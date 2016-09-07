@@ -24,7 +24,6 @@ public class GovernmentAgency extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 
 	String abbreviation = null;
 	String overview = null;
-	String abbreviation = null;
 
 	public int doStartTag() throws JspException {
 		currentInstance = this;
@@ -48,7 +47,7 @@ public class GovernmentAgency extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 				+ "}");
 				while(rs.hasNext()) {
 					QuerySolution sol = rs.nextSolution();
-					label = sol.get("?label") == null ? null : sol.get("?label").toString();
+					label = sol.get("?label") == null ? null : sol.get("?label").asLiteral().getString();
 					abbreviation = sol.get("?abbreviation") == null ? null : sol.get("?abbreviation").toString();
 					overview = sol.get("?overview") == null ? null : sol.get("?overview").toString();
 					abbreviation = sol.get("?abbreviation") == null ? null : sol.get("?abbreviation").toString();
@@ -113,14 +112,6 @@ public class GovernmentAgency extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 
 	public String getOverview() {
 		return overview;
-	}
-
-	public void setAbbreviation(String abbreviation) {
-		this.abbreviation = abbreviation;
-	}
-
-	public String getAbbreviation() {
-		return abbreviation;
 	}
 
 }

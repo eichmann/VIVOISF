@@ -51,8 +51,6 @@ public class PersonRelatedByIterator extends edu.uiowa.slis.VIVOISF.TagLibSuppor
 				if (classFilter == null || (classFilter != null && classFilter.containsKey(type))) {
 					log.info("instance: " + relatedBy + "	type: " + type);
 					return EVAL_BODY_INCLUDE;
-				} else if (classFilter != null) {
-					log.info("skipping instance: " + relatedBy + "	type: " + type);
 				}
 			}
 		} catch (Exception e) {
@@ -74,9 +72,6 @@ public class PersonRelatedByIterator extends edu.uiowa.slis.VIVOISF.TagLibSuppor
 				if (classFilter == null || (classFilter != null && classFilter.containsKey(type))) {
 					log.info("instance: " + relatedBy + "	type: " + type);
 					return EVAL_BODY_AGAIN;
-				} else if (classFilter != null) {
-					log.info("skipping instance: " + relatedBy + "	type: " + type);
-				    
 				}
 			}
 		} catch (Exception e) {

@@ -47,7 +47,7 @@ public class EmeritusLibrarian extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 				+ "}");
 				while(rs.hasNext()) {
 					QuerySolution sol = rs.nextSolution();
-					label = sol.get("?label") == null ? null : sol.get("?label").toString();
+					label = sol.get("?label") == null ? null : sol.get("?label").asLiteral().getString();
 					overview = sol.get("?overview") == null ? null : sol.get("?overview").toString();
 					teachingOverview = sol.get("?teachingOverview") == null ? null : sol.get("?teachingOverview").toString();
 					outreachOverview = sol.get("?outreachOverview") == null ? null : sol.get("?outreachOverview").toString();

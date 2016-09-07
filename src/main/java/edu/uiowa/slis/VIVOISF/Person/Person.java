@@ -41,7 +41,7 @@ public class Person extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 				throw new JspException("subject URI generation currently not supported");
 			} else {
 				ResultSet rs = getResultSet(Prefix_1_4
-				+ " SELECT DISTINCT ?label  ?teachingOverview ?outreachOverview ?researchOverview ?overview where {"
+				+ " SELECT ?label  ?teachingOverview ?outreachOverview ?researchOverview ?overview where {"
 				+ "  OPTIONAL { <" + subjectURI + "> rdfs:label ?label } "
 				+ "  OPTIONAL { <" + subjectURI + "> <http://vivoweb.org/ontology/core#teachingOverview> ?teachingOverview } "
 				+ "  OPTIONAL { <" + subjectURI + "> <http://vivoweb.org/ontology/core#outreachOverview> ?outreachOverview } "

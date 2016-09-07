@@ -44,7 +44,7 @@ public class Report extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 				+ "}");
 				while(rs.hasNext()) {
 					QuerySolution sol = rs.nextSolution();
-					label = sol.get("?label") == null ? null : sol.get("?label").toString();
+					label = sol.get("?label") == null ? null : sol.get("?label").asLiteral().getString();
 					reportId = sol.get("?reportId") == null ? null : sol.get("?reportId").toString();
 				}
 			}

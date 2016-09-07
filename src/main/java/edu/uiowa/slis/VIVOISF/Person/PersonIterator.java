@@ -22,7 +22,7 @@ public class PersonIterator extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 		currentInstance = this;
 		try {
 			rs = getResultSet(Prefix_1_4+
-					" SELECT DISTINCT ?s ?l where { "+
+					" SELECT ?s ?l where { "+
 						"?s rdfs:label ?l . "+
 						"?s rdf:type <http://xmlns.com/foaf/0.1/Person> . "+
 					"} ORDER BY ?l");
