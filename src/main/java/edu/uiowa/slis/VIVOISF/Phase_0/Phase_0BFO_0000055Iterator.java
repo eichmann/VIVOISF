@@ -9,6 +9,8 @@ import javax.servlet.jsp.JspTagException;
 import org.apache.jena.query.QuerySolution;
 import org.apache.jena.query.ResultSet;
 
+import java.util.Hashtable;
+
 @SuppressWarnings("serial")
 public class Phase_0BFO_0000055Iterator extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 	static Phase_0BFO_0000055Iterator currentInstance = null;
@@ -18,6 +20,7 @@ public class Phase_0BFO_0000055Iterator extends edu.uiowa.slis.VIVOISF.TagLibSup
 	String type = null;
 	String BFO_0000055 = null;
 	ResultSet rs = null;
+	Hashtable<String,String> classFilter = null;
 
 	public int doStartTag() throws JspException {
 		currentInstance = this;
@@ -41,12 +44,14 @@ public class Phase_0BFO_0000055Iterator extends edu.uiowa.slis.VIVOISF.TagLibSup
 					+"   filter ( ?subtype != ?t )"
 					+" }"
 					+"} ");
-			if(rs.hasNext()) {
+			while(rs.hasNext()) {
 				QuerySolution sol = rs.nextSolution();
 				BFO_0000055 = sol.get("?s").toString();
 				type = getLocalName(sol.get("?t").toString());
-				log.info("instance: " + BFO_0000055 + "	type: " + type);
-				return EVAL_BODY_INCLUDE;
+				if (classFilter == null || (classFilter != null && classFilter.containsKey(type))) {
+					log.info("instance: " + BFO_0000055 + "	type: " + type);
+					return EVAL_BODY_INCLUDE;
+				}
 			}
 		} catch (Exception e) {
 			log.error("Exception raised in Phase_0BFO_0000055Iterator doStartTag", e);
@@ -60,12 +65,14 @@ public class Phase_0BFO_0000055Iterator extends edu.uiowa.slis.VIVOISF.TagLibSup
 
 	public int doAfterBody() throws JspException {
 		try {
-			if(rs.hasNext()) {
+			while(rs.hasNext()) {
 				QuerySolution sol = rs.nextSolution();
 				BFO_0000055 = sol.get("?s").toString();
 				type = getLocalName(sol.get("?t").toString());
-				log.info("instance: " + BFO_0000055 + "	type: " + type);
-				return EVAL_BODY_AGAIN;
+				if (classFilter == null || (classFilter != null && classFilter.containsKey(type))) {
+					log.info("instance: " + BFO_0000055 + "	type: " + type);
+					return EVAL_BODY_AGAIN;
+				}
 			}
 		} catch (Exception e) {
 			log.error("Exception raised in Phase_0BFO_0000055Iterator doAfterBody", e);
@@ -94,6 +101,9 @@ public class Phase_0BFO_0000055Iterator extends edu.uiowa.slis.VIVOISF.TagLibSup
 
 	private void clearServiceState() {
 		subjectURI = null;
+		type = null;
+		BFO_0000055 = null;
+		classFilter = null;
 	}
 
 	public void setType(String type) {
@@ -110,6 +120,19 @@ public class Phase_0BFO_0000055Iterator extends edu.uiowa.slis.VIVOISF.TagLibSup
 
 	public String getBFO_0000055() {
 		return BFO_0000055;
+	}
+
+	public void setClassFilter(String filterString) {
+		String[] classFilterArray = filterString.split(" ");
+		this.classFilter = new Hashtable<String, String>();
+		for (String filterClass : classFilterArray) {
+			log.info("adding filterClass " + filterClass + " to Phase_0BFO_0000055Iterator");
+			classFilter.put(filterClass, "");
+		}
+	}
+
+	public String getClassFilter() {
+		return classFilter.toString();
 	}
 
 }

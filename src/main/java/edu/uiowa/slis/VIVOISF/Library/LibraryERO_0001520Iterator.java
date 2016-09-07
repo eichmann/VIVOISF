@@ -9,6 +9,8 @@ import javax.servlet.jsp.JspTagException;
 import org.apache.jena.query.QuerySolution;
 import org.apache.jena.query.ResultSet;
 
+import java.util.Hashtable;
+
 @SuppressWarnings("serial")
 public class LibraryERO_0001520Iterator extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 	static LibraryERO_0001520Iterator currentInstance = null;
@@ -18,6 +20,7 @@ public class LibraryERO_0001520Iterator extends edu.uiowa.slis.VIVOISF.TagLibSup
 	String type = null;
 	String ERO_0001520 = null;
 	ResultSet rs = null;
+	Hashtable<String,String> classFilter = null;
 
 	public int doStartTag() throws JspException {
 		currentInstance = this;
@@ -41,12 +44,14 @@ public class LibraryERO_0001520Iterator extends edu.uiowa.slis.VIVOISF.TagLibSup
 					+"   filter ( ?subtype != ?t )"
 					+" }"
 					+"} ");
-			if(rs.hasNext()) {
+			while(rs.hasNext()) {
 				QuerySolution sol = rs.nextSolution();
 				ERO_0001520 = sol.get("?s").toString();
 				type = getLocalName(sol.get("?t").toString());
-				log.info("instance: " + ERO_0001520 + "	type: " + type);
-				return EVAL_BODY_INCLUDE;
+				if (classFilter == null || (classFilter != null && classFilter.containsKey(type))) {
+					log.info("instance: " + ERO_0001520 + "	type: " + type);
+					return EVAL_BODY_INCLUDE;
+				}
 			}
 		} catch (Exception e) {
 			log.error("Exception raised in LibraryERO_0001520Iterator doStartTag", e);
@@ -60,12 +65,14 @@ public class LibraryERO_0001520Iterator extends edu.uiowa.slis.VIVOISF.TagLibSup
 
 	public int doAfterBody() throws JspException {
 		try {
-			if(rs.hasNext()) {
+			while(rs.hasNext()) {
 				QuerySolution sol = rs.nextSolution();
 				ERO_0001520 = sol.get("?s").toString();
 				type = getLocalName(sol.get("?t").toString());
-				log.info("instance: " + ERO_0001520 + "	type: " + type);
-				return EVAL_BODY_AGAIN;
+				if (classFilter == null || (classFilter != null && classFilter.containsKey(type))) {
+					log.info("instance: " + ERO_0001520 + "	type: " + type);
+					return EVAL_BODY_AGAIN;
+				}
 			}
 		} catch (Exception e) {
 			log.error("Exception raised in LibraryERO_0001520Iterator doAfterBody", e);
@@ -94,6 +101,9 @@ public class LibraryERO_0001520Iterator extends edu.uiowa.slis.VIVOISF.TagLibSup
 
 	private void clearServiceState() {
 		subjectURI = null;
+		type = null;
+		ERO_0001520 = null;
+		classFilter = null;
 	}
 
 	public void setType(String type) {
@@ -110,6 +120,19 @@ public class LibraryERO_0001520Iterator extends edu.uiowa.slis.VIVOISF.TagLibSup
 
 	public String getERO_0001520() {
 		return ERO_0001520;
+	}
+
+	public void setClassFilter(String filterString) {
+		String[] classFilterArray = filterString.split(" ");
+		this.classFilter = new Hashtable<String, String>();
+		for (String filterClass : classFilterArray) {
+			log.info("adding filterClass " + filterClass + " to LibraryERO_0001520Iterator");
+			classFilter.put(filterClass, "");
+		}
+	}
+
+	public String getClassFilter() {
+		return classFilter.toString();
 	}
 
 }

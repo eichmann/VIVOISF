@@ -9,6 +9,8 @@ import javax.servlet.jsp.JspTagException;
 import org.apache.jena.query.QuerySolution;
 import org.apache.jena.query.ResultSet;
 
+import java.util.Hashtable;
+
 @SuppressWarnings("serial")
 public class EquipmentOBI_0000304Iterator extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 	static EquipmentOBI_0000304Iterator currentInstance = null;
@@ -18,6 +20,7 @@ public class EquipmentOBI_0000304Iterator extends edu.uiowa.slis.VIVOISF.TagLibS
 	String type = null;
 	String OBI_0000304 = null;
 	ResultSet rs = null;
+	Hashtable<String,String> classFilter = null;
 
 	public int doStartTag() throws JspException {
 		currentInstance = this;
@@ -41,12 +44,14 @@ public class EquipmentOBI_0000304Iterator extends edu.uiowa.slis.VIVOISF.TagLibS
 					+"   filter ( ?subtype != ?t )"
 					+" }"
 					+"} ");
-			if(rs.hasNext()) {
+			while(rs.hasNext()) {
 				QuerySolution sol = rs.nextSolution();
 				OBI_0000304 = sol.get("?s").toString();
 				type = getLocalName(sol.get("?t").toString());
-				log.info("instance: " + OBI_0000304 + "	type: " + type);
-				return EVAL_BODY_INCLUDE;
+				if (classFilter == null || (classFilter != null && classFilter.containsKey(type))) {
+					log.info("instance: " + OBI_0000304 + "	type: " + type);
+					return EVAL_BODY_INCLUDE;
+				}
 			}
 		} catch (Exception e) {
 			log.error("Exception raised in EquipmentOBI_0000304Iterator doStartTag", e);
@@ -60,12 +65,14 @@ public class EquipmentOBI_0000304Iterator extends edu.uiowa.slis.VIVOISF.TagLibS
 
 	public int doAfterBody() throws JspException {
 		try {
-			if(rs.hasNext()) {
+			while(rs.hasNext()) {
 				QuerySolution sol = rs.nextSolution();
 				OBI_0000304 = sol.get("?s").toString();
 				type = getLocalName(sol.get("?t").toString());
-				log.info("instance: " + OBI_0000304 + "	type: " + type);
-				return EVAL_BODY_AGAIN;
+				if (classFilter == null || (classFilter != null && classFilter.containsKey(type))) {
+					log.info("instance: " + OBI_0000304 + "	type: " + type);
+					return EVAL_BODY_AGAIN;
+				}
 			}
 		} catch (Exception e) {
 			log.error("Exception raised in EquipmentOBI_0000304Iterator doAfterBody", e);
@@ -94,6 +101,9 @@ public class EquipmentOBI_0000304Iterator extends edu.uiowa.slis.VIVOISF.TagLibS
 
 	private void clearServiceState() {
 		subjectURI = null;
+		type = null;
+		OBI_0000304 = null;
+		classFilter = null;
 	}
 
 	public void setType(String type) {
@@ -110,6 +120,19 @@ public class EquipmentOBI_0000304Iterator extends edu.uiowa.slis.VIVOISF.TagLibS
 
 	public String getOBI_0000304() {
 		return OBI_0000304;
+	}
+
+	public void setClassFilter(String filterString) {
+		String[] classFilterArray = filterString.split(" ");
+		this.classFilter = new Hashtable<String, String>();
+		for (String filterClass : classFilterArray) {
+			log.info("adding filterClass " + filterClass + " to EquipmentOBI_0000304Iterator");
+			classFilter.put(filterClass, "");
+		}
+	}
+
+	public String getClassFilter() {
+		return classFilter.toString();
 	}
 
 }

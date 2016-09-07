@@ -19,10 +19,10 @@ public class Student extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 	String subjectURI = null;
 	String label = null;
 	boolean commitNeeded = false;
+	String overview = null;
 	String teachingOverview = null;
 	String outreachOverview = null;
 	String researchOverview = null;
-	String overview = null;
 
 	public int doStartTag() throws JspException {
 		currentInstance = this;
@@ -38,20 +38,20 @@ public class Student extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 				throw new JspException("subject URI generation currently not supported");
 			} else {
 				ResultSet rs = getResultSet(Prefix_1_4
-				+ " SELECT ?label  ?teachingOverview ?outreachOverview ?researchOverview ?overview where {"
+				+ " SELECT ?label  ?overview ?teachingOverview ?outreachOverview ?researchOverview where {"
 				+ "  OPTIONAL { <" + subjectURI + "> rdfs:label ?label } "
+				+ "  OPTIONAL { <" + subjectURI + "> <http://vivoweb.org/ontology/core#overview> ?overview } "
 				+ "  OPTIONAL { <" + subjectURI + "> <http://vivoweb.org/ontology/core#teachingOverview> ?teachingOverview } "
 				+ "  OPTIONAL { <" + subjectURI + "> <http://vivoweb.org/ontology/core#outreachOverview> ?outreachOverview } "
 				+ "  OPTIONAL { <" + subjectURI + "> <http://vivoweb.org/ontology/core#researchOverview> ?researchOverview } "
-				+ "  OPTIONAL { <" + subjectURI + "> <http://vivoweb.org/ontology/core#overview> ?overview } "
 				+ "}");
 				while(rs.hasNext()) {
 					QuerySolution sol = rs.nextSolution();
 					label = sol.get("?label") == null ? null : sol.get("?label").toString();
+					overview = sol.get("?overview") == null ? null : sol.get("?overview").toString();
 					teachingOverview = sol.get("?teachingOverview") == null ? null : sol.get("?teachingOverview").toString();
 					outreachOverview = sol.get("?outreachOverview") == null ? null : sol.get("?outreachOverview").toString();
 					researchOverview = sol.get("?researchOverview") == null ? null : sol.get("?researchOverview").toString();
-					overview = sol.get("?overview") == null ? null : sol.get("?overview").toString();
 				}
 			}
 		} catch (Exception e) {
@@ -99,6 +99,14 @@ public class Student extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 		return label;
 	}
 
+	public void setOverview(String overview) {
+		this.overview = overview;
+	}
+
+	public String getOverview() {
+		return overview;
+	}
+
 	public void setTeachingOverview(String teachingOverview) {
 		this.teachingOverview = teachingOverview;
 	}
@@ -121,14 +129,6 @@ public class Student extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 
 	public String getResearchOverview() {
 		return researchOverview;
-	}
-
-	public void setOverview(String overview) {
-		this.overview = overview;
-	}
-
-	public String getOverview() {
-		return overview;
 	}
 
 }

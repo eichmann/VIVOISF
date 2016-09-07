@@ -9,6 +9,8 @@ import javax.servlet.jsp.JspTagException;
 import org.apache.jena.query.QuerySolution;
 import org.apache.jena.query.ResultSet;
 
+import java.util.Hashtable;
+
 @SuppressWarnings("serial")
 public class CollectedDocumentReproducedInIterator extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 	static CollectedDocumentReproducedInIterator currentInstance = null;
@@ -18,6 +20,7 @@ public class CollectedDocumentReproducedInIterator extends edu.uiowa.slis.VIVOIS
 	String type = null;
 	String reproducedIn = null;
 	ResultSet rs = null;
+	Hashtable<String,String> classFilter = null;
 
 	public int doStartTag() throws JspException {
 		currentInstance = this;
@@ -41,12 +44,14 @@ public class CollectedDocumentReproducedInIterator extends edu.uiowa.slis.VIVOIS
 					+"   filter ( ?subtype != ?t )"
 					+" }"
 					+"} ");
-			if(rs.hasNext()) {
+			while(rs.hasNext()) {
 				QuerySolution sol = rs.nextSolution();
 				reproducedIn = sol.get("?s").toString();
 				type = getLocalName(sol.get("?t").toString());
-				log.info("instance: " + reproducedIn + "	type: " + type);
-				return EVAL_BODY_INCLUDE;
+				if (classFilter == null || (classFilter != null && classFilter.containsKey(type))) {
+					log.info("instance: " + reproducedIn + "	type: " + type);
+					return EVAL_BODY_INCLUDE;
+				}
 			}
 		} catch (Exception e) {
 			log.error("Exception raised in CollectedDocumentReproducedInIterator doStartTag", e);
@@ -60,12 +65,14 @@ public class CollectedDocumentReproducedInIterator extends edu.uiowa.slis.VIVOIS
 
 	public int doAfterBody() throws JspException {
 		try {
-			if(rs.hasNext()) {
+			while(rs.hasNext()) {
 				QuerySolution sol = rs.nextSolution();
 				reproducedIn = sol.get("?s").toString();
 				type = getLocalName(sol.get("?t").toString());
-				log.info("instance: " + reproducedIn + "	type: " + type);
-				return EVAL_BODY_AGAIN;
+				if (classFilter == null || (classFilter != null && classFilter.containsKey(type))) {
+					log.info("instance: " + reproducedIn + "	type: " + type);
+					return EVAL_BODY_AGAIN;
+				}
 			}
 		} catch (Exception e) {
 			log.error("Exception raised in CollectedDocumentReproducedInIterator doAfterBody", e);
@@ -94,6 +101,9 @@ public class CollectedDocumentReproducedInIterator extends edu.uiowa.slis.VIVOIS
 
 	private void clearServiceState() {
 		subjectURI = null;
+		type = null;
+		reproducedIn = null;
+		classFilter = null;
 	}
 
 	public void setType(String type) {
@@ -110,6 +120,19 @@ public class CollectedDocumentReproducedInIterator extends edu.uiowa.slis.VIVOIS
 
 	public String getReproducedIn() {
 		return reproducedIn;
+	}
+
+	public void setClassFilter(String filterString) {
+		String[] classFilterArray = filterString.split(" ");
+		this.classFilter = new Hashtable<String, String>();
+		for (String filterClass : classFilterArray) {
+			log.info("adding filterClass " + filterClass + " to CollectedDocumentReproducedInIterator");
+			classFilter.put(filterClass, "");
+		}
+	}
+
+	public String getClassFilter() {
+		return classFilter.toString();
 	}
 
 }

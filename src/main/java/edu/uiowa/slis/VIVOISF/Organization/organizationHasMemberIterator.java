@@ -9,6 +9,8 @@ import javax.servlet.jsp.JspTagException;
 import org.apache.jena.query.QuerySolution;
 import org.apache.jena.query.ResultSet;
 
+import java.util.Hashtable;
+
 @SuppressWarnings("serial")
 public class organizationHasMemberIterator extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 	static organizationHasMemberIterator currentInstance = null;
@@ -18,6 +20,7 @@ public class organizationHasMemberIterator extends edu.uiowa.slis.VIVOISF.TagLib
 	String type = null;
 	String hasMember = null;
 	ResultSet rs = null;
+	Hashtable<String,String> classFilter = null;
 
 	public int doStartTag() throws JspException {
 		currentInstance = this;
@@ -41,12 +44,14 @@ public class organizationHasMemberIterator extends edu.uiowa.slis.VIVOISF.TagLib
 					+"   filter ( ?subtype != ?t )"
 					+" }"
 					+"} ");
-			if(rs.hasNext()) {
+			while(rs.hasNext()) {
 				QuerySolution sol = rs.nextSolution();
 				hasMember = sol.get("?s").toString();
 				type = getLocalName(sol.get("?t").toString());
-				log.info("instance: " + hasMember + "	type: " + type);
-				return EVAL_BODY_INCLUDE;
+				if (classFilter == null || (classFilter != null && classFilter.containsKey(type))) {
+					log.info("instance: " + hasMember + "	type: " + type);
+					return EVAL_BODY_INCLUDE;
+				}
 			}
 		} catch (Exception e) {
 			log.error("Exception raised in organizationHasMemberIterator doStartTag", e);
@@ -60,12 +65,14 @@ public class organizationHasMemberIterator extends edu.uiowa.slis.VIVOISF.TagLib
 
 	public int doAfterBody() throws JspException {
 		try {
-			if(rs.hasNext()) {
+			while(rs.hasNext()) {
 				QuerySolution sol = rs.nextSolution();
 				hasMember = sol.get("?s").toString();
 				type = getLocalName(sol.get("?t").toString());
-				log.info("instance: " + hasMember + "	type: " + type);
-				return EVAL_BODY_AGAIN;
+				if (classFilter == null || (classFilter != null && classFilter.containsKey(type))) {
+					log.info("instance: " + hasMember + "	type: " + type);
+					return EVAL_BODY_AGAIN;
+				}
 			}
 		} catch (Exception e) {
 			log.error("Exception raised in organizationHasMemberIterator doAfterBody", e);
@@ -94,6 +101,9 @@ public class organizationHasMemberIterator extends edu.uiowa.slis.VIVOISF.TagLib
 
 	private void clearServiceState() {
 		subjectURI = null;
+		type = null;
+		hasMember = null;
+		classFilter = null;
 	}
 
 	public void setType(String type) {
@@ -110,6 +120,19 @@ public class organizationHasMemberIterator extends edu.uiowa.slis.VIVOISF.TagLib
 
 	public String getHasMember() {
 		return hasMember;
+	}
+
+	public void setClassFilter(String filterString) {
+		String[] classFilterArray = filterString.split(" ");
+		this.classFilter = new Hashtable<String, String>();
+		for (String filterClass : classFilterArray) {
+			log.info("adding filterClass " + filterClass + " to organizationHasMemberIterator");
+			classFilter.put(filterClass, "");
+		}
+	}
+
+	public String getClassFilter() {
+		return classFilter.toString();
 	}
 
 }

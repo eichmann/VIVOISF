@@ -9,6 +9,8 @@ import javax.servlet.jsp.JspTagException;
 import org.apache.jena.query.QuerySolution;
 import org.apache.jena.query.ResultSet;
 
+import java.util.Hashtable;
+
 @SuppressWarnings("serial")
 public class ClinicalOrganizationHasSuccessorOrganizationIterator extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 	static ClinicalOrganizationHasSuccessorOrganizationIterator currentInstance = null;
@@ -18,6 +20,7 @@ public class ClinicalOrganizationHasSuccessorOrganizationIterator extends edu.ui
 	String type = null;
 	String hasSuccessorOrganization = null;
 	ResultSet rs = null;
+	Hashtable<String,String> classFilter = null;
 
 	public int doStartTag() throws JspException {
 		currentInstance = this;
@@ -41,12 +44,14 @@ public class ClinicalOrganizationHasSuccessorOrganizationIterator extends edu.ui
 					+"   filter ( ?subtype != ?t )"
 					+" }"
 					+"} ");
-			if(rs.hasNext()) {
+			while(rs.hasNext()) {
 				QuerySolution sol = rs.nextSolution();
 				hasSuccessorOrganization = sol.get("?s").toString();
 				type = getLocalName(sol.get("?t").toString());
-				log.info("instance: " + hasSuccessorOrganization + "	type: " + type);
-				return EVAL_BODY_INCLUDE;
+				if (classFilter == null || (classFilter != null && classFilter.containsKey(type))) {
+					log.info("instance: " + hasSuccessorOrganization + "	type: " + type);
+					return EVAL_BODY_INCLUDE;
+				}
 			}
 		} catch (Exception e) {
 			log.error("Exception raised in ClinicalOrganizationHasSuccessorOrganizationIterator doStartTag", e);
@@ -60,12 +65,14 @@ public class ClinicalOrganizationHasSuccessorOrganizationIterator extends edu.ui
 
 	public int doAfterBody() throws JspException {
 		try {
-			if(rs.hasNext()) {
+			while(rs.hasNext()) {
 				QuerySolution sol = rs.nextSolution();
 				hasSuccessorOrganization = sol.get("?s").toString();
 				type = getLocalName(sol.get("?t").toString());
-				log.info("instance: " + hasSuccessorOrganization + "	type: " + type);
-				return EVAL_BODY_AGAIN;
+				if (classFilter == null || (classFilter != null && classFilter.containsKey(type))) {
+					log.info("instance: " + hasSuccessorOrganization + "	type: " + type);
+					return EVAL_BODY_AGAIN;
+				}
 			}
 		} catch (Exception e) {
 			log.error("Exception raised in ClinicalOrganizationHasSuccessorOrganizationIterator doAfterBody", e);
@@ -94,6 +101,9 @@ public class ClinicalOrganizationHasSuccessorOrganizationIterator extends edu.ui
 
 	private void clearServiceState() {
 		subjectURI = null;
+		type = null;
+		hasSuccessorOrganization = null;
+		classFilter = null;
 	}
 
 	public void setType(String type) {
@@ -110,6 +120,19 @@ public class ClinicalOrganizationHasSuccessorOrganizationIterator extends edu.ui
 
 	public String getHasSuccessorOrganization() {
 		return hasSuccessorOrganization;
+	}
+
+	public void setClassFilter(String filterString) {
+		String[] classFilterArray = filterString.split(" ");
+		this.classFilter = new Hashtable<String, String>();
+		for (String filterClass : classFilterArray) {
+			log.info("adding filterClass " + filterClass + " to ClinicalOrganizationHasSuccessorOrganizationIterator");
+			classFilter.put(filterClass, "");
+		}
+	}
+
+	public String getClassFilter() {
+		return classFilter.toString();
 	}
 
 }

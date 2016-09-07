@@ -9,6 +9,8 @@ import javax.servlet.jsp.JspTagException;
 import org.apache.jena.query.QuerySolution;
 import org.apache.jena.query.ResultSet;
 
+import java.util.Hashtable;
+
 @SuppressWarnings("serial")
 public class AcademicTermRO_0000057Iterator extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 	static AcademicTermRO_0000057Iterator currentInstance = null;
@@ -18,6 +20,7 @@ public class AcademicTermRO_0000057Iterator extends edu.uiowa.slis.VIVOISF.TagLi
 	String type = null;
 	String RO_0000057 = null;
 	ResultSet rs = null;
+	Hashtable<String,String> classFilter = null;
 
 	public int doStartTag() throws JspException {
 		currentInstance = this;
@@ -41,12 +44,14 @@ public class AcademicTermRO_0000057Iterator extends edu.uiowa.slis.VIVOISF.TagLi
 					+"   filter ( ?subtype != ?t )"
 					+" }"
 					+"} ");
-			if(rs.hasNext()) {
+			while(rs.hasNext()) {
 				QuerySolution sol = rs.nextSolution();
 				RO_0000057 = sol.get("?s").toString();
 				type = getLocalName(sol.get("?t").toString());
-				log.info("instance: " + RO_0000057 + "	type: " + type);
-				return EVAL_BODY_INCLUDE;
+				if (classFilter == null || (classFilter != null && classFilter.containsKey(type))) {
+					log.info("instance: " + RO_0000057 + "	type: " + type);
+					return EVAL_BODY_INCLUDE;
+				}
 			}
 		} catch (Exception e) {
 			log.error("Exception raised in AcademicTermRO_0000057Iterator doStartTag", e);
@@ -60,12 +65,14 @@ public class AcademicTermRO_0000057Iterator extends edu.uiowa.slis.VIVOISF.TagLi
 
 	public int doAfterBody() throws JspException {
 		try {
-			if(rs.hasNext()) {
+			while(rs.hasNext()) {
 				QuerySolution sol = rs.nextSolution();
 				RO_0000057 = sol.get("?s").toString();
 				type = getLocalName(sol.get("?t").toString());
-				log.info("instance: " + RO_0000057 + "	type: " + type);
-				return EVAL_BODY_AGAIN;
+				if (classFilter == null || (classFilter != null && classFilter.containsKey(type))) {
+					log.info("instance: " + RO_0000057 + "	type: " + type);
+					return EVAL_BODY_AGAIN;
+				}
 			}
 		} catch (Exception e) {
 			log.error("Exception raised in AcademicTermRO_0000057Iterator doAfterBody", e);
@@ -94,6 +101,9 @@ public class AcademicTermRO_0000057Iterator extends edu.uiowa.slis.VIVOISF.TagLi
 
 	private void clearServiceState() {
 		subjectURI = null;
+		type = null;
+		RO_0000057 = null;
+		classFilter = null;
 	}
 
 	public void setType(String type) {
@@ -110,6 +120,19 @@ public class AcademicTermRO_0000057Iterator extends edu.uiowa.slis.VIVOISF.TagLi
 
 	public String getRO_0000057() {
 		return RO_0000057;
+	}
+
+	public void setClassFilter(String filterString) {
+		String[] classFilterArray = filterString.split(" ");
+		this.classFilter = new Hashtable<String, String>();
+		for (String filterClass : classFilterArray) {
+			log.info("adding filterClass " + filterClass + " to AcademicTermRO_0000057Iterator");
+			classFilter.put(filterClass, "");
+		}
+	}
+
+	public String getClassFilter() {
+		return classFilter.toString();
 	}
 
 }

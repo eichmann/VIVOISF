@@ -9,6 +9,8 @@ import javax.servlet.jsp.JspTagException;
 import org.apache.jena.query.QuerySolution;
 import org.apache.jena.query.ResultSet;
 
+import java.util.Hashtable;
+
 @SuppressWarnings("serial")
 public class DbXrefTranslatorIterator extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 	static DbXrefTranslatorIterator currentInstance = null;
@@ -18,6 +20,7 @@ public class DbXrefTranslatorIterator extends edu.uiowa.slis.VIVOISF.TagLibSuppo
 	String type = null;
 	String translator = null;
 	ResultSet rs = null;
+	Hashtable<String,String> classFilter = null;
 
 	public int doStartTag() throws JspException {
 		currentInstance = this;
@@ -41,12 +44,14 @@ public class DbXrefTranslatorIterator extends edu.uiowa.slis.VIVOISF.TagLibSuppo
 					+"   filter ( ?subtype != ?t )"
 					+" }"
 					+"} ");
-			if(rs.hasNext()) {
+			while(rs.hasNext()) {
 				QuerySolution sol = rs.nextSolution();
 				translator = sol.get("?s").toString();
 				type = getLocalName(sol.get("?t").toString());
-				log.info("instance: " + translator + "	type: " + type);
-				return EVAL_BODY_INCLUDE;
+				if (classFilter == null || (classFilter != null && classFilter.containsKey(type))) {
+					log.info("instance: " + translator + "	type: " + type);
+					return EVAL_BODY_INCLUDE;
+				}
 			}
 		} catch (Exception e) {
 			log.error("Exception raised in DbXrefTranslatorIterator doStartTag", e);
@@ -60,12 +65,14 @@ public class DbXrefTranslatorIterator extends edu.uiowa.slis.VIVOISF.TagLibSuppo
 
 	public int doAfterBody() throws JspException {
 		try {
-			if(rs.hasNext()) {
+			while(rs.hasNext()) {
 				QuerySolution sol = rs.nextSolution();
 				translator = sol.get("?s").toString();
 				type = getLocalName(sol.get("?t").toString());
-				log.info("instance: " + translator + "	type: " + type);
-				return EVAL_BODY_AGAIN;
+				if (classFilter == null || (classFilter != null && classFilter.containsKey(type))) {
+					log.info("instance: " + translator + "	type: " + type);
+					return EVAL_BODY_AGAIN;
+				}
 			}
 		} catch (Exception e) {
 			log.error("Exception raised in DbXrefTranslatorIterator doAfterBody", e);
@@ -94,6 +101,9 @@ public class DbXrefTranslatorIterator extends edu.uiowa.slis.VIVOISF.TagLibSuppo
 
 	private void clearServiceState() {
 		subjectURI = null;
+		type = null;
+		translator = null;
+		classFilter = null;
 	}
 
 	public void setType(String type) {
@@ -110,6 +120,19 @@ public class DbXrefTranslatorIterator extends edu.uiowa.slis.VIVOISF.TagLibSuppo
 
 	public String getTranslator() {
 		return translator;
+	}
+
+	public void setClassFilter(String filterString) {
+		String[] classFilterArray = filterString.split(" ");
+		this.classFilter = new Hashtable<String, String>();
+		for (String filterClass : classFilterArray) {
+			log.info("adding filterClass " + filterClass + " to DbXrefTranslatorIterator");
+			classFilter.put(filterClass, "");
+		}
+	}
+
+	public String getClassFilter() {
+		return classFilter.toString();
 	}
 
 }

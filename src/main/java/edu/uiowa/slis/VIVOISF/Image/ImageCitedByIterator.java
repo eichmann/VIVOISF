@@ -9,6 +9,8 @@ import javax.servlet.jsp.JspTagException;
 import org.apache.jena.query.QuerySolution;
 import org.apache.jena.query.ResultSet;
 
+import java.util.Hashtable;
+
 @SuppressWarnings("serial")
 public class ImageCitedByIterator extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 	static ImageCitedByIterator currentInstance = null;
@@ -18,6 +20,7 @@ public class ImageCitedByIterator extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 	String type = null;
 	String citedBy = null;
 	ResultSet rs = null;
+	Hashtable<String,String> classFilter = null;
 
 	public int doStartTag() throws JspException {
 		currentInstance = this;
@@ -41,12 +44,14 @@ public class ImageCitedByIterator extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 					+"   filter ( ?subtype != ?t )"
 					+" }"
 					+"} ");
-			if(rs.hasNext()) {
+			while(rs.hasNext()) {
 				QuerySolution sol = rs.nextSolution();
 				citedBy = sol.get("?s").toString();
 				type = getLocalName(sol.get("?t").toString());
-				log.info("instance: " + citedBy + "	type: " + type);
-				return EVAL_BODY_INCLUDE;
+				if (classFilter == null || (classFilter != null && classFilter.containsKey(type))) {
+					log.info("instance: " + citedBy + "	type: " + type);
+					return EVAL_BODY_INCLUDE;
+				}
 			}
 		} catch (Exception e) {
 			log.error("Exception raised in ImageCitedByIterator doStartTag", e);
@@ -60,12 +65,14 @@ public class ImageCitedByIterator extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 
 	public int doAfterBody() throws JspException {
 		try {
-			if(rs.hasNext()) {
+			while(rs.hasNext()) {
 				QuerySolution sol = rs.nextSolution();
 				citedBy = sol.get("?s").toString();
 				type = getLocalName(sol.get("?t").toString());
-				log.info("instance: " + citedBy + "	type: " + type);
-				return EVAL_BODY_AGAIN;
+				if (classFilter == null || (classFilter != null && classFilter.containsKey(type))) {
+					log.info("instance: " + citedBy + "	type: " + type);
+					return EVAL_BODY_AGAIN;
+				}
 			}
 		} catch (Exception e) {
 			log.error("Exception raised in ImageCitedByIterator doAfterBody", e);
@@ -94,6 +101,9 @@ public class ImageCitedByIterator extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 
 	private void clearServiceState() {
 		subjectURI = null;
+		type = null;
+		citedBy = null;
+		classFilter = null;
 	}
 
 	public void setType(String type) {
@@ -110,6 +120,19 @@ public class ImageCitedByIterator extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 
 	public String getCitedBy() {
 		return citedBy;
+	}
+
+	public void setClassFilter(String filterString) {
+		String[] classFilterArray = filterString.split(" ");
+		this.classFilter = new Hashtable<String, String>();
+		for (String filterClass : classFilterArray) {
+			log.info("adding filterClass " + filterClass + " to ImageCitedByIterator");
+			classFilter.put(filterClass, "");
+		}
+	}
+
+	public String getClassFilter() {
+		return classFilter.toString();
 	}
 
 }

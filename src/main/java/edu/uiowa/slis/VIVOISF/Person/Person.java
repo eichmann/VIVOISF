@@ -41,7 +41,7 @@ public class Person extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 				throw new JspException("subject URI generation currently not supported");
 			} else {
 				ResultSet rs = getResultSet(Prefix_1_4
-				+ " SELECT ?label  ?teachingOverview ?outreachOverview ?researchOverview ?overview where {"
+				+ " SELECT DISTINCT ?label  ?teachingOverview ?outreachOverview ?researchOverview ?overview where {"
 				+ "  OPTIONAL { <" + subjectURI + "> rdfs:label ?label } "
 				+ "  OPTIONAL { <" + subjectURI + "> <http://vivoweb.org/ontology/core#teachingOverview> ?teachingOverview } "
 				+ "  OPTIONAL { <" + subjectURI + "> <http://vivoweb.org/ontology/core#outreachOverview> ?outreachOverview } "
@@ -50,7 +50,7 @@ public class Person extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 				+ "}");
 				while(rs.hasNext()) {
 					QuerySolution sol = rs.nextSolution();
-					label = sol.get("?label") == null ? null : sol.get("?label").toString();
+					label = sol.get("?label") == null ? null : sol.get("?label").asLiteral().getString();
 					teachingOverview = sol.get("?teachingOverview") == null ? null : sol.get("?teachingOverview").toString();
 					outreachOverview = sol.get("?outreachOverview") == null ? null : sol.get("?outreachOverview").toString();
 					researchOverview = sol.get("?researchOverview") == null ? null : sol.get("?researchOverview").toString();

@@ -9,6 +9,8 @@ import javax.servlet.jsp.JspTagException;
 import org.apache.jena.query.QuerySolution;
 import org.apache.jena.query.ResultSet;
 
+import java.util.Hashtable;
+
 @SuppressWarnings("serial")
 public class PersonERO_0000033Iterator extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 	static PersonERO_0000033Iterator currentInstance = null;
@@ -18,6 +20,7 @@ public class PersonERO_0000033Iterator extends edu.uiowa.slis.VIVOISF.TagLibSupp
 	String type = null;
 	String ERO_0000033 = null;
 	ResultSet rs = null;
+	Hashtable<String,String> classFilter = null;
 
 	public int doStartTag() throws JspException {
 		currentInstance = this;
@@ -41,12 +44,14 @@ public class PersonERO_0000033Iterator extends edu.uiowa.slis.VIVOISF.TagLibSupp
 					+"   filter ( ?subtype != ?t )"
 					+" }"
 					+"} ");
-			if(rs.hasNext()) {
+			while(rs.hasNext()) {
 				QuerySolution sol = rs.nextSolution();
 				ERO_0000033 = sol.get("?s").toString();
 				type = getLocalName(sol.get("?t").toString());
-				log.info("instance: " + ERO_0000033 + "	type: " + type);
-				return EVAL_BODY_INCLUDE;
+				if (classFilter == null || (classFilter != null && classFilter.containsKey(type))) {
+					log.info("instance: " + ERO_0000033 + "	type: " + type);
+					return EVAL_BODY_INCLUDE;
+				}
 			}
 		} catch (Exception e) {
 			log.error("Exception raised in PersonERO_0000033Iterator doStartTag", e);
@@ -60,12 +65,14 @@ public class PersonERO_0000033Iterator extends edu.uiowa.slis.VIVOISF.TagLibSupp
 
 	public int doAfterBody() throws JspException {
 		try {
-			if(rs.hasNext()) {
+			while(rs.hasNext()) {
 				QuerySolution sol = rs.nextSolution();
 				ERO_0000033 = sol.get("?s").toString();
 				type = getLocalName(sol.get("?t").toString());
-				log.info("instance: " + ERO_0000033 + "	type: " + type);
-				return EVAL_BODY_AGAIN;
+				if (classFilter == null || (classFilter != null && classFilter.containsKey(type))) {
+					log.info("instance: " + ERO_0000033 + "	type: " + type);
+					return EVAL_BODY_AGAIN;
+				}
 			}
 		} catch (Exception e) {
 			log.error("Exception raised in PersonERO_0000033Iterator doAfterBody", e);
@@ -94,6 +101,9 @@ public class PersonERO_0000033Iterator extends edu.uiowa.slis.VIVOISF.TagLibSupp
 
 	private void clearServiceState() {
 		subjectURI = null;
+		type = null;
+		ERO_0000033 = null;
+		classFilter = null;
 	}
 
 	public void setType(String type) {
@@ -110,6 +120,19 @@ public class PersonERO_0000033Iterator extends edu.uiowa.slis.VIVOISF.TagLibSupp
 
 	public String getERO_0000033() {
 		return ERO_0000033;
+	}
+
+	public void setClassFilter(String filterString) {
+		String[] classFilterArray = filterString.split(" ");
+		this.classFilter = new Hashtable<String, String>();
+		for (String filterClass : classFilterArray) {
+			log.info("adding filterClass " + filterClass + " to PersonERO_0000033Iterator");
+			classFilter.put(filterClass, "");
+		}
+	}
+
+	public String getClassFilter() {
+		return classFilter.toString();
 	}
 
 }

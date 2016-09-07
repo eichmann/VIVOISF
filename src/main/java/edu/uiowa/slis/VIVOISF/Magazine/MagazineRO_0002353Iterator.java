@@ -9,6 +9,8 @@ import javax.servlet.jsp.JspTagException;
 import org.apache.jena.query.QuerySolution;
 import org.apache.jena.query.ResultSet;
 
+import java.util.Hashtable;
+
 @SuppressWarnings("serial")
 public class MagazineRO_0002353Iterator extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 	static MagazineRO_0002353Iterator currentInstance = null;
@@ -18,6 +20,7 @@ public class MagazineRO_0002353Iterator extends edu.uiowa.slis.VIVOISF.TagLibSup
 	String type = null;
 	String RO_0002353 = null;
 	ResultSet rs = null;
+	Hashtable<String,String> classFilter = null;
 
 	public int doStartTag() throws JspException {
 		currentInstance = this;
@@ -41,12 +44,14 @@ public class MagazineRO_0002353Iterator extends edu.uiowa.slis.VIVOISF.TagLibSup
 					+"   filter ( ?subtype != ?t )"
 					+" }"
 					+"} ");
-			if(rs.hasNext()) {
+			while(rs.hasNext()) {
 				QuerySolution sol = rs.nextSolution();
 				RO_0002353 = sol.get("?s").toString();
 				type = getLocalName(sol.get("?t").toString());
-				log.info("instance: " + RO_0002353 + "	type: " + type);
-				return EVAL_BODY_INCLUDE;
+				if (classFilter == null || (classFilter != null && classFilter.containsKey(type))) {
+					log.info("instance: " + RO_0002353 + "	type: " + type);
+					return EVAL_BODY_INCLUDE;
+				}
 			}
 		} catch (Exception e) {
 			log.error("Exception raised in MagazineRO_0002353Iterator doStartTag", e);
@@ -60,12 +65,14 @@ public class MagazineRO_0002353Iterator extends edu.uiowa.slis.VIVOISF.TagLibSup
 
 	public int doAfterBody() throws JspException {
 		try {
-			if(rs.hasNext()) {
+			while(rs.hasNext()) {
 				QuerySolution sol = rs.nextSolution();
 				RO_0002353 = sol.get("?s").toString();
 				type = getLocalName(sol.get("?t").toString());
-				log.info("instance: " + RO_0002353 + "	type: " + type);
-				return EVAL_BODY_AGAIN;
+				if (classFilter == null || (classFilter != null && classFilter.containsKey(type))) {
+					log.info("instance: " + RO_0002353 + "	type: " + type);
+					return EVAL_BODY_AGAIN;
+				}
 			}
 		} catch (Exception e) {
 			log.error("Exception raised in MagazineRO_0002353Iterator doAfterBody", e);
@@ -94,6 +101,9 @@ public class MagazineRO_0002353Iterator extends edu.uiowa.slis.VIVOISF.TagLibSup
 
 	private void clearServiceState() {
 		subjectURI = null;
+		type = null;
+		RO_0002353 = null;
+		classFilter = null;
 	}
 
 	public void setType(String type) {
@@ -110,6 +120,19 @@ public class MagazineRO_0002353Iterator extends edu.uiowa.slis.VIVOISF.TagLibSup
 
 	public String getRO_0002353() {
 		return RO_0002353;
+	}
+
+	public void setClassFilter(String filterString) {
+		String[] classFilterArray = filterString.split(" ");
+		this.classFilter = new Hashtable<String, String>();
+		for (String filterClass : classFilterArray) {
+			log.info("adding filterClass " + filterClass + " to MagazineRO_0002353Iterator");
+			classFilter.put(filterClass, "");
+		}
+	}
+
+	public String getClassFilter() {
+		return classFilter.toString();
 	}
 
 }

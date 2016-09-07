@@ -9,6 +9,8 @@ import javax.servlet.jsp.JspTagException;
 import org.apache.jena.query.QuerySolution;
 import org.apache.jena.query.ResultSet;
 
+import java.util.Hashtable;
+
 @SuppressWarnings("serial")
 public class InstituteSubcontractsGrantIterator extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 	static InstituteSubcontractsGrantIterator currentInstance = null;
@@ -18,6 +20,7 @@ public class InstituteSubcontractsGrantIterator extends edu.uiowa.slis.VIVOISF.T
 	String type = null;
 	String subcontractsGrant = null;
 	ResultSet rs = null;
+	Hashtable<String,String> classFilter = null;
 
 	public int doStartTag() throws JspException {
 		currentInstance = this;
@@ -41,12 +44,14 @@ public class InstituteSubcontractsGrantIterator extends edu.uiowa.slis.VIVOISF.T
 					+"   filter ( ?subtype != ?t )"
 					+" }"
 					+"} ");
-			if(rs.hasNext()) {
+			while(rs.hasNext()) {
 				QuerySolution sol = rs.nextSolution();
 				subcontractsGrant = sol.get("?s").toString();
 				type = getLocalName(sol.get("?t").toString());
-				log.info("instance: " + subcontractsGrant + "	type: " + type);
-				return EVAL_BODY_INCLUDE;
+				if (classFilter == null || (classFilter != null && classFilter.containsKey(type))) {
+					log.info("instance: " + subcontractsGrant + "	type: " + type);
+					return EVAL_BODY_INCLUDE;
+				}
 			}
 		} catch (Exception e) {
 			log.error("Exception raised in InstituteSubcontractsGrantIterator doStartTag", e);
@@ -60,12 +65,14 @@ public class InstituteSubcontractsGrantIterator extends edu.uiowa.slis.VIVOISF.T
 
 	public int doAfterBody() throws JspException {
 		try {
-			if(rs.hasNext()) {
+			while(rs.hasNext()) {
 				QuerySolution sol = rs.nextSolution();
 				subcontractsGrant = sol.get("?s").toString();
 				type = getLocalName(sol.get("?t").toString());
-				log.info("instance: " + subcontractsGrant + "	type: " + type);
-				return EVAL_BODY_AGAIN;
+				if (classFilter == null || (classFilter != null && classFilter.containsKey(type))) {
+					log.info("instance: " + subcontractsGrant + "	type: " + type);
+					return EVAL_BODY_AGAIN;
+				}
 			}
 		} catch (Exception e) {
 			log.error("Exception raised in InstituteSubcontractsGrantIterator doAfterBody", e);
@@ -94,6 +101,9 @@ public class InstituteSubcontractsGrantIterator extends edu.uiowa.slis.VIVOISF.T
 
 	private void clearServiceState() {
 		subjectURI = null;
+		type = null;
+		subcontractsGrant = null;
+		classFilter = null;
 	}
 
 	public void setType(String type) {
@@ -110,6 +120,19 @@ public class InstituteSubcontractsGrantIterator extends edu.uiowa.slis.VIVOISF.T
 
 	public String getSubcontractsGrant() {
 		return subcontractsGrant;
+	}
+
+	public void setClassFilter(String filterString) {
+		String[] classFilterArray = filterString.split(" ");
+		this.classFilter = new Hashtable<String, String>();
+		for (String filterClass : classFilterArray) {
+			log.info("adding filterClass " + filterClass + " to InstituteSubcontractsGrantIterator");
+			classFilter.put(filterClass, "");
+		}
+	}
+
+	public String getClassFilter() {
+		return classFilter.toString();
 	}
 
 }

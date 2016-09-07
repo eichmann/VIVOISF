@@ -9,6 +9,8 @@ import javax.servlet.jsp.JspTagException;
 import org.apache.jena.query.QuerySolution;
 import org.apache.jena.query.ResultSet;
 
+import java.util.Hashtable;
+
 @SuppressWarnings("serial")
 public class ResearchOrganizationERO_0000031Iterator extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 	static ResearchOrganizationERO_0000031Iterator currentInstance = null;
@@ -18,6 +20,7 @@ public class ResearchOrganizationERO_0000031Iterator extends edu.uiowa.slis.VIVO
 	String type = null;
 	String ERO_0000031 = null;
 	ResultSet rs = null;
+	Hashtable<String,String> classFilter = null;
 
 	public int doStartTag() throws JspException {
 		currentInstance = this;
@@ -41,12 +44,14 @@ public class ResearchOrganizationERO_0000031Iterator extends edu.uiowa.slis.VIVO
 					+"   filter ( ?subtype != ?t )"
 					+" }"
 					+"} ");
-			if(rs.hasNext()) {
+			while(rs.hasNext()) {
 				QuerySolution sol = rs.nextSolution();
 				ERO_0000031 = sol.get("?s").toString();
 				type = getLocalName(sol.get("?t").toString());
-				log.info("instance: " + ERO_0000031 + "	type: " + type);
-				return EVAL_BODY_INCLUDE;
+				if (classFilter == null || (classFilter != null && classFilter.containsKey(type))) {
+					log.info("instance: " + ERO_0000031 + "	type: " + type);
+					return EVAL_BODY_INCLUDE;
+				}
 			}
 		} catch (Exception e) {
 			log.error("Exception raised in ResearchOrganizationERO_0000031Iterator doStartTag", e);
@@ -60,12 +65,14 @@ public class ResearchOrganizationERO_0000031Iterator extends edu.uiowa.slis.VIVO
 
 	public int doAfterBody() throws JspException {
 		try {
-			if(rs.hasNext()) {
+			while(rs.hasNext()) {
 				QuerySolution sol = rs.nextSolution();
 				ERO_0000031 = sol.get("?s").toString();
 				type = getLocalName(sol.get("?t").toString());
-				log.info("instance: " + ERO_0000031 + "	type: " + type);
-				return EVAL_BODY_AGAIN;
+				if (classFilter == null || (classFilter != null && classFilter.containsKey(type))) {
+					log.info("instance: " + ERO_0000031 + "	type: " + type);
+					return EVAL_BODY_AGAIN;
+				}
 			}
 		} catch (Exception e) {
 			log.error("Exception raised in ResearchOrganizationERO_0000031Iterator doAfterBody", e);
@@ -94,6 +101,9 @@ public class ResearchOrganizationERO_0000031Iterator extends edu.uiowa.slis.VIVO
 
 	private void clearServiceState() {
 		subjectURI = null;
+		type = null;
+		ERO_0000031 = null;
+		classFilter = null;
 	}
 
 	public void setType(String type) {
@@ -110,6 +120,19 @@ public class ResearchOrganizationERO_0000031Iterator extends edu.uiowa.slis.VIVO
 
 	public String getERO_0000031() {
 		return ERO_0000031;
+	}
+
+	public void setClassFilter(String filterString) {
+		String[] classFilterArray = filterString.split(" ");
+		this.classFilter = new Hashtable<String, String>();
+		for (String filterClass : classFilterArray) {
+			log.info("adding filterClass " + filterClass + " to ResearchOrganizationERO_0000031Iterator");
+			classFilter.put(filterClass, "");
+		}
+	}
+
+	public String getClassFilter() {
+		return classFilter.toString();
 	}
 
 }

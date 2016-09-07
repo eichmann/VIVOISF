@@ -9,6 +9,8 @@ import javax.servlet.jsp.JspTagException;
 import org.apache.jena.query.QuerySolution;
 import org.apache.jena.query.ResultSet;
 
+import java.util.Hashtable;
+
 @SuppressWarnings("serial")
 public class FacultyPositionRO_0000056Iterator extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 	static FacultyPositionRO_0000056Iterator currentInstance = null;
@@ -18,6 +20,7 @@ public class FacultyPositionRO_0000056Iterator extends edu.uiowa.slis.VIVOISF.Ta
 	String type = null;
 	String RO_0000056 = null;
 	ResultSet rs = null;
+	Hashtable<String,String> classFilter = null;
 
 	public int doStartTag() throws JspException {
 		currentInstance = this;
@@ -41,12 +44,14 @@ public class FacultyPositionRO_0000056Iterator extends edu.uiowa.slis.VIVOISF.Ta
 					+"   filter ( ?subtype != ?t )"
 					+" }"
 					+"} ");
-			if(rs.hasNext()) {
+			while(rs.hasNext()) {
 				QuerySolution sol = rs.nextSolution();
 				RO_0000056 = sol.get("?s").toString();
 				type = getLocalName(sol.get("?t").toString());
-				log.info("instance: " + RO_0000056 + "	type: " + type);
-				return EVAL_BODY_INCLUDE;
+				if (classFilter == null || (classFilter != null && classFilter.containsKey(type))) {
+					log.info("instance: " + RO_0000056 + "	type: " + type);
+					return EVAL_BODY_INCLUDE;
+				}
 			}
 		} catch (Exception e) {
 			log.error("Exception raised in FacultyPositionRO_0000056Iterator doStartTag", e);
@@ -60,12 +65,14 @@ public class FacultyPositionRO_0000056Iterator extends edu.uiowa.slis.VIVOISF.Ta
 
 	public int doAfterBody() throws JspException {
 		try {
-			if(rs.hasNext()) {
+			while(rs.hasNext()) {
 				QuerySolution sol = rs.nextSolution();
 				RO_0000056 = sol.get("?s").toString();
 				type = getLocalName(sol.get("?t").toString());
-				log.info("instance: " + RO_0000056 + "	type: " + type);
-				return EVAL_BODY_AGAIN;
+				if (classFilter == null || (classFilter != null && classFilter.containsKey(type))) {
+					log.info("instance: " + RO_0000056 + "	type: " + type);
+					return EVAL_BODY_AGAIN;
+				}
 			}
 		} catch (Exception e) {
 			log.error("Exception raised in FacultyPositionRO_0000056Iterator doAfterBody", e);
@@ -94,6 +101,9 @@ public class FacultyPositionRO_0000056Iterator extends edu.uiowa.slis.VIVOISF.Ta
 
 	private void clearServiceState() {
 		subjectURI = null;
+		type = null;
+		RO_0000056 = null;
+		classFilter = null;
 	}
 
 	public void setType(String type) {
@@ -110,6 +120,19 @@ public class FacultyPositionRO_0000056Iterator extends edu.uiowa.slis.VIVOISF.Ta
 
 	public String getRO_0000056() {
 		return RO_0000056;
+	}
+
+	public void setClassFilter(String filterString) {
+		String[] classFilterArray = filterString.split(" ");
+		this.classFilter = new Hashtable<String, String>();
+		for (String filterClass : classFilterArray) {
+			log.info("adding filterClass " + filterClass + " to FacultyPositionRO_0000056Iterator");
+			classFilter.put(filterClass, "");
+		}
+	}
+
+	public String getClassFilter() {
+		return classFilter.toString();
 	}
 
 }

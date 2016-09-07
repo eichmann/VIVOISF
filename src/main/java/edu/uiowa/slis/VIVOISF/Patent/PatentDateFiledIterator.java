@@ -9,6 +9,8 @@ import javax.servlet.jsp.JspTagException;
 import org.apache.jena.query.QuerySolution;
 import org.apache.jena.query.ResultSet;
 
+import java.util.Hashtable;
+
 @SuppressWarnings("serial")
 public class PatentDateFiledIterator extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 	static PatentDateFiledIterator currentInstance = null;
@@ -18,6 +20,7 @@ public class PatentDateFiledIterator extends edu.uiowa.slis.VIVOISF.TagLibSuppor
 	String type = null;
 	String dateFiled = null;
 	ResultSet rs = null;
+	Hashtable<String,String> classFilter = null;
 
 	public int doStartTag() throws JspException {
 		currentInstance = this;
@@ -41,12 +44,14 @@ public class PatentDateFiledIterator extends edu.uiowa.slis.VIVOISF.TagLibSuppor
 					+"   filter ( ?subtype != ?t )"
 					+" }"
 					+"} ");
-			if(rs.hasNext()) {
+			while(rs.hasNext()) {
 				QuerySolution sol = rs.nextSolution();
 				dateFiled = sol.get("?s").toString();
 				type = getLocalName(sol.get("?t").toString());
-				log.info("instance: " + dateFiled + "	type: " + type);
-				return EVAL_BODY_INCLUDE;
+				if (classFilter == null || (classFilter != null && classFilter.containsKey(type))) {
+					log.info("instance: " + dateFiled + "	type: " + type);
+					return EVAL_BODY_INCLUDE;
+				}
 			}
 		} catch (Exception e) {
 			log.error("Exception raised in PatentDateFiledIterator doStartTag", e);
@@ -60,12 +65,14 @@ public class PatentDateFiledIterator extends edu.uiowa.slis.VIVOISF.TagLibSuppor
 
 	public int doAfterBody() throws JspException {
 		try {
-			if(rs.hasNext()) {
+			while(rs.hasNext()) {
 				QuerySolution sol = rs.nextSolution();
 				dateFiled = sol.get("?s").toString();
 				type = getLocalName(sol.get("?t").toString());
-				log.info("instance: " + dateFiled + "	type: " + type);
-				return EVAL_BODY_AGAIN;
+				if (classFilter == null || (classFilter != null && classFilter.containsKey(type))) {
+					log.info("instance: " + dateFiled + "	type: " + type);
+					return EVAL_BODY_AGAIN;
+				}
 			}
 		} catch (Exception e) {
 			log.error("Exception raised in PatentDateFiledIterator doAfterBody", e);
@@ -94,6 +101,9 @@ public class PatentDateFiledIterator extends edu.uiowa.slis.VIVOISF.TagLibSuppor
 
 	private void clearServiceState() {
 		subjectURI = null;
+		type = null;
+		dateFiled = null;
+		classFilter = null;
 	}
 
 	public void setType(String type) {
@@ -110,6 +120,19 @@ public class PatentDateFiledIterator extends edu.uiowa.slis.VIVOISF.TagLibSuppor
 
 	public String getDateFiled() {
 		return dateFiled;
+	}
+
+	public void setClassFilter(String filterString) {
+		String[] classFilterArray = filterString.split(" ");
+		this.classFilter = new Hashtable<String, String>();
+		for (String filterClass : classFilterArray) {
+			log.info("adding filterClass " + filterClass + " to PatentDateFiledIterator");
+			classFilter.put(filterClass, "");
+		}
+	}
+
+	public String getClassFilter() {
+		return classFilter.toString();
 	}
 
 }

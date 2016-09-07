@@ -9,6 +9,8 @@ import javax.servlet.jsp.JspTagException;
 import org.apache.jena.query.QuerySolution;
 import org.apache.jena.query.ResultSet;
 
+import java.util.Hashtable;
+
 @SuppressWarnings("serial")
 public class ProceedingsHasPublicationVenueIterator extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 	static ProceedingsHasPublicationVenueIterator currentInstance = null;
@@ -18,6 +20,7 @@ public class ProceedingsHasPublicationVenueIterator extends edu.uiowa.slis.VIVOI
 	String type = null;
 	String hasPublicationVenue = null;
 	ResultSet rs = null;
+	Hashtable<String,String> classFilter = null;
 
 	public int doStartTag() throws JspException {
 		currentInstance = this;
@@ -41,12 +44,14 @@ public class ProceedingsHasPublicationVenueIterator extends edu.uiowa.slis.VIVOI
 					+"   filter ( ?subtype != ?t )"
 					+" }"
 					+"} ");
-			if(rs.hasNext()) {
+			while(rs.hasNext()) {
 				QuerySolution sol = rs.nextSolution();
 				hasPublicationVenue = sol.get("?s").toString();
 				type = getLocalName(sol.get("?t").toString());
-				log.info("instance: " + hasPublicationVenue + "	type: " + type);
-				return EVAL_BODY_INCLUDE;
+				if (classFilter == null || (classFilter != null && classFilter.containsKey(type))) {
+					log.info("instance: " + hasPublicationVenue + "	type: " + type);
+					return EVAL_BODY_INCLUDE;
+				}
 			}
 		} catch (Exception e) {
 			log.error("Exception raised in ProceedingsHasPublicationVenueIterator doStartTag", e);
@@ -60,12 +65,14 @@ public class ProceedingsHasPublicationVenueIterator extends edu.uiowa.slis.VIVOI
 
 	public int doAfterBody() throws JspException {
 		try {
-			if(rs.hasNext()) {
+			while(rs.hasNext()) {
 				QuerySolution sol = rs.nextSolution();
 				hasPublicationVenue = sol.get("?s").toString();
 				type = getLocalName(sol.get("?t").toString());
-				log.info("instance: " + hasPublicationVenue + "	type: " + type);
-				return EVAL_BODY_AGAIN;
+				if (classFilter == null || (classFilter != null && classFilter.containsKey(type))) {
+					log.info("instance: " + hasPublicationVenue + "	type: " + type);
+					return EVAL_BODY_AGAIN;
+				}
 			}
 		} catch (Exception e) {
 			log.error("Exception raised in ProceedingsHasPublicationVenueIterator doAfterBody", e);
@@ -94,6 +101,9 @@ public class ProceedingsHasPublicationVenueIterator extends edu.uiowa.slis.VIVOI
 
 	private void clearServiceState() {
 		subjectURI = null;
+		type = null;
+		hasPublicationVenue = null;
+		classFilter = null;
 	}
 
 	public void setType(String type) {
@@ -110,6 +120,19 @@ public class ProceedingsHasPublicationVenueIterator extends edu.uiowa.slis.VIVOI
 
 	public String getHasPublicationVenue() {
 		return hasPublicationVenue;
+	}
+
+	public void setClassFilter(String filterString) {
+		String[] classFilterArray = filterString.split(" ");
+		this.classFilter = new Hashtable<String, String>();
+		for (String filterClass : classFilterArray) {
+			log.info("adding filterClass " + filterClass + " to ProceedingsHasPublicationVenueIterator");
+			classFilter.put(filterClass, "");
+		}
+	}
+
+	public String getClassFilter() {
+		return classFilter.toString();
 	}
 
 }

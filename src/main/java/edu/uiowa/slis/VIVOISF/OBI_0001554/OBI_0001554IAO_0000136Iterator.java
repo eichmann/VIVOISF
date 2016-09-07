@@ -9,6 +9,8 @@ import javax.servlet.jsp.JspTagException;
 import org.apache.jena.query.QuerySolution;
 import org.apache.jena.query.ResultSet;
 
+import java.util.Hashtable;
+
 @SuppressWarnings("serial")
 public class OBI_0001554IAO_0000136Iterator extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 	static OBI_0001554IAO_0000136Iterator currentInstance = null;
@@ -18,6 +20,7 @@ public class OBI_0001554IAO_0000136Iterator extends edu.uiowa.slis.VIVOISF.TagLi
 	String type = null;
 	String IAO_0000136 = null;
 	ResultSet rs = null;
+	Hashtable<String,String> classFilter = null;
 
 	public int doStartTag() throws JspException {
 		currentInstance = this;
@@ -41,12 +44,14 @@ public class OBI_0001554IAO_0000136Iterator extends edu.uiowa.slis.VIVOISF.TagLi
 					+"   filter ( ?subtype != ?t )"
 					+" }"
 					+"} ");
-			if(rs.hasNext()) {
+			while(rs.hasNext()) {
 				QuerySolution sol = rs.nextSolution();
 				IAO_0000136 = sol.get("?s").toString();
 				type = getLocalName(sol.get("?t").toString());
-				log.info("instance: " + IAO_0000136 + "	type: " + type);
-				return EVAL_BODY_INCLUDE;
+				if (classFilter == null || (classFilter != null && classFilter.containsKey(type))) {
+					log.info("instance: " + IAO_0000136 + "	type: " + type);
+					return EVAL_BODY_INCLUDE;
+				}
 			}
 		} catch (Exception e) {
 			log.error("Exception raised in OBI_0001554IAO_0000136Iterator doStartTag", e);
@@ -60,12 +65,14 @@ public class OBI_0001554IAO_0000136Iterator extends edu.uiowa.slis.VIVOISF.TagLi
 
 	public int doAfterBody() throws JspException {
 		try {
-			if(rs.hasNext()) {
+			while(rs.hasNext()) {
 				QuerySolution sol = rs.nextSolution();
 				IAO_0000136 = sol.get("?s").toString();
 				type = getLocalName(sol.get("?t").toString());
-				log.info("instance: " + IAO_0000136 + "	type: " + type);
-				return EVAL_BODY_AGAIN;
+				if (classFilter == null || (classFilter != null && classFilter.containsKey(type))) {
+					log.info("instance: " + IAO_0000136 + "	type: " + type);
+					return EVAL_BODY_AGAIN;
+				}
 			}
 		} catch (Exception e) {
 			log.error("Exception raised in OBI_0001554IAO_0000136Iterator doAfterBody", e);
@@ -94,6 +101,9 @@ public class OBI_0001554IAO_0000136Iterator extends edu.uiowa.slis.VIVOISF.TagLi
 
 	private void clearServiceState() {
 		subjectURI = null;
+		type = null;
+		IAO_0000136 = null;
+		classFilter = null;
 	}
 
 	public void setType(String type) {
@@ -110,6 +120,19 @@ public class OBI_0001554IAO_0000136Iterator extends edu.uiowa.slis.VIVOISF.TagLi
 
 	public String getIAO_0000136() {
 		return IAO_0000136;
+	}
+
+	public void setClassFilter(String filterString) {
+		String[] classFilterArray = filterString.split(" ");
+		this.classFilter = new Hashtable<String, String>();
+		for (String filterClass : classFilterArray) {
+			log.info("adding filterClass " + filterClass + " to OBI_0001554IAO_0000136Iterator");
+			classFilter.put(filterClass, "");
+		}
+	}
+
+	public String getClassFilter() {
+		return classFilter.toString();
 	}
 
 }

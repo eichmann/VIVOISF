@@ -9,6 +9,8 @@ import javax.servlet.jsp.JspTagException;
 import org.apache.jena.query.QuerySolution;
 import org.apache.jena.query.ResultSet;
 
+import java.util.Hashtable;
+
 @SuppressWarnings("serial")
 public class StateOrProvinceBFO_0000050Iterator extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 	static StateOrProvinceBFO_0000050Iterator currentInstance = null;
@@ -18,6 +20,7 @@ public class StateOrProvinceBFO_0000050Iterator extends edu.uiowa.slis.VIVOISF.T
 	String type = null;
 	String BFO_0000050 = null;
 	ResultSet rs = null;
+	Hashtable<String,String> classFilter = null;
 
 	public int doStartTag() throws JspException {
 		currentInstance = this;
@@ -41,12 +44,14 @@ public class StateOrProvinceBFO_0000050Iterator extends edu.uiowa.slis.VIVOISF.T
 					+"   filter ( ?subtype != ?t )"
 					+" }"
 					+"} ");
-			if(rs.hasNext()) {
+			while(rs.hasNext()) {
 				QuerySolution sol = rs.nextSolution();
 				BFO_0000050 = sol.get("?s").toString();
 				type = getLocalName(sol.get("?t").toString());
-				log.info("instance: " + BFO_0000050 + "	type: " + type);
-				return EVAL_BODY_INCLUDE;
+				if (classFilter == null || (classFilter != null && classFilter.containsKey(type))) {
+					log.info("instance: " + BFO_0000050 + "	type: " + type);
+					return EVAL_BODY_INCLUDE;
+				}
 			}
 		} catch (Exception e) {
 			log.error("Exception raised in StateOrProvinceBFO_0000050Iterator doStartTag", e);
@@ -60,12 +65,14 @@ public class StateOrProvinceBFO_0000050Iterator extends edu.uiowa.slis.VIVOISF.T
 
 	public int doAfterBody() throws JspException {
 		try {
-			if(rs.hasNext()) {
+			while(rs.hasNext()) {
 				QuerySolution sol = rs.nextSolution();
 				BFO_0000050 = sol.get("?s").toString();
 				type = getLocalName(sol.get("?t").toString());
-				log.info("instance: " + BFO_0000050 + "	type: " + type);
-				return EVAL_BODY_AGAIN;
+				if (classFilter == null || (classFilter != null && classFilter.containsKey(type))) {
+					log.info("instance: " + BFO_0000050 + "	type: " + type);
+					return EVAL_BODY_AGAIN;
+				}
 			}
 		} catch (Exception e) {
 			log.error("Exception raised in StateOrProvinceBFO_0000050Iterator doAfterBody", e);
@@ -94,6 +101,9 @@ public class StateOrProvinceBFO_0000050Iterator extends edu.uiowa.slis.VIVOISF.T
 
 	private void clearServiceState() {
 		subjectURI = null;
+		type = null;
+		BFO_0000050 = null;
+		classFilter = null;
 	}
 
 	public void setType(String type) {
@@ -110,6 +120,19 @@ public class StateOrProvinceBFO_0000050Iterator extends edu.uiowa.slis.VIVOISF.T
 
 	public String getBFO_0000050() {
 		return BFO_0000050;
+	}
+
+	public void setClassFilter(String filterString) {
+		String[] classFilterArray = filterString.split(" ");
+		this.classFilter = new Hashtable<String, String>();
+		for (String filterClass : classFilterArray) {
+			log.info("adding filterClass " + filterClass + " to StateOrProvinceBFO_0000050Iterator");
+			classFilter.put(filterClass, "");
+		}
+	}
+
+	public String getClassFilter() {
+		return classFilter.toString();
 	}
 
 }

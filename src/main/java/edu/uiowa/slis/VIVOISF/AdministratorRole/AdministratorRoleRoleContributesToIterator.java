@@ -9,6 +9,8 @@ import javax.servlet.jsp.JspTagException;
 import org.apache.jena.query.QuerySolution;
 import org.apache.jena.query.ResultSet;
 
+import java.util.Hashtable;
+
 @SuppressWarnings("serial")
 public class AdministratorRoleRoleContributesToIterator extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 	static AdministratorRoleRoleContributesToIterator currentInstance = null;
@@ -18,6 +20,7 @@ public class AdministratorRoleRoleContributesToIterator extends edu.uiowa.slis.V
 	String type = null;
 	String roleContributesTo = null;
 	ResultSet rs = null;
+	Hashtable<String,String> classFilter = null;
 
 	public int doStartTag() throws JspException {
 		currentInstance = this;
@@ -41,12 +44,14 @@ public class AdministratorRoleRoleContributesToIterator extends edu.uiowa.slis.V
 					+"   filter ( ?subtype != ?t )"
 					+" }"
 					+"} ");
-			if(rs.hasNext()) {
+			while(rs.hasNext()) {
 				QuerySolution sol = rs.nextSolution();
 				roleContributesTo = sol.get("?s").toString();
 				type = getLocalName(sol.get("?t").toString());
-				log.info("instance: " + roleContributesTo + "	type: " + type);
-				return EVAL_BODY_INCLUDE;
+				if (classFilter == null || (classFilter != null && classFilter.containsKey(type))) {
+					log.info("instance: " + roleContributesTo + "	type: " + type);
+					return EVAL_BODY_INCLUDE;
+				}
 			}
 		} catch (Exception e) {
 			log.error("Exception raised in AdministratorRoleRoleContributesToIterator doStartTag", e);
@@ -60,12 +65,14 @@ public class AdministratorRoleRoleContributesToIterator extends edu.uiowa.slis.V
 
 	public int doAfterBody() throws JspException {
 		try {
-			if(rs.hasNext()) {
+			while(rs.hasNext()) {
 				QuerySolution sol = rs.nextSolution();
 				roleContributesTo = sol.get("?s").toString();
 				type = getLocalName(sol.get("?t").toString());
-				log.info("instance: " + roleContributesTo + "	type: " + type);
-				return EVAL_BODY_AGAIN;
+				if (classFilter == null || (classFilter != null && classFilter.containsKey(type))) {
+					log.info("instance: " + roleContributesTo + "	type: " + type);
+					return EVAL_BODY_AGAIN;
+				}
 			}
 		} catch (Exception e) {
 			log.error("Exception raised in AdministratorRoleRoleContributesToIterator doAfterBody", e);
@@ -94,6 +101,9 @@ public class AdministratorRoleRoleContributesToIterator extends edu.uiowa.slis.V
 
 	private void clearServiceState() {
 		subjectURI = null;
+		type = null;
+		roleContributesTo = null;
+		classFilter = null;
 	}
 
 	public void setType(String type) {
@@ -110,6 +120,19 @@ public class AdministratorRoleRoleContributesToIterator extends edu.uiowa.slis.V
 
 	public String getRoleContributesTo() {
 		return roleContributesTo;
+	}
+
+	public void setClassFilter(String filterString) {
+		String[] classFilterArray = filterString.split(" ");
+		this.classFilter = new Hashtable<String, String>();
+		for (String filterClass : classFilterArray) {
+			log.info("adding filterClass " + filterClass + " to AdministratorRoleRoleContributesToIterator");
+			classFilter.put(filterClass, "");
+		}
+	}
+
+	public String getClassFilter() {
+		return classFilter.toString();
 	}
 
 }

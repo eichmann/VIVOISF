@@ -9,6 +9,8 @@ import javax.servlet.jsp.JspTagException;
 import org.apache.jena.query.QuerySolution;
 import org.apache.jena.query.ResultSet;
 
+import java.util.Hashtable;
+
 @SuppressWarnings("serial")
 public class self_governingBFO_0000051Iterator extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 	static self_governingBFO_0000051Iterator currentInstance = null;
@@ -18,6 +20,7 @@ public class self_governingBFO_0000051Iterator extends edu.uiowa.slis.VIVOISF.Ta
 	String type = null;
 	String BFO_0000051 = null;
 	ResultSet rs = null;
+	Hashtable<String,String> classFilter = null;
 
 	public int doStartTag() throws JspException {
 		currentInstance = this;
@@ -41,12 +44,14 @@ public class self_governingBFO_0000051Iterator extends edu.uiowa.slis.VIVOISF.Ta
 					+"   filter ( ?subtype != ?t )"
 					+" }"
 					+"} ");
-			if(rs.hasNext()) {
+			while(rs.hasNext()) {
 				QuerySolution sol = rs.nextSolution();
 				BFO_0000051 = sol.get("?s").toString();
 				type = getLocalName(sol.get("?t").toString());
-				log.info("instance: " + BFO_0000051 + "	type: " + type);
-				return EVAL_BODY_INCLUDE;
+				if (classFilter == null || (classFilter != null && classFilter.containsKey(type))) {
+					log.info("instance: " + BFO_0000051 + "	type: " + type);
+					return EVAL_BODY_INCLUDE;
+				}
 			}
 		} catch (Exception e) {
 			log.error("Exception raised in self_governingBFO_0000051Iterator doStartTag", e);
@@ -60,12 +65,14 @@ public class self_governingBFO_0000051Iterator extends edu.uiowa.slis.VIVOISF.Ta
 
 	public int doAfterBody() throws JspException {
 		try {
-			if(rs.hasNext()) {
+			while(rs.hasNext()) {
 				QuerySolution sol = rs.nextSolution();
 				BFO_0000051 = sol.get("?s").toString();
 				type = getLocalName(sol.get("?t").toString());
-				log.info("instance: " + BFO_0000051 + "	type: " + type);
-				return EVAL_BODY_AGAIN;
+				if (classFilter == null || (classFilter != null && classFilter.containsKey(type))) {
+					log.info("instance: " + BFO_0000051 + "	type: " + type);
+					return EVAL_BODY_AGAIN;
+				}
 			}
 		} catch (Exception e) {
 			log.error("Exception raised in self_governingBFO_0000051Iterator doAfterBody", e);
@@ -94,6 +101,9 @@ public class self_governingBFO_0000051Iterator extends edu.uiowa.slis.VIVOISF.Ta
 
 	private void clearServiceState() {
 		subjectURI = null;
+		type = null;
+		BFO_0000051 = null;
+		classFilter = null;
 	}
 
 	public void setType(String type) {
@@ -110,6 +120,19 @@ public class self_governingBFO_0000051Iterator extends edu.uiowa.slis.VIVOISF.Ta
 
 	public String getBFO_0000051() {
 		return BFO_0000051;
+	}
+
+	public void setClassFilter(String filterString) {
+		String[] classFilterArray = filterString.split(" ");
+		this.classFilter = new Hashtable<String, String>();
+		for (String filterClass : classFilterArray) {
+			log.info("adding filterClass " + filterClass + " to self_governingBFO_0000051Iterator");
+			classFilter.put(filterClass, "");
+		}
+	}
+
+	public String getClassFilter() {
+		return classFilter.toString();
 	}
 
 }

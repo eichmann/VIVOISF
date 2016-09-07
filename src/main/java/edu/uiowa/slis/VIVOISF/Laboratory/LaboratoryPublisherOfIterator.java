@@ -9,6 +9,8 @@ import javax.servlet.jsp.JspTagException;
 import org.apache.jena.query.QuerySolution;
 import org.apache.jena.query.ResultSet;
 
+import java.util.Hashtable;
+
 @SuppressWarnings("serial")
 public class LaboratoryPublisherOfIterator extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 	static LaboratoryPublisherOfIterator currentInstance = null;
@@ -18,6 +20,7 @@ public class LaboratoryPublisherOfIterator extends edu.uiowa.slis.VIVOISF.TagLib
 	String type = null;
 	String publisherOf = null;
 	ResultSet rs = null;
+	Hashtable<String,String> classFilter = null;
 
 	public int doStartTag() throws JspException {
 		currentInstance = this;
@@ -41,12 +44,14 @@ public class LaboratoryPublisherOfIterator extends edu.uiowa.slis.VIVOISF.TagLib
 					+"   filter ( ?subtype != ?t )"
 					+" }"
 					+"} ");
-			if(rs.hasNext()) {
+			while(rs.hasNext()) {
 				QuerySolution sol = rs.nextSolution();
 				publisherOf = sol.get("?s").toString();
 				type = getLocalName(sol.get("?t").toString());
-				log.info("instance: " + publisherOf + "	type: " + type);
-				return EVAL_BODY_INCLUDE;
+				if (classFilter == null || (classFilter != null && classFilter.containsKey(type))) {
+					log.info("instance: " + publisherOf + "	type: " + type);
+					return EVAL_BODY_INCLUDE;
+				}
 			}
 		} catch (Exception e) {
 			log.error("Exception raised in LaboratoryPublisherOfIterator doStartTag", e);
@@ -60,12 +65,14 @@ public class LaboratoryPublisherOfIterator extends edu.uiowa.slis.VIVOISF.TagLib
 
 	public int doAfterBody() throws JspException {
 		try {
-			if(rs.hasNext()) {
+			while(rs.hasNext()) {
 				QuerySolution sol = rs.nextSolution();
 				publisherOf = sol.get("?s").toString();
 				type = getLocalName(sol.get("?t").toString());
-				log.info("instance: " + publisherOf + "	type: " + type);
-				return EVAL_BODY_AGAIN;
+				if (classFilter == null || (classFilter != null && classFilter.containsKey(type))) {
+					log.info("instance: " + publisherOf + "	type: " + type);
+					return EVAL_BODY_AGAIN;
+				}
 			}
 		} catch (Exception e) {
 			log.error("Exception raised in LaboratoryPublisherOfIterator doAfterBody", e);
@@ -94,6 +101,9 @@ public class LaboratoryPublisherOfIterator extends edu.uiowa.slis.VIVOISF.TagLib
 
 	private void clearServiceState() {
 		subjectURI = null;
+		type = null;
+		publisherOf = null;
+		classFilter = null;
 	}
 
 	public void setType(String type) {
@@ -110,6 +120,19 @@ public class LaboratoryPublisherOfIterator extends edu.uiowa.slis.VIVOISF.TagLib
 
 	public String getPublisherOf() {
 		return publisherOf;
+	}
+
+	public void setClassFilter(String filterString) {
+		String[] classFilterArray = filterString.split(" ");
+		this.classFilter = new Hashtable<String, String>();
+		for (String filterClass : classFilterArray) {
+			log.info("adding filterClass " + filterClass + " to LaboratoryPublisherOfIterator");
+			classFilter.put(filterClass, "");
+		}
+	}
+
+	public String getClassFilter() {
+		return classFilter.toString();
 	}
 
 }
