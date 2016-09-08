@@ -33,6 +33,26 @@ public class Geo extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 				label = theGeoIterator.getLabel();
 			}
 
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.Geographical.GeographicalHasGeoIterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.Geographical.GeographicalHasGeoIterator)this.getParent()).getHasGeo();
+			}
+
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.Kind.KindHasGeoIterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.Kind.KindHasGeoIterator)this.getParent()).getHasGeo();
+			}
+
+			edu.uiowa.slis.VIVOISF.Geographical.GeographicalHasGeoIterator theGeographicalHasGeoIterator = (edu.uiowa.slis.VIVOISF.Geographical.GeographicalHasGeoIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.Geographical.GeographicalHasGeoIterator.class);
+
+			if (subjectURI == null && theGeographicalHasGeoIterator != null) {
+				subjectURI = theGeographicalHasGeoIterator.getHasGeo();
+			}
+
+			edu.uiowa.slis.VIVOISF.Kind.KindHasGeoIterator theKindHasGeoIterator = (edu.uiowa.slis.VIVOISF.Kind.KindHasGeoIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.Kind.KindHasGeoIterator.class);
+
+			if (subjectURI == null && theKindHasGeoIterator != null) {
+				subjectURI = theKindHasGeoIterator.getHasGeo();
+			}
+
 			if (theGeoIterator == null && subjectURI == null) {
 				throw new JspException("subject URI generation currently not supported");
 			} else {

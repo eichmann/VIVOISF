@@ -30,6 +30,16 @@ public class OCRE100038 extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 				label = theOCRE100038Iterator.getLabel();
 			}
 
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.ERO_0000016.ERO_0000016ERO_0001518Iterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.ERO_0000016.ERO_0000016ERO_0001518Iterator)this.getParent()).getERO_0001518();
+			}
+
+			edu.uiowa.slis.VIVOISF.ERO_0000016.ERO_0000016ERO_0001518Iterator theERO_0000016ERO_0001518Iterator = (edu.uiowa.slis.VIVOISF.ERO_0000016.ERO_0000016ERO_0001518Iterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.ERO_0000016.ERO_0000016ERO_0001518Iterator.class);
+
+			if (subjectURI == null && theERO_0000016ERO_0001518Iterator != null) {
+				subjectURI = theERO_0000016ERO_0001518Iterator.getERO_0001518();
+			}
+
 			if (theOCRE100038Iterator == null && subjectURI == null) {
 				throw new JspException("subject URI generation currently not supported");
 			} else {

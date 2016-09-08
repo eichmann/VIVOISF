@@ -30,6 +30,16 @@ public class Event extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 				label = theEventIterator.getLabel();
 			}
 
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.Document.DocumentPresentedAtIterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.Document.DocumentPresentedAtIterator)this.getParent()).getPresentedAt();
+			}
+
+			edu.uiowa.slis.VIVOISF.Document.DocumentPresentedAtIterator theDocumentPresentedAtIterator = (edu.uiowa.slis.VIVOISF.Document.DocumentPresentedAtIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.Document.DocumentPresentedAtIterator.class);
+
+			if (subjectURI == null && theDocumentPresentedAtIterator != null) {
+				subjectURI = theDocumentPresentedAtIterator.getPresentedAt();
+			}
+
 			if (theEventIterator == null && subjectURI == null) {
 				throw new JspException("subject URI generation currently not supported");
 			} else {

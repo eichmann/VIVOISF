@@ -33,6 +33,16 @@ public class IAO_0000005 extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 				label = theIAO_0000005Iterator.getLabel();
 			}
 
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.OBI_0000011.OBI_0000011OBI_0000417Iterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.OBI_0000011.OBI_0000011OBI_0000417Iterator)this.getParent()).getOBI_0000417();
+			}
+
+			edu.uiowa.slis.VIVOISF.OBI_0000011.OBI_0000011OBI_0000417Iterator theOBI_0000011OBI_0000417Iterator = (edu.uiowa.slis.VIVOISF.OBI_0000011.OBI_0000011OBI_0000417Iterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.OBI_0000011.OBI_0000011OBI_0000417Iterator.class);
+
+			if (subjectURI == null && theOBI_0000011OBI_0000417Iterator != null) {
+				subjectURI = theOBI_0000011OBI_0000417Iterator.getOBI_0000417();
+			}
+
 			if (theIAO_0000005Iterator == null && subjectURI == null) {
 				throw new JspException("subject URI generation currently not supported");
 			} else {

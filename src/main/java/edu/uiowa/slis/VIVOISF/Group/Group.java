@@ -33,6 +33,16 @@ public class group extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 				label = thegroupIterator.getLabel();
 			}
 
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.territory.territoryIsInGroupIterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.territory.territoryIsInGroupIterator)this.getParent()).getIsInGroup();
+			}
+
+			edu.uiowa.slis.VIVOISF.territory.territoryIsInGroupIterator theterritoryIsInGroupIterator = (edu.uiowa.slis.VIVOISF.territory.territoryIsInGroupIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.territory.territoryIsInGroupIterator.class);
+
+			if (subjectURI == null && theterritoryIsInGroupIterator != null) {
+				subjectURI = theterritoryIsInGroupIterator.getIsInGroup();
+			}
+
 			if (thegroupIterator == null && subjectURI == null) {
 				throw new JspException("subject URI generation currently not supported");
 			} else {

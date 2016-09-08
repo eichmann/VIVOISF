@@ -33,6 +33,26 @@ public class StateOrProvince extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 				label = theStateOrProvinceIterator.getLabel();
 			}
 
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.self_governing.self_governingBFO_0000051Iterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.self_governing.self_governingBFO_0000051Iterator)this.getParent()).getBFO_0000051();
+			}
+
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.Country.CountryBFO_0000051Iterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.Country.CountryBFO_0000051Iterator)this.getParent()).getBFO_0000051();
+			}
+
+			edu.uiowa.slis.VIVOISF.self_governing.self_governingBFO_0000051Iterator theself_governingBFO_0000051Iterator = (edu.uiowa.slis.VIVOISF.self_governing.self_governingBFO_0000051Iterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.self_governing.self_governingBFO_0000051Iterator.class);
+
+			if (subjectURI == null && theself_governingBFO_0000051Iterator != null) {
+				subjectURI = theself_governingBFO_0000051Iterator.getBFO_0000051();
+			}
+
+			edu.uiowa.slis.VIVOISF.Country.CountryBFO_0000051Iterator theCountryBFO_0000051Iterator = (edu.uiowa.slis.VIVOISF.Country.CountryBFO_0000051Iterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.Country.CountryBFO_0000051Iterator.class);
+
+			if (subjectURI == null && theCountryBFO_0000051Iterator != null) {
+				subjectURI = theCountryBFO_0000051Iterator.getBFO_0000051();
+			}
+
 			if (theStateOrProvinceIterator == null && subjectURI == null) {
 				throw new JspException("subject URI generation currently not supported");
 			} else {

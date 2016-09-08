@@ -33,6 +33,16 @@ public class Grant extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 				label = theGrantIterator.getLabel();
 			}
 
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.Organization.OrganizationSubcontractsGrantIterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.Organization.OrganizationSubcontractsGrantIterator)this.getParent()).getSubcontractsGrant();
+			}
+
+			edu.uiowa.slis.VIVOISF.Organization.OrganizationSubcontractsGrantIterator theOrganizationSubcontractsGrantIterator = (edu.uiowa.slis.VIVOISF.Organization.OrganizationSubcontractsGrantIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.Organization.OrganizationSubcontractsGrantIterator.class);
+
+			if (subjectURI == null && theOrganizationSubcontractsGrantIterator != null) {
+				subjectURI = theOrganizationSubcontractsGrantIterator.getSubcontractsGrant();
+			}
+
 			if (theGrantIterator == null && subjectURI == null) {
 				throw new JspException("subject URI generation currently not supported");
 			} else {

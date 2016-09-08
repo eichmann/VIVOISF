@@ -33,6 +33,16 @@ public class GeographicRegion extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 				label = theGeographicRegionIterator.getLabel();
 			}
 
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.Person.PersonGeographicFocusIterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.Person.PersonGeographicFocusIterator)this.getParent()).getGeographicFocus();
+			}
+
+			edu.uiowa.slis.VIVOISF.Person.PersonGeographicFocusIterator thePersonGeographicFocusIterator = (edu.uiowa.slis.VIVOISF.Person.PersonGeographicFocusIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.Person.PersonGeographicFocusIterator.class);
+
+			if (subjectURI == null && thePersonGeographicFocusIterator != null) {
+				subjectURI = thePersonGeographicFocusIterator.getGeographicFocus();
+			}
+
 			if (theGeographicRegionIterator == null && subjectURI == null) {
 				throw new JspException("subject URI generation currently not supported");
 			} else {

@@ -33,6 +33,16 @@ public class Equipment extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 				label = theEquipmentIterator.getLabel();
 			}
 
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.Organization.OrganizationHasEquipmentIterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.Organization.OrganizationHasEquipmentIterator)this.getParent()).getHasEquipment();
+			}
+
+			edu.uiowa.slis.VIVOISF.Organization.OrganizationHasEquipmentIterator theOrganizationHasEquipmentIterator = (edu.uiowa.slis.VIVOISF.Organization.OrganizationHasEquipmentIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.Organization.OrganizationHasEquipmentIterator.class);
+
+			if (subjectURI == null && theOrganizationHasEquipmentIterator != null) {
+				subjectURI = theOrganizationHasEquipmentIterator.getHasEquipment();
+			}
+
 			if (theEquipmentIterator == null && subjectURI == null) {
 				throw new JspException("subject URI generation currently not supported");
 			} else {

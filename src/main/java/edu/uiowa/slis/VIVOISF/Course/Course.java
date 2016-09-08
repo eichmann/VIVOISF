@@ -33,6 +33,26 @@ public class Course extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 				label = theCourseIterator.getLabel();
 			}
 
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.Course.CourseHasPrerequisiteIterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.Course.CourseHasPrerequisiteIterator)this.getParent()).getHasPrerequisite();
+			}
+
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.Course.CoursePrerequisiteForIterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.Course.CoursePrerequisiteForIterator)this.getParent()).getPrerequisiteFor();
+			}
+
+			edu.uiowa.slis.VIVOISF.Course.CourseHasPrerequisiteIterator theCourseHasPrerequisiteIterator = (edu.uiowa.slis.VIVOISF.Course.CourseHasPrerequisiteIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.Course.CourseHasPrerequisiteIterator.class);
+
+			if (subjectURI == null && theCourseHasPrerequisiteIterator != null) {
+				subjectURI = theCourseHasPrerequisiteIterator.getHasPrerequisite();
+			}
+
+			edu.uiowa.slis.VIVOISF.Course.CoursePrerequisiteForIterator theCoursePrerequisiteForIterator = (edu.uiowa.slis.VIVOISF.Course.CoursePrerequisiteForIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.Course.CoursePrerequisiteForIterator.class);
+
+			if (subjectURI == null && theCoursePrerequisiteForIterator != null) {
+				subjectURI = theCoursePrerequisiteForIterator.getPrerequisiteFor();
+			}
+
 			if (theCourseIterator == null && subjectURI == null) {
 				throw new JspException("subject URI generation currently not supported");
 			} else {

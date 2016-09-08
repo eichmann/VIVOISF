@@ -33,6 +33,26 @@ public class Address extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 				label = theAddressIterator.getLabel();
 			}
 
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.Kind.KindHasAddressIterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.Kind.KindHasAddressIterator)this.getParent()).getHasAddress();
+			}
+
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.Geographical.GeographicalHasAddressIterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.Geographical.GeographicalHasAddressIterator)this.getParent()).getHasAddress();
+			}
+
+			edu.uiowa.slis.VIVOISF.Kind.KindHasAddressIterator theKindHasAddressIterator = (edu.uiowa.slis.VIVOISF.Kind.KindHasAddressIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.Kind.KindHasAddressIterator.class);
+
+			if (subjectURI == null && theKindHasAddressIterator != null) {
+				subjectURI = theKindHasAddressIterator.getHasAddress();
+			}
+
+			edu.uiowa.slis.VIVOISF.Geographical.GeographicalHasAddressIterator theGeographicalHasAddressIterator = (edu.uiowa.slis.VIVOISF.Geographical.GeographicalHasAddressIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.Geographical.GeographicalHasAddressIterator.class);
+
+			if (subjectURI == null && theGeographicalHasAddressIterator != null) {
+				subjectURI = theGeographicalHasAddressIterator.getHasAddress();
+			}
+
 			if (theAddressIterator == null && subjectURI == null) {
 				throw new JspException("subject URI generation currently not supported");
 			} else {

@@ -30,6 +30,16 @@ public class BibliographicInformationSource extends edu.uiowa.slis.VIVOISF.TagLi
 				label = theBibliographicInformationSourceIterator.getLabel();
 			}
 
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.GlobalCitationCount.GlobalCitationCountHasGlobalCountSourceIterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.GlobalCitationCount.GlobalCitationCountHasGlobalCountSourceIterator)this.getParent()).getHasGlobalCountSource();
+			}
+
+			edu.uiowa.slis.VIVOISF.GlobalCitationCount.GlobalCitationCountHasGlobalCountSourceIterator theGlobalCitationCountHasGlobalCountSourceIterator = (edu.uiowa.slis.VIVOISF.GlobalCitationCount.GlobalCitationCountHasGlobalCountSourceIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.GlobalCitationCount.GlobalCitationCountHasGlobalCountSourceIterator.class);
+
+			if (subjectURI == null && theGlobalCitationCountHasGlobalCountSourceIterator != null) {
+				subjectURI = theGlobalCitationCountHasGlobalCountSourceIterator.getHasGlobalCountSource();
+			}
+
 			if (theBibliographicInformationSourceIterator == null && subjectURI == null) {
 				throw new JspException("subject URI generation currently not supported");
 			} else {

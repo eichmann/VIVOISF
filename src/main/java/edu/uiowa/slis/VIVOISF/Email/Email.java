@@ -33,6 +33,36 @@ public class Email extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 				label = theEmailIterator.getLabel();
 			}
 
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.Individual.IndividualHasEmailIterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.Individual.IndividualHasEmailIterator)this.getParent()).getHasEmail();
+			}
+
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.Geographical.GeographicalHasEmailIterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.Geographical.GeographicalHasEmailIterator)this.getParent()).getHasEmail();
+			}
+
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.Kind.KindHasEmailIterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.Kind.KindHasEmailIterator)this.getParent()).getHasEmail();
+			}
+
+			edu.uiowa.slis.VIVOISF.Individual.IndividualHasEmailIterator theIndividualHasEmailIterator = (edu.uiowa.slis.VIVOISF.Individual.IndividualHasEmailIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.Individual.IndividualHasEmailIterator.class);
+
+			if (subjectURI == null && theIndividualHasEmailIterator != null) {
+				subjectURI = theIndividualHasEmailIterator.getHasEmail();
+			}
+
+			edu.uiowa.slis.VIVOISF.Geographical.GeographicalHasEmailIterator theGeographicalHasEmailIterator = (edu.uiowa.slis.VIVOISF.Geographical.GeographicalHasEmailIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.Geographical.GeographicalHasEmailIterator.class);
+
+			if (subjectURI == null && theGeographicalHasEmailIterator != null) {
+				subjectURI = theGeographicalHasEmailIterator.getHasEmail();
+			}
+
+			edu.uiowa.slis.VIVOISF.Kind.KindHasEmailIterator theKindHasEmailIterator = (edu.uiowa.slis.VIVOISF.Kind.KindHasEmailIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.Kind.KindHasEmailIterator.class);
+
+			if (subjectURI == null && theKindHasEmailIterator != null) {
+				subjectURI = theKindHasEmailIterator.getHasEmail();
+			}
+
 			if (theEmailIterator == null && subjectURI == null) {
 				throw new JspException("subject URI generation currently not supported");
 			} else {

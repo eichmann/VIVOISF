@@ -33,6 +33,16 @@ public class Proceedings extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 				label = theProceedingsIterator.getLabel();
 			}
 
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.Conference.ConferenceHasProceedingsIterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.Conference.ConferenceHasProceedingsIterator)this.getParent()).getHasProceedings();
+			}
+
+			edu.uiowa.slis.VIVOISF.Conference.ConferenceHasProceedingsIterator theConferenceHasProceedingsIterator = (edu.uiowa.slis.VIVOISF.Conference.ConferenceHasProceedingsIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.Conference.ConferenceHasProceedingsIterator.class);
+
+			if (subjectURI == null && theConferenceHasProceedingsIterator != null) {
+				subjectURI = theConferenceHasProceedingsIterator.getHasProceedings();
+			}
+
 			if (theProceedingsIterator == null && subjectURI == null) {
 				throw new JspException("subject URI generation currently not supported");
 			} else {

@@ -33,6 +33,16 @@ public class Title extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 				label = theTitleIterator.getLabel();
 			}
 
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.Individual.IndividualHasTitleIterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.Individual.IndividualHasTitleIterator)this.getParent()).getHasTitle();
+			}
+
+			edu.uiowa.slis.VIVOISF.Individual.IndividualHasTitleIterator theIndividualHasTitleIterator = (edu.uiowa.slis.VIVOISF.Individual.IndividualHasTitleIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.Individual.IndividualHasTitleIterator.class);
+
+			if (subjectURI == null && theIndividualHasTitleIterator != null) {
+				subjectURI = theIndividualHasTitleIterator.getHasTitle();
+			}
+
 			if (theTitleIterator == null && subjectURI == null) {
 				throw new JspException("subject URI generation currently not supported");
 			} else {

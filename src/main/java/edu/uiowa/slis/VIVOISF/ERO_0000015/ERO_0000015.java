@@ -33,6 +33,16 @@ public class ERO_0000015 extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 				label = theERO_0000015Iterator.getLabel();
 			}
 
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.Organization.OrganizationERO_0001520Iterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.Organization.OrganizationERO_0001520Iterator)this.getParent()).getERO_0001520();
+			}
+
+			edu.uiowa.slis.VIVOISF.Organization.OrganizationERO_0001520Iterator theOrganizationERO_0001520Iterator = (edu.uiowa.slis.VIVOISF.Organization.OrganizationERO_0001520Iterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.Organization.OrganizationERO_0001520Iterator.class);
+
+			if (subjectURI == null && theOrganizationERO_0001520Iterator != null) {
+				subjectURI = theOrganizationERO_0001520Iterator.getERO_0001520();
+			}
+
 			if (theERO_0000015Iterator == null && subjectURI == null) {
 				throw new JspException("subject URI generation currently not supported");
 			} else {

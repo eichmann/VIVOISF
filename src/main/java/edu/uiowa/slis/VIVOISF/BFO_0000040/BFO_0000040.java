@@ -33,6 +33,26 @@ public class BFO_0000040 extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 				label = theBFO_0000040Iterator.getLabel();
 			}
 
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.BFO_0000040.BFO_0000040RO_0003000Iterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.BFO_0000040.BFO_0000040RO_0003000Iterator)this.getParent()).getRO_0003000();
+			}
+
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.BFO_0000040.BFO_0000040RO_0003001Iterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.BFO_0000040.BFO_0000040RO_0003001Iterator)this.getParent()).getRO_0003001();
+			}
+
+			edu.uiowa.slis.VIVOISF.BFO_0000040.BFO_0000040RO_0003000Iterator theBFO_0000040RO_0003000Iterator = (edu.uiowa.slis.VIVOISF.BFO_0000040.BFO_0000040RO_0003000Iterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.BFO_0000040.BFO_0000040RO_0003000Iterator.class);
+
+			if (subjectURI == null && theBFO_0000040RO_0003000Iterator != null) {
+				subjectURI = theBFO_0000040RO_0003000Iterator.getRO_0003000();
+			}
+
+			edu.uiowa.slis.VIVOISF.BFO_0000040.BFO_0000040RO_0003001Iterator theBFO_0000040RO_0003001Iterator = (edu.uiowa.slis.VIVOISF.BFO_0000040.BFO_0000040RO_0003001Iterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.BFO_0000040.BFO_0000040RO_0003001Iterator.class);
+
+			if (subjectURI == null && theBFO_0000040RO_0003001Iterator != null) {
+				subjectURI = theBFO_0000040RO_0003001Iterator.getRO_0003001();
+			}
+
 			if (theBFO_0000040Iterator == null && subjectURI == null) {
 				throw new JspException("subject URI generation currently not supported");
 			} else {

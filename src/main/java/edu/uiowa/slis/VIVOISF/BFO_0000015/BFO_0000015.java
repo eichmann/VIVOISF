@@ -33,6 +33,16 @@ public class BFO_0000015 extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 				label = theBFO_0000015Iterator.getLabel();
 			}
 
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.BFO_0000017.BFO_0000017BFO_0000054Iterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.BFO_0000017.BFO_0000017BFO_0000054Iterator)this.getParent()).getBFO_0000054();
+			}
+
+			edu.uiowa.slis.VIVOISF.BFO_0000017.BFO_0000017BFO_0000054Iterator theBFO_0000017BFO_0000054Iterator = (edu.uiowa.slis.VIVOISF.BFO_0000017.BFO_0000017BFO_0000054Iterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.BFO_0000017.BFO_0000017BFO_0000054Iterator.class);
+
+			if (subjectURI == null && theBFO_0000017BFO_0000054Iterator != null) {
+				subjectURI = theBFO_0000017BFO_0000054Iterator.getBFO_0000054();
+			}
+
 			if (theBFO_0000015Iterator == null && subjectURI == null) {
 				throw new JspException("subject URI generation currently not supported");
 			} else {

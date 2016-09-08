@@ -33,6 +33,16 @@ public class DateTimeValuePrecision extends edu.uiowa.slis.VIVOISF.TagLibSupport
 				label = theDateTimeValuePrecisionIterator.getLabel();
 			}
 
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.DateTimeValue.DateTimeValueDateTimePrecisionIterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.DateTimeValue.DateTimeValueDateTimePrecisionIterator)this.getParent()).getDateTimePrecision();
+			}
+
+			edu.uiowa.slis.VIVOISF.DateTimeValue.DateTimeValueDateTimePrecisionIterator theDateTimeValueDateTimePrecisionIterator = (edu.uiowa.slis.VIVOISF.DateTimeValue.DateTimeValueDateTimePrecisionIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.DateTimeValue.DateTimeValueDateTimePrecisionIterator.class);
+
+			if (subjectURI == null && theDateTimeValueDateTimePrecisionIterator != null) {
+				subjectURI = theDateTimeValueDateTimePrecisionIterator.getDateTimePrecision();
+			}
+
 			if (theDateTimeValuePrecisionIterator == null && subjectURI == null) {
 				throw new JspException("subject URI generation currently not supported");
 			} else {

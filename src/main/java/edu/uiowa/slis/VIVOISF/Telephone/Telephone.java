@@ -33,6 +33,16 @@ public class Telephone extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 				label = theTelephoneIterator.getLabel();
 			}
 
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.Individual.IndividualHasTelephoneIterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.Individual.IndividualHasTelephoneIterator)this.getParent()).getHasTelephone();
+			}
+
+			edu.uiowa.slis.VIVOISF.Individual.IndividualHasTelephoneIterator theIndividualHasTelephoneIterator = (edu.uiowa.slis.VIVOISF.Individual.IndividualHasTelephoneIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.Individual.IndividualHasTelephoneIterator.class);
+
+			if (subjectURI == null && theIndividualHasTelephoneIterator != null) {
+				subjectURI = theIndividualHasTelephoneIterator.getHasTelephone();
+			}
+
 			if (theTelephoneIterator == null && subjectURI == null) {
 				throw new JspException("subject URI generation currently not supported");
 			} else {

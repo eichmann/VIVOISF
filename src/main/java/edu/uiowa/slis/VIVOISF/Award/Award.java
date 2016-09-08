@@ -33,6 +33,16 @@ public class Award extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 				label = theAwardIterator.getLabel();
 			}
 
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.Organization.OrganizationSponsorsIterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.Organization.OrganizationSponsorsIterator)this.getParent()).getSponsors();
+			}
+
+			edu.uiowa.slis.VIVOISF.Organization.OrganizationSponsorsIterator theOrganizationSponsorsIterator = (edu.uiowa.slis.VIVOISF.Organization.OrganizationSponsorsIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.Organization.OrganizationSponsorsIterator.class);
+
+			if (subjectURI == null && theOrganizationSponsorsIterator != null) {
+				subjectURI = theOrganizationSponsorsIterator.getSponsors();
+			}
+
 			if (theAwardIterator == null && subjectURI == null) {
 				throw new JspException("subject URI generation currently not supported");
 			} else {

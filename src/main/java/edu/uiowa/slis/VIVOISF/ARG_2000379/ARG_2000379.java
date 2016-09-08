@@ -33,6 +33,136 @@ public class ARG_2000379 extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 				label = theARG_2000379Iterator.getLabel();
 			}
 
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.AcademicArticle.AcademicArticleARG_2000028Iterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.AcademicArticle.AcademicArticleARG_2000028Iterator)this.getParent()).getARG_2000028();
+			}
+
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.Person.PersonARG_2000028Iterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.Person.PersonARG_2000028Iterator)this.getParent()).getARG_2000028();
+			}
+
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.Article.ArticleARG_2000028Iterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.Article.ArticleARG_2000028Iterator)this.getParent()).getARG_2000028();
+			}
+
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.Dataset.DatasetARG_2000028Iterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.Dataset.DatasetARG_2000028Iterator)this.getParent()).getARG_2000028();
+			}
+
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.ConferencePaper.ConferencePaperARG_2000028Iterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.ConferencePaper.ConferencePaperARG_2000028Iterator)this.getParent()).getARG_2000028();
+			}
+
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.Chapter.ChapterARG_2000028Iterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.Chapter.ChapterARG_2000028Iterator)this.getParent()).getARG_2000028();
+			}
+
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.Slideshow.SlideshowARG_2000028Iterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.Slideshow.SlideshowARG_2000028Iterator)this.getParent()).getARG_2000028();
+			}
+
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.ConferencePoster.ConferencePosterARG_2000028Iterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.ConferencePoster.ConferencePosterARG_2000028Iterator)this.getParent()).getARG_2000028();
+			}
+
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.Book.BookARG_2000028Iterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.Book.BookARG_2000028Iterator)this.getParent()).getARG_2000028();
+			}
+
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.Collection.CollectionARG_2000028Iterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.Collection.CollectionARG_2000028Iterator)this.getParent()).getARG_2000028();
+			}
+
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.Conference.ConferenceARG_2000028Iterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.Conference.ConferenceARG_2000028Iterator)this.getParent()).getARG_2000028();
+			}
+
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.Report.ReportARG_2000028Iterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.Report.ReportARG_2000028Iterator)this.getParent()).getARG_2000028();
+			}
+
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.AudioVisualDocument.AudioVisualDocumentARG_2000028Iterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.AudioVisualDocument.AudioVisualDocumentARG_2000028Iterator)this.getParent()).getARG_2000028();
+			}
+
+			edu.uiowa.slis.VIVOISF.AcademicArticle.AcademicArticleARG_2000028Iterator theAcademicArticleARG_2000028Iterator = (edu.uiowa.slis.VIVOISF.AcademicArticle.AcademicArticleARG_2000028Iterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.AcademicArticle.AcademicArticleARG_2000028Iterator.class);
+
+			if (subjectURI == null && theAcademicArticleARG_2000028Iterator != null) {
+				subjectURI = theAcademicArticleARG_2000028Iterator.getARG_2000028();
+			}
+
+			edu.uiowa.slis.VIVOISF.Person.PersonARG_2000028Iterator thePersonARG_2000028Iterator = (edu.uiowa.slis.VIVOISF.Person.PersonARG_2000028Iterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.Person.PersonARG_2000028Iterator.class);
+
+			if (subjectURI == null && thePersonARG_2000028Iterator != null) {
+				subjectURI = thePersonARG_2000028Iterator.getARG_2000028();
+			}
+
+			edu.uiowa.slis.VIVOISF.Article.ArticleARG_2000028Iterator theArticleARG_2000028Iterator = (edu.uiowa.slis.VIVOISF.Article.ArticleARG_2000028Iterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.Article.ArticleARG_2000028Iterator.class);
+
+			if (subjectURI == null && theArticleARG_2000028Iterator != null) {
+				subjectURI = theArticleARG_2000028Iterator.getARG_2000028();
+			}
+
+			edu.uiowa.slis.VIVOISF.Dataset.DatasetARG_2000028Iterator theDatasetARG_2000028Iterator = (edu.uiowa.slis.VIVOISF.Dataset.DatasetARG_2000028Iterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.Dataset.DatasetARG_2000028Iterator.class);
+
+			if (subjectURI == null && theDatasetARG_2000028Iterator != null) {
+				subjectURI = theDatasetARG_2000028Iterator.getARG_2000028();
+			}
+
+			edu.uiowa.slis.VIVOISF.ConferencePaper.ConferencePaperARG_2000028Iterator theConferencePaperARG_2000028Iterator = (edu.uiowa.slis.VIVOISF.ConferencePaper.ConferencePaperARG_2000028Iterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.ConferencePaper.ConferencePaperARG_2000028Iterator.class);
+
+			if (subjectURI == null && theConferencePaperARG_2000028Iterator != null) {
+				subjectURI = theConferencePaperARG_2000028Iterator.getARG_2000028();
+			}
+
+			edu.uiowa.slis.VIVOISF.Chapter.ChapterARG_2000028Iterator theChapterARG_2000028Iterator = (edu.uiowa.slis.VIVOISF.Chapter.ChapterARG_2000028Iterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.Chapter.ChapterARG_2000028Iterator.class);
+
+			if (subjectURI == null && theChapterARG_2000028Iterator != null) {
+				subjectURI = theChapterARG_2000028Iterator.getARG_2000028();
+			}
+
+			edu.uiowa.slis.VIVOISF.Slideshow.SlideshowARG_2000028Iterator theSlideshowARG_2000028Iterator = (edu.uiowa.slis.VIVOISF.Slideshow.SlideshowARG_2000028Iterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.Slideshow.SlideshowARG_2000028Iterator.class);
+
+			if (subjectURI == null && theSlideshowARG_2000028Iterator != null) {
+				subjectURI = theSlideshowARG_2000028Iterator.getARG_2000028();
+			}
+
+			edu.uiowa.slis.VIVOISF.ConferencePoster.ConferencePosterARG_2000028Iterator theConferencePosterARG_2000028Iterator = (edu.uiowa.slis.VIVOISF.ConferencePoster.ConferencePosterARG_2000028Iterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.ConferencePoster.ConferencePosterARG_2000028Iterator.class);
+
+			if (subjectURI == null && theConferencePosterARG_2000028Iterator != null) {
+				subjectURI = theConferencePosterARG_2000028Iterator.getARG_2000028();
+			}
+
+			edu.uiowa.slis.VIVOISF.Book.BookARG_2000028Iterator theBookARG_2000028Iterator = (edu.uiowa.slis.VIVOISF.Book.BookARG_2000028Iterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.Book.BookARG_2000028Iterator.class);
+
+			if (subjectURI == null && theBookARG_2000028Iterator != null) {
+				subjectURI = theBookARG_2000028Iterator.getARG_2000028();
+			}
+
+			edu.uiowa.slis.VIVOISF.Collection.CollectionARG_2000028Iterator theCollectionARG_2000028Iterator = (edu.uiowa.slis.VIVOISF.Collection.CollectionARG_2000028Iterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.Collection.CollectionARG_2000028Iterator.class);
+
+			if (subjectURI == null && theCollectionARG_2000028Iterator != null) {
+				subjectURI = theCollectionARG_2000028Iterator.getARG_2000028();
+			}
+
+			edu.uiowa.slis.VIVOISF.Conference.ConferenceARG_2000028Iterator theConferenceARG_2000028Iterator = (edu.uiowa.slis.VIVOISF.Conference.ConferenceARG_2000028Iterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.Conference.ConferenceARG_2000028Iterator.class);
+
+			if (subjectURI == null && theConferenceARG_2000028Iterator != null) {
+				subjectURI = theConferenceARG_2000028Iterator.getARG_2000028();
+			}
+
+			edu.uiowa.slis.VIVOISF.Report.ReportARG_2000028Iterator theReportARG_2000028Iterator = (edu.uiowa.slis.VIVOISF.Report.ReportARG_2000028Iterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.Report.ReportARG_2000028Iterator.class);
+
+			if (subjectURI == null && theReportARG_2000028Iterator != null) {
+				subjectURI = theReportARG_2000028Iterator.getARG_2000028();
+			}
+
+			edu.uiowa.slis.VIVOISF.AudioVisualDocument.AudioVisualDocumentARG_2000028Iterator theAudioVisualDocumentARG_2000028Iterator = (edu.uiowa.slis.VIVOISF.AudioVisualDocument.AudioVisualDocumentARG_2000028Iterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.AudioVisualDocument.AudioVisualDocumentARG_2000028Iterator.class);
+
+			if (subjectURI == null && theAudioVisualDocumentARG_2000028Iterator != null) {
+				subjectURI = theAudioVisualDocumentARG_2000028Iterator.getARG_2000028();
+			}
+
 			if (theARG_2000379Iterator == null && subjectURI == null) {
 				throw new JspException("subject URI generation currently not supported");
 			} else {

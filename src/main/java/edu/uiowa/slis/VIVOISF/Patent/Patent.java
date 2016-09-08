@@ -34,6 +34,16 @@ public class Patent extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 				label = thePatentIterator.getLabel();
 			}
 
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.Agent.AgentAssigneeForIterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.Agent.AgentAssigneeForIterator)this.getParent()).getAssigneeFor();
+			}
+
+			edu.uiowa.slis.VIVOISF.Agent.AgentAssigneeForIterator theAgentAssigneeForIterator = (edu.uiowa.slis.VIVOISF.Agent.AgentAssigneeForIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.Agent.AgentAssigneeForIterator.class);
+
+			if (subjectURI == null && theAgentAssigneeForIterator != null) {
+				subjectURI = theAgentAssigneeForIterator.getAssigneeFor();
+			}
+
 			if (thePatentIterator == null && subjectURI == null) {
 				throw new JspException("subject URI generation currently not supported");
 			} else {

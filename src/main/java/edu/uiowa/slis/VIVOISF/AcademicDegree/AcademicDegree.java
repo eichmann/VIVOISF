@@ -34,6 +34,16 @@ public class AcademicDegree extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 				label = theAcademicDegreeIterator.getLabel();
 			}
 
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.AdvisingRelationship.AdvisingRelationshipDegreeCandidacyIterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.AdvisingRelationship.AdvisingRelationshipDegreeCandidacyIterator)this.getParent()).getDegreeCandidacy();
+			}
+
+			edu.uiowa.slis.VIVOISF.AdvisingRelationship.AdvisingRelationshipDegreeCandidacyIterator theAdvisingRelationshipDegreeCandidacyIterator = (edu.uiowa.slis.VIVOISF.AdvisingRelationship.AdvisingRelationshipDegreeCandidacyIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.AdvisingRelationship.AdvisingRelationshipDegreeCandidacyIterator.class);
+
+			if (subjectURI == null && theAdvisingRelationshipDegreeCandidacyIterator != null) {
+				subjectURI = theAdvisingRelationshipDegreeCandidacyIterator.getDegreeCandidacy();
+			}
+
 			if (theAcademicDegreeIterator == null && subjectURI == null) {
 				throw new JspException("subject URI generation currently not supported");
 			} else {

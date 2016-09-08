@@ -33,6 +33,36 @@ public class non_self_governing extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 				label = thenon_self_governingIterator.getLabel();
 			}
 
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.self_governing.self_governingHasBorderWithIterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.self_governing.self_governingHasBorderWithIterator)this.getParent()).getHasBorderWith();
+			}
+
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.Country.CountryHasBorderWithIterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.Country.CountryHasBorderWithIterator)this.getParent()).getHasBorderWith();
+			}
+
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.non_self_governing.non_self_governingHasBorderWithIterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.non_self_governing.non_self_governingHasBorderWithIterator)this.getParent()).getHasBorderWith();
+			}
+
+			edu.uiowa.slis.VIVOISF.self_governing.self_governingHasBorderWithIterator theself_governingHasBorderWithIterator = (edu.uiowa.slis.VIVOISF.self_governing.self_governingHasBorderWithIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.self_governing.self_governingHasBorderWithIterator.class);
+
+			if (subjectURI == null && theself_governingHasBorderWithIterator != null) {
+				subjectURI = theself_governingHasBorderWithIterator.getHasBorderWith();
+			}
+
+			edu.uiowa.slis.VIVOISF.Country.CountryHasBorderWithIterator theCountryHasBorderWithIterator = (edu.uiowa.slis.VIVOISF.Country.CountryHasBorderWithIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.Country.CountryHasBorderWithIterator.class);
+
+			if (subjectURI == null && theCountryHasBorderWithIterator != null) {
+				subjectURI = theCountryHasBorderWithIterator.getHasBorderWith();
+			}
+
+			edu.uiowa.slis.VIVOISF.non_self_governing.non_self_governingHasBorderWithIterator thenon_self_governingHasBorderWithIterator = (edu.uiowa.slis.VIVOISF.non_self_governing.non_self_governingHasBorderWithIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.non_self_governing.non_self_governingHasBorderWithIterator.class);
+
+			if (subjectURI == null && thenon_self_governingHasBorderWithIterator != null) {
+				subjectURI = thenon_self_governingHasBorderWithIterator.getHasBorderWith();
+			}
+
 			if (thenon_self_governingIterator == null && subjectURI == null) {
 				throw new JspException("subject URI generation currently not supported");
 			} else {
