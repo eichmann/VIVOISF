@@ -201,6 +201,10 @@ public class Name extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 				subjectURI = ((edu.uiowa.slis.VIVOISF.ConferencePoster.ConferencePosterRelatesIterator)this.getParent()).getRelates();
 			}
 
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.URL.URLHasURLInverseIterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.URL.URLHasURLInverseIterator)this.getParent()).getHasURLInverse();
+			}
+
 			edu.uiowa.slis.VIVOISF.Individual.IndividualHasNameIterator theIndividualHasNameIterator = (edu.uiowa.slis.VIVOISF.Individual.IndividualHasNameIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.Individual.IndividualHasNameIterator.class);
 
 			if (subjectURI == null && theIndividualHasNameIterator != null) {
@@ -456,7 +460,7 @@ public class Name extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 			if (theNameIterator == null && subjectURI == null) {
 				throw new JspException("subject URI generation currently not supported");
 			} else {
-				ResultSet rs = getResultSet(Prefix_1_4
+				ResultSet rs = getResultSet(prefix
 				+ " SELECT ?label  where {"
 				+ "  OPTIONAL { <" + subjectURI + "> rdfs:label ?label } "
 				+ "}");

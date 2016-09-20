@@ -31,7 +31,7 @@ public class PersonalCommunicationDocumentARG_0000001Iterator extends edu.uiowa.
 				throw new JspException("subject URI generation currently not supported");
 			}
 
-			rs = getResultSet(Prefix_1_4+"SELECT ?s where { <" + subjectURI + "> <http://purl.obolibrary.org/obo/ARG_0000001> ?s } ");
+			rs = getResultSet(prefix+"SELECT ?s where { <" + subjectURI + "> <http://purl.obolibrary.org/obo/ARG_0000001> ?s } ");
 			if(rs.hasNext()) {
 				QuerySolution sol = rs.nextSolution();
 				ARG_0000001 = sol.get("?s").toString();

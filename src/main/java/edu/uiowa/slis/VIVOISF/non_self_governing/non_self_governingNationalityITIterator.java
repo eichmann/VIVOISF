@@ -31,7 +31,7 @@ public class non_self_governingNationalityITIterator extends edu.uiowa.slis.VIVO
 				throw new JspException("subject URI generation currently not supported");
 			}
 
-			rs = getResultSet(Prefix_1_4+"SELECT ?s where { <" + subjectURI + "> <http://aims.fao.org/aos/geopolitical.owl#nationalityIT> ?s } ");
+			rs = getResultSet(prefix+"SELECT ?s where { <" + subjectURI + "> <http://aims.fao.org/aos/geopolitical.owl#nationalityIT> ?s } ");
 			if(rs.hasNext()) {
 				QuerySolution sol = rs.nextSolution();
 				nationalityIT = sol.get("?s").toString();

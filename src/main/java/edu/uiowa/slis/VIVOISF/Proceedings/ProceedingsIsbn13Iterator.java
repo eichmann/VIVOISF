@@ -31,7 +31,7 @@ public class ProceedingsIsbn13Iterator extends edu.uiowa.slis.VIVOISF.TagLibSupp
 				throw new JspException("subject URI generation currently not supported");
 			}
 
-			rs = getResultSet(Prefix_1_4+"SELECT ?s where { <" + subjectURI + "> <http://purl.org/ontology/bibo/isbn13> ?s } ");
+			rs = getResultSet(prefix+"SELECT ?s where { <" + subjectURI + "> <http://purl.org/ontology/bibo/isbn13> ?s } ");
 			if(rs.hasNext()) {
 				QuerySolution sol = rs.nextSolution();
 				isbn13 = sol.get("?s").toString();

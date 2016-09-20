@@ -35,7 +35,7 @@ public class PositionRO_0000052Iterator extends edu.uiowa.slis.VIVOISF.TagLibSup
 				throw new JspException("subject URI generation currently not supported");
 			}
 
-			rs = getResultSet(Prefix_1_4+"SELECT ?s ?t where {"
+			rs = getResultSet(prefix+"SELECT ?s ?t where {"
 					+" <" + subjectURI + "> <http://purl.obolibrary.org/obo/RO_0000052> ?s . "
 					+" ?s <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?t ."
 					+" FILTER NOT EXISTS {"
@@ -48,7 +48,7 @@ public class PositionRO_0000052Iterator extends edu.uiowa.slis.VIVOISF.TagLibSup
 				QuerySolution sol = rs.nextSolution();
 				RO_0000052 = sol.get("?s").toString();
 				type = getLocalName(sol.get("?t").toString());
-				if (classFilter == null || (classFilter != null && classFilter.containsKey(type))) {
+				if (classFilter == null || (classFilter != null && type != null && classFilter.containsKey(type))) {
 					log.info("instance: " + RO_0000052 + "	type: " + type);
 					return EVAL_BODY_INCLUDE;
 				}
@@ -69,7 +69,7 @@ public class PositionRO_0000052Iterator extends edu.uiowa.slis.VIVOISF.TagLibSup
 				QuerySolution sol = rs.nextSolution();
 				RO_0000052 = sol.get("?s").toString();
 				type = getLocalName(sol.get("?t").toString());
-				if (classFilter == null || (classFilter != null && classFilter.containsKey(type))) {
+				if (classFilter == null || (classFilter != null && type != null && classFilter.containsKey(type))) {
 					log.info("instance: " + RO_0000052 + "	type: " + type);
 					return EVAL_BODY_AGAIN;
 				}

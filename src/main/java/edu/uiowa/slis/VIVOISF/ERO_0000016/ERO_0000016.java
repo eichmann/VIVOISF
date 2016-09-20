@@ -33,10 +33,14 @@ public class ERO_0000016 extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 				label = theERO_0000016Iterator.getLabel();
 			}
 
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.OCRE100038.OCRE100038ERO_0001518InverseIterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.OCRE100038.OCRE100038ERO_0001518InverseIterator)this.getParent()).getERO_0001518Inverse();
+			}
+
 			if (theERO_0000016Iterator == null && subjectURI == null) {
 				throw new JspException("subject URI generation currently not supported");
 			} else {
-				ResultSet rs = getResultSet(Prefix_1_4
+				ResultSet rs = getResultSet(prefix
 				+ " SELECT ?label  where {"
 				+ "  OPTIONAL { <" + subjectURI + "> rdfs:label ?label } "
 				+ "}");

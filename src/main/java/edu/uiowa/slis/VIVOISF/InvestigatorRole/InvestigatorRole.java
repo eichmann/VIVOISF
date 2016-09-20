@@ -34,7 +34,7 @@ public class InvestigatorRole extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 			if (theInvestigatorRoleIterator == null && subjectURI == null) {
 				throw new JspException("subject URI generation currently not supported");
 			} else {
-				ResultSet rs = getResultSet(Prefix_1_4
+				ResultSet rs = getResultSet(prefix
 				+ " SELECT ?label  ?hideFromDisplay where {"
 				+ "  OPTIONAL { <" + subjectURI + "> rdfs:label ?label } "
 				+ "  OPTIONAL { <" + subjectURI + "> <http://vivoweb.org/ontology/core#hideFromDisplay> ?hideFromDisplay } "

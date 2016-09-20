@@ -70,6 +70,10 @@ public class Conference extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 				subjectURI = ((edu.uiowa.slis.VIVOISF.ConferencePaper.ConferencePaperRO_0002353Iterator)this.getParent()).getRO_0002353();
 			}
 
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.DateTimeInterval.DateTimeIntervalDateTimeIntervalInverseIterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.DateTimeInterval.DateTimeIntervalDateTimeIntervalInverseIterator)this.getParent()).getDateTimeIntervalInverse();
+			}
+
 			edu.uiowa.slis.VIVOISF.ARG_2000379.ARG_2000379ARG_2000029Iterator theARG_2000379ARG_2000029Iterator = (edu.uiowa.slis.VIVOISF.ARG_2000379.ARG_2000379ARG_2000029Iterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.ARG_2000379.ARG_2000379ARG_2000029Iterator.class);
 
 			if (subjectURI == null && theARG_2000379ARG_2000029Iterator != null) {
@@ -127,7 +131,7 @@ public class Conference extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 			if (theConferenceIterator == null && subjectURI == null) {
 				throw new JspException("subject URI generation currently not supported");
 			} else {
-				ResultSet rs = getResultSet(Prefix_1_4
+				ResultSet rs = getResultSet(prefix
 				+ " SELECT ?label  ?abbreviation where {"
 				+ "  OPTIONAL { <" + subjectURI + "> rdfs:label ?label } "
 				+ "  OPTIONAL { <" + subjectURI + "> <http://vivoweb.org/ontology/core#abbreviation> ?abbreviation } "

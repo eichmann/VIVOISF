@@ -197,6 +197,22 @@ public class Kind extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 				subjectURI = ((edu.uiowa.slis.VIVOISF.ConferencePoster.ConferencePosterRelatesIterator)this.getParent()).getRelates();
 			}
 
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.Address.AddressHasAddressInverseIterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.Address.AddressHasAddressInverseIterator)this.getParent()).getHasAddressInverse();
+			}
+
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.Geo.GeoHasGeoInverseIterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.Geo.GeoHasGeoInverseIterator)this.getParent()).getHasGeoInverse();
+			}
+
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.Email.EmailHasEmailInverseIterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.Email.EmailHasEmailInverseIterator)this.getParent()).getHasEmailInverse();
+			}
+
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.URL.URLHasURLInverseIterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.URL.URLHasURLInverseIterator)this.getParent()).getHasURLInverse();
+			}
+
 			edu.uiowa.slis.VIVOISF.Individual.IndividualRelatedByIterator theIndividualRelatedByIterator = (edu.uiowa.slis.VIVOISF.Individual.IndividualRelatedByIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.Individual.IndividualRelatedByIterator.class);
 
 			if (subjectURI == null && theIndividualRelatedByIterator != null) {
@@ -446,7 +462,7 @@ public class Kind extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 			if (theKindIterator == null && subjectURI == null) {
 				throw new JspException("subject URI generation currently not supported");
 			} else {
-				ResultSet rs = getResultSet(Prefix_1_4
+				ResultSet rs = getResultSet(prefix
 				+ " SELECT ?label  where {"
 				+ "  OPTIONAL { <" + subjectURI + "> rdfs:label ?label } "
 				+ "}");

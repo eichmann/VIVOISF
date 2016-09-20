@@ -69,6 +69,14 @@ public class DateTimeInterval extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 				subjectURI = ((edu.uiowa.slis.VIVOISF.PostdocPosition.PostdocPositionDateTimeIntervalIterator)this.getParent()).getDateTimeInterval();
 			}
 
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.DateTimeValue.DateTimeValueEndInverseIterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.DateTimeValue.DateTimeValueEndInverseIterator)this.getParent()).getEndInverse();
+			}
+
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.DateTimeValue.DateTimeValueStartInverseIterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.DateTimeValue.DateTimeValueStartInverseIterator)this.getParent()).getStartInverse();
+			}
+
 			edu.uiowa.slis.VIVOISF.FacultyPosition.FacultyPositionDateTimeIntervalIterator theFacultyPositionDateTimeIntervalIterator = (edu.uiowa.slis.VIVOISF.FacultyPosition.FacultyPositionDateTimeIntervalIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.FacultyPosition.FacultyPositionDateTimeIntervalIterator.class);
 
 			if (subjectURI == null && theFacultyPositionDateTimeIntervalIterator != null) {
@@ -126,7 +134,7 @@ public class DateTimeInterval extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 			if (theDateTimeIntervalIterator == null && subjectURI == null) {
 				throw new JspException("subject URI generation currently not supported");
 			} else {
-				ResultSet rs = getResultSet(Prefix_1_4
+				ResultSet rs = getResultSet(prefix
 				+ " SELECT ?label  where {"
 				+ "  OPTIONAL { <" + subjectURI + "> rdfs:label ?label } "
 				+ "}");

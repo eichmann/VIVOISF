@@ -202,6 +202,10 @@ public class Report extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 				subjectURI = ((edu.uiowa.slis.VIVOISF.ConferencePoster.ConferencePosterRelatesIterator)this.getParent()).getRelates();
 			}
 
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.DateTimeValue.DateTimeValueDateTimeValueInverseIterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.DateTimeValue.DateTimeValueDateTimeValueInverseIterator)this.getParent()).getDateTimeValueInverse();
+			}
+
 			edu.uiowa.slis.VIVOISF.ARG_2000379.ARG_2000379ARG_2000029Iterator theARG_2000379ARG_2000029Iterator = (edu.uiowa.slis.VIVOISF.ARG_2000379.ARG_2000379ARG_2000029Iterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.ARG_2000379.ARG_2000379ARG_2000029Iterator.class);
 
 			if (subjectURI == null && theARG_2000379ARG_2000029Iterator != null) {
@@ -457,14 +461,16 @@ public class Report extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 			if (theReportIterator == null && subjectURI == null) {
 				throw new JspException("subject URI generation currently not supported");
 			} else {
-				ResultSet rs = getResultSet(Prefix_1_4
-				+ " SELECT ?label  ?reportId where {"
+				ResultSet rs = getResultSet(prefix
+				+ " SELECT ?label  ?reportId ?reportId where {"
 				+ "  OPTIONAL { <" + subjectURI + "> rdfs:label ?label } "
+				+ "  OPTIONAL { <" + subjectURI + "> <http://vivoweb.org/ontology/core#reportId> ?reportId } "
 				+ "  OPTIONAL { <" + subjectURI + "> <http://vivoweb.org/ontology/core#reportId> ?reportId } "
 				+ "}");
 				while(rs.hasNext()) {
 					QuerySolution sol = rs.nextSolution();
 					label = sol.get("?label") == null ? null : sol.get("?label").asLiteral().getString();
+					reportId = sol.get("?reportId") == null ? null : sol.get("?reportId").toString();
 					reportId = sol.get("?reportId") == null ? null : sol.get("?reportId").toString();
 				}
 			}

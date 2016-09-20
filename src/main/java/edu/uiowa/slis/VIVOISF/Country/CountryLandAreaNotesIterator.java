@@ -31,7 +31,7 @@ public class CountryLandAreaNotesIterator extends edu.uiowa.slis.VIVOISF.TagLibS
 				throw new JspException("subject URI generation currently not supported");
 			}
 
-			rs = getResultSet(Prefix_1_4+"SELECT ?s where { <" + subjectURI + "> <http://aims.fao.org/aos/geopolitical.owl#landAreaNotes> ?s } ");
+			rs = getResultSet(prefix+"SELECT ?s where { <" + subjectURI + "> <http://aims.fao.org/aos/geopolitical.owl#landAreaNotes> ?s } ");
 			if(rs.hasNext()) {
 				QuerySolution sol = rs.nextSolution();
 				landAreaNotes = sol.get("?s").toString();

@@ -43,7 +43,7 @@ public class ERO_0000776 extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 			if (theERO_0000776Iterator == null && subjectURI == null) {
 				throw new JspException("subject URI generation currently not supported");
 			} else {
-				ResultSet rs = getResultSet(Prefix_1_4
+				ResultSet rs = getResultSet(prefix
 				+ " SELECT ?label  where {"
 				+ "  OPTIONAL { <" + subjectURI + "> rdfs:label ?label } "
 				+ "}");

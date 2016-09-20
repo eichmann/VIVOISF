@@ -31,7 +31,7 @@ public class OrganizationUnitNameOrganizationNameIterator extends edu.uiowa.slis
 				throw new JspException("subject URI generation currently not supported");
 			}
 
-			rs = getResultSet(Prefix_1_4+"SELECT ?s where { <" + subjectURI + "> <http://www.w3.org/2006/vcard/ns#organizationName> ?s } ");
+			rs = getResultSet(prefix+"SELECT ?s where { <" + subjectURI + "> <http://www.w3.org/2006/vcard/ns#organizationName> ?s } ");
 			if(rs.hasNext()) {
 				QuerySolution sol = rs.nextSolution();
 				organizationName = sol.get("?s").toString();

@@ -31,7 +31,7 @@ public class TimeZoneTimeZoneIterator extends edu.uiowa.slis.VIVOISF.TagLibSuppo
 				throw new JspException("subject URI generation currently not supported");
 			}
 
-			rs = getResultSet(Prefix_1_4+"SELECT ?s where { <" + subjectURI + "> <http://www.w3.org/2006/vcard/ns#timeZone> ?s } ");
+			rs = getResultSet(prefix+"SELECT ?s where { <" + subjectURI + "> <http://www.w3.org/2006/vcard/ns#timeZone> ?s } ");
 			if(rs.hasNext()) {
 				QuerySolution sol = rs.nextSolution();
 				timeZone = sol.get("?s").toString();

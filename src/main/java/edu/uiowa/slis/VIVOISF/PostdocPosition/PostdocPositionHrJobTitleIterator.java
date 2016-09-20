@@ -31,7 +31,7 @@ public class PostdocPositionHrJobTitleIterator extends edu.uiowa.slis.VIVOISF.Ta
 				throw new JspException("subject URI generation currently not supported");
 			}
 
-			rs = getResultSet(Prefix_1_4+"SELECT ?s where { <" + subjectURI + "> <http://vivoweb.org/ontology/core#hrJobTitle> ?s } ");
+			rs = getResultSet(prefix+"SELECT ?s where { <" + subjectURI + "> <http://vivoweb.org/ontology/core#hrJobTitle> ?s } ");
 			if(rs.hasNext()) {
 				QuerySolution sol = rs.nextSolution();
 				hrJobTitle = sol.get("?s").toString();

@@ -20,6 +20,12 @@ public class Contract extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 	String label = null;
 	boolean commitNeeded = false;
 
+	// functional datatype properties, both local and inherited
+
+	String sponsorAwardId = null;
+	String grantDirectCosts = null;
+	String totalAwardAmount = null;
+
 	public int doStartTag() throws JspException {
 		currentInstance = this;
 		try {
@@ -33,13 +39,19 @@ public class Contract extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 			if (theContractIterator == null && subjectURI == null) {
 				throw new JspException("subject URI generation currently not supported");
 			} else {
-				ResultSet rs = getResultSet(Prefix_1_4
-				+ " SELECT ?label  where {"
+				ResultSet rs = getResultSet(prefix
+				+ " SELECT ?label  ?sponsorAwardId ?grantDirectCosts ?totalAwardAmount where {"
 				+ "  OPTIONAL { <" + subjectURI + "> rdfs:label ?label } "
+				+ "  OPTIONAL { <" + subjectURI + "> <http://vivoweb.org/ontology/core#sponsorAwardId> ?sponsorAwardId } "
+				+ "  OPTIONAL { <" + subjectURI + "> <http://vivoweb.org/ontology/core#grantDirectCosts> ?grantDirectCosts } "
+				+ "  OPTIONAL { <" + subjectURI + "> <http://vivoweb.org/ontology/core#totalAwardAmount> ?totalAwardAmount } "
 				+ "}");
 				while(rs.hasNext()) {
 					QuerySolution sol = rs.nextSolution();
 					label = sol.get("?label") == null ? null : sol.get("?label").asLiteral().getString();
+					sponsorAwardId = sol.get("?sponsorAwardId") == null ? null : sol.get("?sponsorAwardId").toString();
+					grantDirectCosts = sol.get("?grantDirectCosts") == null ? null : sol.get("?grantDirectCosts").toString();
+					totalAwardAmount = sol.get("?totalAwardAmount") == null ? null : sol.get("?totalAwardAmount").toString();
 				}
 			}
 		} catch (Exception e) {
@@ -85,6 +97,30 @@ public class Contract extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 
 	public String getLabel() {
 		return label;
+	}
+
+	public void setSponsorAwardId(String sponsorAwardId) {
+		this.sponsorAwardId = sponsorAwardId;
+	}
+
+	public String getSponsorAwardId() {
+		return sponsorAwardId;
+	}
+
+	public void setGrantDirectCosts(String grantDirectCosts) {
+		this.grantDirectCosts = grantDirectCosts;
+	}
+
+	public String getGrantDirectCosts() {
+		return grantDirectCosts;
+	}
+
+	public void setTotalAwardAmount(String totalAwardAmount) {
+		this.totalAwardAmount = totalAwardAmount;
+	}
+
+	public String getTotalAwardAmount() {
+		return totalAwardAmount;
 	}
 
 }

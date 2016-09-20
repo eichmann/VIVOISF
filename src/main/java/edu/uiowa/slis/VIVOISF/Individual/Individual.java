@@ -117,6 +117,26 @@ public class Individual extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 				subjectURI = ((edu.uiowa.slis.VIVOISF.ConferencePoster.ConferencePosterRelatesIterator)this.getParent()).getRelates();
 			}
 
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.Telephone.TelephoneHasTelephoneInverseIterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.Telephone.TelephoneHasTelephoneInverseIterator)this.getParent()).getHasTelephoneInverse();
+			}
+
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.Title.TitleHasTitleInverseIterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.Title.TitleHasTitleInverseIterator)this.getParent()).getHasTitleInverse();
+			}
+
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.Name.NameHasNameInverseIterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.Name.NameHasNameInverseIterator)this.getParent()).getHasNameInverse();
+			}
+
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.Email.EmailHasEmailInverseIterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.Email.EmailHasEmailInverseIterator)this.getParent()).getHasEmailInverse();
+			}
+
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.URL.URLHasURLInverseIterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.URL.URLHasURLInverseIterator)this.getParent()).getHasURLInverse();
+			}
+
 			edu.uiowa.slis.VIVOISF.Authorship.AuthorshipRelatesIterator theAuthorshipRelatesIterator = (edu.uiowa.slis.VIVOISF.Authorship.AuthorshipRelatesIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.Authorship.AuthorshipRelatesIterator.class);
 
 			if (subjectURI == null && theAuthorshipRelatesIterator != null) {
@@ -246,7 +266,7 @@ public class Individual extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 			if (theIndividualIterator == null && subjectURI == null) {
 				throw new JspException("subject URI generation currently not supported");
 			} else {
-				ResultSet rs = getResultSet(Prefix_1_4
+				ResultSet rs = getResultSet(prefix
 				+ " SELECT ?label  where {"
 				+ "  OPTIONAL { <" + subjectURI + "> rdfs:label ?label } "
 				+ "}");

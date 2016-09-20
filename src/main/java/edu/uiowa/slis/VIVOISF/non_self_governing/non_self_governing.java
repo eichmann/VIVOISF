@@ -45,6 +45,14 @@ public class non_self_governing extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 				subjectURI = ((edu.uiowa.slis.VIVOISF.non_self_governing.non_self_governingHasBorderWithIterator)this.getParent()).getHasBorderWith();
 			}
 
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.self_governing.self_governingIsAdministeredByInverseIterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.self_governing.self_governingIsAdministeredByInverseIterator)this.getParent()).getIsAdministeredByInverse();
+			}
+
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.Country.CountryIsAdministeredByInverseIterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.Country.CountryIsAdministeredByInverseIterator)this.getParent()).getIsAdministeredByInverse();
+			}
+
 			edu.uiowa.slis.VIVOISF.self_governing.self_governingHasBorderWithIterator theself_governingHasBorderWithIterator = (edu.uiowa.slis.VIVOISF.self_governing.self_governingHasBorderWithIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.self_governing.self_governingHasBorderWithIterator.class);
 
 			if (subjectURI == null && theself_governingHasBorderWithIterator != null) {
@@ -66,7 +74,7 @@ public class non_self_governing extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 			if (thenon_self_governingIterator == null && subjectURI == null) {
 				throw new JspException("subject URI generation currently not supported");
 			} else {
-				ResultSet rs = getResultSet(Prefix_1_4
+				ResultSet rs = getResultSet(prefix
 				+ " SELECT ?label  where {"
 				+ "  OPTIONAL { <" + subjectURI + "> rdfs:label ?label } "
 				+ "}");

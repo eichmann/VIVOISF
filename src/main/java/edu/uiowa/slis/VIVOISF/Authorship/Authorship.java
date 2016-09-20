@@ -199,6 +199,10 @@ public class Authorship extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 				subjectURI = ((edu.uiowa.slis.VIVOISF.ConferencePoster.ConferencePosterRelatesIterator)this.getParent()).getRelates();
 			}
 
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.URL.URLHasURLInverseIterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.URL.URLHasURLInverseIterator)this.getParent()).getHasURLInverse();
+			}
+
 			edu.uiowa.slis.VIVOISF.Individual.IndividualRelatedByIterator theIndividualRelatedByIterator = (edu.uiowa.slis.VIVOISF.Individual.IndividualRelatedByIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.Individual.IndividualRelatedByIterator.class);
 
 			if (subjectURI == null && theIndividualRelatedByIterator != null) {
@@ -448,15 +452,17 @@ public class Authorship extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 			if (theAuthorshipIterator == null && subjectURI == null) {
 				throw new JspException("subject URI generation currently not supported");
 			} else {
-				ResultSet rs = getResultSet(Prefix_1_4
-				+ " SELECT ?label  ?isCorrespondingAuthor ?hideFromDisplay where {"
+				ResultSet rs = getResultSet(prefix
+				+ " SELECT ?label  ?isCorrespondingAuthor ?isCorrespondingAuthor ?hideFromDisplay where {"
 				+ "  OPTIONAL { <" + subjectURI + "> rdfs:label ?label } "
+				+ "  OPTIONAL { <" + subjectURI + "> <http://vivoweb.org/ontology/core#isCorrespondingAuthor> ?isCorrespondingAuthor } "
 				+ "  OPTIONAL { <" + subjectURI + "> <http://vivoweb.org/ontology/core#isCorrespondingAuthor> ?isCorrespondingAuthor } "
 				+ "  OPTIONAL { <" + subjectURI + "> <http://vivoweb.org/ontology/core#hideFromDisplay> ?hideFromDisplay } "
 				+ "}");
 				while(rs.hasNext()) {
 					QuerySolution sol = rs.nextSolution();
 					label = sol.get("?label") == null ? null : sol.get("?label").asLiteral().getString();
+					isCorrespondingAuthor = sol.get("?isCorrespondingAuthor") == null ? null : sol.get("?isCorrespondingAuthor").toString();
 					isCorrespondingAuthor = sol.get("?isCorrespondingAuthor") == null ? null : sol.get("?isCorrespondingAuthor").toString();
 					hideFromDisplay = sol.get("?hideFromDisplay") == null ? null : sol.get("?hideFromDisplay").toString();
 				}

@@ -31,7 +31,7 @@ public class ReviewNihmsidIterator extends edu.uiowa.slis.VIVOISF.TagLibSupport 
 				throw new JspException("subject URI generation currently not supported");
 			}
 
-			rs = getResultSet(Prefix_1_4+"SELECT ?s where { <" + subjectURI + "> <http://vivoweb.org/ontology/core#nihmsid> ?s } ");
+			rs = getResultSet(prefix+"SELECT ?s where { <" + subjectURI + "> <http://vivoweb.org/ontology/core#nihmsid> ?s } ");
 			if(rs.hasNext()) {
 				QuerySolution sol = rs.nextSolution();
 				nihmsid = sol.get("?s").toString();

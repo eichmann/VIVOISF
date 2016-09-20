@@ -33,10 +33,14 @@ public class AdvisingRelationship extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 				label = theAdvisingRelationshipIterator.getLabel();
 			}
 
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.AcademicDegree.AcademicDegreeDegreeCandidacyInverseIterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.AcademicDegree.AcademicDegreeDegreeCandidacyInverseIterator)this.getParent()).getDegreeCandidacyInverse();
+			}
+
 			if (theAdvisingRelationshipIterator == null && subjectURI == null) {
 				throw new JspException("subject URI generation currently not supported");
 			} else {
-				ResultSet rs = getResultSet(Prefix_1_4
+				ResultSet rs = getResultSet(prefix
 				+ " SELECT ?label  where {"
 				+ "  OPTIONAL { <" + subjectURI + "> rdfs:label ?label } "
 				+ "}");

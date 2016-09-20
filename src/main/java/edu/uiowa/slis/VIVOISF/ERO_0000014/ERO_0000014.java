@@ -33,8 +33,22 @@ public class ERO_0000014 extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 				label = theERO_0000014Iterator.getLabel();
 			}
 
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.Document.DocumentDocumentationForIterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.Document.DocumentDocumentationForIterator)this.getParent()).getDocumentationFor();
+			}
+
 			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.ERO_0000020.ERO_0000020ERO_0000918Iterator) {
 				subjectURI = ((edu.uiowa.slis.VIVOISF.ERO_0000020.ERO_0000020ERO_0000918Iterator)this.getParent()).getERO_0000918();
+			}
+
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.OBI_0000272.OBI_0000272ProtocolRealizedByIterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.OBI_0000272.OBI_0000272ProtocolRealizedByIterator)this.getParent()).getProtocolRealizedBy();
+			}
+
+			edu.uiowa.slis.VIVOISF.Document.DocumentDocumentationForIterator theDocumentDocumentationForIterator = (edu.uiowa.slis.VIVOISF.Document.DocumentDocumentationForIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.Document.DocumentDocumentationForIterator.class);
+
+			if (subjectURI == null && theDocumentDocumentationForIterator != null) {
+				subjectURI = theDocumentDocumentationForIterator.getDocumentationFor();
 			}
 
 			edu.uiowa.slis.VIVOISF.ERO_0000020.ERO_0000020ERO_0000918Iterator theERO_0000020ERO_0000918Iterator = (edu.uiowa.slis.VIVOISF.ERO_0000020.ERO_0000020ERO_0000918Iterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.ERO_0000020.ERO_0000020ERO_0000918Iterator.class);
@@ -43,10 +57,16 @@ public class ERO_0000014 extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 				subjectURI = theERO_0000020ERO_0000918Iterator.getERO_0000918();
 			}
 
+			edu.uiowa.slis.VIVOISF.OBI_0000272.OBI_0000272ProtocolRealizedByIterator theOBI_0000272ProtocolRealizedByIterator = (edu.uiowa.slis.VIVOISF.OBI_0000272.OBI_0000272ProtocolRealizedByIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.OBI_0000272.OBI_0000272ProtocolRealizedByIterator.class);
+
+			if (subjectURI == null && theOBI_0000272ProtocolRealizedByIterator != null) {
+				subjectURI = theOBI_0000272ProtocolRealizedByIterator.getProtocolRealizedBy();
+			}
+
 			if (theERO_0000014Iterator == null && subjectURI == null) {
 				throw new JspException("subject URI generation currently not supported");
 			} else {
-				ResultSet rs = getResultSet(Prefix_1_4
+				ResultSet rs = getResultSet(prefix
 				+ " SELECT ?label  where {"
 				+ "  OPTIONAL { <" + subjectURI + "> rdfs:label ?label } "
 				+ "}");

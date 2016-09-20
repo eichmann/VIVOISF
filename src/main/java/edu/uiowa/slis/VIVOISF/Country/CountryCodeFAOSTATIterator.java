@@ -31,7 +31,7 @@ public class CountryCodeFAOSTATIterator extends edu.uiowa.slis.VIVOISF.TagLibSup
 				throw new JspException("subject URI generation currently not supported");
 			}
 
-			rs = getResultSet(Prefix_1_4+"SELECT ?s where { <" + subjectURI + "> <http://aims.fao.org/aos/geopolitical.owl#codeFAOSTAT> ?s } ");
+			rs = getResultSet(prefix+"SELECT ?s where { <" + subjectURI + "> <http://aims.fao.org/aos/geopolitical.owl#codeFAOSTAT> ?s } ");
 			if(rs.hasNext()) {
 				QuerySolution sol = rs.nextSolution();
 				codeFAOSTAT = sol.get("?s").toString();

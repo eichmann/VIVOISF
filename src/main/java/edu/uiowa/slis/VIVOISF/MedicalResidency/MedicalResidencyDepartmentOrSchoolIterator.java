@@ -31,7 +31,7 @@ public class MedicalResidencyDepartmentOrSchoolIterator extends edu.uiowa.slis.V
 				throw new JspException("subject URI generation currently not supported");
 			}
 
-			rs = getResultSet(Prefix_1_4+"SELECT ?s where { <" + subjectURI + "> <http://vivoweb.org/ontology/core#departmentOrSchool> ?s } ");
+			rs = getResultSet(prefix+"SELECT ?s where { <" + subjectURI + "> <http://vivoweb.org/ontology/core#departmentOrSchool> ?s } ");
 			if(rs.hasNext()) {
 				QuerySolution sol = rs.nextSolution();
 				departmentOrSchool = sol.get("?s").toString();

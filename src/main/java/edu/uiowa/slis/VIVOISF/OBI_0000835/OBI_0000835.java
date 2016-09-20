@@ -31,27 +31,59 @@ public class OBI_0000835 extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 				label = theOBI_0000835Iterator.getLabel();
 			}
 
-			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.null.nullERO_0000034Iterator) {
-				subjectURI = ((edu.uiowa.slis.VIVOISF.null.nullERO_0000034Iterator)this.getParent()).getERO_0000034();
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.ERO_0000004.ERO_0000004ERO_0000034Iterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.ERO_0000004.ERO_0000004ERO_0000034Iterator)this.getParent()).getERO_0000034();
 			}
 
-			edu.uiowa.slis.VIVOISF.null.nullERO_0000034Iterator thenullERO_0000034Iterator = (edu.uiowa.slis.VIVOISF.null.nullERO_0000034Iterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.null.nullERO_0000034Iterator.class);
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.ERO_0000006.ERO_0000006ERO_0000034Iterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.ERO_0000006.ERO_0000006ERO_0000034Iterator)this.getParent()).getERO_0000034();
+			}
 
-			if (subjectURI == null && thenullERO_0000034Iterator != null) {
-				subjectURI = thenullERO_0000034Iterator.getERO_0000034();
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.ERO_0000071.ERO_0000071ERO_0000034Iterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.ERO_0000071.ERO_0000071ERO_0000034Iterator)this.getParent()).getERO_0000034();
+			}
+
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.ERO_0001716.ERO_0001716ERO_0000034Iterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.ERO_0001716.ERO_0001716ERO_0000034Iterator)this.getParent()).getERO_0000034();
+			}
+
+			edu.uiowa.slis.VIVOISF.ERO_0000004.ERO_0000004ERO_0000034Iterator theERO_0000004ERO_0000034Iterator = (edu.uiowa.slis.VIVOISF.ERO_0000004.ERO_0000004ERO_0000034Iterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.ERO_0000004.ERO_0000004ERO_0000034Iterator.class);
+
+			if (subjectURI == null && theERO_0000004ERO_0000034Iterator != null) {
+				subjectURI = theERO_0000004ERO_0000034Iterator.getERO_0000034();
+			}
+
+			edu.uiowa.slis.VIVOISF.ERO_0000006.ERO_0000006ERO_0000034Iterator theERO_0000006ERO_0000034Iterator = (edu.uiowa.slis.VIVOISF.ERO_0000006.ERO_0000006ERO_0000034Iterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.ERO_0000006.ERO_0000006ERO_0000034Iterator.class);
+
+			if (subjectURI == null && theERO_0000006ERO_0000034Iterator != null) {
+				subjectURI = theERO_0000006ERO_0000034Iterator.getERO_0000034();
+			}
+
+			edu.uiowa.slis.VIVOISF.ERO_0000071.ERO_0000071ERO_0000034Iterator theERO_0000071ERO_0000034Iterator = (edu.uiowa.slis.VIVOISF.ERO_0000071.ERO_0000071ERO_0000034Iterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.ERO_0000071.ERO_0000071ERO_0000034Iterator.class);
+
+			if (subjectURI == null && theERO_0000071ERO_0000034Iterator != null) {
+				subjectURI = theERO_0000071ERO_0000034Iterator.getERO_0000034();
+			}
+
+			edu.uiowa.slis.VIVOISF.ERO_0001716.ERO_0001716ERO_0000034Iterator theERO_0001716ERO_0000034Iterator = (edu.uiowa.slis.VIVOISF.ERO_0001716.ERO_0001716ERO_0000034Iterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.ERO_0001716.ERO_0001716ERO_0000034Iterator.class);
+
+			if (subjectURI == null && theERO_0001716ERO_0000034Iterator != null) {
+				subjectURI = theERO_0001716ERO_0000034Iterator.getERO_0000034();
 			}
 
 			if (theOBI_0000835Iterator == null && subjectURI == null) {
 				throw new JspException("subject URI generation currently not supported");
 			} else {
-				ResultSet rs = getResultSet(Prefix_1_4
-				+ " SELECT ?label  ?overview where {"
+				ResultSet rs = getResultSet(prefix
+				+ " SELECT ?label  ?overview ?overview where {"
 				+ "  OPTIONAL { <" + subjectURI + "> rdfs:label ?label } "
+				+ "  OPTIONAL { <" + subjectURI + "> <http://vivoweb.org/ontology/core#overview> ?overview } "
 				+ "  OPTIONAL { <" + subjectURI + "> <http://vivoweb.org/ontology/core#overview> ?overview } "
 				+ "}");
 				while(rs.hasNext()) {
 					QuerySolution sol = rs.nextSolution();
 					label = sol.get("?label") == null ? null : sol.get("?label").asLiteral().getString();
+					overview = sol.get("?overview") == null ? null : sol.get("?overview").toString();
 					overview = sol.get("?overview") == null ? null : sol.get("?overview").toString();
 				}
 			}

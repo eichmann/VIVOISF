@@ -20,6 +20,9 @@ public class ERO_0001716 extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 	String label = null;
 	boolean commitNeeded = false;
 
+	// functional datatype properties, both local and inherited
+
+
 	public int doStartTag() throws JspException {
 		currentInstance = this;
 		try {
@@ -30,10 +33,44 @@ public class ERO_0001716 extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 				label = theERO_0001716Iterator.getLabel();
 			}
 
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.ERO_0000005.ERO_0000005ERO_0000029Iterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.ERO_0000005.ERO_0000005ERO_0000029Iterator)this.getParent()).getERO_0000029();
+			}
+
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.Organization.OrganizationERO_0000031Iterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.Organization.OrganizationERO_0000031Iterator)this.getParent()).getERO_0000031();
+			}
+
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.Document.DocumentDocumentationForIterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.Document.DocumentDocumentationForIterator)this.getParent()).getDocumentationFor();
+			}
+
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.OBI_0000835.OBI_0000835ERO_0000034InverseIterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.OBI_0000835.OBI_0000835ERO_0000034InverseIterator)this.getParent()).getERO_0000034Inverse();
+			}
+
+			edu.uiowa.slis.VIVOISF.ERO_0000005.ERO_0000005ERO_0000029Iterator theERO_0000005ERO_0000029Iterator = (edu.uiowa.slis.VIVOISF.ERO_0000005.ERO_0000005ERO_0000029Iterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.ERO_0000005.ERO_0000005ERO_0000029Iterator.class);
+
+			if (subjectURI == null && theERO_0000005ERO_0000029Iterator != null) {
+				subjectURI = theERO_0000005ERO_0000029Iterator.getERO_0000029();
+			}
+
+			edu.uiowa.slis.VIVOISF.Organization.OrganizationERO_0000031Iterator theOrganizationERO_0000031Iterator = (edu.uiowa.slis.VIVOISF.Organization.OrganizationERO_0000031Iterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.Organization.OrganizationERO_0000031Iterator.class);
+
+			if (subjectURI == null && theOrganizationERO_0000031Iterator != null) {
+				subjectURI = theOrganizationERO_0000031Iterator.getERO_0000031();
+			}
+
+			edu.uiowa.slis.VIVOISF.Document.DocumentDocumentationForIterator theDocumentDocumentationForIterator = (edu.uiowa.slis.VIVOISF.Document.DocumentDocumentationForIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.Document.DocumentDocumentationForIterator.class);
+
+			if (subjectURI == null && theDocumentDocumentationForIterator != null) {
+				subjectURI = theDocumentDocumentationForIterator.getDocumentationFor();
+			}
+
 			if (theERO_0001716Iterator == null && subjectURI == null) {
 				throw new JspException("subject URI generation currently not supported");
 			} else {
-				ResultSet rs = getResultSet(Prefix_1_4
+				ResultSet rs = getResultSet(prefix
 				+ " SELECT ?label  where {"
 				+ "  OPTIONAL { <" + subjectURI + "> rdfs:label ?label } "
 				+ "}");

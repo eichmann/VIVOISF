@@ -33,10 +33,18 @@ public class GlobalCitationCount extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 				label = theGlobalCitationCountIterator.getLabel();
 			}
 
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.BibliographicInformationSource.BibliographicInformationSourceHasGlobalCountSourceInverseIterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.BibliographicInformationSource.BibliographicInformationSourceHasGlobalCountSourceInverseIterator)this.getParent()).getHasGlobalCountSourceInverse();
+			}
+
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.DateTimeValue.DateTimeValueHasGlobalCountDateInverseIterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.DateTimeValue.DateTimeValueHasGlobalCountDateInverseIterator)this.getParent()).getHasGlobalCountDateInverse();
+			}
+
 			if (theGlobalCitationCountIterator == null && subjectURI == null) {
 				throw new JspException("subject URI generation currently not supported");
 			} else {
-				ResultSet rs = getResultSet(Prefix_1_4
+				ResultSet rs = getResultSet(prefix
 				+ " SELECT ?label  where {"
 				+ "  OPTIONAL { <" + subjectURI + "> rdfs:label ?label } "
 				+ "}");

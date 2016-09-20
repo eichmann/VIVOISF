@@ -41,6 +41,10 @@ public class BFO_0000040 extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 				subjectURI = ((edu.uiowa.slis.VIVOISF.BFO_0000040.BFO_0000040RO_0003001Iterator)this.getParent()).getRO_0003001();
 			}
 
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.Organization.OrganizationOBI_0000304InverseIterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.Organization.OrganizationOBI_0000304InverseIterator)this.getParent()).getOBI_0000304Inverse();
+			}
+
 			edu.uiowa.slis.VIVOISF.BFO_0000040.BFO_0000040RO_0003000Iterator theBFO_0000040RO_0003000Iterator = (edu.uiowa.slis.VIVOISF.BFO_0000040.BFO_0000040RO_0003000Iterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.BFO_0000040.BFO_0000040RO_0003000Iterator.class);
 
 			if (subjectURI == null && theBFO_0000040RO_0003000Iterator != null) {
@@ -56,7 +60,7 @@ public class BFO_0000040 extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 			if (theBFO_0000040Iterator == null && subjectURI == null) {
 				throw new JspException("subject URI generation currently not supported");
 			} else {
-				ResultSet rs = getResultSet(Prefix_1_4
+				ResultSet rs = getResultSet(prefix
 				+ " SELECT ?label  where {"
 				+ "  OPTIONAL { <" + subjectURI + "> rdfs:label ?label } "
 				+ "}");

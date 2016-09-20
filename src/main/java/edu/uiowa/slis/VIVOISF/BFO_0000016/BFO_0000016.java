@@ -33,7 +33,7 @@ public class BFO_0000016 extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 			if (theBFO_0000016Iterator == null && subjectURI == null) {
 				throw new JspException("subject URI generation currently not supported");
 			} else {
-				ResultSet rs = getResultSet(Prefix_1_4
+				ResultSet rs = getResultSet(prefix
 				+ " SELECT ?label  where {"
 				+ "  OPTIONAL { <" + subjectURI + "> rdfs:label ?label } "
 				+ "}");

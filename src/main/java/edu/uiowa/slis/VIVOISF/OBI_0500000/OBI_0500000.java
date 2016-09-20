@@ -33,7 +33,7 @@ public class OBI_0500000 extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 			if (theOBI_0500000Iterator == null && subjectURI == null) {
 				throw new JspException("subject URI generation currently not supported");
 			} else {
-				ResultSet rs = getResultSet(Prefix_1_4
+				ResultSet rs = getResultSet(prefix
 				+ " SELECT ?label  where {"
 				+ "  OPTIONAL { <" + subjectURI + "> rdfs:label ?label } "
 				+ "}");

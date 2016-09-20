@@ -57,6 +57,14 @@ public class Person extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 				subjectURI = ((edu.uiowa.slis.VIVOISF.GeographicRegion.GeographicRegionGeographicFocusOfIterator)this.getParent()).getGeographicFocusOf();
 			}
 
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.ERO_0000005.ERO_0000005ERO_0000390Iterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.ERO_0000005.ERO_0000005ERO_0000390Iterator)this.getParent()).getERO_0000390();
+			}
+
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.ERO_0000007.ERO_0000007ERO_0000398Iterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.ERO_0000007.ERO_0000007ERO_0000398Iterator)this.getParent()).getERO_0000398();
+			}
+
 			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.Authorship.AuthorshipRelatesIterator) {
 				subjectURI = ((edu.uiowa.slis.VIVOISF.Authorship.AuthorshipRelatesIterator)this.getParent()).getRelates();
 			}
@@ -141,6 +149,10 @@ public class Person extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 				subjectURI = ((edu.uiowa.slis.VIVOISF.ConferencePoster.ConferencePosterRelatesIterator)this.getParent()).getRelates();
 			}
 
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.ERO_0000007.ERO_0000007ERO_0000033InverseIterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.ERO_0000007.ERO_0000007ERO_0000033InverseIterator)this.getParent()).getERO_0000033Inverse();
+			}
+
 			edu.uiowa.slis.VIVOISF.ARG_2000379.ARG_2000379ARG_2000029Iterator theARG_2000379ARG_2000029Iterator = (edu.uiowa.slis.VIVOISF.ARG_2000379.ARG_2000379ARG_2000029Iterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.ARG_2000379.ARG_2000379ARG_2000029Iterator.class);
 
 			if (subjectURI == null && theARG_2000379ARG_2000029Iterator != null) {
@@ -169,6 +181,18 @@ public class Person extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 
 			if (subjectURI == null && theGeographicRegionGeographicFocusOfIterator != null) {
 				subjectURI = theGeographicRegionGeographicFocusOfIterator.getGeographicFocusOf();
+			}
+
+			edu.uiowa.slis.VIVOISF.ERO_0000005.ERO_0000005ERO_0000390Iterator theERO_0000005ERO_0000390Iterator = (edu.uiowa.slis.VIVOISF.ERO_0000005.ERO_0000005ERO_0000390Iterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.ERO_0000005.ERO_0000005ERO_0000390Iterator.class);
+
+			if (subjectURI == null && theERO_0000005ERO_0000390Iterator != null) {
+				subjectURI = theERO_0000005ERO_0000390Iterator.getERO_0000390();
+			}
+
+			edu.uiowa.slis.VIVOISF.ERO_0000007.ERO_0000007ERO_0000398Iterator theERO_0000007ERO_0000398Iterator = (edu.uiowa.slis.VIVOISF.ERO_0000007.ERO_0000007ERO_0000398Iterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.ERO_0000007.ERO_0000007ERO_0000398Iterator.class);
+
+			if (subjectURI == null && theERO_0000007ERO_0000398Iterator != null) {
+				subjectURI = theERO_0000007ERO_0000398Iterator.getERO_0000398();
 			}
 
 			edu.uiowa.slis.VIVOISF.Authorship.AuthorshipRelatesIterator theAuthorshipRelatesIterator = (edu.uiowa.slis.VIVOISF.Authorship.AuthorshipRelatesIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.Authorship.AuthorshipRelatesIterator.class);
@@ -300,20 +324,28 @@ public class Person extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 			if (thePersonIterator == null && subjectURI == null) {
 				throw new JspException("subject URI generation currently not supported");
 			} else {
-				ResultSet rs = getResultSet(Prefix_1_4
-				+ " SELECT ?label  ?teachingOverview ?outreachOverview ?researchOverview ?overview where {"
+				ResultSet rs = getResultSet(prefix
+				+ " SELECT ?label  ?teachingOverview ?teachingOverview ?outreachOverview ?outreachOverview ?researchOverview ?researchOverview ?overview ?overview where {"
 				+ "  OPTIONAL { <" + subjectURI + "> rdfs:label ?label } "
 				+ "  OPTIONAL { <" + subjectURI + "> <http://vivoweb.org/ontology/core#teachingOverview> ?teachingOverview } "
+				+ "  OPTIONAL { <" + subjectURI + "> <http://vivoweb.org/ontology/core#teachingOverview> ?teachingOverview } "
+				+ "  OPTIONAL { <" + subjectURI + "> <http://vivoweb.org/ontology/core#outreachOverview> ?outreachOverview } "
 				+ "  OPTIONAL { <" + subjectURI + "> <http://vivoweb.org/ontology/core#outreachOverview> ?outreachOverview } "
 				+ "  OPTIONAL { <" + subjectURI + "> <http://vivoweb.org/ontology/core#researchOverview> ?researchOverview } "
+				+ "  OPTIONAL { <" + subjectURI + "> <http://vivoweb.org/ontology/core#researchOverview> ?researchOverview } "
+				+ "  OPTIONAL { <" + subjectURI + "> <http://vivoweb.org/ontology/core#overview> ?overview } "
 				+ "  OPTIONAL { <" + subjectURI + "> <http://vivoweb.org/ontology/core#overview> ?overview } "
 				+ "}");
 				while(rs.hasNext()) {
 					QuerySolution sol = rs.nextSolution();
 					label = sol.get("?label") == null ? null : sol.get("?label").asLiteral().getString();
 					teachingOverview = sol.get("?teachingOverview") == null ? null : sol.get("?teachingOverview").toString();
+					teachingOverview = sol.get("?teachingOverview") == null ? null : sol.get("?teachingOverview").toString();
+					outreachOverview = sol.get("?outreachOverview") == null ? null : sol.get("?outreachOverview").toString();
 					outreachOverview = sol.get("?outreachOverview") == null ? null : sol.get("?outreachOverview").toString();
 					researchOverview = sol.get("?researchOverview") == null ? null : sol.get("?researchOverview").toString();
+					researchOverview = sol.get("?researchOverview") == null ? null : sol.get("?researchOverview").toString();
+					overview = sol.get("?overview") == null ? null : sol.get("?overview").toString();
 					overview = sol.get("?overview") == null ? null : sol.get("?overview").toString();
 				}
 			}

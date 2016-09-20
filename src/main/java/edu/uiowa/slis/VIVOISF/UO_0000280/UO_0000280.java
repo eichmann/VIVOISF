@@ -20,9 +20,6 @@ public class UO_0000280 extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 	String label = null;
 	boolean commitNeeded = false;
 
-	// functional datatype properties, both local and inherited
-
-
 	public int doStartTag() throws JspException {
 		currentInstance = this;
 		try {
@@ -36,7 +33,7 @@ public class UO_0000280 extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 			if (theUO_0000280Iterator == null && subjectURI == null) {
 				throw new JspException("subject URI generation currently not supported");
 			} else {
-				ResultSet rs = getResultSet(Prefix_1_4
+				ResultSet rs = getResultSet(prefix
 				+ " SELECT ?label  where {"
 				+ "  OPTIONAL { <" + subjectURI + "> rdfs:label ?label } "
 				+ "}");

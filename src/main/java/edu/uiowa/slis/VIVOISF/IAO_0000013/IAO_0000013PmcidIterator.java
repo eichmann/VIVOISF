@@ -31,7 +31,7 @@ public class IAO_0000013PmcidIterator extends edu.uiowa.slis.VIVOISF.TagLibSuppo
 				throw new JspException("subject URI generation currently not supported");
 			}
 
-			rs = getResultSet(Prefix_1_4+"SELECT ?s where { <" + subjectURI + "> <http://vivoweb.org/ontology/core#pmcid> ?s } ");
+			rs = getResultSet(prefix+"SELECT ?s where { <" + subjectURI + "> <http://vivoweb.org/ontology/core#pmcid> ?s } ");
 			if(rs.hasNext()) {
 				QuerySolution sol = rs.nextSolution();
 				pmcid = sol.get("?s").toString();

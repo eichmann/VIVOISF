@@ -38,6 +38,10 @@ public class Patent extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 				subjectURI = ((edu.uiowa.slis.VIVOISF.Agent.AgentAssigneeForIterator)this.getParent()).getAssigneeFor();
 			}
 
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.DateTimeValue.DateTimeValueDateFiledInverseIterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.DateTimeValue.DateTimeValueDateFiledInverseIterator)this.getParent()).getDateFiledInverse();
+			}
+
 			edu.uiowa.slis.VIVOISF.Agent.AgentAssigneeForIterator theAgentAssigneeForIterator = (edu.uiowa.slis.VIVOISF.Agent.AgentAssigneeForIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.Agent.AgentAssigneeForIterator.class);
 
 			if (subjectURI == null && theAgentAssigneeForIterator != null) {
@@ -47,14 +51,16 @@ public class Patent extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 			if (thePatentIterator == null && subjectURI == null) {
 				throw new JspException("subject URI generation currently not supported");
 			} else {
-				ResultSet rs = getResultSet(Prefix_1_4
-				+ " SELECT ?label  ?patentNumber where {"
+				ResultSet rs = getResultSet(prefix
+				+ " SELECT ?label  ?patentNumber ?patentNumber where {"
 				+ "  OPTIONAL { <" + subjectURI + "> rdfs:label ?label } "
+				+ "  OPTIONAL { <" + subjectURI + "> <http://vivoweb.org/ontology/core#patentNumber> ?patentNumber } "
 				+ "  OPTIONAL { <" + subjectURI + "> <http://vivoweb.org/ontology/core#patentNumber> ?patentNumber } "
 				+ "}");
 				while(rs.hasNext()) {
 					QuerySolution sol = rs.nextSolution();
 					label = sol.get("?label") == null ? null : sol.get("?label").asLiteral().getString();
+					patentNumber = sol.get("?patentNumber") == null ? null : sol.get("?patentNumber").toString();
 					patentNumber = sol.get("?patentNumber") == null ? null : sol.get("?patentNumber").toString();
 				}
 			}

@@ -33,18 +33,38 @@ public class ERO_0000007 extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 				label = theERO_0000007Iterator.getLabel();
 			}
 
-			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.null.nullERO_0000397Iterator) {
-				subjectURI = ((edu.uiowa.slis.VIVOISF.null.nullERO_0000397Iterator)this.getParent()).getERO_0000397();
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.Laboratory.LaboratoryERO_0000397Iterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.Laboratory.LaboratoryERO_0000397Iterator)this.getParent()).getERO_0000397();
+			}
+
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.Person.PersonERO_0000397Iterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.Person.PersonERO_0000397Iterator)this.getParent()).getERO_0000397();
+			}
+
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.OBI_0000272.OBI_0000272ERO_0000038Iterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.OBI_0000272.OBI_0000272ERO_0000038Iterator)this.getParent()).getERO_0000038();
 			}
 
 			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.Person.PersonERO_0000033Iterator) {
 				subjectURI = ((edu.uiowa.slis.VIVOISF.Person.PersonERO_0000033Iterator)this.getParent()).getERO_0000033();
 			}
 
-			edu.uiowa.slis.VIVOISF.null.nullERO_0000397Iterator thenullERO_0000397Iterator = (edu.uiowa.slis.VIVOISF.null.nullERO_0000397Iterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.null.nullERO_0000397Iterator.class);
+			edu.uiowa.slis.VIVOISF.Laboratory.LaboratoryERO_0000397Iterator theLaboratoryERO_0000397Iterator = (edu.uiowa.slis.VIVOISF.Laboratory.LaboratoryERO_0000397Iterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.Laboratory.LaboratoryERO_0000397Iterator.class);
 
-			if (subjectURI == null && thenullERO_0000397Iterator != null) {
-				subjectURI = thenullERO_0000397Iterator.getERO_0000397();
+			if (subjectURI == null && theLaboratoryERO_0000397Iterator != null) {
+				subjectURI = theLaboratoryERO_0000397Iterator.getERO_0000397();
+			}
+
+			edu.uiowa.slis.VIVOISF.Person.PersonERO_0000397Iterator thePersonERO_0000397Iterator = (edu.uiowa.slis.VIVOISF.Person.PersonERO_0000397Iterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.Person.PersonERO_0000397Iterator.class);
+
+			if (subjectURI == null && thePersonERO_0000397Iterator != null) {
+				subjectURI = thePersonERO_0000397Iterator.getERO_0000397();
+			}
+
+			edu.uiowa.slis.VIVOISF.OBI_0000272.OBI_0000272ERO_0000038Iterator theOBI_0000272ERO_0000038Iterator = (edu.uiowa.slis.VIVOISF.OBI_0000272.OBI_0000272ERO_0000038Iterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.OBI_0000272.OBI_0000272ERO_0000038Iterator.class);
+
+			if (subjectURI == null && theOBI_0000272ERO_0000038Iterator != null) {
+				subjectURI = theOBI_0000272ERO_0000038Iterator.getERO_0000038();
 			}
 
 			edu.uiowa.slis.VIVOISF.Person.PersonERO_0000033Iterator thePersonERO_0000033Iterator = (edu.uiowa.slis.VIVOISF.Person.PersonERO_0000033Iterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.Person.PersonERO_0000033Iterator.class);
@@ -56,7 +76,7 @@ public class ERO_0000007 extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 			if (theERO_0000007Iterator == null && subjectURI == null) {
 				throw new JspException("subject URI generation currently not supported");
 			} else {
-				ResultSet rs = getResultSet(Prefix_1_4
+				ResultSet rs = getResultSet(prefix
 				+ " SELECT ?label  where {"
 				+ "  OPTIONAL { <" + subjectURI + "> rdfs:label ?label } "
 				+ "}");

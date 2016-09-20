@@ -31,7 +31,7 @@ public class PostdocERACommonsIdIterator extends edu.uiowa.slis.VIVOISF.TagLibSu
 				throw new JspException("subject URI generation currently not supported");
 			}
 
-			rs = getResultSet(Prefix_1_4+"SELECT ?s where { <" + subjectURI + "> <http://vivoweb.org/ontology/core#eRACommonsId> ?s } ");
+			rs = getResultSet(prefix+"SELECT ?s where { <" + subjectURI + "> <http://vivoweb.org/ontology/core#eRACommonsId> ?s } ");
 			if(rs.hasNext()) {
 				QuerySolution sol = rs.nextSolution();
 				eRACommonsId = sol.get("?s").toString();

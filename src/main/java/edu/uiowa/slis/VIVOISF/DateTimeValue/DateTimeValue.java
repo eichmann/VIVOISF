@@ -97,6 +97,10 @@ public class DateTimeValue extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 				subjectURI = ((edu.uiowa.slis.VIVOISF.DateTimeValue.DateTimeValueDateTimeIterator)this.getParent()).getDateTime();
 			}
 
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.DateTimeValuePrecision.DateTimeValuePrecisionDateTimePrecisionInverseIterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.DateTimeValuePrecision.DateTimeValuePrecisionDateTimePrecisionInverseIterator)this.getParent()).getDateTimePrecisionInverse();
+			}
+
 			edu.uiowa.slis.VIVOISF.DateTimeInterval.DateTimeIntervalEndIterator theDateTimeIntervalEndIterator = (edu.uiowa.slis.VIVOISF.DateTimeInterval.DateTimeIntervalEndIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.DateTimeInterval.DateTimeIntervalEndIterator.class);
 
 			if (subjectURI == null && theDateTimeIntervalEndIterator != null) {
@@ -196,7 +200,7 @@ public class DateTimeValue extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 			if (theDateTimeValueIterator == null && subjectURI == null) {
 				throw new JspException("subject URI generation currently not supported");
 			} else {
-				ResultSet rs = getResultSet(Prefix_1_4
+				ResultSet rs = getResultSet(prefix
 				+ " SELECT ?label  where {"
 				+ "  OPTIONAL { <" + subjectURI + "> rdfs:label ?label } "
 				+ "}");
