@@ -453,16 +453,14 @@ public class Authorship extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 				throw new JspException("subject URI generation currently not supported");
 			} else {
 				ResultSet rs = getResultSet(prefix
-				+ " SELECT ?label  ?isCorrespondingAuthor ?isCorrespondingAuthor ?hideFromDisplay where {"
+				+ " SELECT ?label  ?isCorrespondingAuthor ?hideFromDisplay where {"
 				+ "  OPTIONAL { <" + subjectURI + "> rdfs:label ?label } "
-				+ "  OPTIONAL { <" + subjectURI + "> <http://vivoweb.org/ontology/core#isCorrespondingAuthor> ?isCorrespondingAuthor } "
 				+ "  OPTIONAL { <" + subjectURI + "> <http://vivoweb.org/ontology/core#isCorrespondingAuthor> ?isCorrespondingAuthor } "
 				+ "  OPTIONAL { <" + subjectURI + "> <http://vivoweb.org/ontology/core#hideFromDisplay> ?hideFromDisplay } "
 				+ "}");
 				while(rs.hasNext()) {
 					QuerySolution sol = rs.nextSolution();
 					label = sol.get("?label") == null ? null : sol.get("?label").asLiteral().getString();
-					isCorrespondingAuthor = sol.get("?isCorrespondingAuthor") == null ? null : sol.get("?isCorrespondingAuthor").toString();
 					isCorrespondingAuthor = sol.get("?isCorrespondingAuthor") == null ? null : sol.get("?isCorrespondingAuthor").toString();
 					hideFromDisplay = sol.get("?hideFromDisplay") == null ? null : sol.get("?hideFromDisplay").toString();
 				}

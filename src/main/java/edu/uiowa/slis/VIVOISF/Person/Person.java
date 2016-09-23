@@ -153,6 +153,10 @@ public class Person extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 				subjectURI = ((edu.uiowa.slis.VIVOISF.ERO_0000007.ERO_0000007ERO_0000033InverseIterator)this.getParent()).getERO_0000033Inverse();
 			}
 
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.Thing.ThingOrcidIdInverseIterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.Thing.ThingOrcidIdInverseIterator)this.getParent()).getOrcidIdInverse();
+			}
+
 			edu.uiowa.slis.VIVOISF.ARG_2000379.ARG_2000379ARG_2000029Iterator theARG_2000379ARG_2000029Iterator = (edu.uiowa.slis.VIVOISF.ARG_2000379.ARG_2000379ARG_2000029Iterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.ARG_2000379.ARG_2000379ARG_2000029Iterator.class);
 
 			if (subjectURI == null && theARG_2000379ARG_2000029Iterator != null) {
@@ -325,27 +329,19 @@ public class Person extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 				throw new JspException("subject URI generation currently not supported");
 			} else {
 				ResultSet rs = getResultSet(prefix
-				+ " SELECT ?label  ?teachingOverview ?teachingOverview ?outreachOverview ?outreachOverview ?researchOverview ?researchOverview ?overview ?overview where {"
+				+ " SELECT ?label  ?teachingOverview ?outreachOverview ?researchOverview ?overview where {"
 				+ "  OPTIONAL { <" + subjectURI + "> rdfs:label ?label } "
 				+ "  OPTIONAL { <" + subjectURI + "> <http://vivoweb.org/ontology/core#teachingOverview> ?teachingOverview } "
-				+ "  OPTIONAL { <" + subjectURI + "> <http://vivoweb.org/ontology/core#teachingOverview> ?teachingOverview } "
-				+ "  OPTIONAL { <" + subjectURI + "> <http://vivoweb.org/ontology/core#outreachOverview> ?outreachOverview } "
 				+ "  OPTIONAL { <" + subjectURI + "> <http://vivoweb.org/ontology/core#outreachOverview> ?outreachOverview } "
 				+ "  OPTIONAL { <" + subjectURI + "> <http://vivoweb.org/ontology/core#researchOverview> ?researchOverview } "
-				+ "  OPTIONAL { <" + subjectURI + "> <http://vivoweb.org/ontology/core#researchOverview> ?researchOverview } "
-				+ "  OPTIONAL { <" + subjectURI + "> <http://vivoweb.org/ontology/core#overview> ?overview } "
 				+ "  OPTIONAL { <" + subjectURI + "> <http://vivoweb.org/ontology/core#overview> ?overview } "
 				+ "}");
 				while(rs.hasNext()) {
 					QuerySolution sol = rs.nextSolution();
 					label = sol.get("?label") == null ? null : sol.get("?label").asLiteral().getString();
 					teachingOverview = sol.get("?teachingOverview") == null ? null : sol.get("?teachingOverview").toString();
-					teachingOverview = sol.get("?teachingOverview") == null ? null : sol.get("?teachingOverview").toString();
-					outreachOverview = sol.get("?outreachOverview") == null ? null : sol.get("?outreachOverview").toString();
 					outreachOverview = sol.get("?outreachOverview") == null ? null : sol.get("?outreachOverview").toString();
 					researchOverview = sol.get("?researchOverview") == null ? null : sol.get("?researchOverview").toString();
-					researchOverview = sol.get("?researchOverview") == null ? null : sol.get("?researchOverview").toString();
-					overview = sol.get("?overview") == null ? null : sol.get("?overview").toString();
 					overview = sol.get("?overview") == null ? null : sol.get("?overview").toString();
 				}
 			}

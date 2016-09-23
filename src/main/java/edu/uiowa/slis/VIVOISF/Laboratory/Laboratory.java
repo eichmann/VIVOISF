@@ -49,16 +49,14 @@ public class Laboratory extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 				throw new JspException("subject URI generation currently not supported");
 			} else {
 				ResultSet rs = getResultSet(prefix
-				+ " SELECT ?label  ?overview ?overview ?abbreviation where {"
+				+ " SELECT ?label  ?overview ?abbreviation where {"
 				+ "  OPTIONAL { <" + subjectURI + "> rdfs:label ?label } "
-				+ "  OPTIONAL { <" + subjectURI + "> <http://vivoweb.org/ontology/core#overview> ?overview } "
 				+ "  OPTIONAL { <" + subjectURI + "> <http://vivoweb.org/ontology/core#overview> ?overview } "
 				+ "  OPTIONAL { <" + subjectURI + "> <http://vivoweb.org/ontology/core#abbreviation> ?abbreviation } "
 				+ "}");
 				while(rs.hasNext()) {
 					QuerySolution sol = rs.nextSolution();
 					label = sol.get("?label") == null ? null : sol.get("?label").asLiteral().getString();
-					overview = sol.get("?overview") == null ? null : sol.get("?overview").toString();
 					overview = sol.get("?overview") == null ? null : sol.get("?overview").toString();
 					abbreviation = sol.get("?abbreviation") == null ? null : sol.get("?abbreviation").toString();
 				}

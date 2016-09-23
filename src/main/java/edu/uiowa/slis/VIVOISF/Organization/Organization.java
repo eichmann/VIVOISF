@@ -30,6 +30,16 @@ public class Organization extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 				label = theOrganizationIterator.getLabel();
 			}
 
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.Group.GroupHasMemberIterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.Group.GroupHasMemberIterator)this.getParent()).getHasMember();
+			}
+
+			edu.uiowa.slis.VIVOISF.Group.GroupHasMemberIterator theGroupHasMemberIterator = (edu.uiowa.slis.VIVOISF.Group.GroupHasMemberIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.Group.GroupHasMemberIterator.class);
+
+			if (subjectURI == null && theGroupHasMemberIterator != null) {
+				subjectURI = theGroupHasMemberIterator.getHasMember();
+			}
+
 			if (theOrganizationIterator == null && subjectURI == null) {
 				throw new JspException("subject URI generation currently not supported");
 			} else {

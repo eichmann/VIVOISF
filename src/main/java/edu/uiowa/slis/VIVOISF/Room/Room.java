@@ -38,15 +38,13 @@ public class Room extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 				throw new JspException("subject URI generation currently not supported");
 			} else {
 				ResultSet rs = getResultSet(prefix
-				+ " SELECT ?label  ?seatingCapacity ?seatingCapacity where {"
+				+ " SELECT ?label  ?seatingCapacity where {"
 				+ "  OPTIONAL { <" + subjectURI + "> rdfs:label ?label } "
-				+ "  OPTIONAL { <" + subjectURI + "> <http://vivoweb.org/ontology/core#seatingCapacity> ?seatingCapacity } "
 				+ "  OPTIONAL { <" + subjectURI + "> <http://vivoweb.org/ontology/core#seatingCapacity> ?seatingCapacity } "
 				+ "}");
 				while(rs.hasNext()) {
 					QuerySolution sol = rs.nextSolution();
 					label = sol.get("?label") == null ? null : sol.get("?label").asLiteral().getString();
-					seatingCapacity = sol.get("?seatingCapacity") == null ? null : sol.get("?seatingCapacity").toString();
 					seatingCapacity = sol.get("?seatingCapacity") == null ? null : sol.get("?seatingCapacity").toString();
 				}
 			}

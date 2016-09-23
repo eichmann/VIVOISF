@@ -462,15 +462,13 @@ public class Report extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 				throw new JspException("subject URI generation currently not supported");
 			} else {
 				ResultSet rs = getResultSet(prefix
-				+ " SELECT ?label  ?reportId ?reportId where {"
+				+ " SELECT ?label  ?reportId where {"
 				+ "  OPTIONAL { <" + subjectURI + "> rdfs:label ?label } "
-				+ "  OPTIONAL { <" + subjectURI + "> <http://vivoweb.org/ontology/core#reportId> ?reportId } "
 				+ "  OPTIONAL { <" + subjectURI + "> <http://vivoweb.org/ontology/core#reportId> ?reportId } "
 				+ "}");
 				while(rs.hasNext()) {
 					QuerySolution sol = rs.nextSolution();
 					label = sol.get("?label") == null ? null : sol.get("?label").asLiteral().getString();
-					reportId = sol.get("?reportId") == null ? null : sol.get("?reportId").toString();
 					reportId = sol.get("?reportId") == null ? null : sol.get("?reportId").toString();
 				}
 			}
