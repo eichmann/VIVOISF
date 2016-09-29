@@ -48,6 +48,8 @@ public class AwardNarrowerIterator extends edu.uiowa.slis.VIVOISF.TagLibSupport 
 				QuerySolution sol = rs.nextSolution();
 				narrower = sol.get("?s").toString();
 				type = getLocalName(sol.get("?t").toString());
+				if (type == null)
+					continue;
 				if (classFilter == null || (classFilter != null && type != null && classFilter.containsKey(type))) {
 					log.info("instance: " + narrower + "	type: " + type);
 					return EVAL_BODY_INCLUDE;

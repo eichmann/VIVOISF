@@ -48,6 +48,8 @@ public class ExtensionUnitAffiliatedOrganizationInverseIterator extends edu.uiow
 				QuerySolution sol = rs.nextSolution();
 				affiliatedOrganizationInverse = sol.get("?s").toString();
 				type = getLocalName(sol.get("?t").toString());
+				if (type == null)
+					continue;
 				if (classFilter == null || (classFilter != null && type != null && classFilter.containsKey(type))) {
 					log.info("instance: " + affiliatedOrganizationInverse + "	type: " + type);
 					return EVAL_BODY_INCLUDE;

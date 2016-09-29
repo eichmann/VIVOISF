@@ -48,6 +48,8 @@ public class AddressHasAddressInverseIterator extends edu.uiowa.slis.VIVOISF.Tag
 				QuerySolution sol = rs.nextSolution();
 				hasAddressInverse = sol.get("?s").toString();
 				type = getLocalName(sol.get("?t").toString());
+				if (type == null)
+					continue;
 				if (classFilter == null || (classFilter != null && type != null && classFilter.containsKey(type))) {
 					log.info("instance: " + hasAddressInverse + "	type: " + type);
 					return EVAL_BODY_INCLUDE;

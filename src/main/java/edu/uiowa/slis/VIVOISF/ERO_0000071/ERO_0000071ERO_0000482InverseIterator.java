@@ -48,6 +48,8 @@ public class ERO_0000071ERO_0000482InverseIterator extends edu.uiowa.slis.VIVOIS
 				QuerySolution sol = rs.nextSolution();
 				ERO_0000482Inverse = sol.get("?s").toString();
 				type = getLocalName(sol.get("?t").toString());
+				if (type == null)
+					continue;
 				if (classFilter == null || (classFilter != null && type != null && classFilter.containsKey(type))) {
 					log.info("instance: " + ERO_0000482Inverse + "	type: " + type);
 					return EVAL_BODY_INCLUDE;

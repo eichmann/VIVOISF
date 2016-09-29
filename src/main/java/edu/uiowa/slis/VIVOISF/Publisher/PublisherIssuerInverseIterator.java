@@ -48,6 +48,8 @@ public class PublisherIssuerInverseIterator extends edu.uiowa.slis.VIVOISF.TagLi
 				QuerySolution sol = rs.nextSolution();
 				issuerInverse = sol.get("?s").toString();
 				type = getLocalName(sol.get("?t").toString());
+				if (type == null)
+					continue;
 				if (classFilter == null || (classFilter != null && type != null && classFilter.containsKey(type))) {
 					log.info("instance: " + issuerInverse + "	type: " + type);
 					return EVAL_BODY_INCLUDE;

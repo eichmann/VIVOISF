@@ -48,6 +48,8 @@ public class BibliographicInformationSourceSWO_0000741Iterator extends edu.uiowa
 				QuerySolution sol = rs.nextSolution();
 				SWO_0000741 = sol.get("?s").toString();
 				type = getLocalName(sol.get("?t").toString());
+				if (type == null)
+					continue;
 				if (classFilter == null || (classFilter != null && type != null && classFilter.containsKey(type))) {
 					log.info("instance: " + SWO_0000741 + "	type: " + type);
 					return EVAL_BODY_INCLUDE;

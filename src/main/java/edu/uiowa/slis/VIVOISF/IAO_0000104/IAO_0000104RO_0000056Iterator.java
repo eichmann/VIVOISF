@@ -48,6 +48,8 @@ public class IAO_0000104RO_0000056Iterator extends edu.uiowa.slis.VIVOISF.TagLib
 				QuerySolution sol = rs.nextSolution();
 				RO_0000056 = sol.get("?s").toString();
 				type = getLocalName(sol.get("?t").toString());
+				if (type == null)
+					continue;
 				if (classFilter == null || (classFilter != null && type != null && classFilter.containsKey(type))) {
 					log.info("instance: " + RO_0000056 + "	type: " + type);
 					return EVAL_BODY_INCLUDE;

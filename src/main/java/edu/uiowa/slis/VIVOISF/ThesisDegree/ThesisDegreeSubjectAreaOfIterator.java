@@ -48,6 +48,8 @@ public class ThesisDegreeSubjectAreaOfIterator extends edu.uiowa.slis.VIVOISF.Ta
 				QuerySolution sol = rs.nextSolution();
 				subjectAreaOf = sol.get("?s").toString();
 				type = getLocalName(sol.get("?t").toString());
+				if (type == null)
+					continue;
 				if (classFilter == null || (classFilter != null && type != null && classFilter.containsKey(type))) {
 					log.info("instance: " + subjectAreaOf + "	type: " + type);
 					return EVAL_BODY_INCLUDE;

@@ -34,32 +34,28 @@ public class Thing extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 				subjectURI = ((edu.uiowa.slis.VIVOISF.Person.PersonOrcidIdIterator)this.getParent()).getOrcidId();
 			}
 
-			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.Concept.ConceptIsDefinedByIterator) {
-				subjectURI = ((edu.uiowa.slis.VIVOISF.Concept.ConceptIsDefinedByIterator)this.getParent()).getIsDefinedBy();
-			}
-
 			edu.uiowa.slis.VIVOISF.Person.PersonOrcidIdIterator thePersonOrcidIdIterator = (edu.uiowa.slis.VIVOISF.Person.PersonOrcidIdIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.Person.PersonOrcidIdIterator.class);
 
 			if (subjectURI == null && thePersonOrcidIdIterator != null) {
 				subjectURI = thePersonOrcidIdIterator.getOrcidId();
 			}
 
-			edu.uiowa.slis.VIVOISF.Concept.ConceptIsDefinedByIterator theConceptIsDefinedByIterator = (edu.uiowa.slis.VIVOISF.Concept.ConceptIsDefinedByIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.Concept.ConceptIsDefinedByIterator.class);
-
-			if (subjectURI == null && theConceptIsDefinedByIterator != null) {
-				subjectURI = theConceptIsDefinedByIterator.getIsDefinedBy();
-			}
-
 			if (theThingIterator == null && subjectURI == null) {
 				throw new JspException("subject URI generation currently not supported");
 			} else {
 				ResultSet rs = getResultSet(prefix
-				+ " SELECT ?label  where {"
+				+ " SELECT ?label ?foafName ?rdfValue  where {"
 				+ "  OPTIONAL { <" + subjectURI + "> rdfs:label ?label } "
+				+ "  OPTIONAL { <" + subjectURI + "> <http://xmlns.com/foaf/0.1/name> ?foafName } "
+				+ "  OPTIONAL { <" + subjectURI + "> <http://www.w3.org/1999/02/22-rdf-syntax-ns#value> ?rdfValue } "
 				+ "}");
 				while(rs.hasNext()) {
 					QuerySolution sol = rs.nextSolution();
 					label = sol.get("?label") == null ? null : sol.get("?label").asLiteral().getString();
+					if (label == null)
+						label = sol.get("?foafName") == null ? null : sol.get("?foafName").asLiteral().getString();
+					if (label == null)
+						label = sol.get("?rdfValue") == null ? null : sol.get("?rdfValue").asLiteral().getString();
 				}
 			}
 		} catch (Exception e) {

@@ -48,6 +48,8 @@ public class DateTimeValueDateTimeInverseIterator extends edu.uiowa.slis.VIVOISF
 				QuerySolution sol = rs.nextSolution();
 				dateTimeInverse = sol.get("?s").toString();
 				type = getLocalName(sol.get("?t").toString());
+				if (type == null)
+					continue;
 				if (classFilter == null || (classFilter != null && type != null && classFilter.containsKey(type))) {
 					log.info("instance: " + dateTimeInverse + "	type: " + type);
 					return EVAL_BODY_INCLUDE;

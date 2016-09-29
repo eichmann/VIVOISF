@@ -48,6 +48,8 @@ public class NonAcademicHasCollaboratorIterator extends edu.uiowa.slis.VIVOISF.T
 				QuerySolution sol = rs.nextSolution();
 				hasCollaborator = sol.get("?s").toString();
 				type = getLocalName(sol.get("?t").toString());
+				if (type == null)
+					continue;
 				if (classFilter == null || (classFilter != null && type != null && classFilter.containsKey(type))) {
 					log.info("instance: " + hasCollaborator + "	type: " + type);
 					return EVAL_BODY_INCLUDE;

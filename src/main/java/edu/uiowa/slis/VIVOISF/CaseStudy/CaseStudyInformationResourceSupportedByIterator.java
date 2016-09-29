@@ -48,6 +48,8 @@ public class CaseStudyInformationResourceSupportedByIterator extends edu.uiowa.s
 				QuerySolution sol = rs.nextSolution();
 				informationResourceSupportedBy = sol.get("?s").toString();
 				type = getLocalName(sol.get("?t").toString());
+				if (type == null)
+					continue;
 				if (classFilter == null || (classFilter != null && type != null && classFilter.containsKey(type))) {
 					log.info("instance: " + informationResourceSupportedBy + "	type: " + type);
 					return EVAL_BODY_INCLUDE;

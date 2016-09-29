@@ -48,6 +48,8 @@ public class PatentIAO_0000136Iterator extends edu.uiowa.slis.VIVOISF.TagLibSupp
 				QuerySolution sol = rs.nextSolution();
 				IAO_0000136 = sol.get("?s").toString();
 				type = getLocalName(sol.get("?t").toString());
+				if (type == null)
+					continue;
 				if (classFilter == null || (classFilter != null && type != null && classFilter.containsKey(type))) {
 					log.info("instance: " + IAO_0000136 + "	type: " + type);
 					return EVAL_BODY_INCLUDE;

@@ -48,6 +48,8 @@ public class FacultyMemberERO_0000033Iterator extends edu.uiowa.slis.VIVOISF.Tag
 				QuerySolution sol = rs.nextSolution();
 				ERO_0000033 = sol.get("?s").toString();
 				type = getLocalName(sol.get("?t").toString());
+				if (type == null)
+					continue;
 				if (classFilter == null || (classFilter != null && type != null && classFilter.containsKey(type))) {
 					log.info("instance: " + ERO_0000033 + "	type: " + type);
 					return EVAL_BODY_INCLUDE;

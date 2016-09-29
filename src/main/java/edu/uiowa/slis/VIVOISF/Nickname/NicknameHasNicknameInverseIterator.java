@@ -48,6 +48,8 @@ public class NicknameHasNicknameInverseIterator extends edu.uiowa.slis.VIVOISF.T
 				QuerySolution sol = rs.nextSolution();
 				hasNicknameInverse = sol.get("?s").toString();
 				type = getLocalName(sol.get("?t").toString());
+				if (type == null)
+					continue;
 				if (classFilter == null || (classFilter != null && type != null && classFilter.containsKey(type))) {
 					log.info("instance: " + hasNicknameInverse + "	type: " + type);
 					return EVAL_BODY_INCLUDE;

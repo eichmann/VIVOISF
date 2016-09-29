@@ -48,6 +48,8 @@ public class disputedIsSuccessorOfIterator extends edu.uiowa.slis.VIVOISF.TagLib
 				QuerySolution sol = rs.nextSolution();
 				isSuccessorOf = sol.get("?s").toString();
 				type = getLocalName(sol.get("?t").toString());
+				if (type == null)
+					continue;
 				if (classFilter == null || (classFilter != null && type != null && classFilter.containsKey(type))) {
 					log.info("instance: " + isSuccessorOf + "	type: " + type);
 					return EVAL_BODY_INCLUDE;

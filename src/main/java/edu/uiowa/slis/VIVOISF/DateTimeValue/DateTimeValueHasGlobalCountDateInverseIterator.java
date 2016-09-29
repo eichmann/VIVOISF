@@ -48,6 +48,8 @@ public class DateTimeValueHasGlobalCountDateInverseIterator extends edu.uiowa.sl
 				QuerySolution sol = rs.nextSolution();
 				hasGlobalCountDateInverse = sol.get("?s").toString();
 				type = getLocalName(sol.get("?t").toString());
+				if (type == null)
+					continue;
 				if (classFilter == null || (classFilter != null && type != null && classFilter.containsKey(type))) {
 					log.info("instance: " + hasGlobalCountDateInverse + "	type: " + type);
 					return EVAL_BODY_INCLUDE;

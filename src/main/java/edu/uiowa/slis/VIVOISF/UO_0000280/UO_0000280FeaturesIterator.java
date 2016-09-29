@@ -48,6 +48,8 @@ public class UO_0000280FeaturesIterator extends edu.uiowa.slis.VIVOISF.TagLibSup
 				QuerySolution sol = rs.nextSolution();
 				features = sol.get("?s").toString();
 				type = getLocalName(sol.get("?t").toString());
+				if (type == null)
+					continue;
 				if (classFilter == null || (classFilter != null && type != null && classFilter.containsKey(type))) {
 					log.info("instance: " + features + "	type: " + type);
 					return EVAL_BODY_INCLUDE;

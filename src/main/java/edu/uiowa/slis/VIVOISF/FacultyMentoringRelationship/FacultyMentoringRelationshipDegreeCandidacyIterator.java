@@ -48,6 +48,8 @@ public class FacultyMentoringRelationshipDegreeCandidacyIterator extends edu.uio
 				QuerySolution sol = rs.nextSolution();
 				degreeCandidacy = sol.get("?s").toString();
 				type = getLocalName(sol.get("?t").toString());
+				if (type == null)
+					continue;
 				if (classFilter == null || (classFilter != null && type != null && classFilter.containsKey(type))) {
 					log.info("instance: " + degreeCandidacy + "	type: " + type);
 					return EVAL_BODY_INCLUDE;

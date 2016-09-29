@@ -48,6 +48,8 @@ public class ARG_2000009IAO_0000221Iterator extends edu.uiowa.slis.VIVOISF.TagLi
 				QuerySolution sol = rs.nextSolution();
 				IAO_0000221 = sol.get("?s").toString();
 				type = getLocalName(sol.get("?t").toString());
+				if (type == null)
+					continue;
 				if (classFilter == null || (classFilter != null && type != null && classFilter.containsKey(type))) {
 					log.info("instance: " + IAO_0000221 + "	type: " + type);
 					return EVAL_BODY_INCLUDE;

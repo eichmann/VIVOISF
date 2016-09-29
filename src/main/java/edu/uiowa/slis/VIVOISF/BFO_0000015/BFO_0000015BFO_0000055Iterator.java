@@ -48,6 +48,8 @@ public class BFO_0000015BFO_0000055Iterator extends edu.uiowa.slis.VIVOISF.TagLi
 				QuerySolution sol = rs.nextSolution();
 				BFO_0000055 = sol.get("?s").toString();
 				type = getLocalName(sol.get("?t").toString());
+				if (type == null)
+					continue;
 				if (classFilter == null || (classFilter != null && type != null && classFilter.containsKey(type))) {
 					log.info("instance: " + BFO_0000055 + "	type: " + type);
 					return EVAL_BODY_INCLUDE;

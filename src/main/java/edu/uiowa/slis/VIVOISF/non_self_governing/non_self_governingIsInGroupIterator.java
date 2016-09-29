@@ -48,6 +48,8 @@ public class non_self_governingIsInGroupIterator extends edu.uiowa.slis.VIVOISF.
 				QuerySolution sol = rs.nextSolution();
 				isInGroup = sol.get("?s").toString();
 				type = getLocalName(sol.get("?t").toString());
+				if (type == null)
+					continue;
 				if (classFilter == null || (classFilter != null && type != null && classFilter.containsKey(type))) {
 					log.info("instance: " + isInGroup + "	type: " + type);
 					return EVAL_BODY_INCLUDE;

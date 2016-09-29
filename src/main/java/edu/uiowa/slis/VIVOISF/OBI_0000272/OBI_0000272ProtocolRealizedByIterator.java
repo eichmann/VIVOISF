@@ -48,6 +48,8 @@ public class OBI_0000272ProtocolRealizedByIterator extends edu.uiowa.slis.VIVOIS
 				QuerySolution sol = rs.nextSolution();
 				protocolRealizedBy = sol.get("?s").toString();
 				type = getLocalName(sol.get("?t").toString());
+				if (type == null)
+					continue;
 				if (classFilter == null || (classFilter != null && type != null && classFilter.containsKey(type))) {
 					log.info("instance: " + protocolRealizedBy + "	type: " + type);
 					return EVAL_BODY_INCLUDE;

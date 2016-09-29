@@ -48,6 +48,8 @@ public class PrincipalInvestigatorRoleRO_0000052Iterator extends edu.uiowa.slis.
 				QuerySolution sol = rs.nextSolution();
 				RO_0000052 = sol.get("?s").toString();
 				type = getLocalName(sol.get("?t").toString());
+				if (type == null)
+					continue;
 				if (classFilter == null || (classFilter != null && type != null && classFilter.containsKey(type))) {
 					log.info("instance: " + RO_0000052 + "	type: " + type);
 					return EVAL_BODY_INCLUDE;

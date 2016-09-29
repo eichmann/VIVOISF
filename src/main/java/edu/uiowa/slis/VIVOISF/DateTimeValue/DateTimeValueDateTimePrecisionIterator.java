@@ -48,6 +48,8 @@ public class DateTimeValueDateTimePrecisionIterator extends edu.uiowa.slis.VIVOI
 				QuerySolution sol = rs.nextSolution();
 				dateTimePrecision = sol.get("?s").toString();
 				type = getLocalName(sol.get("?t").toString());
+				if (type == null)
+					continue;
 				if (classFilter == null || (classFilter != null && type != null && classFilter.containsKey(type))) {
 					log.info("instance: " + dateTimePrecision + "	type: " + type);
 					return EVAL_BODY_INCLUDE;

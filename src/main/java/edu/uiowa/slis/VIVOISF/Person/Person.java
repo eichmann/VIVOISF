@@ -329,8 +329,10 @@ public class Person extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 				throw new JspException("subject URI generation currently not supported");
 			} else {
 				ResultSet rs = getResultSet(prefix
-				+ " SELECT ?label  ?teachingOverview ?outreachOverview ?researchOverview ?overview where {"
+				+ " SELECT ?label ?foafName ?rdfValue  ?teachingOverview ?outreachOverview ?researchOverview ?overview where {"
 				+ "  OPTIONAL { <" + subjectURI + "> rdfs:label ?label } "
+				+ "  OPTIONAL { <" + subjectURI + "> <http://xmlns.com/foaf/0.1/name> ?foafName } "
+				+ "  OPTIONAL { <" + subjectURI + "> <http://www.w3.org/1999/02/22-rdf-syntax-ns#value> ?rdfValue } "
 				+ "  OPTIONAL { <" + subjectURI + "> <http://vivoweb.org/ontology/core#teachingOverview> ?teachingOverview } "
 				+ "  OPTIONAL { <" + subjectURI + "> <http://vivoweb.org/ontology/core#outreachOverview> ?outreachOverview } "
 				+ "  OPTIONAL { <" + subjectURI + "> <http://vivoweb.org/ontology/core#researchOverview> ?researchOverview } "
@@ -339,6 +341,10 @@ public class Person extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 				while(rs.hasNext()) {
 					QuerySolution sol = rs.nextSolution();
 					label = sol.get("?label") == null ? null : sol.get("?label").asLiteral().getString();
+					if (label == null)
+						label = sol.get("?foafName") == null ? null : sol.get("?foafName").asLiteral().getString();
+					if (label == null)
+						label = sol.get("?rdfValue") == null ? null : sol.get("?rdfValue").asLiteral().getString();
 					teachingOverview = sol.get("?teachingOverview") == null ? null : sol.get("?teachingOverview").toString();
 					outreachOverview = sol.get("?outreachOverview") == null ? null : sol.get("?outreachOverview").toString();
 					researchOverview = sol.get("?researchOverview") == null ? null : sol.get("?researchOverview").toString();

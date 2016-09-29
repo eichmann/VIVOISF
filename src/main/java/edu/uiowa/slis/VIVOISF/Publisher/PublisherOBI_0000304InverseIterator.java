@@ -48,6 +48,8 @@ public class PublisherOBI_0000304InverseIterator extends edu.uiowa.slis.VIVOISF.
 				QuerySolution sol = rs.nextSolution();
 				OBI_0000304Inverse = sol.get("?s").toString();
 				type = getLocalName(sol.get("?t").toString());
+				if (type == null)
+					continue;
 				if (classFilter == null || (classFilter != null && type != null && classFilter.containsKey(type))) {
 					log.info("instance: " + OBI_0000304Inverse + "	type: " + type);
 					return EVAL_BODY_INCLUDE;

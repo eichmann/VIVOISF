@@ -48,6 +48,8 @@ public class ARG_2000009InformationResourceSupportedByIterator extends edu.uiowa
 				QuerySolution sol = rs.nextSolution();
 				informationResourceSupportedBy = sol.get("?s").toString();
 				type = getLocalName(sol.get("?t").toString());
+				if (type == null)
+					continue;
 				if (classFilter == null || (classFilter != null && type != null && classFilter.containsKey(type))) {
 					log.info("instance: " + informationResourceSupportedBy + "	type: " + type);
 					return EVAL_BODY_INCLUDE;

@@ -48,6 +48,8 @@ public class OrganizationARG_2000029Iterator extends edu.uiowa.slis.VIVOISF.TagL
 				QuerySolution sol = rs.nextSolution();
 				ARG_2000029 = sol.get("?s").toString();
 				type = getLocalName(sol.get("?t").toString());
+				if (type == null)
+					continue;
 				if (classFilter == null || (classFilter != null && type != null && classFilter.containsKey(type))) {
 					log.info("instance: " + ARG_2000029 + "	type: " + type);
 					return EVAL_BODY_INCLUDE;

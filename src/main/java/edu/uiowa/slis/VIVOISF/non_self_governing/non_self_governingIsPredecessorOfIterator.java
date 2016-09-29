@@ -48,6 +48,8 @@ public class non_self_governingIsPredecessorOfIterator extends edu.uiowa.slis.VI
 				QuerySolution sol = rs.nextSolution();
 				isPredecessorOf = sol.get("?s").toString();
 				type = getLocalName(sol.get("?t").toString());
+				if (type == null)
+					continue;
 				if (classFilter == null || (classFilter != null && type != null && classFilter.containsKey(type))) {
 					log.info("instance: " + isPredecessorOf + "	type: " + type);
 					return EVAL_BODY_INCLUDE;

@@ -48,6 +48,8 @@ public class EquipmentRO_0003000Iterator extends edu.uiowa.slis.VIVOISF.TagLibSu
 				QuerySolution sol = rs.nextSolution();
 				RO_0003000 = sol.get("?s").toString();
 				type = getLocalName(sol.get("?t").toString());
+				if (type == null)
+					continue;
 				if (classFilter == null || (classFilter != null && type != null && classFilter.containsKey(type))) {
 					log.info("instance: " + RO_0003000 + "	type: " + type);
 					return EVAL_BODY_INCLUDE;
