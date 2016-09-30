@@ -71,6 +71,8 @@ public class MuseumERO_0000037Iterator extends edu.uiowa.slis.VIVOISF.TagLibSupp
 				QuerySolution sol = rs.nextSolution();
 				ERO_0000037 = sol.get("?s").toString();
 				type = getLocalName(sol.get("?t").toString());
+				if (type == null)
+					continue;
 				if (classFilter == null || (classFilter != null && type != null && classFilter.containsKey(type))) {
 					log.info("instance: " + ERO_0000037 + "	type: " + type);
 					return EVAL_BODY_AGAIN;

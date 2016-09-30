@@ -19,8 +19,8 @@ public class PrivateCompany extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 	String subjectURI = null;
 	String label = null;
 	boolean commitNeeded = false;
-	String overview = null;
 	String abbreviation = null;
+	String overview = null;
 
 	public int doStartTag() throws JspException {
 		currentInstance = this;
@@ -36,13 +36,14 @@ public class PrivateCompany extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 				throw new JspException("subject URI generation currently not supported");
 			} else {
 				ResultSet rs = getResultSet(prefix
-				+ " SELECT ?label ?foafName ?rdfValue  ?overview ?abbreviation ?abbreviation where {"
+				+ " SELECT ?label ?foafName ?schemaName ?rdfValue  ?abbreviation ?abbreviation ?overview where {"
 				+ "  OPTIONAL { <" + subjectURI + "> rdfs:label ?label } "
 				+ "  OPTIONAL { <" + subjectURI + "> <http://xmlns.com/foaf/0.1/name> ?foafName } "
+				+ "  OPTIONAL { <" + subjectURI + "> <http://schema.org/name> ?schemaName } "
 				+ "  OPTIONAL { <" + subjectURI + "> <http://www.w3.org/1999/02/22-rdf-syntax-ns#value> ?rdfValue } "
+				+ "  OPTIONAL { <" + subjectURI + "> <http://vivoweb.org/ontology/core#abbreviation> ?abbreviation } "
+				+ "  OPTIONAL { <" + subjectURI + "> <http://vivoweb.org/ontology/core#abbreviation> ?abbreviation } "
 				+ "  OPTIONAL { <" + subjectURI + "> <http://vivoweb.org/ontology/core#overview> ?overview } "
-				+ "  OPTIONAL { <" + subjectURI + "> <http://vivoweb.org/ontology/core#abbreviation> ?abbreviation } "
-				+ "  OPTIONAL { <" + subjectURI + "> <http://vivoweb.org/ontology/core#abbreviation> ?abbreviation } "
 				+ "}");
 				while(rs.hasNext()) {
 					QuerySolution sol = rs.nextSolution();
@@ -50,10 +51,12 @@ public class PrivateCompany extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 					if (label == null)
 						label = sol.get("?foafName") == null ? null : sol.get("?foafName").asLiteral().getString();
 					if (label == null)
+						label = sol.get("?schemaName") == null ? null : sol.get("?schemaName").asLiteral().getString();
+					if (label == null)
 						label = sol.get("?rdfValue") == null ? null : sol.get("?rdfValue").asLiteral().getString();
+					abbreviation = sol.get("?abbreviation") == null ? null : sol.get("?abbreviation").toString();
+					abbreviation = sol.get("?abbreviation") == null ? null : sol.get("?abbreviation").toString();
 					overview = sol.get("?overview") == null ? null : sol.get("?overview").toString();
-					abbreviation = sol.get("?abbreviation") == null ? null : sol.get("?abbreviation").toString();
-					abbreviation = sol.get("?abbreviation") == null ? null : sol.get("?abbreviation").toString();
 				}
 			}
 		} catch (Exception e) {
@@ -101,20 +104,20 @@ public class PrivateCompany extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 		return label;
 	}
 
-	public void setOverview(String overview) {
-		this.overview = overview;
-	}
-
-	public String getOverview() {
-		return overview;
-	}
-
 	public void setAbbreviation(String abbreviation) {
 		this.abbreviation = abbreviation;
 	}
 
 	public String getAbbreviation() {
 		return abbreviation;
+	}
+
+	public void setOverview(String overview) {
+		this.overview = overview;
+	}
+
+	public String getOverview() {
+		return overview;
 	}
 
 }

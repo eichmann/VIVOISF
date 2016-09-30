@@ -71,6 +71,8 @@ public class GlobalCitationCountIAO_0000221Iterator extends edu.uiowa.slis.VIVOI
 				QuerySolution sol = rs.nextSolution();
 				IAO_0000221 = sol.get("?s").toString();
 				type = getLocalName(sol.get("?t").toString());
+				if (type == null)
+					continue;
 				if (classFilter == null || (classFilter != null && type != null && classFilter.containsKey(type))) {
 					log.info("instance: " + IAO_0000221 + "	type: " + type);
 					return EVAL_BODY_AGAIN;

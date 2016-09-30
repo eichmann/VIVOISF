@@ -71,6 +71,8 @@ public class CourtReporterRO_0002353Iterator extends edu.uiowa.slis.VIVOISF.TagL
 				QuerySolution sol = rs.nextSolution();
 				RO_0002353 = sol.get("?s").toString();
 				type = getLocalName(sol.get("?t").toString());
+				if (type == null)
+					continue;
 				if (classFilter == null || (classFilter != null && type != null && classFilter.containsKey(type))) {
 					log.info("instance: " + RO_0002353 + "	type: " + type);
 					return EVAL_BODY_AGAIN;

@@ -71,6 +71,8 @@ public class OrganizationHasURLIterator extends edu.uiowa.slis.VIVOISF.TagLibSup
 				QuerySolution sol = rs.nextSolution();
 				hasURL = sol.get("?s").toString();
 				type = getLocalName(sol.get("?t").toString());
+				if (type == null)
+					continue;
 				if (classFilter == null || (classFilter != null && type != null && classFilter.containsKey(type))) {
 					log.info("instance: " + hasURL + "	type: " + type);
 					return EVAL_BODY_AGAIN;

@@ -71,6 +71,8 @@ public class DocumentHasTranslationIterator extends edu.uiowa.slis.VIVOISF.TagLi
 				QuerySolution sol = rs.nextSolution();
 				hasTranslation = sol.get("?s").toString();
 				type = getLocalName(sol.get("?t").toString());
+				if (type == null)
+					continue;
 				if (classFilter == null || (classFilter != null && type != null && classFilter.containsKey(type))) {
 					log.info("instance: " + hasTranslation + "	type: " + type);
 					return EVAL_BODY_AGAIN;

@@ -71,6 +71,8 @@ public class geographical_regionOrcidIdInverseIterator extends edu.uiowa.slis.VI
 				QuerySolution sol = rs.nextSolution();
 				orcidIdInverse = sol.get("?s").toString();
 				type = getLocalName(sol.get("?t").toString());
+				if (type == null)
+					continue;
 				if (classFilter == null || (classFilter != null && type != null && classFilter.containsKey(type))) {
 					log.info("instance: " + orcidIdInverse + "	type: " + type);
 					return EVAL_BODY_AGAIN;

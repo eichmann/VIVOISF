@@ -71,6 +71,8 @@ public class ERO_0000006RO_0003001Iterator extends edu.uiowa.slis.VIVOISF.TagLib
 				QuerySolution sol = rs.nextSolution();
 				RO_0003001 = sol.get("?s").toString();
 				type = getLocalName(sol.get("?t").toString());
+				if (type == null)
+					continue;
 				if (classFilter == null || (classFilter != null && type != null && classFilter.containsKey(type))) {
 					log.info("instance: " + RO_0003001 + "	type: " + type);
 					return EVAL_BODY_AGAIN;

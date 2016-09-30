@@ -52,9 +52,10 @@ public class Patent extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 				throw new JspException("subject URI generation currently not supported");
 			} else {
 				ResultSet rs = getResultSet(prefix
-				+ " SELECT ?label ?foafName ?rdfValue  ?patentNumber where {"
+				+ " SELECT ?label ?foafName ?schemaName ?rdfValue  ?patentNumber where {"
 				+ "  OPTIONAL { <" + subjectURI + "> rdfs:label ?label } "
 				+ "  OPTIONAL { <" + subjectURI + "> <http://xmlns.com/foaf/0.1/name> ?foafName } "
+				+ "  OPTIONAL { <" + subjectURI + "> <http://schema.org/name> ?schemaName } "
 				+ "  OPTIONAL { <" + subjectURI + "> <http://www.w3.org/1999/02/22-rdf-syntax-ns#value> ?rdfValue } "
 				+ "  OPTIONAL { <" + subjectURI + "> <http://vivoweb.org/ontology/core#patentNumber> ?patentNumber } "
 				+ "}");
@@ -63,6 +64,8 @@ public class Patent extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 					label = sol.get("?label") == null ? null : sol.get("?label").asLiteral().getString();
 					if (label == null)
 						label = sol.get("?foafName") == null ? null : sol.get("?foafName").asLiteral().getString();
+					if (label == null)
+						label = sol.get("?schemaName") == null ? null : sol.get("?schemaName").asLiteral().getString();
 					if (label == null)
 						label = sol.get("?rdfValue") == null ? null : sol.get("?rdfValue").asLiteral().getString();
 					patentNumber = sol.get("?patentNumber") == null ? null : sol.get("?patentNumber").toString();

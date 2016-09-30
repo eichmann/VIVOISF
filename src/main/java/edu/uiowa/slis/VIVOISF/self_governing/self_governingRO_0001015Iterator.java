@@ -71,6 +71,8 @@ public class self_governingRO_0001015Iterator extends edu.uiowa.slis.VIVOISF.Tag
 				QuerySolution sol = rs.nextSolution();
 				RO_0001015 = sol.get("?s").toString();
 				type = getLocalName(sol.get("?t").toString());
+				if (type == null)
+					continue;
 				if (classFilter == null || (classFilter != null && type != null && classFilter.containsKey(type))) {
 					log.info("instance: " + RO_0001015 + "	type: " + type);
 					return EVAL_BODY_AGAIN;

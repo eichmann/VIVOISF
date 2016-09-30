@@ -71,6 +71,8 @@ public class LibrarianRO_0001025Iterator extends edu.uiowa.slis.VIVOISF.TagLibSu
 				QuerySolution sol = rs.nextSolution();
 				RO_0001025 = sol.get("?s").toString();
 				type = getLocalName(sol.get("?t").toString());
+				if (type == null)
+					continue;
 				if (classFilter == null || (classFilter != null && type != null && classFilter.containsKey(type))) {
 					log.info("instance: " + RO_0001025 + "	type: " + type);
 					return EVAL_BODY_AGAIN;

@@ -71,6 +71,8 @@ public class TimeZoneHasGeoIterator extends edu.uiowa.slis.VIVOISF.TagLibSupport
 				QuerySolution sol = rs.nextSolution();
 				hasGeo = sol.get("?s").toString();
 				type = getLocalName(sol.get("?t").toString());
+				if (type == null)
+					continue;
 				if (classFilter == null || (classFilter != null && type != null && classFilter.containsKey(type))) {
 					log.info("instance: " + hasGeo + "	type: " + type);
 					return EVAL_BODY_AGAIN;

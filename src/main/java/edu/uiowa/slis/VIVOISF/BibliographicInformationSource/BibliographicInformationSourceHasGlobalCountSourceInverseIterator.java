@@ -71,6 +71,8 @@ public class BibliographicInformationSourceHasGlobalCountSourceInverseIterator e
 				QuerySolution sol = rs.nextSolution();
 				hasGlobalCountSourceInverse = sol.get("?s").toString();
 				type = getLocalName(sol.get("?t").toString());
+				if (type == null)
+					continue;
 				if (classFilter == null || (classFilter != null && type != null && classFilter.containsKey(type))) {
 					log.info("instance: " + hasGlobalCountSourceInverse + "	type: " + type);
 					return EVAL_BODY_AGAIN;

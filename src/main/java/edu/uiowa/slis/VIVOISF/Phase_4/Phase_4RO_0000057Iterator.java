@@ -71,6 +71,8 @@ public class Phase_4RO_0000057Iterator extends edu.uiowa.slis.VIVOISF.TagLibSupp
 				QuerySolution sol = rs.nextSolution();
 				RO_0000057 = sol.get("?s").toString();
 				type = getLocalName(sol.get("?t").toString());
+				if (type == null)
+					continue;
 				if (classFilter == null || (classFilter != null && type != null && classFilter.containsKey(type))) {
 					log.info("instance: " + RO_0000057 + "	type: " + type);
 					return EVAL_BODY_AGAIN;

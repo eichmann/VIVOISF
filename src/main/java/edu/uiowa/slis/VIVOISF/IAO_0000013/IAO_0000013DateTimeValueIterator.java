@@ -71,6 +71,8 @@ public class IAO_0000013DateTimeValueIterator extends edu.uiowa.slis.VIVOISF.Tag
 				QuerySolution sol = rs.nextSolution();
 				dateTimeValue = sol.get("?s").toString();
 				type = getLocalName(sol.get("?t").toString());
+				if (type == null)
+					continue;
 				if (classFilter == null || (classFilter != null && type != null && classFilter.containsKey(type))) {
 					log.info("instance: " + dateTimeValue + "	type: " + type);
 					return EVAL_BODY_AGAIN;

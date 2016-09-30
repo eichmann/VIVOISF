@@ -71,6 +71,8 @@ public class IAO_0000005OBI_0000833Iterator extends edu.uiowa.slis.VIVOISF.TagLi
 				QuerySolution sol = rs.nextSolution();
 				OBI_0000833 = sol.get("?s").toString();
 				type = getLocalName(sol.get("?t").toString());
+				if (type == null)
+					continue;
 				if (classFilter == null || (classFilter != null && type != null && classFilter.containsKey(type))) {
 					log.info("instance: " + OBI_0000833 + "	type: " + type);
 					return EVAL_BODY_AGAIN;

@@ -71,6 +71,8 @@ public class LaboratoryERO_0000397Iterator extends edu.uiowa.slis.VIVOISF.TagLib
 				QuerySolution sol = rs.nextSolution();
 				ERO_0000397 = sol.get("?s").toString();
 				type = getLocalName(sol.get("?t").toString());
+				if (type == null)
+					continue;
 				if (classFilter == null || (classFilter != null && type != null && classFilter.containsKey(type))) {
 					log.info("instance: " + ERO_0000397 + "	type: " + type);
 					return EVAL_BODY_AGAIN;

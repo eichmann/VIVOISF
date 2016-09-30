@@ -71,6 +71,8 @@ public class UO_0000280IAO_0000039InverseIterator extends edu.uiowa.slis.VIVOISF
 				QuerySolution sol = rs.nextSolution();
 				IAO_0000039Inverse = sol.get("?s").toString();
 				type = getLocalName(sol.get("?t").toString());
+				if (type == null)
+					continue;
 				if (classFilter == null || (classFilter != null && type != null && classFilter.containsKey(type))) {
 					log.info("instance: " + IAO_0000039Inverse + "	type: " + type);
 					return EVAL_BODY_AGAIN;

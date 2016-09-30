@@ -71,6 +71,8 @@ public class CredentialResearchAreaOfIterator extends edu.uiowa.slis.VIVOISF.Tag
 				QuerySolution sol = rs.nextSolution();
 				researchAreaOf = sol.get("?s").toString();
 				type = getLocalName(sol.get("?t").toString());
+				if (type == null)
+					continue;
 				if (classFilter == null || (classFilter != null && type != null && classFilter.containsKey(type))) {
 					log.info("instance: " + researchAreaOf + "	type: " + type);
 					return EVAL_BODY_AGAIN;

@@ -71,6 +71,8 @@ public class BibliographicInformationSourceERO_0000034Iterator extends edu.uiowa
 				QuerySolution sol = rs.nextSolution();
 				ERO_0000034 = sol.get("?s").toString();
 				type = getLocalName(sol.get("?t").toString());
+				if (type == null)
+					continue;
 				if (classFilter == null || (classFilter != null && type != null && classFilter.containsKey(type))) {
 					log.info("instance: " + ERO_0000034 + "	type: " + type);
 					return EVAL_BODY_AGAIN;

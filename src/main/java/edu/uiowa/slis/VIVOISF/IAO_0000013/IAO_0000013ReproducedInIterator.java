@@ -71,6 +71,8 @@ public class IAO_0000013ReproducedInIterator extends edu.uiowa.slis.VIVOISF.TagL
 				QuerySolution sol = rs.nextSolution();
 				reproducedIn = sol.get("?s").toString();
 				type = getLocalName(sol.get("?t").toString());
+				if (type == null)
+					continue;
 				if (classFilter == null || (classFilter != null && type != null && classFilter.containsKey(type))) {
 					log.info("instance: " + reproducedIn + "	type: " + type);
 					return EVAL_BODY_AGAIN;

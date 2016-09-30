@@ -71,6 +71,8 @@ public class GeopoliticalEntityValidInInverseIterator extends edu.uiowa.slis.VIV
 				QuerySolution sol = rs.nextSolution();
 				validInInverse = sol.get("?s").toString();
 				type = getLocalName(sol.get("?t").toString());
+				if (type == null)
+					continue;
 				if (classFilter == null || (classFilter != null && type != null && classFilter.containsKey(type))) {
 					log.info("instance: " + validInInverse + "	type: " + type);
 					return EVAL_BODY_AGAIN;

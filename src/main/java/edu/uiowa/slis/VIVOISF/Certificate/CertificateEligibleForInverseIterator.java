@@ -71,6 +71,8 @@ public class CertificateEligibleForInverseIterator extends edu.uiowa.slis.VIVOIS
 				QuerySolution sol = rs.nextSolution();
 				eligibleForInverse = sol.get("?s").toString();
 				type = getLocalName(sol.get("?t").toString());
+				if (type == null)
+					continue;
 				if (classFilter == null || (classFilter != null && type != null && classFilter.containsKey(type))) {
 					log.info("instance: " + eligibleForInverse + "	type: " + type);
 					return EVAL_BODY_AGAIN;

@@ -71,6 +71,8 @@ public class TitleHasTitleInverseIterator extends edu.uiowa.slis.VIVOISF.TagLibS
 				QuerySolution sol = rs.nextSolution();
 				hasTitleInverse = sol.get("?s").toString();
 				type = getLocalName(sol.get("?t").toString());
+				if (type == null)
+					continue;
 				if (classFilter == null || (classFilter != null && type != null && classFilter.containsKey(type))) {
 					log.info("instance: " + hasTitleInverse + "	type: " + type);
 					return EVAL_BODY_AGAIN;

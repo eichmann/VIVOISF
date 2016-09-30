@@ -71,6 +71,8 @@ public class CertificateRelatedInverseIterator extends edu.uiowa.slis.VIVOISF.Ta
 				QuerySolution sol = rs.nextSolution();
 				relatedInverse = sol.get("?s").toString();
 				type = getLocalName(sol.get("?t").toString());
+				if (type == null)
+					continue;
 				if (classFilter == null || (classFilter != null && type != null && classFilter.containsKey(type))) {
 					log.info("instance: " + relatedInverse + "	type: " + type);
 					return EVAL_BODY_AGAIN;

@@ -71,6 +71,8 @@ public class IndividualHasAddressIterator extends edu.uiowa.slis.VIVOISF.TagLibS
 				QuerySolution sol = rs.nextSolution();
 				hasAddress = sol.get("?s").toString();
 				type = getLocalName(sol.get("?t").toString());
+				if (type == null)
+					continue;
 				if (classFilter == null || (classFilter != null && type != null && classFilter.containsKey(type))) {
 					log.info("instance: " + hasAddress + "	type: " + type);
 					return EVAL_BODY_AGAIN;

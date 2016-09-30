@@ -71,6 +71,8 @@ public class FundingOrganizationProvidesFundingThroughIterator extends edu.uiowa
 				QuerySolution sol = rs.nextSolution();
 				providesFundingThrough = sol.get("?s").toString();
 				type = getLocalName(sol.get("?t").toString());
+				if (type == null)
+					continue;
 				if (classFilter == null || (classFilter != null && type != null && classFilter.containsKey(type))) {
 					log.info("instance: " + providesFundingThrough + "	type: " + type);
 					return EVAL_BODY_AGAIN;

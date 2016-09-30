@@ -71,6 +71,8 @@ public class AudioDocumentDocumentationForIterator extends edu.uiowa.slis.VIVOIS
 				QuerySolution sol = rs.nextSolution();
 				documentationFor = sol.get("?s").toString();
 				type = getLocalName(sol.get("?t").toString());
+				if (type == null)
+					continue;
 				if (classFilter == null || (classFilter != null && type != null && classFilter.containsKey(type))) {
 					log.info("instance: " + documentationFor + "	type: " + type);
 					return EVAL_BODY_AGAIN;

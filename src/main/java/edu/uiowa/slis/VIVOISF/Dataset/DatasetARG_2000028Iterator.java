@@ -71,6 +71,8 @@ public class DatasetARG_2000028Iterator extends edu.uiowa.slis.VIVOISF.TagLibSup
 				QuerySolution sol = rs.nextSolution();
 				ARG_2000028 = sol.get("?s").toString();
 				type = getLocalName(sol.get("?t").toString());
+				if (type == null)
+					continue;
 				if (classFilter == null || (classFilter != null && type != null && classFilter.containsKey(type))) {
 					log.info("instance: " + ARG_2000028 + "	type: " + type);
 					return EVAL_BODY_AGAIN;

@@ -48,7 +48,9 @@ public class Phase3ClinicalTrialERO_0001518Iterator extends edu.uiowa.slis.VIVOI
 				QuerySolution sol = rs.nextSolution();
 				ERO_0001518 = sol.get("?s").toString();
 				type = getLocalName(sol.get("?t").toString());
-				if (classFilter == null || (classFilter != null && classFilter.containsKey(type))) {
+				if (type == null)
+					continue;
+				if (classFilter == null || (classFilter != null && type != null && classFilter.containsKey(type))) {
 					log.info("instance: " + ERO_0001518 + "	type: " + type);
 					return EVAL_BODY_INCLUDE;
 				}
@@ -69,6 +71,8 @@ public class Phase3ClinicalTrialERO_0001518Iterator extends edu.uiowa.slis.VIVOI
 				QuerySolution sol = rs.nextSolution();
 				ERO_0001518 = sol.get("?s").toString();
 				type = getLocalName(sol.get("?t").toString());
+				if (type == null)
+					continue;
 				if (classFilter == null || (classFilter != null && type != null && classFilter.containsKey(type))) {
 					log.info("instance: " + ERO_0001518 + "	type: " + type);
 					return EVAL_BODY_AGAIN;

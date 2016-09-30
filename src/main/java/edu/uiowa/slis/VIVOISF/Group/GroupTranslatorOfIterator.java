@@ -71,6 +71,8 @@ public class GroupTranslatorOfIterator extends edu.uiowa.slis.VIVOISF.TagLibSupp
 				QuerySolution sol = rs.nextSolution();
 				translatorOf = sol.get("?s").toString();
 				type = getLocalName(sol.get("?t").toString());
+				if (type == null)
+					continue;
 				if (classFilter == null || (classFilter != null && type != null && classFilter.containsKey(type))) {
 					log.info("instance: " + translatorOf + "	type: " + type);
 					return EVAL_BODY_AGAIN;
