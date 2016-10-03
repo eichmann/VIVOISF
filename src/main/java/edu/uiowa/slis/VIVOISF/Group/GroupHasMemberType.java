@@ -1,4 +1,4 @@
-package edu.uiowa.slis.VIVOISF.group;
+package edu.uiowa.slis.VIVOISF.Group;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -7,19 +7,19 @@ import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspTagException;
 
 @SuppressWarnings("serial")
-public class groupHasMemberType extends edu.uiowa.slis.VIVOISF.TagLibSupport {
-	static groupHasMemberType currentInstance = null;
-	private static final Log log = LogFactory.getLog(groupHasMemberType.class);
+public class GroupHasMemberType extends edu.uiowa.slis.VIVOISF.TagLibSupport {
+	static GroupHasMemberType currentInstance = null;
+	private static final Log log = LogFactory.getLog(GroupHasMemberType.class);
 
 	// object property
 
 	public int doStartTag() throws JspException {
 		try {
-			groupHasMemberIterator thegroupHasMemberIterator = (groupHasMemberIterator)findAncestorWithClass(this, groupHasMemberIterator.class);
-			pageContext.getOut().print(thegroupHasMemberIterator.getType());
+			GroupHasMemberIterator theGroupHasMemberIterator = (GroupHasMemberIterator)findAncestorWithClass(this, GroupHasMemberIterator.class);
+			pageContext.getOut().print(theGroupHasMemberIterator.getType());
 		} catch (Exception e) {
-			log.error("Can't find enclosing group for hasMember tag ", e);
-			throw new JspTagException("Error: Can't find enclosing group for hasMember tag ");
+			log.error("Can't find enclosing Group for hasMember tag ", e);
+			throw new JspTagException("Error: Can't find enclosing Group for hasMember tag ");
 		}
 		return SKIP_BODY;
 	}

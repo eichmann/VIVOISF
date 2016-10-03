@@ -20,6 +20,9 @@ public class Performance extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 	String label = null;
 	boolean commitNeeded = false;
 
+	// functional datatype properties, both local and inherited
+
+
 	public int doStartTag() throws JspException {
 		currentInstance = this;
 		try {
@@ -28,6 +31,10 @@ public class Performance extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 			if (thePerformanceIterator != null) {
 				subjectURI = thePerformanceIterator.getSubjectURI();
 				label = thePerformanceIterator.getLabel();
+			}
+
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.Agent.AgentPerformerInverseIterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.Agent.AgentPerformerInverseIterator)this.getParent()).getPerformerInverse();
 			}
 
 			if (thePerformanceIterator == null && subjectURI == null) {

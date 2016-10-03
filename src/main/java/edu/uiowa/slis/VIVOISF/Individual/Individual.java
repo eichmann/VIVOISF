@@ -33,6 +33,10 @@ public class Individual extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 				label = theIndividualIterator.getLabel();
 			}
 
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.Group.GroupHasMemberIterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.Group.GroupHasMemberIterator)this.getParent()).getHasMember();
+			}
+
 			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.Authorship.AuthorshipRelatesIterator) {
 				subjectURI = ((edu.uiowa.slis.VIVOISF.Authorship.AuthorshipRelatesIterator)this.getParent()).getRelates();
 			}
@@ -135,6 +139,12 @@ public class Individual extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 
 			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.URL.URLHasURLInverseIterator) {
 				subjectURI = ((edu.uiowa.slis.VIVOISF.URL.URLHasURLInverseIterator)this.getParent()).getHasURLInverse();
+			}
+
+			edu.uiowa.slis.VIVOISF.Group.GroupHasMemberIterator theGroupHasMemberIterator = (edu.uiowa.slis.VIVOISF.Group.GroupHasMemberIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.Group.GroupHasMemberIterator.class);
+
+			if (subjectURI == null && theGroupHasMemberIterator != null) {
+				subjectURI = theGroupHasMemberIterator.getHasMember();
 			}
 
 			edu.uiowa.slis.VIVOISF.Authorship.AuthorshipRelatesIterator theAuthorshipRelatesIterator = (edu.uiowa.slis.VIVOISF.Authorship.AuthorshipRelatesIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.Authorship.AuthorshipRelatesIterator.class);

@@ -1,4 +1,4 @@
-package edu.uiowa.slis.VIVOISF.group;
+package edu.uiowa.slis.VIVOISF.Group;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -10,48 +10,37 @@ import org.apache.jena.query.QuerySolution;
 import org.apache.jena.query.ResultSet;
 
 @SuppressWarnings("serial")
-public class group extends edu.uiowa.slis.VIVOISF.TagLibSupport {
-	static group currentInstance = null;
-	private static final Log log = LogFactory.getLog(group.class);
+public class Group extends edu.uiowa.slis.VIVOISF.TagLibSupport {
+	static Group currentInstance = null;
+	private static final Log log = LogFactory.getLog(Group.class);
 
 	// 'standard' properties
 
 	String subjectURI = null;
 	String label = null;
 	boolean commitNeeded = false;
-
-	// functional datatype properties, both local and inherited
-
+	String overview = null;
 
 	public int doStartTag() throws JspException {
 		currentInstance = this;
 		try {
-			groupIterator thegroupIterator = (groupIterator) findAncestorWithClass(this, groupIterator.class);
+			GroupIterator theGroupIterator = (GroupIterator) findAncestorWithClass(this, GroupIterator.class);
 
-			if (thegroupIterator != null) {
-				subjectURI = thegroupIterator.getSubjectURI();
-				label = thegroupIterator.getLabel();
+			if (theGroupIterator != null) {
+				subjectURI = theGroupIterator.getSubjectURI();
+				label = theGroupIterator.getLabel();
 			}
 
-			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.territory.territoryIsInGroupIterator) {
-				subjectURI = ((edu.uiowa.slis.VIVOISF.territory.territoryIsInGroupIterator)this.getParent()).getIsInGroup();
-			}
-
-			edu.uiowa.slis.VIVOISF.territory.territoryIsInGroupIterator theterritoryIsInGroupIterator = (edu.uiowa.slis.VIVOISF.territory.territoryIsInGroupIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.territory.territoryIsInGroupIterator.class);
-
-			if (subjectURI == null && theterritoryIsInGroupIterator != null) {
-				subjectURI = theterritoryIsInGroupIterator.getIsInGroup();
-			}
-
-			if (thegroupIterator == null && subjectURI == null) {
+			if (theGroupIterator == null && subjectURI == null) {
 				throw new JspException("subject URI generation currently not supported");
 			} else {
 				ResultSet rs = getResultSet(prefix
-				+ " SELECT ?label ?foafName ?schemaName ?rdfValue  where {"
+				+ " SELECT ?label ?foafName ?schemaName ?rdfValue  ?overview where {"
 				+ "  OPTIONAL { <" + subjectURI + "> rdfs:label ?label } "
 				+ "  OPTIONAL { <" + subjectURI + "> <http://xmlns.com/foaf/0.1/name> ?foafName } "
 				+ "  OPTIONAL { <" + subjectURI + "> <http://schema.org/name> ?schemaName } "
 				+ "  OPTIONAL { <" + subjectURI + "> <http://www.w3.org/1999/02/22-rdf-syntax-ns#value> ?rdfValue } "
+				+ "  OPTIONAL { <" + subjectURI + "> <http://vivoweb.org/ontology/core#overview> ?overview } "
 				+ "}");
 				while(rs.hasNext()) {
 					QuerySolution sol = rs.nextSolution();
@@ -62,11 +51,12 @@ public class group extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 						label = sol.get("?schemaName") == null ? null : sol.get("?schemaName").asLiteral().getString();
 					if (label == null)
 						label = sol.get("?rdfValue") == null ? null : sol.get("?rdfValue").asLiteral().getString();
+					overview = sol.get("?overview") == null ? null : sol.get("?overview").toString();
 				}
 			}
 		} catch (Exception e) {
-			log.error("Exception raised in group doStartTag", e);
-			throw new JspTagException("Exception raised in group doStartTag");
+			log.error("Exception raised in Group doStartTag", e);
+			throw new JspTagException("Exception raised in Group doStartTag");
 		} finally {
 			freeConnection();
 		}
@@ -79,8 +69,8 @@ public class group extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 		try {
 			// do processing
 		} catch (Exception e) {
-			log.error("Exception raised in group doEndTag", e);
-			throw new JspTagException("Exception raised in group doEndTag");
+			log.error("Exception raised in Group doEndTag", e);
+			throw new JspTagException("Exception raised in Group doEndTag");
 		} finally {
 			clearServiceState();
 			freeConnection();
@@ -107,6 +97,14 @@ public class group extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 
 	public String getLabel() {
 		return label;
+	}
+
+	public void setOverview(String overview) {
+		this.overview = overview;
+	}
+
+	public String getOverview() {
+		return overview;
 	}
 
 }

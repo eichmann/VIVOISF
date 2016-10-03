@@ -23,7 +23,7 @@ public class CollectionIterator extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 		try {
 			rs = getResultSet(prefix+
 					" SELECT ?s ?l where { "+
-						"?s rdf:type <http://purl.org/ontology/bibo/Collection> . "+
+						"?s rdf:type <http://www.w3.org/2008/05/skos#Collection> . "+
 					"  OPTIONAL { ?s rdfs:label ?l } "+
 					"} ORDER BY ?l");
 			if(rs.hasNext()) {

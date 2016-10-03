@@ -23,7 +23,7 @@ public class VideoIterator extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 		try {
 			rs = getResultSet(prefix+
 					" SELECT ?s ?l where { "+
-						"?s rdf:type <http://www.w3.org/2006/vcard/ns#Video> . "+
+						"?s rdf:type <http://vivoweb.org/ontology/core#Video> . "+
 					"  OPTIONAL { ?s rdfs:label ?l } "+
 					"} ORDER BY ?l");
 			if(rs.hasNext()) {

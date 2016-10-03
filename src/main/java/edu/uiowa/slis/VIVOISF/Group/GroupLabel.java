@@ -1,4 +1,4 @@
-package edu.uiowa.slis.VIVOISF.group;
+package edu.uiowa.slis.VIVOISF.Group;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -7,42 +7,42 @@ import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspTagException;
 
 @SuppressWarnings("serial")
-public class groupLabel extends edu.uiowa.slis.VIVOISF.TagLibSupport {
-	static groupLabel currentInstance = null;
-	private static final Log log = LogFactory.getLog(groupLabel.class);
+public class GroupLabel extends edu.uiowa.slis.VIVOISF.TagLibSupport {
+	static GroupLabel currentInstance = null;
+	private static final Log log = LogFactory.getLog(GroupLabel.class);
 
 	// functional property
 
 	public int doStartTag() throws JspException {
 		try {
-			group thegroup = (group)findAncestorWithClass(this, group.class);
-			if (!thegroup.commitNeeded) {
-				pageContext.getOut().print(thegroup.getLabel());
+			Group theGroup = (Group)findAncestorWithClass(this, Group.class);
+			if (!theGroup.commitNeeded) {
+				pageContext.getOut().print(theGroup.getLabel());
 			}
 		} catch (Exception e) {
-			log.error("Can't find enclosing group for label tag ", e);
-			throw new JspTagException("Error: Can't find enclosing group for label tag ");
+			log.error("Can't find enclosing Group for label tag ", e);
+			throw new JspTagException("Error: Can't find enclosing Group for label tag ");
 		}
 		return SKIP_BODY;
 	}
 
 	public String getLabel() throws JspTagException {
 		try {
-			group thegroup = (group)findAncestorWithClass(this, group.class);
-			return thegroup.getLabel();
+			Group theGroup = (Group)findAncestorWithClass(this, Group.class);
+			return theGroup.getLabel();
 		} catch (Exception e) {
-			log.error(" Can't find enclosing group for label tag ", e);
-			throw new JspTagException("Error: Can't find enclosing group for label tag ");
+			log.error(" Can't find enclosing Group for label tag ", e);
+			throw new JspTagException("Error: Can't find enclosing Group for label tag ");
 		}
 	}
 
 	public void setLabel(String label) throws JspTagException {
 		try {
-			group thegroup = (group)findAncestorWithClass(this, group.class);
-			thegroup.setLabel(label);
+			Group theGroup = (Group)findAncestorWithClass(this, Group.class);
+			theGroup.setLabel(label);
 		} catch (Exception e) {
-			log.error("Can't find enclosing group for label tag ", e);
-			throw new JspTagException("Error: Can't find enclosing group for label tag ");
+			log.error("Can't find enclosing Group for label tag ", e);
+			throw new JspTagException("Error: Can't find enclosing Group for label tag ");
 		}
 	}
 }

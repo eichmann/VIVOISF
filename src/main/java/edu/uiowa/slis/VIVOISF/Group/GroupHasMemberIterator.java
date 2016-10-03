@@ -1,4 +1,4 @@
-package edu.uiowa.slis.VIVOISF.group;
+package edu.uiowa.slis.VIVOISF.Group;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -12,9 +12,9 @@ import org.apache.jena.query.ResultSet;
 import java.util.Hashtable;
 
 @SuppressWarnings("serial")
-public class groupHasMemberIterator extends edu.uiowa.slis.VIVOISF.TagLibSupport {
-	static groupHasMemberIterator currentInstance = null;
-	private static final Log log = LogFactory.getLog(groupHasMemberIterator.class);
+public class GroupHasMemberIterator extends edu.uiowa.slis.VIVOISF.TagLibSupport {
+	static GroupHasMemberIterator currentInstance = null;
+	private static final Log log = LogFactory.getLog(GroupHasMemberIterator.class);
 
 	String subjectURI = null;
 	String type = null;
@@ -25,18 +25,18 @@ public class groupHasMemberIterator extends edu.uiowa.slis.VIVOISF.TagLibSupport
 	public int doStartTag() throws JspException {
 		currentInstance = this;
 		try {
-			group thegroup = (group) findAncestorWithClass(this, group.class);
+			Group theGroup = (Group) findAncestorWithClass(this, Group.class);
 
-			if (thegroup != null) {
-				subjectURI = thegroup.getSubjectURI();
+			if (theGroup != null) {
+				subjectURI = theGroup.getSubjectURI();
 			}
 
-			if (thegroup == null && subjectURI == null) {
+			if (theGroup == null && subjectURI == null) {
 				throw new JspException("subject URI generation currently not supported");
 			}
 
 			rs = getResultSet(prefix+"SELECT ?s ?t where {"
-					+" <" + subjectURI + "> <http://aims.fao.org/aos/geopolitical.owl#hasMember> ?s . "
+					+" <" + subjectURI + "> <http://www.w3.org/2006/vcard/ns#hasMember> ?s . "
 					+" ?s <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?t ."
 					+" FILTER NOT EXISTS {"
 					+"   ?s <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?subtype ."
@@ -56,10 +56,10 @@ public class groupHasMemberIterator extends edu.uiowa.slis.VIVOISF.TagLibSupport
 				}
 			}
 		} catch (Exception e) {
-			log.error("Exception raised in groupHasMemberIterator doStartTag", e);
+			log.error("Exception raised in GroupHasMemberIterator doStartTag", e);
 			clearServiceState();
 			freeConnection();
-			throw new JspTagException("Exception raised in groupHasMemberIterator doStartTag");
+			throw new JspTagException("Exception raised in GroupHasMemberIterator doStartTag");
 		}
 
 		return SKIP_BODY;
@@ -79,10 +79,10 @@ public class groupHasMemberIterator extends edu.uiowa.slis.VIVOISF.TagLibSupport
 				}
 			}
 		} catch (Exception e) {
-			log.error("Exception raised in groupHasMemberIterator doAfterBody", e);
+			log.error("Exception raised in GroupHasMemberIterator doAfterBody", e);
 			clearServiceState();
 			freeConnection();
-			throw new JspTagException("Exception raised in groupHasMemberIterator doAfterBody");
+			throw new JspTagException("Exception raised in GroupHasMemberIterator doAfterBody");
 		}
 
 		return SKIP_BODY;
@@ -93,8 +93,8 @@ public class groupHasMemberIterator extends edu.uiowa.slis.VIVOISF.TagLibSupport
 		try {
 			// do processing
 		} catch (Exception e) {
-			log.error("Exception raised in groupHasMember doEndTag", e);
-			throw new JspTagException("Exception raised in groupHasMember doEndTag");
+			log.error("Exception raised in GroupHasMember doEndTag", e);
+			throw new JspTagException("Exception raised in GroupHasMember doEndTag");
 		} finally {
 			clearServiceState();
 			freeConnection();
@@ -130,7 +130,7 @@ public class groupHasMemberIterator extends edu.uiowa.slis.VIVOISF.TagLibSupport
 		String[] classFilterArray = filterString.split(" ");
 		this.classFilter = new Hashtable<String, String>();
 		for (String filterClass : classFilterArray) {
-			log.info("adding filterClass " + filterClass + " to groupHasMemberIterator");
+			log.info("adding filterClass " + filterClass + " to GroupHasMemberIterator");
 			classFilter.put(filterClass, "");
 		}
 	}

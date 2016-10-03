@@ -41,6 +41,22 @@ public class Concept extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 				subjectURI = ((edu.uiowa.slis.VIVOISF.Concept.ConceptNarrowerIterator)this.getParent()).getNarrower();
 			}
 
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.Concept.ConceptSemanticRelationIterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.Concept.ConceptSemanticRelationIterator)this.getParent()).getSemanticRelation();
+			}
+
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.Concept.ConceptBroaderIterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.Concept.ConceptBroaderIterator)this.getParent()).getBroader();
+			}
+
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.ConceptScheme.ConceptSchemeHasTopConceptIterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.ConceptScheme.ConceptSchemeHasTopConceptIterator)this.getParent()).getHasTopConcept();
+			}
+
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.Collection.CollectionMemberIterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.Collection.CollectionMemberIterator)this.getParent()).getMember();
+			}
+
 			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.Person.PersonHasResearchAreaIterator) {
 				subjectURI = ((edu.uiowa.slis.VIVOISF.Person.PersonHasResearchAreaIterator)this.getParent()).getHasResearchArea();
 			}
@@ -57,10 +73,6 @@ public class Concept extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 				subjectURI = ((edu.uiowa.slis.VIVOISF.Conference.ConferenceHasSubjectAreaIterator)this.getParent()).getHasSubjectArea();
 			}
 
-			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.Concept.ConceptBroaderIterator) {
-				subjectURI = ((edu.uiowa.slis.VIVOISF.Concept.ConceptBroaderIterator)this.getParent()).getBroader();
-			}
-
 			edu.uiowa.slis.VIVOISF.Concept.ConceptRelatedIterator theConceptRelatedIterator = (edu.uiowa.slis.VIVOISF.Concept.ConceptRelatedIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.Concept.ConceptRelatedIterator.class);
 
 			if (subjectURI == null && theConceptRelatedIterator != null) {
@@ -71,6 +83,30 @@ public class Concept extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 
 			if (subjectURI == null && theConceptNarrowerIterator != null) {
 				subjectURI = theConceptNarrowerIterator.getNarrower();
+			}
+
+			edu.uiowa.slis.VIVOISF.Concept.ConceptSemanticRelationIterator theConceptSemanticRelationIterator = (edu.uiowa.slis.VIVOISF.Concept.ConceptSemanticRelationIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.Concept.ConceptSemanticRelationIterator.class);
+
+			if (subjectURI == null && theConceptSemanticRelationIterator != null) {
+				subjectURI = theConceptSemanticRelationIterator.getSemanticRelation();
+			}
+
+			edu.uiowa.slis.VIVOISF.Concept.ConceptBroaderIterator theConceptBroaderIterator = (edu.uiowa.slis.VIVOISF.Concept.ConceptBroaderIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.Concept.ConceptBroaderIterator.class);
+
+			if (subjectURI == null && theConceptBroaderIterator != null) {
+				subjectURI = theConceptBroaderIterator.getBroader();
+			}
+
+			edu.uiowa.slis.VIVOISF.ConceptScheme.ConceptSchemeHasTopConceptIterator theConceptSchemeHasTopConceptIterator = (edu.uiowa.slis.VIVOISF.ConceptScheme.ConceptSchemeHasTopConceptIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.ConceptScheme.ConceptSchemeHasTopConceptIterator.class);
+
+			if (subjectURI == null && theConceptSchemeHasTopConceptIterator != null) {
+				subjectURI = theConceptSchemeHasTopConceptIterator.getHasTopConcept();
+			}
+
+			edu.uiowa.slis.VIVOISF.Collection.CollectionMemberIterator theCollectionMemberIterator = (edu.uiowa.slis.VIVOISF.Collection.CollectionMemberIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.Collection.CollectionMemberIterator.class);
+
+			if (subjectURI == null && theCollectionMemberIterator != null) {
+				subjectURI = theCollectionMemberIterator.getMember();
 			}
 
 			edu.uiowa.slis.VIVOISF.Person.PersonHasResearchAreaIterator thePersonHasResearchAreaIterator = (edu.uiowa.slis.VIVOISF.Person.PersonHasResearchAreaIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.Person.PersonHasResearchAreaIterator.class);
@@ -95,12 +131,6 @@ public class Concept extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 
 			if (subjectURI == null && theConferenceHasSubjectAreaIterator != null) {
 				subjectURI = theConferenceHasSubjectAreaIterator.getHasSubjectArea();
-			}
-
-			edu.uiowa.slis.VIVOISF.Concept.ConceptBroaderIterator theConceptBroaderIterator = (edu.uiowa.slis.VIVOISF.Concept.ConceptBroaderIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.Concept.ConceptBroaderIterator.class);
-
-			if (subjectURI == null && theConceptBroaderIterator != null) {
-				subjectURI = theConceptBroaderIterator.getBroader();
 			}
 
 			if (theConceptIterator == null && subjectURI == null) {

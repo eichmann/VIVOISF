@@ -41,18 +41,6 @@ public class self_governing extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 				subjectURI = ((edu.uiowa.slis.VIVOISF.Person.PersonRO_0001025Iterator)this.getParent()).getRO_0001025();
 			}
 
-			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.self_governing.self_governingHasBorderWithIterator) {
-				subjectURI = ((edu.uiowa.slis.VIVOISF.self_governing.self_governingHasBorderWithIterator)this.getParent()).getHasBorderWith();
-			}
-
-			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.Country.CountryHasBorderWithIterator) {
-				subjectURI = ((edu.uiowa.slis.VIVOISF.Country.CountryHasBorderWithIterator)this.getParent()).getHasBorderWith();
-			}
-
-			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.non_self_governing.non_self_governingHasBorderWithIterator) {
-				subjectURI = ((edu.uiowa.slis.VIVOISF.non_self_governing.non_self_governingHasBorderWithIterator)this.getParent()).getHasBorderWith();
-			}
-
 			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.StateOrProvince.StateOrProvinceBFO_0000050Iterator) {
 				subjectURI = ((edu.uiowa.slis.VIVOISF.StateOrProvince.StateOrProvinceBFO_0000050Iterator)this.getParent()).getBFO_0000050();
 			}
@@ -67,24 +55,6 @@ public class self_governing extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 
 			if (subjectURI == null && thePersonRO_0001025Iterator != null) {
 				subjectURI = thePersonRO_0001025Iterator.getRO_0001025();
-			}
-
-			edu.uiowa.slis.VIVOISF.self_governing.self_governingHasBorderWithIterator theself_governingHasBorderWithIterator = (edu.uiowa.slis.VIVOISF.self_governing.self_governingHasBorderWithIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.self_governing.self_governingHasBorderWithIterator.class);
-
-			if (subjectURI == null && theself_governingHasBorderWithIterator != null) {
-				subjectURI = theself_governingHasBorderWithIterator.getHasBorderWith();
-			}
-
-			edu.uiowa.slis.VIVOISF.Country.CountryHasBorderWithIterator theCountryHasBorderWithIterator = (edu.uiowa.slis.VIVOISF.Country.CountryHasBorderWithIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.Country.CountryHasBorderWithIterator.class);
-
-			if (subjectURI == null && theCountryHasBorderWithIterator != null) {
-				subjectURI = theCountryHasBorderWithIterator.getHasBorderWith();
-			}
-
-			edu.uiowa.slis.VIVOISF.non_self_governing.non_self_governingHasBorderWithIterator thenon_self_governingHasBorderWithIterator = (edu.uiowa.slis.VIVOISF.non_self_governing.non_self_governingHasBorderWithIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.non_self_governing.non_self_governingHasBorderWithIterator.class);
-
-			if (subjectURI == null && thenon_self_governingHasBorderWithIterator != null) {
-				subjectURI = thenon_self_governingHasBorderWithIterator.getHasBorderWith();
 			}
 
 			edu.uiowa.slis.VIVOISF.StateOrProvince.StateOrProvinceBFO_0000050Iterator theStateOrProvinceBFO_0000050Iterator = (edu.uiowa.slis.VIVOISF.StateOrProvince.StateOrProvinceBFO_0000050Iterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.StateOrProvince.StateOrProvinceBFO_0000050Iterator.class);

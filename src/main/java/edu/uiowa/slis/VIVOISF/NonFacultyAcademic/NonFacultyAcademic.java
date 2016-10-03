@@ -19,10 +19,10 @@ public class NonFacultyAcademic extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 	String subjectURI = null;
 	String label = null;
 	boolean commitNeeded = false;
+	String overview = null;
 	String teachingOverview = null;
 	String outreachOverview = null;
 	String researchOverview = null;
-	String overview = null;
 
 	public int doStartTag() throws JspException {
 		currentInstance = this;
@@ -38,15 +38,15 @@ public class NonFacultyAcademic extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 				throw new JspException("subject URI generation currently not supported");
 			} else {
 				ResultSet rs = getResultSet(prefix
-				+ " SELECT ?label ?foafName ?schemaName ?rdfValue  ?teachingOverview ?outreachOverview ?researchOverview ?overview where {"
+				+ " SELECT ?label ?foafName ?schemaName ?rdfValue  ?overview ?teachingOverview ?outreachOverview ?researchOverview where {"
 				+ "  OPTIONAL { <" + subjectURI + "> rdfs:label ?label } "
 				+ "  OPTIONAL { <" + subjectURI + "> <http://xmlns.com/foaf/0.1/name> ?foafName } "
 				+ "  OPTIONAL { <" + subjectURI + "> <http://schema.org/name> ?schemaName } "
 				+ "  OPTIONAL { <" + subjectURI + "> <http://www.w3.org/1999/02/22-rdf-syntax-ns#value> ?rdfValue } "
+				+ "  OPTIONAL { <" + subjectURI + "> <http://vivoweb.org/ontology/core#overview> ?overview } "
 				+ "  OPTIONAL { <" + subjectURI + "> <http://vivoweb.org/ontology/core#teachingOverview> ?teachingOverview } "
 				+ "  OPTIONAL { <" + subjectURI + "> <http://vivoweb.org/ontology/core#outreachOverview> ?outreachOverview } "
 				+ "  OPTIONAL { <" + subjectURI + "> <http://vivoweb.org/ontology/core#researchOverview> ?researchOverview } "
-				+ "  OPTIONAL { <" + subjectURI + "> <http://vivoweb.org/ontology/core#overview> ?overview } "
 				+ "}");
 				while(rs.hasNext()) {
 					QuerySolution sol = rs.nextSolution();
@@ -57,10 +57,10 @@ public class NonFacultyAcademic extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 						label = sol.get("?schemaName") == null ? null : sol.get("?schemaName").asLiteral().getString();
 					if (label == null)
 						label = sol.get("?rdfValue") == null ? null : sol.get("?rdfValue").asLiteral().getString();
+					overview = sol.get("?overview") == null ? null : sol.get("?overview").toString();
 					teachingOverview = sol.get("?teachingOverview") == null ? null : sol.get("?teachingOverview").toString();
 					outreachOverview = sol.get("?outreachOverview") == null ? null : sol.get("?outreachOverview").toString();
 					researchOverview = sol.get("?researchOverview") == null ? null : sol.get("?researchOverview").toString();
-					overview = sol.get("?overview") == null ? null : sol.get("?overview").toString();
 				}
 			}
 		} catch (Exception e) {
@@ -108,6 +108,14 @@ public class NonFacultyAcademic extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 		return label;
 	}
 
+	public void setOverview(String overview) {
+		this.overview = overview;
+	}
+
+	public String getOverview() {
+		return overview;
+	}
+
 	public void setTeachingOverview(String teachingOverview) {
 		this.teachingOverview = teachingOverview;
 	}
@@ -130,14 +138,6 @@ public class NonFacultyAcademic extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 
 	public String getResearchOverview() {
 		return researchOverview;
-	}
-
-	public void setOverview(String overview) {
-		this.overview = overview;
-	}
-
-	public String getOverview() {
-		return overview;
 	}
 
 }

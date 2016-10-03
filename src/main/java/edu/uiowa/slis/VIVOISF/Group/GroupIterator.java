@@ -1,4 +1,4 @@
-package edu.uiowa.slis.VIVOISF.group;
+package edu.uiowa.slis.VIVOISF.Group;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -10,9 +10,9 @@ import org.apache.jena.query.QuerySolution;
 import org.apache.jena.query.ResultSet;
 
 @SuppressWarnings("serial")
-public class groupIterator extends edu.uiowa.slis.VIVOISF.TagLibSupport {
-	static groupIterator currentInstance = null;
-	private static final Log log = LogFactory.getLog(groupIterator.class);
+public class GroupIterator extends edu.uiowa.slis.VIVOISF.TagLibSupport {
+	static GroupIterator currentInstance = null;
+	private static final Log log = LogFactory.getLog(GroupIterator.class);
 
 	String subjectURI = null;
 	String label = null;
@@ -23,7 +23,7 @@ public class groupIterator extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 		try {
 			rs = getResultSet(prefix+
 					" SELECT ?s ?l where { "+
-						"?s rdf:type <http://aims.fao.org/aos/geopolitical.owl#group> . "+
+						"?s rdf:type <http://xmlns.com/foaf/0.1/Group> . "+
 					"  OPTIONAL { ?s rdfs:label ?l } "+
 					"} ORDER BY ?l");
 			if(rs.hasNext()) {
@@ -33,10 +33,10 @@ public class groupIterator extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 				return EVAL_BODY_INCLUDE;
 			}
 		} catch (Exception e) {
-			log.error("Exception raised in groupIterator doStartTag", e);
+			log.error("Exception raised in GroupIterator doStartTag", e);
 			clearServiceState();
 			freeConnection();
-			throw new JspTagException("Exception raised in groupIterator doStartTag");
+			throw new JspTagException("Exception raised in GroupIterator doStartTag");
 		}
 
 		return SKIP_BODY;
@@ -51,10 +51,10 @@ public class groupIterator extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 				return EVAL_BODY_AGAIN;
 			}
 		} catch (Exception e) {
-			log.error("Exception raised in groupIterator doAfterBody", e);
+			log.error("Exception raised in GroupIterator doAfterBody", e);
 			clearServiceState();
 			freeConnection();
-			throw new JspTagException("Exception raised in groupIterator doAfterBody");
+			throw new JspTagException("Exception raised in GroupIterator doAfterBody");
 		}
 
 		return SKIP_BODY;
@@ -65,8 +65,8 @@ public class groupIterator extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 		try {
 			// do processing
 		} catch (Exception e) {
-			log.error("Exception raised in group doEndTag", e);
-			throw new JspTagException("Exception raised in group doEndTag");
+			log.error("Exception raised in Group doEndTag", e);
+			throw new JspTagException("Exception raised in Group doEndTag");
 		} finally {
 			clearServiceState();
 			freeConnection();

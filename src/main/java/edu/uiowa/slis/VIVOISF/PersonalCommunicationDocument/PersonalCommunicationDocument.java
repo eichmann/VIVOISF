@@ -20,6 +20,9 @@ public class PersonalCommunicationDocument extends edu.uiowa.slis.VIVOISF.TagLib
 	String label = null;
 	boolean commitNeeded = false;
 
+	// functional datatype properties, both local and inherited
+
+
 	public int doStartTag() throws JspException {
 		currentInstance = this;
 		try {
@@ -28,6 +31,10 @@ public class PersonalCommunicationDocument extends edu.uiowa.slis.VIVOISF.TagLib
 			if (thePersonalCommunicationDocumentIterator != null) {
 				subjectURI = thePersonalCommunicationDocumentIterator.getSubjectURI();
 				label = thePersonalCommunicationDocumentIterator.getLabel();
+			}
+
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.Agent.AgentRecipientInverseIterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.Agent.AgentRecipientInverseIterator)this.getParent()).getRecipientInverse();
 			}
 
 			if (thePersonalCommunicationDocumentIterator == null && subjectURI == null) {

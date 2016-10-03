@@ -20,6 +20,9 @@ public class LegalDecision extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 	String label = null;
 	boolean commitNeeded = false;
 
+	// functional datatype properties, both local and inherited
+
+
 	public int doStartTag() throws JspException {
 		currentInstance = this;
 		try {
@@ -28,6 +31,36 @@ public class LegalDecision extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 			if (theLegalDecisionIterator != null) {
 				subjectURI = theLegalDecisionIterator.getSubjectURI();
 				label = theLegalDecisionIterator.getLabel();
+			}
+
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.LegalDecision.LegalDecisionAffirmedByIterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.LegalDecision.LegalDecisionAffirmedByIterator)this.getParent()).getAffirmedBy();
+			}
+
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.LegalDecision.LegalDecisionSubsequentLegalDecisionIterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.LegalDecision.LegalDecisionSubsequentLegalDecisionIterator)this.getParent()).getSubsequentLegalDecision();
+			}
+
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.LegalDecision.LegalDecisionReversedByIterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.LegalDecision.LegalDecisionReversedByIterator)this.getParent()).getReversedBy();
+			}
+
+			edu.uiowa.slis.VIVOISF.LegalDecision.LegalDecisionAffirmedByIterator theLegalDecisionAffirmedByIterator = (edu.uiowa.slis.VIVOISF.LegalDecision.LegalDecisionAffirmedByIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.LegalDecision.LegalDecisionAffirmedByIterator.class);
+
+			if (subjectURI == null && theLegalDecisionAffirmedByIterator != null) {
+				subjectURI = theLegalDecisionAffirmedByIterator.getAffirmedBy();
+			}
+
+			edu.uiowa.slis.VIVOISF.LegalDecision.LegalDecisionSubsequentLegalDecisionIterator theLegalDecisionSubsequentLegalDecisionIterator = (edu.uiowa.slis.VIVOISF.LegalDecision.LegalDecisionSubsequentLegalDecisionIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.LegalDecision.LegalDecisionSubsequentLegalDecisionIterator.class);
+
+			if (subjectURI == null && theLegalDecisionSubsequentLegalDecisionIterator != null) {
+				subjectURI = theLegalDecisionSubsequentLegalDecisionIterator.getSubsequentLegalDecision();
+			}
+
+			edu.uiowa.slis.VIVOISF.LegalDecision.LegalDecisionReversedByIterator theLegalDecisionReversedByIterator = (edu.uiowa.slis.VIVOISF.LegalDecision.LegalDecisionReversedByIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.LegalDecision.LegalDecisionReversedByIterator.class);
+
+			if (subjectURI == null && theLegalDecisionReversedByIterator != null) {
+				subjectURI = theLegalDecisionReversedByIterator.getReversedBy();
 			}
 
 			if (theLegalDecisionIterator == null && subjectURI == null) {

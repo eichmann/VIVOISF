@@ -31,6 +31,16 @@ public class ThesisDegree extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 				label = theThesisDegreeIterator.getLabel();
 			}
 
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.Thesis.ThesisDegreeIterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.Thesis.ThesisDegreeIterator)this.getParent()).getDegree();
+			}
+
+			edu.uiowa.slis.VIVOISF.Thesis.ThesisDegreeIterator theThesisDegreeIterator = (edu.uiowa.slis.VIVOISF.Thesis.ThesisDegreeIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.Thesis.ThesisDegreeIterator.class);
+
+			if (subjectURI == null && theThesisDegreeIterator != null) {
+				subjectURI = theThesisDegreeIterator.getDegree();
+			}
+
 			if (theThesisDegreeIterator == null && subjectURI == null) {
 				throw new JspException("subject URI generation currently not supported");
 			} else {

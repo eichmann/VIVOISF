@@ -20,6 +20,9 @@ public class LegalDocument extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 	String label = null;
 	boolean commitNeeded = false;
 
+	// functional datatype properties, both local and inherited
+
+
 	public int doStartTag() throws JspException {
 		currentInstance = this;
 		try {
@@ -28,6 +31,10 @@ public class LegalDocument extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 			if (theLegalDocumentIterator != null) {
 				subjectURI = theLegalDocumentIterator.getSubjectURI();
 				label = theLegalDocumentIterator.getLabel();
+			}
+
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.Organization.OrganizationCourtInverseIterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.Organization.OrganizationCourtInverseIterator)this.getParent()).getCourtInverse();
 			}
 
 			if (theLegalDocumentIterator == null && subjectURI == null) {

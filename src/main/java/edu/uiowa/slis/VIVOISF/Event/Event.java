@@ -20,6 +20,9 @@ public class Event extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 	String label = null;
 	boolean commitNeeded = false;
 
+	// functional datatype properties, both local and inherited
+
+
 	public int doStartTag() throws JspException {
 		currentInstance = this;
 		try {
@@ -28,16 +31,6 @@ public class Event extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 			if (theEventIterator != null) {
 				subjectURI = theEventIterator.getSubjectURI();
 				label = theEventIterator.getLabel();
-			}
-
-			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.Document.DocumentPresentedAtIterator) {
-				subjectURI = ((edu.uiowa.slis.VIVOISF.Document.DocumentPresentedAtIterator)this.getParent()).getPresentedAt();
-			}
-
-			edu.uiowa.slis.VIVOISF.Document.DocumentPresentedAtIterator theDocumentPresentedAtIterator = (edu.uiowa.slis.VIVOISF.Document.DocumentPresentedAtIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.Document.DocumentPresentedAtIterator.class);
-
-			if (subjectURI == null && theDocumentPresentedAtIterator != null) {
-				subjectURI = theDocumentPresentedAtIterator.getPresentedAt();
 			}
 
 			if (theEventIterator == null && subjectURI == null) {

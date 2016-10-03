@@ -20,6 +20,9 @@ public class Thesis extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 	String label = null;
 	boolean commitNeeded = false;
 
+	// functional datatype properties, both local and inherited
+
+
 	public int doStartTag() throws JspException {
 		currentInstance = this;
 		try {
@@ -28,6 +31,10 @@ public class Thesis extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 			if (theThesisIterator != null) {
 				subjectURI = theThesisIterator.getSubjectURI();
 				label = theThesisIterator.getLabel();
+			}
+
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.ThesisDegree.ThesisDegreeDegreeInverseIterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.ThesisDegree.ThesisDegreeDegreeInverseIterator)this.getParent()).getDegreeInverse();
 			}
 
 			if (theThesisIterator == null && subjectURI == null) {

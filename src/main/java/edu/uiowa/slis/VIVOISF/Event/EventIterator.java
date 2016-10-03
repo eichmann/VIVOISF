@@ -23,7 +23,7 @@ public class EventIterator extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 		try {
 			rs = getResultSet(prefix+
 					" SELECT ?s ?l where { "+
-						"?s rdf:type <http://purl.org/NET/c4dm/event.owl#Event> . "+
+						"?s rdf:type <http://purl.org/ontology/bibo/Event> . "+
 					"  OPTIONAL { ?s rdfs:label ?l } "+
 					"} ORDER BY ?l");
 			if(rs.hasNext()) {

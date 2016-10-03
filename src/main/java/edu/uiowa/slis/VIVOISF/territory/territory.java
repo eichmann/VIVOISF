@@ -37,10 +37,20 @@ public class territory extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 				subjectURI = ((edu.uiowa.slis.VIVOISF.group.groupHasMemberIterator)this.getParent()).getHasMember();
 			}
 
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.territory.territoryHasBorderWithIterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.territory.territoryHasBorderWithIterator)this.getParent()).getHasBorderWith();
+			}
+
 			edu.uiowa.slis.VIVOISF.group.groupHasMemberIterator thegroupHasMemberIterator = (edu.uiowa.slis.VIVOISF.group.groupHasMemberIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.group.groupHasMemberIterator.class);
 
 			if (subjectURI == null && thegroupHasMemberIterator != null) {
 				subjectURI = thegroupHasMemberIterator.getHasMember();
+			}
+
+			edu.uiowa.slis.VIVOISF.territory.territoryHasBorderWithIterator theterritoryHasBorderWithIterator = (edu.uiowa.slis.VIVOISF.territory.territoryHasBorderWithIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.territory.territoryHasBorderWithIterator.class);
+
+			if (subjectURI == null && theterritoryHasBorderWithIterator != null) {
+				subjectURI = theterritoryHasBorderWithIterator.getHasBorderWith();
 			}
 
 			if (theterritoryIterator == null && subjectURI == null) {

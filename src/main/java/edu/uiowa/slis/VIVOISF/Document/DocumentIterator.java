@@ -23,7 +23,7 @@ public class DocumentIterator extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 		try {
 			rs = getResultSet(prefix+
 					" SELECT ?s ?l where { "+
-						"?s rdf:type <http://purl.org/ontology/bibo/Document> . "+
+						"?s rdf:type <http://xmlns.com/foaf/0.1/Document> . "+
 					"  OPTIONAL { ?s rdfs:label ?l } "+
 					"} ORDER BY ?l");
 			if(rs.hasNext()) {

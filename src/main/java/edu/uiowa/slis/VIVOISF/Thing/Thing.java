@@ -33,12 +33,56 @@ public class Thing extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 				label = theThingIterator.getLabel();
 			}
 
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.NegativePropertyAssertion.NegativePropertyAssertionSourceIndividualIterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.NegativePropertyAssertion.NegativePropertyAssertionSourceIndividualIterator)this.getParent()).getSourceIndividual();
+			}
+
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.Person.PersonSameAsIterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.Person.PersonSameAsIterator)this.getParent()).getSameAs();
+			}
+
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.Thing.ThingDifferentFromIterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.Thing.ThingDifferentFromIterator)this.getParent()).getDifferentFrom();
+			}
+
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.NegativePropertyAssertion.NegativePropertyAssertionTargetIndividualIterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.NegativePropertyAssertion.NegativePropertyAssertionTargetIndividualIterator)this.getParent()).getTargetIndividual();
+			}
+
 			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.Person.PersonOrcidIdIterator) {
 				subjectURI = ((edu.uiowa.slis.VIVOISF.Person.PersonOrcidIdIterator)this.getParent()).getOrcidId();
 			}
 
-			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.Concept.ConceptIsDefinedByIterator) {
-				subjectURI = ((edu.uiowa.slis.VIVOISF.Concept.ConceptIsDefinedByIterator)this.getParent()).getIsDefinedBy();
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.Thing.ThingBottomObjectPropertyIterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.Thing.ThingBottomObjectPropertyIterator)this.getParent()).getBottomObjectProperty();
+			}
+
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.Thing.ThingTopObjectPropertyIterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.Thing.ThingTopObjectPropertyIterator)this.getParent()).getTopObjectProperty();
+			}
+
+			edu.uiowa.slis.VIVOISF.NegativePropertyAssertion.NegativePropertyAssertionSourceIndividualIterator theNegativePropertyAssertionSourceIndividualIterator = (edu.uiowa.slis.VIVOISF.NegativePropertyAssertion.NegativePropertyAssertionSourceIndividualIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.NegativePropertyAssertion.NegativePropertyAssertionSourceIndividualIterator.class);
+
+			if (subjectURI == null && theNegativePropertyAssertionSourceIndividualIterator != null) {
+				subjectURI = theNegativePropertyAssertionSourceIndividualIterator.getSourceIndividual();
+			}
+
+			edu.uiowa.slis.VIVOISF.Person.PersonSameAsIterator thePersonSameAsIterator = (edu.uiowa.slis.VIVOISF.Person.PersonSameAsIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.Person.PersonSameAsIterator.class);
+
+			if (subjectURI == null && thePersonSameAsIterator != null) {
+				subjectURI = thePersonSameAsIterator.getSameAs();
+			}
+
+			edu.uiowa.slis.VIVOISF.Thing.ThingDifferentFromIterator theThingDifferentFromIterator = (edu.uiowa.slis.VIVOISF.Thing.ThingDifferentFromIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.Thing.ThingDifferentFromIterator.class);
+
+			if (subjectURI == null && theThingDifferentFromIterator != null) {
+				subjectURI = theThingDifferentFromIterator.getDifferentFrom();
+			}
+
+			edu.uiowa.slis.VIVOISF.NegativePropertyAssertion.NegativePropertyAssertionTargetIndividualIterator theNegativePropertyAssertionTargetIndividualIterator = (edu.uiowa.slis.VIVOISF.NegativePropertyAssertion.NegativePropertyAssertionTargetIndividualIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.NegativePropertyAssertion.NegativePropertyAssertionTargetIndividualIterator.class);
+
+			if (subjectURI == null && theNegativePropertyAssertionTargetIndividualIterator != null) {
+				subjectURI = theNegativePropertyAssertionTargetIndividualIterator.getTargetIndividual();
 			}
 
 			edu.uiowa.slis.VIVOISF.Person.PersonOrcidIdIterator thePersonOrcidIdIterator = (edu.uiowa.slis.VIVOISF.Person.PersonOrcidIdIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.Person.PersonOrcidIdIterator.class);
@@ -47,10 +91,16 @@ public class Thing extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 				subjectURI = thePersonOrcidIdIterator.getOrcidId();
 			}
 
-			edu.uiowa.slis.VIVOISF.Concept.ConceptIsDefinedByIterator theConceptIsDefinedByIterator = (edu.uiowa.slis.VIVOISF.Concept.ConceptIsDefinedByIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.Concept.ConceptIsDefinedByIterator.class);
+			edu.uiowa.slis.VIVOISF.Thing.ThingBottomObjectPropertyIterator theThingBottomObjectPropertyIterator = (edu.uiowa.slis.VIVOISF.Thing.ThingBottomObjectPropertyIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.Thing.ThingBottomObjectPropertyIterator.class);
 
-			if (subjectURI == null && theConceptIsDefinedByIterator != null) {
-				subjectURI = theConceptIsDefinedByIterator.getIsDefinedBy();
+			if (subjectURI == null && theThingBottomObjectPropertyIterator != null) {
+				subjectURI = theThingBottomObjectPropertyIterator.getBottomObjectProperty();
+			}
+
+			edu.uiowa.slis.VIVOISF.Thing.ThingTopObjectPropertyIterator theThingTopObjectPropertyIterator = (edu.uiowa.slis.VIVOISF.Thing.ThingTopObjectPropertyIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.Thing.ThingTopObjectPropertyIterator.class);
+
+			if (subjectURI == null && theThingTopObjectPropertyIterator != null) {
+				subjectURI = theThingTopObjectPropertyIterator.getTopObjectProperty();
 			}
 
 			if (theThingIterator == null && subjectURI == null) {

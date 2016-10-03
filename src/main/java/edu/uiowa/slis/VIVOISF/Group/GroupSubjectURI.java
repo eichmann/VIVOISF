@@ -1,4 +1,4 @@
-package edu.uiowa.slis.VIVOISF.group;
+package edu.uiowa.slis.VIVOISF.Group;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -7,42 +7,42 @@ import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspTagException;
 
 @SuppressWarnings("serial")
-public class groupSubjectURI extends edu.uiowa.slis.VIVOISF.TagLibSupport {
-	static groupSubjectURI currentInstance = null;
-	private static final Log log = LogFactory.getLog(groupSubjectURI.class);
+public class GroupSubjectURI extends edu.uiowa.slis.VIVOISF.TagLibSupport {
+	static GroupSubjectURI currentInstance = null;
+	private static final Log log = LogFactory.getLog(GroupSubjectURI.class);
 
 	// functional property
 
 	public int doStartTag() throws JspException {
 		try {
-			group thegroup = (group)findAncestorWithClass(this, group.class);
-			if (!thegroup.commitNeeded) {
-				pageContext.getOut().print(thegroup.getSubjectURI());
+			Group theGroup = (Group)findAncestorWithClass(this, Group.class);
+			if (!theGroup.commitNeeded) {
+				pageContext.getOut().print(theGroup.getSubjectURI());
 			}
 		} catch (Exception e) {
-			log.error("Can't find enclosing group for subjectURI tag ", e);
-			throw new JspTagException("Error: Can't find enclosing group for subjectURI tag ");
+			log.error("Can't find enclosing Group for subjectURI tag ", e);
+			throw new JspTagException("Error: Can't find enclosing Group for subjectURI tag ");
 		}
 		return SKIP_BODY;
 	}
 
 	public String getSubjectURI() throws JspTagException {
 		try {
-			group thegroup = (group)findAncestorWithClass(this, group.class);
-			return thegroup.getSubjectURI();
+			Group theGroup = (Group)findAncestorWithClass(this, Group.class);
+			return theGroup.getSubjectURI();
 		} catch (Exception e) {
-			log.error(" Can't find enclosing group for subjectURI tag ", e);
-			throw new JspTagException("Error: Can't find enclosing group for subjectURI tag ");
+			log.error(" Can't find enclosing Group for subjectURI tag ", e);
+			throw new JspTagException("Error: Can't find enclosing Group for subjectURI tag ");
 		}
 	}
 
 	public void setSubjectURI(String subjectURI) throws JspTagException {
 		try {
-			group thegroup = (group)findAncestorWithClass(this, group.class);
-			thegroup.setSubjectURI(subjectURI);
+			Group theGroup = (Group)findAncestorWithClass(this, Group.class);
+			theGroup.setSubjectURI(subjectURI);
 		} catch (Exception e) {
-			log.error("Can't find enclosing group for subjectURI tag ", e);
-			throw new JspTagException("Error: Can't find enclosing group for subjectURI tag ");
+			log.error("Can't find enclosing Group for subjectURI tag ", e);
+			throw new JspTagException("Error: Can't find enclosing Group for subjectURI tag ");
 		}
 	}
 }
