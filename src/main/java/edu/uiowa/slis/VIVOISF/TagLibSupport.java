@@ -51,8 +51,8 @@ public class TagLibSupport extends javax.servlet.jsp.tagext.TagSupport {
 		classNameHash.put("http://purl.obolibrary.org/obo/ERO_0000020", "ERO_0000020");
 		classNameHash.put("http://aims.fao.org/aos/geopolitical.owl#special_group", "special_group");
 		classNameHash.put("http://purl.obolibrary.org/obo/IAO_0000027", "IAO_0000027");
-		classNameHash.put("http://purl.obolibrary.org/obo/IAO_0000013", "IAO_0000013");
 		classNameHash.put("http://vivoweb.org/ontology/core#Museum", "Museum");
+		classNameHash.put("http://purl.obolibrary.org/obo/IAO_0000013", "IAO_0000013");
 		classNameHash.put("http://purl.org/ontology/bibo/Journal", "Journal");
 		classNameHash.put("http://www.w3.org/2006/vcard/ns#Date", "Date");
 		classNameHash.put("http://vivoweb.org/ontology/core#EmeritusProfessor", "EmeritusProfessor");
@@ -104,8 +104,8 @@ public class TagLibSupport extends javax.servlet.jsp.tagext.TagSupport {
 		classNameHash.put("http://www.w3.org/2006/vcard/ns#Security", "Security");
 		classNameHash.put("http://purl.obolibrary.org/obo/ERO_0000392", "ERO_0000392");
 		classNameHash.put("http://purl.obolibrary.org/obo/ERO_0000779", "ERO_0000779");
-		classNameHash.put("http://purl.obolibrary.org/obo/IAO_0000102", "IAO_0000102");
 		classNameHash.put("http://purl.org/ontology/bibo/Code", "Code");
+		classNameHash.put("http://purl.obolibrary.org/obo/IAO_0000102", "IAO_0000102");
 		classNameHash.put("http://vivoweb.org/ontology/core#Catalog", "Catalog");
 		classNameHash.put("http://vivoweb.org/ontology/core#Course", "Course");
 		classNameHash.put("http://vivoweb.org/ontology/core#Association", "Association");
@@ -277,9 +277,9 @@ public class TagLibSupport extends javax.servlet.jsp.tagext.TagSupport {
 		classNameHash.put("http://www.w3.org/2008/05/skos#ConceptScheme", "ConceptScheme");
 		classNameHash.put("http://purl.obolibrary.org/obo/ERO_0000015", "ERO_0000015");
 		classNameHash.put("http://purl.obolibrary.org/obo/ERO_0001259", "ERO_0001259");
-		classNameHash.put("http://vivoweb.org/ontology/core#AdvisorRole", "AdvisorRole");
 		classNameHash.put("http://www.w3.org/2006/vcard/ns#Agent", "Agent");
 		classNameHash.put("http://www.w3.org/2006/vcard/ns#Language", "Language");
+		classNameHash.put("http://vivoweb.org/ontology/core#AdvisorRole", "AdvisorRole");
 		classNameHash.put("http://vivoweb.org/ontology/core#NonFacultyAcademic", "NonFacultyAcademic");
 		classNameHash.put("http://vivoweb.org/ontology/core#FacultyMentoringRelationship", "FacultyMentoringRelationship");
 		classNameHash.put("http://aims.fao.org/aos/geopolitical.owl#area", "area");
@@ -387,8 +387,8 @@ public class TagLibSupport extends javax.servlet.jsp.tagext.TagSupport {
 		classNameHash.put("http://vivoweb.org/ontology/core#University", "University");
 		classNameHash.put("http://vivoweb.org/ontology/core#GeographicRegion", "GeographicRegion");
 		classNameHash.put("http://purl.org/ontology/bibo/Brief", "Brief");
-		classNameHash.put("http://purl.obolibrary.org/obo/ERO_0001263", "ERO_0001263");
 		classNameHash.put("http://purl.obolibrary.org/obo/ERO_0000005", "ERO_0000005");
+		classNameHash.put("http://purl.obolibrary.org/obo/ERO_0001263", "ERO_0001263");
 		classNameHash.put("http://www.w3.org/2006/vcard/ns#Email", "Email");
 		classNameHash.put("http://purl.org/ontology/bibo/Slideshow", "Slideshow");
 		classNameHash.put("http://vivoweb.org/ontology/core#FacultyAdministrativePosition", "FacultyAdministrativePosition");
@@ -439,8 +439,8 @@ public class TagLibSupport extends javax.servlet.jsp.tagext.TagSupport {
 		classNameHash.put("http://vivoweb.org/ontology/core#CoPrincipalInvestigatorRole", "CoPrincipalInvestigatorRole");
 		classNameHash.put("http://xmlns.com/foaf/0.1/Organization", "Organization");
 		classNameHash.put("http://www.w3.org/2006/vcard/ns#Contact", "Contact");
-		classNameHash.put("http://www.w3.org/2006/vcard/ns#OrganizationUnitName", "OrganizationUnitName");
 		classNameHash.put("http://vivoweb.org/ontology/core#Grant", "Grant");
+		classNameHash.put("http://www.w3.org/2006/vcard/ns#OrganizationUnitName", "OrganizationUnitName");
 		classNameHash.put("http://www.w3.org/2006/vcard/ns#Emergency", "Emergency");
 		classNameHash.put("http://vivoweb.org/ontology/core#OrganizingProcess", "OrganizingProcess");
 		classNameHash.put("http://vivoweb.org/ontology/core#Building", "Building");
@@ -481,8 +481,8 @@ public class TagLibSupport extends javax.servlet.jsp.tagext.TagSupport {
 		classLocalNameHash.put("ERO_0000020", "http://purl.obolibrary.org/obo/ERO_0000020");
 		classLocalNameHash.put("special_group", "http://aims.fao.org/aos/geopolitical.owl#special_group");
 		classLocalNameHash.put("IAO_0000027", "http://purl.obolibrary.org/obo/IAO_0000027");
-		classLocalNameHash.put("IAO_0000013", "http://purl.obolibrary.org/obo/IAO_0000013");
 		classLocalNameHash.put("Museum", "http://vivoweb.org/ontology/core#Museum");
+		classLocalNameHash.put("IAO_0000013", "http://purl.obolibrary.org/obo/IAO_0000013");
 		classLocalNameHash.put("Journal", "http://purl.org/ontology/bibo/Journal");
 		classLocalNameHash.put("Date", "http://www.w3.org/2006/vcard/ns#Date");
 		classLocalNameHash.put("EmeritusProfessor", "http://vivoweb.org/ontology/core#EmeritusProfessor");
@@ -534,8 +534,8 @@ public class TagLibSupport extends javax.servlet.jsp.tagext.TagSupport {
 		classLocalNameHash.put("Security", "http://www.w3.org/2006/vcard/ns#Security");
 		classLocalNameHash.put("ERO_0000392", "http://purl.obolibrary.org/obo/ERO_0000392");
 		classLocalNameHash.put("ERO_0000779", "http://purl.obolibrary.org/obo/ERO_0000779");
-		classLocalNameHash.put("IAO_0000102", "http://purl.obolibrary.org/obo/IAO_0000102");
 		classLocalNameHash.put("Code", "http://purl.org/ontology/bibo/Code");
+		classLocalNameHash.put("IAO_0000102", "http://purl.obolibrary.org/obo/IAO_0000102");
 		classLocalNameHash.put("Catalog", "http://vivoweb.org/ontology/core#Catalog");
 		classLocalNameHash.put("Course", "http://vivoweb.org/ontology/core#Course");
 		classLocalNameHash.put("Association", "http://vivoweb.org/ontology/core#Association");
@@ -707,9 +707,9 @@ public class TagLibSupport extends javax.servlet.jsp.tagext.TagSupport {
 		classLocalNameHash.put("ConceptScheme", "http://www.w3.org/2008/05/skos#ConceptScheme");
 		classLocalNameHash.put("ERO_0000015", "http://purl.obolibrary.org/obo/ERO_0000015");
 		classLocalNameHash.put("ERO_0001259", "http://purl.obolibrary.org/obo/ERO_0001259");
-		classLocalNameHash.put("AdvisorRole", "http://vivoweb.org/ontology/core#AdvisorRole");
 		classLocalNameHash.put("Agent", "http://www.w3.org/2006/vcard/ns#Agent");
 		classLocalNameHash.put("Language", "http://www.w3.org/2006/vcard/ns#Language");
+		classLocalNameHash.put("AdvisorRole", "http://vivoweb.org/ontology/core#AdvisorRole");
 		classLocalNameHash.put("NonFacultyAcademic", "http://vivoweb.org/ontology/core#NonFacultyAcademic");
 		classLocalNameHash.put("FacultyMentoringRelationship", "http://vivoweb.org/ontology/core#FacultyMentoringRelationship");
 		classLocalNameHash.put("area", "http://aims.fao.org/aos/geopolitical.owl#area");
@@ -817,8 +817,8 @@ public class TagLibSupport extends javax.servlet.jsp.tagext.TagSupport {
 		classLocalNameHash.put("University", "http://vivoweb.org/ontology/core#University");
 		classLocalNameHash.put("GeographicRegion", "http://vivoweb.org/ontology/core#GeographicRegion");
 		classLocalNameHash.put("Brief", "http://purl.org/ontology/bibo/Brief");
-		classLocalNameHash.put("ERO_0001263", "http://purl.obolibrary.org/obo/ERO_0001263");
 		classLocalNameHash.put("ERO_0000005", "http://purl.obolibrary.org/obo/ERO_0000005");
+		classLocalNameHash.put("ERO_0001263", "http://purl.obolibrary.org/obo/ERO_0001263");
 		classLocalNameHash.put("Email", "http://www.w3.org/2006/vcard/ns#Email");
 		classLocalNameHash.put("Slideshow", "http://purl.org/ontology/bibo/Slideshow");
 		classLocalNameHash.put("FacultyAdministrativePosition", "http://vivoweb.org/ontology/core#FacultyAdministrativePosition");
@@ -869,8 +869,8 @@ public class TagLibSupport extends javax.servlet.jsp.tagext.TagSupport {
 		classLocalNameHash.put("CoPrincipalInvestigatorRole", "http://vivoweb.org/ontology/core#CoPrincipalInvestigatorRole");
 		classLocalNameHash.put("Organization", "http://xmlns.com/foaf/0.1/Organization");
 		classLocalNameHash.put("Contact", "http://www.w3.org/2006/vcard/ns#Contact");
-		classLocalNameHash.put("OrganizationUnitName", "http://www.w3.org/2006/vcard/ns#OrganizationUnitName");
 		classLocalNameHash.put("Grant", "http://vivoweb.org/ontology/core#Grant");
+		classLocalNameHash.put("OrganizationUnitName", "http://www.w3.org/2006/vcard/ns#OrganizationUnitName");
 		classLocalNameHash.put("Emergency", "http://www.w3.org/2006/vcard/ns#Emergency");
 		classLocalNameHash.put("OrganizingProcess", "http://vivoweb.org/ontology/core#OrganizingProcess");
 		classLocalNameHash.put("Building", "http://vivoweb.org/ontology/core#Building");
@@ -888,7 +888,7 @@ public class TagLibSupport extends javax.servlet.jsp.tagext.TagSupport {
 
 	Dataset dataset = null;
 
-	protected ResultSet getResultSet(String queryString) {
+	public ResultSet getResultSet(String queryString) {
 		if (useSPARQL) {
 			Query theClassQuery = QueryFactory.create(queryString, Syntax.syntaxARQ);
 			QueryExecution theClassExecution = QueryExecutionFactory.sparqlService(endpoint, theClassQuery);
