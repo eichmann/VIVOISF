@@ -11,12 +11,12 @@ public class CountryGeographicFocusOf extends edu.uiowa.slis.VIVOISF.TagLibSuppo
 	static CountryGeographicFocusOf currentInstance = null;
 	private static final Log log = LogFactory.getLog(CountryGeographicFocusOf.class);
 
-	// object property
+	// non-functional property
 
 	public int doStartTag() throws JspException {
 		try {
-			CountryGeographicFocusOfIterator theCountryGeographicFocusOfIterator = (CountryGeographicFocusOfIterator)findAncestorWithClass(this, CountryGeographicFocusOfIterator.class);
-			pageContext.getOut().print(theCountryGeographicFocusOfIterator.getGeographicFocusOf());
+			CountryGeographicFocusOfIterator theCountry = (CountryGeographicFocusOfIterator)findAncestorWithClass(this, CountryGeographicFocusOfIterator.class);
+			pageContext.getOut().print(theCountry.getGeographicFocusOf());
 		} catch (Exception e) {
 			log.error("Can't find enclosing Country for geographicFocusOf tag ", e);
 			throw new JspTagException("Error: Can't find enclosing Country for geographicFocusOf tag ");

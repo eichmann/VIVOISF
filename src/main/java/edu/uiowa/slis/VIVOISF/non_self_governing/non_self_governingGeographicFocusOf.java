@@ -11,12 +11,12 @@ public class non_self_governingGeographicFocusOf extends edu.uiowa.slis.VIVOISF.
 	static non_self_governingGeographicFocusOf currentInstance = null;
 	private static final Log log = LogFactory.getLog(non_self_governingGeographicFocusOf.class);
 
-	// object property
+	// non-functional property
 
 	public int doStartTag() throws JspException {
 		try {
-			non_self_governingGeographicFocusOfIterator thenon_self_governingGeographicFocusOfIterator = (non_self_governingGeographicFocusOfIterator)findAncestorWithClass(this, non_self_governingGeographicFocusOfIterator.class);
-			pageContext.getOut().print(thenon_self_governingGeographicFocusOfIterator.getGeographicFocusOf());
+			non_self_governingGeographicFocusOfIterator thenon_self_governing = (non_self_governingGeographicFocusOfIterator)findAncestorWithClass(this, non_self_governingGeographicFocusOfIterator.class);
+			pageContext.getOut().print(thenon_self_governing.getGeographicFocusOf());
 		} catch (Exception e) {
 			log.error("Can't find enclosing non_self_governing for geographicFocusOf tag ", e);
 			throw new JspTagException("Error: Can't find enclosing non_self_governing for geographicFocusOf tag ");

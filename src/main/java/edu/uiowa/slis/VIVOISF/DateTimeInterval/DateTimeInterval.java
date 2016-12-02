@@ -33,10 +33,6 @@ public class DateTimeInterval extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 				label = theDateTimeIntervalIterator.getLabel();
 			}
 
-			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.FacultyPosition.FacultyPositionDateTimeIntervalIterator) {
-				subjectURI = ((edu.uiowa.slis.VIVOISF.FacultyPosition.FacultyPositionDateTimeIntervalIterator)this.getParent()).getDateTimeInterval();
-			}
-
 			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.LibrarianPosition.LibrarianPositionDateTimeIntervalIterator) {
 				subjectURI = ((edu.uiowa.slis.VIVOISF.LibrarianPosition.LibrarianPositionDateTimeIntervalIterator)this.getParent()).getDateTimeInterval();
 			}
@@ -45,28 +41,24 @@ public class DateTimeInterval extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 				subjectURI = ((edu.uiowa.slis.VIVOISF.NonAcademicPosition.NonAcademicPositionDateTimeIntervalIterator)this.getParent()).getDateTimeInterval();
 			}
 
-			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.Position.PositionDateTimeIntervalIterator) {
-				subjectURI = ((edu.uiowa.slis.VIVOISF.Position.PositionDateTimeIntervalIterator)this.getParent()).getDateTimeInterval();
-			}
-
-			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.FacultyAdministrativePosition.FacultyAdministrativePositionDateTimeIntervalIterator) {
-				subjectURI = ((edu.uiowa.slis.VIVOISF.FacultyAdministrativePosition.FacultyAdministrativePositionDateTimeIntervalIterator)this.getParent()).getDateTimeInterval();
-			}
-
-			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.NonFacultyAcademicPosition.NonFacultyAcademicPositionDateTimeIntervalIterator) {
-				subjectURI = ((edu.uiowa.slis.VIVOISF.NonFacultyAcademicPosition.NonFacultyAcademicPositionDateTimeIntervalIterator)this.getParent()).getDateTimeInterval();
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.PostdocPosition.PostdocPositionDateTimeIntervalIterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.PostdocPosition.PostdocPositionDateTimeIntervalIterator)this.getParent()).getDateTimeInterval();
 			}
 
 			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.Conference.ConferenceDateTimeIntervalIterator) {
 				subjectURI = ((edu.uiowa.slis.VIVOISF.Conference.ConferenceDateTimeIntervalIterator)this.getParent()).getDateTimeInterval();
 			}
 
-			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.PrimaryPosition.PrimaryPositionDateTimeIntervalIterator) {
-				subjectURI = ((edu.uiowa.slis.VIVOISF.PrimaryPosition.PrimaryPositionDateTimeIntervalIterator)this.getParent()).getDateTimeInterval();
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.FacultyPosition.FacultyPositionDateTimeIntervalIterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.FacultyPosition.FacultyPositionDateTimeIntervalIterator)this.getParent()).getDateTimeInterval();
 			}
 
-			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.PostdocPosition.PostdocPositionDateTimeIntervalIterator) {
-				subjectURI = ((edu.uiowa.slis.VIVOISF.PostdocPosition.PostdocPositionDateTimeIntervalIterator)this.getParent()).getDateTimeInterval();
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.FacultyAdministrativePosition.FacultyAdministrativePositionDateTimeIntervalIterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.FacultyAdministrativePosition.FacultyAdministrativePositionDateTimeIntervalIterator)this.getParent()).getDateTimeInterval();
+			}
+
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.PrimaryPosition.PrimaryPositionDateTimeIntervalIterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.PrimaryPosition.PrimaryPositionDateTimeIntervalIterator)this.getParent()).getDateTimeInterval();
 			}
 
 			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.DateTimeValue.DateTimeValueEndInverseIterator) {
@@ -75,12 +67,6 @@ public class DateTimeInterval extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 
 			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.DateTimeValue.DateTimeValueStartInverseIterator) {
 				subjectURI = ((edu.uiowa.slis.VIVOISF.DateTimeValue.DateTimeValueStartInverseIterator)this.getParent()).getStartInverse();
-			}
-
-			edu.uiowa.slis.VIVOISF.FacultyPosition.FacultyPositionDateTimeIntervalIterator theFacultyPositionDateTimeIntervalIterator = (edu.uiowa.slis.VIVOISF.FacultyPosition.FacultyPositionDateTimeIntervalIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.FacultyPosition.FacultyPositionDateTimeIntervalIterator.class);
-
-			if (subjectURI == null && theFacultyPositionDateTimeIntervalIterator != null) {
-				subjectURI = theFacultyPositionDateTimeIntervalIterator.getDateTimeInterval();
 			}
 
 			edu.uiowa.slis.VIVOISF.LibrarianPosition.LibrarianPositionDateTimeIntervalIterator theLibrarianPositionDateTimeIntervalIterator = (edu.uiowa.slis.VIVOISF.LibrarianPosition.LibrarianPositionDateTimeIntervalIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.LibrarianPosition.LibrarianPositionDateTimeIntervalIterator.class);
@@ -95,22 +81,10 @@ public class DateTimeInterval extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 				subjectURI = theNonAcademicPositionDateTimeIntervalIterator.getDateTimeInterval();
 			}
 
-			edu.uiowa.slis.VIVOISF.Position.PositionDateTimeIntervalIterator thePositionDateTimeIntervalIterator = (edu.uiowa.slis.VIVOISF.Position.PositionDateTimeIntervalIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.Position.PositionDateTimeIntervalIterator.class);
+			edu.uiowa.slis.VIVOISF.PostdocPosition.PostdocPositionDateTimeIntervalIterator thePostdocPositionDateTimeIntervalIterator = (edu.uiowa.slis.VIVOISF.PostdocPosition.PostdocPositionDateTimeIntervalIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.PostdocPosition.PostdocPositionDateTimeIntervalIterator.class);
 
-			if (subjectURI == null && thePositionDateTimeIntervalIterator != null) {
-				subjectURI = thePositionDateTimeIntervalIterator.getDateTimeInterval();
-			}
-
-			edu.uiowa.slis.VIVOISF.FacultyAdministrativePosition.FacultyAdministrativePositionDateTimeIntervalIterator theFacultyAdministrativePositionDateTimeIntervalIterator = (edu.uiowa.slis.VIVOISF.FacultyAdministrativePosition.FacultyAdministrativePositionDateTimeIntervalIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.FacultyAdministrativePosition.FacultyAdministrativePositionDateTimeIntervalIterator.class);
-
-			if (subjectURI == null && theFacultyAdministrativePositionDateTimeIntervalIterator != null) {
-				subjectURI = theFacultyAdministrativePositionDateTimeIntervalIterator.getDateTimeInterval();
-			}
-
-			edu.uiowa.slis.VIVOISF.NonFacultyAcademicPosition.NonFacultyAcademicPositionDateTimeIntervalIterator theNonFacultyAcademicPositionDateTimeIntervalIterator = (edu.uiowa.slis.VIVOISF.NonFacultyAcademicPosition.NonFacultyAcademicPositionDateTimeIntervalIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.NonFacultyAcademicPosition.NonFacultyAcademicPositionDateTimeIntervalIterator.class);
-
-			if (subjectURI == null && theNonFacultyAcademicPositionDateTimeIntervalIterator != null) {
-				subjectURI = theNonFacultyAcademicPositionDateTimeIntervalIterator.getDateTimeInterval();
+			if (subjectURI == null && thePostdocPositionDateTimeIntervalIterator != null) {
+				subjectURI = thePostdocPositionDateTimeIntervalIterator.getDateTimeInterval();
 			}
 
 			edu.uiowa.slis.VIVOISF.Conference.ConferenceDateTimeIntervalIterator theConferenceDateTimeIntervalIterator = (edu.uiowa.slis.VIVOISF.Conference.ConferenceDateTimeIntervalIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.Conference.ConferenceDateTimeIntervalIterator.class);
@@ -119,31 +93,46 @@ public class DateTimeInterval extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 				subjectURI = theConferenceDateTimeIntervalIterator.getDateTimeInterval();
 			}
 
+			edu.uiowa.slis.VIVOISF.FacultyPosition.FacultyPositionDateTimeIntervalIterator theFacultyPositionDateTimeIntervalIterator = (edu.uiowa.slis.VIVOISF.FacultyPosition.FacultyPositionDateTimeIntervalIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.FacultyPosition.FacultyPositionDateTimeIntervalIterator.class);
+
+			if (subjectURI == null && theFacultyPositionDateTimeIntervalIterator != null) {
+				subjectURI = theFacultyPositionDateTimeIntervalIterator.getDateTimeInterval();
+			}
+
+			edu.uiowa.slis.VIVOISF.FacultyAdministrativePosition.FacultyAdministrativePositionDateTimeIntervalIterator theFacultyAdministrativePositionDateTimeIntervalIterator = (edu.uiowa.slis.VIVOISF.FacultyAdministrativePosition.FacultyAdministrativePositionDateTimeIntervalIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.FacultyAdministrativePosition.FacultyAdministrativePositionDateTimeIntervalIterator.class);
+
+			if (subjectURI == null && theFacultyAdministrativePositionDateTimeIntervalIterator != null) {
+				subjectURI = theFacultyAdministrativePositionDateTimeIntervalIterator.getDateTimeInterval();
+			}
+
 			edu.uiowa.slis.VIVOISF.PrimaryPosition.PrimaryPositionDateTimeIntervalIterator thePrimaryPositionDateTimeIntervalIterator = (edu.uiowa.slis.VIVOISF.PrimaryPosition.PrimaryPositionDateTimeIntervalIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.PrimaryPosition.PrimaryPositionDateTimeIntervalIterator.class);
 
 			if (subjectURI == null && thePrimaryPositionDateTimeIntervalIterator != null) {
 				subjectURI = thePrimaryPositionDateTimeIntervalIterator.getDateTimeInterval();
 			}
 
-			edu.uiowa.slis.VIVOISF.PostdocPosition.PostdocPositionDateTimeIntervalIterator thePostdocPositionDateTimeIntervalIterator = (edu.uiowa.slis.VIVOISF.PostdocPosition.PostdocPositionDateTimeIntervalIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.PostdocPosition.PostdocPositionDateTimeIntervalIterator.class);
-
-			if (subjectURI == null && thePostdocPositionDateTimeIntervalIterator != null) {
-				subjectURI = thePostdocPositionDateTimeIntervalIterator.getDateTimeInterval();
-			}
-
 			if (theDateTimeIntervalIterator == null && subjectURI == null) {
 				throw new JspException("subject URI generation currently not supported");
 			} else {
 				ResultSet rs = getResultSet(prefix
-				+ " SELECT ?label ?foafName ?schemaName ?rdfValue  where {"
-				+ "  OPTIONAL { <" + subjectURI + "> rdfs:label ?label } "
+				+ " SELECT ?labelUS ?labelENG ?label ?labelANY ?foafName ?schemaName ?rdfValue  where {"
+				+ "  OPTIONAL { SELECT ?labelUS  WHERE { <" + subjectURI + "> rdfs:label ?labelUS  FILTER (lang(?labelUS) = \"en-US\")}    LIMIT 1 } "
+				+ "  OPTIONAL { SELECT ?labelENG WHERE { <" + subjectURI + "> rdfs:label ?labelENG FILTER (langMatches(?labelENG,\"en\"))} LIMIT 1 } "
+				+ "  OPTIONAL { SELECT ?label    WHERE { <" + subjectURI + "> rdfs:label ?label    FILTER (lang(?label) = \"\")}           LIMIT 1 } "
+				+ "  OPTIONAL { SELECT ?labelANY WHERE { <" + subjectURI + "> rdfs:label ?labelANY FILTER (lang(?labelANY) != \"\")}       LIMIT 1 } "
 				+ "  OPTIONAL { <" + subjectURI + "> <http://xmlns.com/foaf/0.1/name> ?foafName } "
 				+ "  OPTIONAL { <" + subjectURI + "> <http://schema.org/name> ?schemaName } "
 				+ "  OPTIONAL { <" + subjectURI + "> <http://www.w3.org/1999/02/22-rdf-syntax-ns#value> ?rdfValue } "
 				+ "}");
 				while(rs.hasNext()) {
 					QuerySolution sol = rs.nextSolution();
-					label = sol.get("?label") == null ? null : sol.get("?label").asLiteral().getString();
+					label = sol.get("?labelUS") == null ? null : sol.get("?labelUS").asLiteral().getString();
+					if (label == null)
+						label = sol.get("?labelENG") == null ? null : sol.get("?labelENG").asLiteral().getString();
+					if (label == null)
+						label = sol.get("?label") == null ? null : sol.get("?label").asLiteral().getString();
+					if (label == null)
+						label = sol.get("?labelANY") == null ? null : sol.get("?labelANY").asLiteral().getString();
 					if (label == null)
 						label = sol.get("?foafName") == null ? null : sol.get("?foafName").asLiteral().getString();
 					if (label == null)

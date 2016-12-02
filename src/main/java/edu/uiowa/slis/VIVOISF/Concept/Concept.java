@@ -57,22 +57,6 @@ public class Concept extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 				subjectURI = ((edu.uiowa.slis.VIVOISF.Collection.CollectionMemberIterator)this.getParent()).getMember();
 			}
 
-			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.Person.PersonHasResearchAreaIterator) {
-				subjectURI = ((edu.uiowa.slis.VIVOISF.Person.PersonHasResearchAreaIterator)this.getParent()).getHasResearchArea();
-			}
-
-			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.AcademicArticle.AcademicArticleHasSubjectAreaIterator) {
-				subjectURI = ((edu.uiowa.slis.VIVOISF.AcademicArticle.AcademicArticleHasSubjectAreaIterator)this.getParent()).getHasSubjectArea();
-			}
-
-			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.Chapter.ChapterHasSubjectAreaIterator) {
-				subjectURI = ((edu.uiowa.slis.VIVOISF.Chapter.ChapterHasSubjectAreaIterator)this.getParent()).getHasSubjectArea();
-			}
-
-			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.Conference.ConferenceHasSubjectAreaIterator) {
-				subjectURI = ((edu.uiowa.slis.VIVOISF.Conference.ConferenceHasSubjectAreaIterator)this.getParent()).getHasSubjectArea();
-			}
-
 			edu.uiowa.slis.VIVOISF.Concept.ConceptRelatedIterator theConceptRelatedIterator = (edu.uiowa.slis.VIVOISF.Concept.ConceptRelatedIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.Concept.ConceptRelatedIterator.class);
 
 			if (subjectURI == null && theConceptRelatedIterator != null) {
@@ -109,43 +93,28 @@ public class Concept extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 				subjectURI = theCollectionMemberIterator.getMember();
 			}
 
-			edu.uiowa.slis.VIVOISF.Person.PersonHasResearchAreaIterator thePersonHasResearchAreaIterator = (edu.uiowa.slis.VIVOISF.Person.PersonHasResearchAreaIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.Person.PersonHasResearchAreaIterator.class);
-
-			if (subjectURI == null && thePersonHasResearchAreaIterator != null) {
-				subjectURI = thePersonHasResearchAreaIterator.getHasResearchArea();
-			}
-
-			edu.uiowa.slis.VIVOISF.AcademicArticle.AcademicArticleHasSubjectAreaIterator theAcademicArticleHasSubjectAreaIterator = (edu.uiowa.slis.VIVOISF.AcademicArticle.AcademicArticleHasSubjectAreaIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.AcademicArticle.AcademicArticleHasSubjectAreaIterator.class);
-
-			if (subjectURI == null && theAcademicArticleHasSubjectAreaIterator != null) {
-				subjectURI = theAcademicArticleHasSubjectAreaIterator.getHasSubjectArea();
-			}
-
-			edu.uiowa.slis.VIVOISF.Chapter.ChapterHasSubjectAreaIterator theChapterHasSubjectAreaIterator = (edu.uiowa.slis.VIVOISF.Chapter.ChapterHasSubjectAreaIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.Chapter.ChapterHasSubjectAreaIterator.class);
-
-			if (subjectURI == null && theChapterHasSubjectAreaIterator != null) {
-				subjectURI = theChapterHasSubjectAreaIterator.getHasSubjectArea();
-			}
-
-			edu.uiowa.slis.VIVOISF.Conference.ConferenceHasSubjectAreaIterator theConferenceHasSubjectAreaIterator = (edu.uiowa.slis.VIVOISF.Conference.ConferenceHasSubjectAreaIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.Conference.ConferenceHasSubjectAreaIterator.class);
-
-			if (subjectURI == null && theConferenceHasSubjectAreaIterator != null) {
-				subjectURI = theConferenceHasSubjectAreaIterator.getHasSubjectArea();
-			}
-
 			if (theConceptIterator == null && subjectURI == null) {
 				throw new JspException("subject URI generation currently not supported");
 			} else {
 				ResultSet rs = getResultSet(prefix
-				+ " SELECT ?label ?foafName ?schemaName ?rdfValue  where {"
-				+ "  OPTIONAL { <" + subjectURI + "> rdfs:label ?label } "
+				+ " SELECT ?labelUS ?labelENG ?label ?labelANY ?foafName ?schemaName ?rdfValue  where {"
+				+ "  OPTIONAL { SELECT ?labelUS  WHERE { <" + subjectURI + "> rdfs:label ?labelUS  FILTER (lang(?labelUS) = \"en-US\")}    LIMIT 1 } "
+				+ "  OPTIONAL { SELECT ?labelENG WHERE { <" + subjectURI + "> rdfs:label ?labelENG FILTER (langMatches(?labelENG,\"en\"))} LIMIT 1 } "
+				+ "  OPTIONAL { SELECT ?label    WHERE { <" + subjectURI + "> rdfs:label ?label    FILTER (lang(?label) = \"\")}           LIMIT 1 } "
+				+ "  OPTIONAL { SELECT ?labelANY WHERE { <" + subjectURI + "> rdfs:label ?labelANY FILTER (lang(?labelANY) != \"\")}       LIMIT 1 } "
 				+ "  OPTIONAL { <" + subjectURI + "> <http://xmlns.com/foaf/0.1/name> ?foafName } "
 				+ "  OPTIONAL { <" + subjectURI + "> <http://schema.org/name> ?schemaName } "
 				+ "  OPTIONAL { <" + subjectURI + "> <http://www.w3.org/1999/02/22-rdf-syntax-ns#value> ?rdfValue } "
 				+ "}");
 				while(rs.hasNext()) {
 					QuerySolution sol = rs.nextSolution();
-					label = sol.get("?label") == null ? null : sol.get("?label").asLiteral().getString();
+					label = sol.get("?labelUS") == null ? null : sol.get("?labelUS").asLiteral().getString();
+					if (label == null)
+						label = sol.get("?labelENG") == null ? null : sol.get("?labelENG").asLiteral().getString();
+					if (label == null)
+						label = sol.get("?label") == null ? null : sol.get("?label").asLiteral().getString();
+					if (label == null)
+						label = sol.get("?labelANY") == null ? null : sol.get("?labelANY").asLiteral().getString();
 					if (label == null)
 						label = sol.get("?foafName") == null ? null : sol.get("?foafName").asLiteral().getString();
 					if (label == null)

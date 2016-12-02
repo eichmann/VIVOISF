@@ -37,35 +37,34 @@ public class Geo extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 				subjectURI = ((edu.uiowa.slis.VIVOISF.Geographical.GeographicalHasGeoIterator)this.getParent()).getHasGeo();
 			}
 
-			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.Kind.KindHasGeoIterator) {
-				subjectURI = ((edu.uiowa.slis.VIVOISF.Kind.KindHasGeoIterator)this.getParent()).getHasGeo();
-			}
-
 			edu.uiowa.slis.VIVOISF.Geographical.GeographicalHasGeoIterator theGeographicalHasGeoIterator = (edu.uiowa.slis.VIVOISF.Geographical.GeographicalHasGeoIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.Geographical.GeographicalHasGeoIterator.class);
 
 			if (subjectURI == null && theGeographicalHasGeoIterator != null) {
 				subjectURI = theGeographicalHasGeoIterator.getHasGeo();
 			}
 
-			edu.uiowa.slis.VIVOISF.Kind.KindHasGeoIterator theKindHasGeoIterator = (edu.uiowa.slis.VIVOISF.Kind.KindHasGeoIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.Kind.KindHasGeoIterator.class);
-
-			if (subjectURI == null && theKindHasGeoIterator != null) {
-				subjectURI = theKindHasGeoIterator.getHasGeo();
-			}
-
 			if (theGeoIterator == null && subjectURI == null) {
 				throw new JspException("subject URI generation currently not supported");
 			} else {
 				ResultSet rs = getResultSet(prefix
-				+ " SELECT ?label ?foafName ?schemaName ?rdfValue  where {"
-				+ "  OPTIONAL { <" + subjectURI + "> rdfs:label ?label } "
+				+ " SELECT ?labelUS ?labelENG ?label ?labelANY ?foafName ?schemaName ?rdfValue  where {"
+				+ "  OPTIONAL { SELECT ?labelUS  WHERE { <" + subjectURI + "> rdfs:label ?labelUS  FILTER (lang(?labelUS) = \"en-US\")}    LIMIT 1 } "
+				+ "  OPTIONAL { SELECT ?labelENG WHERE { <" + subjectURI + "> rdfs:label ?labelENG FILTER (langMatches(?labelENG,\"en\"))} LIMIT 1 } "
+				+ "  OPTIONAL { SELECT ?label    WHERE { <" + subjectURI + "> rdfs:label ?label    FILTER (lang(?label) = \"\")}           LIMIT 1 } "
+				+ "  OPTIONAL { SELECT ?labelANY WHERE { <" + subjectURI + "> rdfs:label ?labelANY FILTER (lang(?labelANY) != \"\")}       LIMIT 1 } "
 				+ "  OPTIONAL { <" + subjectURI + "> <http://xmlns.com/foaf/0.1/name> ?foafName } "
 				+ "  OPTIONAL { <" + subjectURI + "> <http://schema.org/name> ?schemaName } "
 				+ "  OPTIONAL { <" + subjectURI + "> <http://www.w3.org/1999/02/22-rdf-syntax-ns#value> ?rdfValue } "
 				+ "}");
 				while(rs.hasNext()) {
 					QuerySolution sol = rs.nextSolution();
-					label = sol.get("?label") == null ? null : sol.get("?label").asLiteral().getString();
+					label = sol.get("?labelUS") == null ? null : sol.get("?labelUS").asLiteral().getString();
+					if (label == null)
+						label = sol.get("?labelENG") == null ? null : sol.get("?labelENG").asLiteral().getString();
+					if (label == null)
+						label = sol.get("?label") == null ? null : sol.get("?label").asLiteral().getString();
+					if (label == null)
+						label = sol.get("?labelANY") == null ? null : sol.get("?labelANY").asLiteral().getString();
 					if (label == null)
 						label = sol.get("?foafName") == null ? null : sol.get("?foafName").asLiteral().getString();
 					if (label == null)

@@ -11,12 +11,12 @@ public class EmeritusProfessorRO_0001025 extends edu.uiowa.slis.VIVOISF.TagLibSu
 	static EmeritusProfessorRO_0001025 currentInstance = null;
 	private static final Log log = LogFactory.getLog(EmeritusProfessorRO_0001025.class);
 
-	// object property
+	// non-functional property
 
 	public int doStartTag() throws JspException {
 		try {
-			EmeritusProfessorRO_0001025Iterator theEmeritusProfessorRO_0001025Iterator = (EmeritusProfessorRO_0001025Iterator)findAncestorWithClass(this, EmeritusProfessorRO_0001025Iterator.class);
-			pageContext.getOut().print(theEmeritusProfessorRO_0001025Iterator.getRO_0001025());
+			EmeritusProfessorRO_0001025Iterator theEmeritusProfessor = (EmeritusProfessorRO_0001025Iterator)findAncestorWithClass(this, EmeritusProfessorRO_0001025Iterator.class);
+			pageContext.getOut().print(theEmeritusProfessor.getRO_0001025());
 		} catch (Exception e) {
 			log.error("Can't find enclosing EmeritusProfessor for RO_0001025 tag ", e);
 			throw new JspTagException("Error: Can't find enclosing EmeritusProfessor for RO_0001025 tag ");

@@ -11,12 +11,12 @@ public class AudioVisualDocumentRO_0002353 extends edu.uiowa.slis.VIVOISF.TagLib
 	static AudioVisualDocumentRO_0002353 currentInstance = null;
 	private static final Log log = LogFactory.getLog(AudioVisualDocumentRO_0002353.class);
 
-	// object property
+	// non-functional property
 
 	public int doStartTag() throws JspException {
 		try {
-			AudioVisualDocumentRO_0002353Iterator theAudioVisualDocumentRO_0002353Iterator = (AudioVisualDocumentRO_0002353Iterator)findAncestorWithClass(this, AudioVisualDocumentRO_0002353Iterator.class);
-			pageContext.getOut().print(theAudioVisualDocumentRO_0002353Iterator.getRO_0002353());
+			AudioVisualDocumentRO_0002353Iterator theAudioVisualDocument = (AudioVisualDocumentRO_0002353Iterator)findAncestorWithClass(this, AudioVisualDocumentRO_0002353Iterator.class);
+			pageContext.getOut().print(theAudioVisualDocument.getRO_0002353());
 		} catch (Exception e) {
 			log.error("Can't find enclosing AudioVisualDocument for RO_0002353 tag ", e);
 			throw new JspTagException("Error: Can't find enclosing AudioVisualDocument for RO_0002353 tag ");

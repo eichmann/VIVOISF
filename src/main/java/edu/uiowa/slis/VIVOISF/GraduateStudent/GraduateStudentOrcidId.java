@@ -11,12 +11,12 @@ public class GraduateStudentOrcidId extends edu.uiowa.slis.VIVOISF.TagLibSupport
 	static GraduateStudentOrcidId currentInstance = null;
 	private static final Log log = LogFactory.getLog(GraduateStudentOrcidId.class);
 
-	// object property
+	// non-functional property
 
 	public int doStartTag() throws JspException {
 		try {
-			GraduateStudentOrcidIdIterator theGraduateStudentOrcidIdIterator = (GraduateStudentOrcidIdIterator)findAncestorWithClass(this, GraduateStudentOrcidIdIterator.class);
-			pageContext.getOut().print(theGraduateStudentOrcidIdIterator.getOrcidId());
+			GraduateStudentOrcidIdIterator theGraduateStudent = (GraduateStudentOrcidIdIterator)findAncestorWithClass(this, GraduateStudentOrcidIdIterator.class);
+			pageContext.getOut().print(theGraduateStudent.getOrcidId());
 		} catch (Exception e) {
 			log.error("Can't find enclosing GraduateStudent for orcidId tag ", e);
 			throw new JspTagException("Error: Can't find enclosing GraduateStudent for orcidId tag ");

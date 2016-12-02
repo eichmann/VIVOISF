@@ -11,12 +11,12 @@ public class disputedGeographicFocusOf extends edu.uiowa.slis.VIVOISF.TagLibSupp
 	static disputedGeographicFocusOf currentInstance = null;
 	private static final Log log = LogFactory.getLog(disputedGeographicFocusOf.class);
 
-	// object property
+	// non-functional property
 
 	public int doStartTag() throws JspException {
 		try {
-			disputedGeographicFocusOfIterator thedisputedGeographicFocusOfIterator = (disputedGeographicFocusOfIterator)findAncestorWithClass(this, disputedGeographicFocusOfIterator.class);
-			pageContext.getOut().print(thedisputedGeographicFocusOfIterator.getGeographicFocusOf());
+			disputedGeographicFocusOfIterator thedisputed = (disputedGeographicFocusOfIterator)findAncestorWithClass(this, disputedGeographicFocusOfIterator.class);
+			pageContext.getOut().print(thedisputed.getGeographicFocusOf());
 		} catch (Exception e) {
 			log.error("Can't find enclosing disputed for geographicFocusOf tag ", e);
 			throw new JspTagException("Error: Can't find enclosing disputed for geographicFocusOf tag ");

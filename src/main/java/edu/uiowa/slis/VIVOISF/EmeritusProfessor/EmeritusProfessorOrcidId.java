@@ -11,12 +11,12 @@ public class EmeritusProfessorOrcidId extends edu.uiowa.slis.VIVOISF.TagLibSuppo
 	static EmeritusProfessorOrcidId currentInstance = null;
 	private static final Log log = LogFactory.getLog(EmeritusProfessorOrcidId.class);
 
-	// object property
+	// non-functional property
 
 	public int doStartTag() throws JspException {
 		try {
-			EmeritusProfessorOrcidIdIterator theEmeritusProfessorOrcidIdIterator = (EmeritusProfessorOrcidIdIterator)findAncestorWithClass(this, EmeritusProfessorOrcidIdIterator.class);
-			pageContext.getOut().print(theEmeritusProfessorOrcidIdIterator.getOrcidId());
+			EmeritusProfessorOrcidIdIterator theEmeritusProfessor = (EmeritusProfessorOrcidIdIterator)findAncestorWithClass(this, EmeritusProfessorOrcidIdIterator.class);
+			pageContext.getOut().print(theEmeritusProfessor.getOrcidId());
 		} catch (Exception e) {
 			log.error("Can't find enclosing EmeritusProfessor for orcidId tag ", e);
 			throw new JspTagException("Error: Can't find enclosing EmeritusProfessor for orcidId tag ");

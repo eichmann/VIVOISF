@@ -11,12 +11,12 @@ public class ContinentGeographicFocusOf extends edu.uiowa.slis.VIVOISF.TagLibSup
 	static ContinentGeographicFocusOf currentInstance = null;
 	private static final Log log = LogFactory.getLog(ContinentGeographicFocusOf.class);
 
-	// object property
+	// non-functional property
 
 	public int doStartTag() throws JspException {
 		try {
-			ContinentGeographicFocusOfIterator theContinentGeographicFocusOfIterator = (ContinentGeographicFocusOfIterator)findAncestorWithClass(this, ContinentGeographicFocusOfIterator.class);
-			pageContext.getOut().print(theContinentGeographicFocusOfIterator.getGeographicFocusOf());
+			ContinentGeographicFocusOfIterator theContinent = (ContinentGeographicFocusOfIterator)findAncestorWithClass(this, ContinentGeographicFocusOfIterator.class);
+			pageContext.getOut().print(theContinent.getGeographicFocusOf());
 		} catch (Exception e) {
 			log.error("Can't find enclosing Continent for geographicFocusOf tag ", e);
 			throw new JspTagException("Error: Can't find enclosing Continent for geographicFocusOf tag ");

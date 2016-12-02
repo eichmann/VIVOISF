@@ -9,57 +9,39 @@ import javax.servlet.jsp.JspTagException;
 import org.apache.jena.query.QuerySolution;
 import org.apache.jena.query.ResultSet;
 
-import java.util.Hashtable;
-
 @SuppressWarnings("serial")
 public class EmeritusLibrarianOrcidIdIterator extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 	static EmeritusLibrarianOrcidIdIterator currentInstance = null;
 	private static final Log log = LogFactory.getLog(EmeritusLibrarianOrcidIdIterator.class);
 
 	String subjectURI = null;
-	String type = null;
 	String orcidId = null;
 	ResultSet rs = null;
-	Hashtable<String,String> classFilter = null;
 
 	public int doStartTag() throws JspException {
 		currentInstance = this;
 		try {
-			EmeritusLibrarian theEmeritusLibrarian = (EmeritusLibrarian) findAncestorWithClass(this, EmeritusLibrarian.class);
+			EmeritusLibrarian ancestorInstance = (EmeritusLibrarian) findAncestorWithClass(this, EmeritusLibrarian.class);
 
-			if (theEmeritusLibrarian != null) {
-				subjectURI = theEmeritusLibrarian.getSubjectURI();
+			if (ancestorInstance != null) {
+				subjectURI = ancestorInstance.getSubjectURI();
 			}
 
-			if (theEmeritusLibrarian == null && subjectURI == null) {
+			if (ancestorInstance == null && subjectURI == null) {
 				throw new JspException("subject URI generation currently not supported");
 			}
 
-			rs = getResultSet(prefix+"SELECT ?s ?t where {"
-					+" <" + subjectURI + "> <http://vivoweb.org/ontology/core#orcidId> ?s . "
-					+" ?s <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?t ."
-					+" FILTER NOT EXISTS {"
-					+"   ?s <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?subtype ."
-					+"   ?subtype <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?t ."
-					+"   filter ( ?subtype != ?t )"
-					+" }"
-					+"} ");
-			while(rs.hasNext()) {
+			rs = getResultSet(prefix+"SELECT ?s where { <" + subjectURI + "> <http://vivoweb.org/ontology/core#orcidId> ?s } ");
+			if(rs.hasNext()) {
 				QuerySolution sol = rs.nextSolution();
 				orcidId = sol.get("?s").toString();
-				type = getLocalName(sol.get("?t").toString());
-				if (type == null)
-					continue;
-				if (classFilter == null || (classFilter != null && type != null && classFilter.containsKey(type))) {
-					log.info("instance: " + orcidId + "	type: " + type);
-					return EVAL_BODY_INCLUDE;
-				}
+				return EVAL_BODY_INCLUDE;
 			}
 		} catch (Exception e) {
-			log.error("Exception raised in EmeritusLibrarianOrcidIdIterator doStartTag", e);
+			log.error("Exception raised in EmeritusLibrarianIterator doStartTag", e);
 			clearServiceState();
 			freeConnection();
-			throw new JspTagException("Exception raised in EmeritusLibrarianOrcidIdIterator doStartTag");
+			throw new JspTagException("Exception raised in EmeritusLibrarianIterator doStartTag");
 		}
 
 		return SKIP_BODY;
@@ -67,22 +49,16 @@ public class EmeritusLibrarianOrcidIdIterator extends edu.uiowa.slis.VIVOISF.Tag
 
 	public int doAfterBody() throws JspException {
 		try {
-			while(rs.hasNext()) {
+			if(rs.hasNext()) {
 				QuerySolution sol = rs.nextSolution();
 				orcidId = sol.get("?s").toString();
-				type = getLocalName(sol.get("?t").toString());
-				if (type == null)
-					continue;
-				if (classFilter == null || (classFilter != null && type != null && classFilter.containsKey(type))) {
-					log.info("instance: " + orcidId + "	type: " + type);
-					return EVAL_BODY_AGAIN;
-				}
+				return EVAL_BODY_AGAIN;
 			}
 		} catch (Exception e) {
-			log.error("Exception raised in EmeritusLibrarianOrcidIdIterator doAfterBody", e);
+			log.error("Exception raised in EmeritusLibrarianIterator doAfterBody", e);
 			clearServiceState();
 			freeConnection();
-			throw new JspTagException("Exception raised in EmeritusLibrarianOrcidIdIterator doAfterBody");
+			throw new JspTagException("Exception raised in EmeritusLibrarianIterator doAfterBody");
 		}
 
 		return SKIP_BODY;
@@ -93,8 +69,8 @@ public class EmeritusLibrarianOrcidIdIterator extends edu.uiowa.slis.VIVOISF.Tag
 		try {
 			// do processing
 		} catch (Exception e) {
-			log.error("Exception raised in EmeritusLibrarianOrcidId doEndTag", e);
-			throw new JspTagException("Exception raised in EmeritusLibrarianOrcidId doEndTag");
+			log.error("Exception raised in EmeritusLibrarian doEndTag", e);
+			throw new JspTagException("Exception raised in EmeritusLibrarian doEndTag");
 		} finally {
 			clearServiceState();
 			freeConnection();
@@ -105,17 +81,6 @@ public class EmeritusLibrarianOrcidIdIterator extends edu.uiowa.slis.VIVOISF.Tag
 
 	private void clearServiceState() {
 		subjectURI = null;
-		type = null;
-		orcidId = null;
-		classFilter = null;
-	}
-
-	public void setType(String type) {
-		this.type = type;
-	}
-
-	public String getType() {
-		return type;
 	}
 
 	public void setOrcidId(String orcidId) {
@@ -124,19 +89,6 @@ public class EmeritusLibrarianOrcidIdIterator extends edu.uiowa.slis.VIVOISF.Tag
 
 	public String getOrcidId() {
 		return orcidId;
-	}
-
-	public void setClassFilter(String filterString) {
-		String[] classFilterArray = filterString.split(" ");
-		this.classFilter = new Hashtable<String, String>();
-		for (String filterClass : classFilterArray) {
-			log.info("adding filterClass " + filterClass + " to EmeritusLibrarianOrcidIdIterator");
-			classFilter.put(filterClass, "");
-		}
-	}
-
-	public String getClassFilter() {
-		return classFilter.toString();
 	}
 
 }

@@ -9,57 +9,39 @@ import javax.servlet.jsp.JspTagException;
 import org.apache.jena.query.QuerySolution;
 import org.apache.jena.query.ResultSet;
 
-import java.util.Hashtable;
-
 @SuppressWarnings("serial")
 public class GeographicRegionGeographicFocusOfIterator extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 	static GeographicRegionGeographicFocusOfIterator currentInstance = null;
 	private static final Log log = LogFactory.getLog(GeographicRegionGeographicFocusOfIterator.class);
 
 	String subjectURI = null;
-	String type = null;
 	String geographicFocusOf = null;
 	ResultSet rs = null;
-	Hashtable<String,String> classFilter = null;
 
 	public int doStartTag() throws JspException {
 		currentInstance = this;
 		try {
-			GeographicRegion theGeographicRegion = (GeographicRegion) findAncestorWithClass(this, GeographicRegion.class);
+			GeographicRegion ancestorInstance = (GeographicRegion) findAncestorWithClass(this, GeographicRegion.class);
 
-			if (theGeographicRegion != null) {
-				subjectURI = theGeographicRegion.getSubjectURI();
+			if (ancestorInstance != null) {
+				subjectURI = ancestorInstance.getSubjectURI();
 			}
 
-			if (theGeographicRegion == null && subjectURI == null) {
+			if (ancestorInstance == null && subjectURI == null) {
 				throw new JspException("subject URI generation currently not supported");
 			}
 
-			rs = getResultSet(prefix+"SELECT ?s ?t where {"
-					+" <" + subjectURI + "> <http://vivoweb.org/ontology/core#geographicFocusOf> ?s . "
-					+" ?s <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?t ."
-					+" FILTER NOT EXISTS {"
-					+"   ?s <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?subtype ."
-					+"   ?subtype <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?t ."
-					+"   filter ( ?subtype != ?t )"
-					+" }"
-					+"} ");
-			while(rs.hasNext()) {
+			rs = getResultSet(prefix+"SELECT ?s where { <" + subjectURI + "> <http://vivoweb.org/ontology/core#geographicFocusOf> ?s } ");
+			if(rs.hasNext()) {
 				QuerySolution sol = rs.nextSolution();
 				geographicFocusOf = sol.get("?s").toString();
-				type = getLocalName(sol.get("?t").toString());
-				if (type == null)
-					continue;
-				if (classFilter == null || (classFilter != null && type != null && classFilter.containsKey(type))) {
-					log.info("instance: " + geographicFocusOf + "	type: " + type);
-					return EVAL_BODY_INCLUDE;
-				}
+				return EVAL_BODY_INCLUDE;
 			}
 		} catch (Exception e) {
-			log.error("Exception raised in GeographicRegionGeographicFocusOfIterator doStartTag", e);
+			log.error("Exception raised in GeographicRegionIterator doStartTag", e);
 			clearServiceState();
 			freeConnection();
-			throw new JspTagException("Exception raised in GeographicRegionGeographicFocusOfIterator doStartTag");
+			throw new JspTagException("Exception raised in GeographicRegionIterator doStartTag");
 		}
 
 		return SKIP_BODY;
@@ -67,22 +49,16 @@ public class GeographicRegionGeographicFocusOfIterator extends edu.uiowa.slis.VI
 
 	public int doAfterBody() throws JspException {
 		try {
-			while(rs.hasNext()) {
+			if(rs.hasNext()) {
 				QuerySolution sol = rs.nextSolution();
 				geographicFocusOf = sol.get("?s").toString();
-				type = getLocalName(sol.get("?t").toString());
-				if (type == null)
-					continue;
-				if (classFilter == null || (classFilter != null && type != null && classFilter.containsKey(type))) {
-					log.info("instance: " + geographicFocusOf + "	type: " + type);
-					return EVAL_BODY_AGAIN;
-				}
+				return EVAL_BODY_AGAIN;
 			}
 		} catch (Exception e) {
-			log.error("Exception raised in GeographicRegionGeographicFocusOfIterator doAfterBody", e);
+			log.error("Exception raised in GeographicRegionIterator doAfterBody", e);
 			clearServiceState();
 			freeConnection();
-			throw new JspTagException("Exception raised in GeographicRegionGeographicFocusOfIterator doAfterBody");
+			throw new JspTagException("Exception raised in GeographicRegionIterator doAfterBody");
 		}
 
 		return SKIP_BODY;
@@ -93,8 +69,8 @@ public class GeographicRegionGeographicFocusOfIterator extends edu.uiowa.slis.VI
 		try {
 			// do processing
 		} catch (Exception e) {
-			log.error("Exception raised in GeographicRegionGeographicFocusOf doEndTag", e);
-			throw new JspTagException("Exception raised in GeographicRegionGeographicFocusOf doEndTag");
+			log.error("Exception raised in GeographicRegion doEndTag", e);
+			throw new JspTagException("Exception raised in GeographicRegion doEndTag");
 		} finally {
 			clearServiceState();
 			freeConnection();
@@ -105,17 +81,6 @@ public class GeographicRegionGeographicFocusOfIterator extends edu.uiowa.slis.VI
 
 	private void clearServiceState() {
 		subjectURI = null;
-		type = null;
-		geographicFocusOf = null;
-		classFilter = null;
-	}
-
-	public void setType(String type) {
-		this.type = type;
-	}
-
-	public String getType() {
-		return type;
 	}
 
 	public void setGeographicFocusOf(String geographicFocusOf) {
@@ -124,19 +89,6 @@ public class GeographicRegionGeographicFocusOfIterator extends edu.uiowa.slis.VI
 
 	public String getGeographicFocusOf() {
 		return geographicFocusOf;
-	}
-
-	public void setClassFilter(String filterString) {
-		String[] classFilterArray = filterString.split(" ");
-		this.classFilter = new Hashtable<String, String>();
-		for (String filterClass : classFilterArray) {
-			log.info("adding filterClass " + filterClass + " to GeographicRegionGeographicFocusOfIterator");
-			classFilter.put(filterClass, "");
-		}
-	}
-
-	public String getClassFilter() {
-		return classFilter.toString();
 	}
 
 }

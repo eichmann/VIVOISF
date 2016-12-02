@@ -11,12 +11,12 @@ public class NonFacultyAcademicRO_0001025 extends edu.uiowa.slis.VIVOISF.TagLibS
 	static NonFacultyAcademicRO_0001025 currentInstance = null;
 	private static final Log log = LogFactory.getLog(NonFacultyAcademicRO_0001025.class);
 
-	// object property
+	// non-functional property
 
 	public int doStartTag() throws JspException {
 		try {
-			NonFacultyAcademicRO_0001025Iterator theNonFacultyAcademicRO_0001025Iterator = (NonFacultyAcademicRO_0001025Iterator)findAncestorWithClass(this, NonFacultyAcademicRO_0001025Iterator.class);
-			pageContext.getOut().print(theNonFacultyAcademicRO_0001025Iterator.getRO_0001025());
+			NonFacultyAcademicRO_0001025Iterator theNonFacultyAcademic = (NonFacultyAcademicRO_0001025Iterator)findAncestorWithClass(this, NonFacultyAcademicRO_0001025Iterator.class);
+			pageContext.getOut().print(theNonFacultyAcademic.getRO_0001025());
 		} catch (Exception e) {
 			log.error("Can't find enclosing NonFacultyAcademic for RO_0001025 tag ", e);
 			throw new JspTagException("Error: Can't find enclosing NonFacultyAcademic for RO_0001025 tag ");

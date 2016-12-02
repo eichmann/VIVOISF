@@ -11,12 +11,12 @@ public class NonFacultyAcademicOrcidId extends edu.uiowa.slis.VIVOISF.TagLibSupp
 	static NonFacultyAcademicOrcidId currentInstance = null;
 	private static final Log log = LogFactory.getLog(NonFacultyAcademicOrcidId.class);
 
-	// object property
+	// non-functional property
 
 	public int doStartTag() throws JspException {
 		try {
-			NonFacultyAcademicOrcidIdIterator theNonFacultyAcademicOrcidIdIterator = (NonFacultyAcademicOrcidIdIterator)findAncestorWithClass(this, NonFacultyAcademicOrcidIdIterator.class);
-			pageContext.getOut().print(theNonFacultyAcademicOrcidIdIterator.getOrcidId());
+			NonFacultyAcademicOrcidIdIterator theNonFacultyAcademic = (NonFacultyAcademicOrcidIdIterator)findAncestorWithClass(this, NonFacultyAcademicOrcidIdIterator.class);
+			pageContext.getOut().print(theNonFacultyAcademic.getOrcidId());
 		} catch (Exception e) {
 			log.error("Can't find enclosing NonFacultyAcademic for orcidId tag ", e);
 			throw new JspTagException("Error: Can't find enclosing NonFacultyAcademic for orcidId tag ");

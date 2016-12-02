@@ -36,7 +36,7 @@ public class ListMemberListInverseIterator extends edu.uiowa.slis.VIVOISF.TagLib
 			}
 
 			rs = getResultSet(prefix+"SELECT ?s ?t where {"
-					+" ?s <http://www.w3.org/2008/05/skos#memberList> <" + subjectURI+ "> . "
+					+" ?s <http://www.w3.org/2004/02/skos/core#memberList> <" + subjectURI+ "> . "
 					+" ?s <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?t ."
 					+" FILTER NOT EXISTS {"
 					+"   ?s <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?subtype ."
