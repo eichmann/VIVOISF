@@ -9,57 +9,39 @@ import javax.servlet.jsp.JspTagException;
 import org.apache.jena.query.QuerySolution;
 import org.apache.jena.query.ResultSet;
 
-import java.util.Hashtable;
-
 @SuppressWarnings("serial")
 public class UndergraduateStudentOrcidIdIterator extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 	static UndergraduateStudentOrcidIdIterator currentInstance = null;
 	private static final Log log = LogFactory.getLog(UndergraduateStudentOrcidIdIterator.class);
 
 	String subjectURI = null;
-	String type = null;
 	String orcidId = null;
 	ResultSet rs = null;
-	Hashtable<String,String> classFilter = null;
 
 	public int doStartTag() throws JspException {
 		currentInstance = this;
 		try {
-			UndergraduateStudent theUndergraduateStudent = (UndergraduateStudent) findAncestorWithClass(this, UndergraduateStudent.class);
+			UndergraduateStudent ancestorInstance = (UndergraduateStudent) findAncestorWithClass(this, UndergraduateStudent.class);
 
-			if (theUndergraduateStudent != null) {
-				subjectURI = theUndergraduateStudent.getSubjectURI();
+			if (ancestorInstance != null) {
+				subjectURI = ancestorInstance.getSubjectURI();
 			}
 
-			if (theUndergraduateStudent == null && subjectURI == null) {
+			if (ancestorInstance == null && subjectURI == null) {
 				throw new JspException("subject URI generation currently not supported");
 			}
 
-			rs = getResultSet(prefix+"SELECT ?s ?t where {"
-					+" <" + subjectURI + "> <http://vivoweb.org/ontology/core#orcidId> ?s . "
-					+" ?s <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?t ."
-					+" FILTER NOT EXISTS {"
-					+"   ?s <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?subtype ."
-					+"   ?subtype <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?t ."
-					+"   filter ( ?subtype != ?t )"
-					+" }"
-					+"} ");
-			while(rs.hasNext()) {
+			rs = getResultSet(prefix+"SELECT ?s where { <" + subjectURI + "> <http://vivoweb.org/ontology/core#orcidId> ?s } ");
+			if(rs.hasNext()) {
 				QuerySolution sol = rs.nextSolution();
 				orcidId = sol.get("?s").toString();
-				type = getLocalName(sol.get("?t").toString());
-				if (type == null)
-					continue;
-				if (classFilter == null || (classFilter != null && type != null && classFilter.containsKey(type))) {
-					log.info("instance: " + orcidId + "	type: " + type);
-					return EVAL_BODY_INCLUDE;
-				}
+				return EVAL_BODY_INCLUDE;
 			}
 		} catch (Exception e) {
-			log.error("Exception raised in UndergraduateStudentOrcidIdIterator doStartTag", e);
+			log.error("Exception raised in UndergraduateStudentIterator doStartTag", e);
 			clearServiceState();
 			freeConnection();
-			throw new JspTagException("Exception raised in UndergraduateStudentOrcidIdIterator doStartTag");
+			throw new JspTagException("Exception raised in UndergraduateStudentIterator doStartTag");
 		}
 
 		return SKIP_BODY;
@@ -67,22 +49,16 @@ public class UndergraduateStudentOrcidIdIterator extends edu.uiowa.slis.VIVOISF.
 
 	public int doAfterBody() throws JspException {
 		try {
-			while(rs.hasNext()) {
+			if(rs.hasNext()) {
 				QuerySolution sol = rs.nextSolution();
 				orcidId = sol.get("?s").toString();
-				type = getLocalName(sol.get("?t").toString());
-				if (type == null)
-					continue;
-				if (classFilter == null || (classFilter != null && type != null && classFilter.containsKey(type))) {
-					log.info("instance: " + orcidId + "	type: " + type);
-					return EVAL_BODY_AGAIN;
-				}
+				return EVAL_BODY_AGAIN;
 			}
 		} catch (Exception e) {
-			log.error("Exception raised in UndergraduateStudentOrcidIdIterator doAfterBody", e);
+			log.error("Exception raised in UndergraduateStudentIterator doAfterBody", e);
 			clearServiceState();
 			freeConnection();
-			throw new JspTagException("Exception raised in UndergraduateStudentOrcidIdIterator doAfterBody");
+			throw new JspTagException("Exception raised in UndergraduateStudentIterator doAfterBody");
 		}
 
 		return SKIP_BODY;
@@ -93,8 +69,8 @@ public class UndergraduateStudentOrcidIdIterator extends edu.uiowa.slis.VIVOISF.
 		try {
 			// do processing
 		} catch (Exception e) {
-			log.error("Exception raised in UndergraduateStudentOrcidId doEndTag", e);
-			throw new JspTagException("Exception raised in UndergraduateStudentOrcidId doEndTag");
+			log.error("Exception raised in UndergraduateStudent doEndTag", e);
+			throw new JspTagException("Exception raised in UndergraduateStudent doEndTag");
 		} finally {
 			clearServiceState();
 			freeConnection();
@@ -105,17 +81,6 @@ public class UndergraduateStudentOrcidIdIterator extends edu.uiowa.slis.VIVOISF.
 
 	private void clearServiceState() {
 		subjectURI = null;
-		type = null;
-		orcidId = null;
-		classFilter = null;
-	}
-
-	public void setType(String type) {
-		this.type = type;
-	}
-
-	public String getType() {
-		return type;
 	}
 
 	public void setOrcidId(String orcidId) {
@@ -124,19 +89,6 @@ public class UndergraduateStudentOrcidIdIterator extends edu.uiowa.slis.VIVOISF.
 
 	public String getOrcidId() {
 		return orcidId;
-	}
-
-	public void setClassFilter(String filterString) {
-		String[] classFilterArray = filterString.split(" ");
-		this.classFilter = new Hashtable<String, String>();
-		for (String filterClass : classFilterArray) {
-			log.info("adding filterClass " + filterClass + " to UndergraduateStudentOrcidIdIterator");
-			classFilter.put(filterClass, "");
-		}
-	}
-
-	public String getClassFilter() {
-		return classFilter.toString();
 	}
 
 }

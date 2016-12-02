@@ -11,12 +11,12 @@ public class SubnationalRegionGeographicFocusOf extends edu.uiowa.slis.VIVOISF.T
 	static SubnationalRegionGeographicFocusOf currentInstance = null;
 	private static final Log log = LogFactory.getLog(SubnationalRegionGeographicFocusOf.class);
 
-	// object property
+	// non-functional property
 
 	public int doStartTag() throws JspException {
 		try {
-			SubnationalRegionGeographicFocusOfIterator theSubnationalRegionGeographicFocusOfIterator = (SubnationalRegionGeographicFocusOfIterator)findAncestorWithClass(this, SubnationalRegionGeographicFocusOfIterator.class);
-			pageContext.getOut().print(theSubnationalRegionGeographicFocusOfIterator.getGeographicFocusOf());
+			SubnationalRegionGeographicFocusOfIterator theSubnationalRegion = (SubnationalRegionGeographicFocusOfIterator)findAncestorWithClass(this, SubnationalRegionGeographicFocusOfIterator.class);
+			pageContext.getOut().print(theSubnationalRegion.getGeographicFocusOf());
 		} catch (Exception e) {
 			log.error("Can't find enclosing SubnationalRegion for geographicFocusOf tag ", e);
 			throw new JspTagException("Error: Can't find enclosing SubnationalRegion for geographicFocusOf tag ");

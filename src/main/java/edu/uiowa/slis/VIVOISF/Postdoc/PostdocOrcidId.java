@@ -11,12 +11,12 @@ public class PostdocOrcidId extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 	static PostdocOrcidId currentInstance = null;
 	private static final Log log = LogFactory.getLog(PostdocOrcidId.class);
 
-	// object property
+	// non-functional property
 
 	public int doStartTag() throws JspException {
 		try {
-			PostdocOrcidIdIterator thePostdocOrcidIdIterator = (PostdocOrcidIdIterator)findAncestorWithClass(this, PostdocOrcidIdIterator.class);
-			pageContext.getOut().print(thePostdocOrcidIdIterator.getOrcidId());
+			PostdocOrcidIdIterator thePostdoc = (PostdocOrcidIdIterator)findAncestorWithClass(this, PostdocOrcidIdIterator.class);
+			pageContext.getOut().print(thePostdoc.getOrcidId());
 		} catch (Exception e) {
 			log.error("Can't find enclosing Postdoc for orcidId tag ", e);
 			throw new JspTagException("Error: Can't find enclosing Postdoc for orcidId tag ");

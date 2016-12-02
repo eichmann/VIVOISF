@@ -9,57 +9,39 @@ import javax.servlet.jsp.JspTagException;
 import org.apache.jena.query.QuerySolution;
 import org.apache.jena.query.ResultSet;
 
-import java.util.Hashtable;
-
 @SuppressWarnings("serial")
 public class UndergraduateStudentRO_0001025Iterator extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 	static UndergraduateStudentRO_0001025Iterator currentInstance = null;
 	private static final Log log = LogFactory.getLog(UndergraduateStudentRO_0001025Iterator.class);
 
 	String subjectURI = null;
-	String type = null;
 	String RO_0001025 = null;
 	ResultSet rs = null;
-	Hashtable<String,String> classFilter = null;
 
 	public int doStartTag() throws JspException {
 		currentInstance = this;
 		try {
-			UndergraduateStudent theUndergraduateStudent = (UndergraduateStudent) findAncestorWithClass(this, UndergraduateStudent.class);
+			UndergraduateStudent ancestorInstance = (UndergraduateStudent) findAncestorWithClass(this, UndergraduateStudent.class);
 
-			if (theUndergraduateStudent != null) {
-				subjectURI = theUndergraduateStudent.getSubjectURI();
+			if (ancestorInstance != null) {
+				subjectURI = ancestorInstance.getSubjectURI();
 			}
 
-			if (theUndergraduateStudent == null && subjectURI == null) {
+			if (ancestorInstance == null && subjectURI == null) {
 				throw new JspException("subject URI generation currently not supported");
 			}
 
-			rs = getResultSet(prefix+"SELECT ?s ?t where {"
-					+" <" + subjectURI + "> <http://purl.obolibrary.org/obo/RO_0001025> ?s . "
-					+" ?s <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?t ."
-					+" FILTER NOT EXISTS {"
-					+"   ?s <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?subtype ."
-					+"   ?subtype <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?t ."
-					+"   filter ( ?subtype != ?t )"
-					+" }"
-					+"} ");
-			while(rs.hasNext()) {
+			rs = getResultSet(prefix+"SELECT ?s where { <" + subjectURI + "> <http://purl.obolibrary.org/obo/RO_0001025> ?s } ");
+			if(rs.hasNext()) {
 				QuerySolution sol = rs.nextSolution();
 				RO_0001025 = sol.get("?s").toString();
-				type = getLocalName(sol.get("?t").toString());
-				if (type == null)
-					continue;
-				if (classFilter == null || (classFilter != null && type != null && classFilter.containsKey(type))) {
-					log.info("instance: " + RO_0001025 + "	type: " + type);
-					return EVAL_BODY_INCLUDE;
-				}
+				return EVAL_BODY_INCLUDE;
 			}
 		} catch (Exception e) {
-			log.error("Exception raised in UndergraduateStudentRO_0001025Iterator doStartTag", e);
+			log.error("Exception raised in UndergraduateStudentIterator doStartTag", e);
 			clearServiceState();
 			freeConnection();
-			throw new JspTagException("Exception raised in UndergraduateStudentRO_0001025Iterator doStartTag");
+			throw new JspTagException("Exception raised in UndergraduateStudentIterator doStartTag");
 		}
 
 		return SKIP_BODY;
@@ -67,22 +49,16 @@ public class UndergraduateStudentRO_0001025Iterator extends edu.uiowa.slis.VIVOI
 
 	public int doAfterBody() throws JspException {
 		try {
-			while(rs.hasNext()) {
+			if(rs.hasNext()) {
 				QuerySolution sol = rs.nextSolution();
 				RO_0001025 = sol.get("?s").toString();
-				type = getLocalName(sol.get("?t").toString());
-				if (type == null)
-					continue;
-				if (classFilter == null || (classFilter != null && type != null && classFilter.containsKey(type))) {
-					log.info("instance: " + RO_0001025 + "	type: " + type);
-					return EVAL_BODY_AGAIN;
-				}
+				return EVAL_BODY_AGAIN;
 			}
 		} catch (Exception e) {
-			log.error("Exception raised in UndergraduateStudentRO_0001025Iterator doAfterBody", e);
+			log.error("Exception raised in UndergraduateStudentIterator doAfterBody", e);
 			clearServiceState();
 			freeConnection();
-			throw new JspTagException("Exception raised in UndergraduateStudentRO_0001025Iterator doAfterBody");
+			throw new JspTagException("Exception raised in UndergraduateStudentIterator doAfterBody");
 		}
 
 		return SKIP_BODY;
@@ -93,8 +69,8 @@ public class UndergraduateStudentRO_0001025Iterator extends edu.uiowa.slis.VIVOI
 		try {
 			// do processing
 		} catch (Exception e) {
-			log.error("Exception raised in UndergraduateStudentRO_0001025 doEndTag", e);
-			throw new JspTagException("Exception raised in UndergraduateStudentRO_0001025 doEndTag");
+			log.error("Exception raised in UndergraduateStudent doEndTag", e);
+			throw new JspTagException("Exception raised in UndergraduateStudent doEndTag");
 		} finally {
 			clearServiceState();
 			freeConnection();
@@ -105,17 +81,6 @@ public class UndergraduateStudentRO_0001025Iterator extends edu.uiowa.slis.VIVOI
 
 	private void clearServiceState() {
 		subjectURI = null;
-		type = null;
-		RO_0001025 = null;
-		classFilter = null;
-	}
-
-	public void setType(String type) {
-		this.type = type;
-	}
-
-	public String getType() {
-		return type;
 	}
 
 	public void setRO_0001025(String RO_0001025) {
@@ -124,19 +89,6 @@ public class UndergraduateStudentRO_0001025Iterator extends edu.uiowa.slis.VIVOI
 
 	public String getRO_0001025() {
 		return RO_0001025;
-	}
-
-	public void setClassFilter(String filterString) {
-		String[] classFilterArray = filterString.split(" ");
-		this.classFilter = new Hashtable<String, String>();
-		for (String filterClass : classFilterArray) {
-			log.info("adding filterClass " + filterClass + " to UndergraduateStudentRO_0001025Iterator");
-			classFilter.put(filterClass, "");
-		}
-	}
-
-	public String getClassFilter() {
-		return classFilter.toString();
 	}
 
 }

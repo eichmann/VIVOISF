@@ -11,12 +11,12 @@ public class PopulatedPlaceGeographicFocusOf extends edu.uiowa.slis.VIVOISF.TagL
 	static PopulatedPlaceGeographicFocusOf currentInstance = null;
 	private static final Log log = LogFactory.getLog(PopulatedPlaceGeographicFocusOf.class);
 
-	// object property
+	// non-functional property
 
 	public int doStartTag() throws JspException {
 		try {
-			PopulatedPlaceGeographicFocusOfIterator thePopulatedPlaceGeographicFocusOfIterator = (PopulatedPlaceGeographicFocusOfIterator)findAncestorWithClass(this, PopulatedPlaceGeographicFocusOfIterator.class);
-			pageContext.getOut().print(thePopulatedPlaceGeographicFocusOfIterator.getGeographicFocusOf());
+			PopulatedPlaceGeographicFocusOfIterator thePopulatedPlace = (PopulatedPlaceGeographicFocusOfIterator)findAncestorWithClass(this, PopulatedPlaceGeographicFocusOfIterator.class);
+			pageContext.getOut().print(thePopulatedPlace.getGeographicFocusOf());
 		} catch (Exception e) {
 			log.error("Can't find enclosing PopulatedPlace for geographicFocusOf tag ", e);
 			throw new JspTagException("Error: Can't find enclosing PopulatedPlace for geographicFocusOf tag ");
