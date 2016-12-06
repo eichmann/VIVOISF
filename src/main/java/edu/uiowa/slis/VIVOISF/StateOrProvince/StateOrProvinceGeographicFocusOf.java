@@ -11,12 +11,12 @@ public class StateOrProvinceGeographicFocusOf extends edu.uiowa.slis.VIVOISF.Tag
 	static StateOrProvinceGeographicFocusOf currentInstance = null;
 	private static final Log log = LogFactory.getLog(StateOrProvinceGeographicFocusOf.class);
 
-	// non-functional property
+	// object property
 
 	public int doStartTag() throws JspException {
 		try {
-			StateOrProvinceGeographicFocusOfIterator theStateOrProvince = (StateOrProvinceGeographicFocusOfIterator)findAncestorWithClass(this, StateOrProvinceGeographicFocusOfIterator.class);
-			pageContext.getOut().print(theStateOrProvince.getGeographicFocusOf());
+			StateOrProvinceGeographicFocusOfIterator theStateOrProvinceGeographicFocusOfIterator = (StateOrProvinceGeographicFocusOfIterator)findAncestorWithClass(this, StateOrProvinceGeographicFocusOfIterator.class);
+			pageContext.getOut().print(theStateOrProvinceGeographicFocusOfIterator.getGeographicFocusOf());
 		} catch (Exception e) {
 			log.error("Can't find enclosing StateOrProvince for geographicFocusOf tag ", e);
 			throw new JspTagException("Error: Can't find enclosing StateOrProvince for geographicFocusOf tag ");

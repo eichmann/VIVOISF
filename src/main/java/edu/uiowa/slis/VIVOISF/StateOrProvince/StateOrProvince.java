@@ -22,6 +22,9 @@ public class StateOrProvince extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 
 	// functional datatype properties, both local and inherited
 
+	String placeOfPublication = null;
+	String hideFromDisplay = null;
+	String abbreviation = null;
 
 	public int doStartTag() throws JspException {
 		currentInstance = this;
@@ -33,11 +36,151 @@ public class StateOrProvince extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 				label = theStateOrProvinceIterator.getLabel();
 			}
 
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.area.areaBFO_0000051Iterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.area.areaBFO_0000051Iterator)this.getParent()).getBFO_0000051();
+			}
+
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.self_governing.self_governingBFO_0000051Iterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.self_governing.self_governingBFO_0000051Iterator)this.getParent()).getBFO_0000051();
+			}
+
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.territory.territoryBFO_0000051Iterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.territory.territoryBFO_0000051Iterator)this.getParent()).getBFO_0000051();
+			}
+
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.BFO_0000001.BFO_0000001BFO_0000051Iterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.BFO_0000001.BFO_0000001BFO_0000051Iterator)this.getParent()).getBFO_0000051();
+			}
+
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.BFO_0000002.BFO_0000002BFO_0000051Iterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.BFO_0000002.BFO_0000002BFO_0000051Iterator)this.getParent()).getBFO_0000051();
+			}
+
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.BFO_0000004.BFO_0000004BFO_0000051Iterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.BFO_0000004.BFO_0000004BFO_0000051Iterator)this.getParent()).getBFO_0000051();
+			}
+
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.BFO_0000006.BFO_0000006BFO_0000051Iterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.BFO_0000006.BFO_0000006BFO_0000051Iterator)this.getParent()).getBFO_0000051();
+			}
+
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.BFO_0000141.BFO_0000141BFO_0000051Iterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.BFO_0000141.BFO_0000141BFO_0000051Iterator)this.getParent()).getBFO_0000051();
+			}
+
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.Country.CountryBFO_0000051Iterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.Country.CountryBFO_0000051Iterator)this.getParent()).getBFO_0000051();
+			}
+
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.GeographicLocation.GeographicLocationBFO_0000051Iterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.GeographicLocation.GeographicLocationBFO_0000051Iterator)this.getParent()).getBFO_0000051();
+			}
+
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.GeographicRegion.GeographicRegionBFO_0000051Iterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.GeographicRegion.GeographicRegionBFO_0000051Iterator)this.getParent()).getBFO_0000051();
+			}
+
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.GeopoliticalEntity.GeopoliticalEntityBFO_0000051Iterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.GeopoliticalEntity.GeopoliticalEntityBFO_0000051Iterator)this.getParent()).getBFO_0000051();
+			}
+
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.Location.LocationBFO_0000051Iterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.Location.LocationBFO_0000051Iterator)this.getParent()).getBFO_0000051();
+			}
+
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.Thing.ThingBFO_0000051Iterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.Thing.ThingBFO_0000051Iterator)this.getParent()).getBFO_0000051();
+			}
+
+			edu.uiowa.slis.VIVOISF.area.areaBFO_0000051Iterator theareaBFO_0000051Iterator = (edu.uiowa.slis.VIVOISF.area.areaBFO_0000051Iterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.area.areaBFO_0000051Iterator.class);
+
+			if (subjectURI == null && theareaBFO_0000051Iterator != null) {
+				subjectURI = theareaBFO_0000051Iterator.getBFO_0000051();
+			}
+
+			edu.uiowa.slis.VIVOISF.self_governing.self_governingBFO_0000051Iterator theself_governingBFO_0000051Iterator = (edu.uiowa.slis.VIVOISF.self_governing.self_governingBFO_0000051Iterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.self_governing.self_governingBFO_0000051Iterator.class);
+
+			if (subjectURI == null && theself_governingBFO_0000051Iterator != null) {
+				subjectURI = theself_governingBFO_0000051Iterator.getBFO_0000051();
+			}
+
+			edu.uiowa.slis.VIVOISF.territory.territoryBFO_0000051Iterator theterritoryBFO_0000051Iterator = (edu.uiowa.slis.VIVOISF.territory.territoryBFO_0000051Iterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.territory.territoryBFO_0000051Iterator.class);
+
+			if (subjectURI == null && theterritoryBFO_0000051Iterator != null) {
+				subjectURI = theterritoryBFO_0000051Iterator.getBFO_0000051();
+			}
+
+			edu.uiowa.slis.VIVOISF.BFO_0000001.BFO_0000001BFO_0000051Iterator theBFO_0000001BFO_0000051Iterator = (edu.uiowa.slis.VIVOISF.BFO_0000001.BFO_0000001BFO_0000051Iterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.BFO_0000001.BFO_0000001BFO_0000051Iterator.class);
+
+			if (subjectURI == null && theBFO_0000001BFO_0000051Iterator != null) {
+				subjectURI = theBFO_0000001BFO_0000051Iterator.getBFO_0000051();
+			}
+
+			edu.uiowa.slis.VIVOISF.BFO_0000002.BFO_0000002BFO_0000051Iterator theBFO_0000002BFO_0000051Iterator = (edu.uiowa.slis.VIVOISF.BFO_0000002.BFO_0000002BFO_0000051Iterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.BFO_0000002.BFO_0000002BFO_0000051Iterator.class);
+
+			if (subjectURI == null && theBFO_0000002BFO_0000051Iterator != null) {
+				subjectURI = theBFO_0000002BFO_0000051Iterator.getBFO_0000051();
+			}
+
+			edu.uiowa.slis.VIVOISF.BFO_0000004.BFO_0000004BFO_0000051Iterator theBFO_0000004BFO_0000051Iterator = (edu.uiowa.slis.VIVOISF.BFO_0000004.BFO_0000004BFO_0000051Iterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.BFO_0000004.BFO_0000004BFO_0000051Iterator.class);
+
+			if (subjectURI == null && theBFO_0000004BFO_0000051Iterator != null) {
+				subjectURI = theBFO_0000004BFO_0000051Iterator.getBFO_0000051();
+			}
+
+			edu.uiowa.slis.VIVOISF.BFO_0000006.BFO_0000006BFO_0000051Iterator theBFO_0000006BFO_0000051Iterator = (edu.uiowa.slis.VIVOISF.BFO_0000006.BFO_0000006BFO_0000051Iterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.BFO_0000006.BFO_0000006BFO_0000051Iterator.class);
+
+			if (subjectURI == null && theBFO_0000006BFO_0000051Iterator != null) {
+				subjectURI = theBFO_0000006BFO_0000051Iterator.getBFO_0000051();
+			}
+
+			edu.uiowa.slis.VIVOISF.BFO_0000141.BFO_0000141BFO_0000051Iterator theBFO_0000141BFO_0000051Iterator = (edu.uiowa.slis.VIVOISF.BFO_0000141.BFO_0000141BFO_0000051Iterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.BFO_0000141.BFO_0000141BFO_0000051Iterator.class);
+
+			if (subjectURI == null && theBFO_0000141BFO_0000051Iterator != null) {
+				subjectURI = theBFO_0000141BFO_0000051Iterator.getBFO_0000051();
+			}
+
+			edu.uiowa.slis.VIVOISF.Country.CountryBFO_0000051Iterator theCountryBFO_0000051Iterator = (edu.uiowa.slis.VIVOISF.Country.CountryBFO_0000051Iterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.Country.CountryBFO_0000051Iterator.class);
+
+			if (subjectURI == null && theCountryBFO_0000051Iterator != null) {
+				subjectURI = theCountryBFO_0000051Iterator.getBFO_0000051();
+			}
+
+			edu.uiowa.slis.VIVOISF.GeographicLocation.GeographicLocationBFO_0000051Iterator theGeographicLocationBFO_0000051Iterator = (edu.uiowa.slis.VIVOISF.GeographicLocation.GeographicLocationBFO_0000051Iterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.GeographicLocation.GeographicLocationBFO_0000051Iterator.class);
+
+			if (subjectURI == null && theGeographicLocationBFO_0000051Iterator != null) {
+				subjectURI = theGeographicLocationBFO_0000051Iterator.getBFO_0000051();
+			}
+
+			edu.uiowa.slis.VIVOISF.GeographicRegion.GeographicRegionBFO_0000051Iterator theGeographicRegionBFO_0000051Iterator = (edu.uiowa.slis.VIVOISF.GeographicRegion.GeographicRegionBFO_0000051Iterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.GeographicRegion.GeographicRegionBFO_0000051Iterator.class);
+
+			if (subjectURI == null && theGeographicRegionBFO_0000051Iterator != null) {
+				subjectURI = theGeographicRegionBFO_0000051Iterator.getBFO_0000051();
+			}
+
+			edu.uiowa.slis.VIVOISF.GeopoliticalEntity.GeopoliticalEntityBFO_0000051Iterator theGeopoliticalEntityBFO_0000051Iterator = (edu.uiowa.slis.VIVOISF.GeopoliticalEntity.GeopoliticalEntityBFO_0000051Iterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.GeopoliticalEntity.GeopoliticalEntityBFO_0000051Iterator.class);
+
+			if (subjectURI == null && theGeopoliticalEntityBFO_0000051Iterator != null) {
+				subjectURI = theGeopoliticalEntityBFO_0000051Iterator.getBFO_0000051();
+			}
+
+			edu.uiowa.slis.VIVOISF.Location.LocationBFO_0000051Iterator theLocationBFO_0000051Iterator = (edu.uiowa.slis.VIVOISF.Location.LocationBFO_0000051Iterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.Location.LocationBFO_0000051Iterator.class);
+
+			if (subjectURI == null && theLocationBFO_0000051Iterator != null) {
+				subjectURI = theLocationBFO_0000051Iterator.getBFO_0000051();
+			}
+
+			edu.uiowa.slis.VIVOISF.Thing.ThingBFO_0000051Iterator theThingBFO_0000051Iterator = (edu.uiowa.slis.VIVOISF.Thing.ThingBFO_0000051Iterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.Thing.ThingBFO_0000051Iterator.class);
+
+			if (subjectURI == null && theThingBFO_0000051Iterator != null) {
+				subjectURI = theThingBFO_0000051Iterator.getBFO_0000051();
+			}
+
 			if (theStateOrProvinceIterator == null && subjectURI == null) {
 				throw new JspException("subject URI generation currently not supported");
 			} else {
 				ResultSet rs = getResultSet(prefix
-				+ " SELECT ?labelUS ?labelENG ?label ?labelANY ?foafName ?schemaName ?rdfValue  where {"
+				+ " SELECT ?labelUS ?labelENG ?label ?labelANY ?foafName ?schemaName ?rdfValue  ?placeOfPublication ?hideFromDisplay ?abbreviation where {"
 				+ "  OPTIONAL { SELECT ?labelUS  WHERE { <" + subjectURI + "> rdfs:label ?labelUS  FILTER (lang(?labelUS) = \"en-US\")}    LIMIT 1 } "
 				+ "  OPTIONAL { SELECT ?labelENG WHERE { <" + subjectURI + "> rdfs:label ?labelENG FILTER (langMatches(?labelENG,\"en\"))} LIMIT 1 } "
 				+ "  OPTIONAL { SELECT ?label    WHERE { <" + subjectURI + "> rdfs:label ?label    FILTER (lang(?label) = \"\")}           LIMIT 1 } "
@@ -45,6 +188,9 @@ public class StateOrProvince extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 				+ "  OPTIONAL { <" + subjectURI + "> <http://xmlns.com/foaf/0.1/name> ?foafName } "
 				+ "  OPTIONAL { <" + subjectURI + "> <http://schema.org/name> ?schemaName } "
 				+ "  OPTIONAL { <" + subjectURI + "> <http://www.w3.org/1999/02/22-rdf-syntax-ns#value> ?rdfValue } "
+				+ "  OPTIONAL { <" + subjectURI + "> <http://vivoweb.org/ontology/core#placeOfPublication> ?placeOfPublication } "
+				+ "  OPTIONAL { <" + subjectURI + "> <http://vivoweb.org/ontology/core#hideFromDisplay> ?hideFromDisplay } "
+				+ "  OPTIONAL { <" + subjectURI + "> <http://vivoweb.org/ontology/core#abbreviation> ?abbreviation } "
 				+ "}");
 				while(rs.hasNext()) {
 					QuerySolution sol = rs.nextSolution();
@@ -61,6 +207,9 @@ public class StateOrProvince extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 						label = sol.get("?schemaName") == null ? null : sol.get("?schemaName").asLiteral().getString();
 					if (label == null)
 						label = sol.get("?rdfValue") == null ? null : sol.get("?rdfValue").asLiteral().getString();
+					placeOfPublication = sol.get("?placeOfPublication") == null ? null : sol.get("?placeOfPublication").toString();
+					hideFromDisplay = sol.get("?hideFromDisplay") == null ? null : sol.get("?hideFromDisplay").toString();
+					abbreviation = sol.get("?abbreviation") == null ? null : sol.get("?abbreviation").toString();
 				}
 			}
 		} catch (Exception e) {
@@ -106,6 +255,30 @@ public class StateOrProvince extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 
 	public String getLabel() {
 		return label;
+	}
+
+	public void setPlaceOfPublication(String placeOfPublication) {
+		this.placeOfPublication = placeOfPublication;
+	}
+
+	public String getPlaceOfPublication() {
+		return placeOfPublication;
+	}
+
+	public void setHideFromDisplay(String hideFromDisplay) {
+		this.hideFromDisplay = hideFromDisplay;
+	}
+
+	public String getHideFromDisplay() {
+		return hideFromDisplay;
+	}
+
+	public void setAbbreviation(String abbreviation) {
+		this.abbreviation = abbreviation;
+	}
+
+	public String getAbbreviation() {
+		return abbreviation;
 	}
 
 }
