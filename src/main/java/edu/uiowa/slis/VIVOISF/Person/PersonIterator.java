@@ -28,7 +28,7 @@ public class PersonIterator extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 					"  OPTIONAL { SELECT ?labelENG WHERE { ?s rdfs:label ?labelENG FILTER (langMatches(?labelENG,\"en\"))} LIMIT 1 } "+
 					"  OPTIONAL { SELECT ?label    WHERE { ?s rdfs:label ?label    FILTER (lang(?label) = \"\")}           LIMIT 1 } "+
 					"  OPTIONAL { SELECT ?labelANY WHERE { ?s rdfs:label ?labelANY FILTER (lang(?labelANY) != \"\")}       LIMIT 1 } "+
-					"} ORDER BY ?labelUS");
+					"} ORDER BY ?label");
 			if(rs.hasNext()) {
 				QuerySolution sol = rs.nextSolution();
 				subjectURI = sol.get("?s").toString();
