@@ -22,6 +22,9 @@ public class DateTimeValue extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 
 	// functional datatype properties, both local and inherited
 
+	String placeOfPublication = null;
+	String hideFromDisplay = null;
+	String abbreviation = null;
 
 	public int doStartTag() throws JspException {
 		currentInstance = this;
@@ -37,28 +40,76 @@ public class DateTimeValue extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 				subjectURI = ((edu.uiowa.slis.VIVOISF.DateTimeInterval.DateTimeIntervalEndIterator)this.getParent()).getEnd();
 			}
 
-			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.Chapter.ChapterDateTimeValueIterator) {
-				subjectURI = ((edu.uiowa.slis.VIVOISF.Chapter.ChapterDateTimeValueIterator)this.getParent()).getDateTimeValue();
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.BFO_0000001.BFO_0000001DateTimeValueIterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.BFO_0000001.BFO_0000001DateTimeValueIterator)this.getParent()).getDateTimeValue();
+			}
+
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.BFO_0000002.BFO_0000002DateTimeValueIterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.BFO_0000002.BFO_0000002DateTimeValueIterator)this.getParent()).getDateTimeValue();
+			}
+
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.BFO_0000031.BFO_0000031DateTimeValueIterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.BFO_0000031.BFO_0000031DateTimeValueIterator)this.getParent()).getDateTimeValue();
+			}
+
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.IAO_0000030.IAO_0000030DateTimeValueIterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.IAO_0000030.IAO_0000030DateTimeValueIterator)this.getParent()).getDateTimeValue();
+			}
+
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.Thing.ThingDateTimeValueIterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.Thing.ThingDateTimeValueIterator)this.getParent()).getDateTimeValue();
+			}
+
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.Document.DocumentDateTimeValueIterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.Document.DocumentDateTimeValueIterator)this.getParent()).getDateTimeValue();
+			}
+
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.Article.ArticleDateTimeValueIterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.Article.ArticleDateTimeValueIterator)this.getParent()).getDateTimeValue();
 			}
 
 			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.AcademicArticle.AcademicArticleDateTimeValueIterator) {
 				subjectURI = ((edu.uiowa.slis.VIVOISF.AcademicArticle.AcademicArticleDateTimeValueIterator)this.getParent()).getDateTimeValue();
 			}
 
-			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.ConferencePoster.ConferencePosterDateTimeValueIterator) {
-				subjectURI = ((edu.uiowa.slis.VIVOISF.ConferencePoster.ConferencePosterDateTimeValueIterator)this.getParent()).getDateTimeValue();
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.ConferencePaper.ConferencePaperDateTimeValueIterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.ConferencePaper.ConferencePaperDateTimeValueIterator)this.getParent()).getDateTimeValue();
+			}
+
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.BookSection.BookSectionDateTimeValueIterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.BookSection.BookSectionDateTimeValueIterator)this.getParent()).getDateTimeValue();
+			}
+
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.Chapter.ChapterDateTimeValueIterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.Chapter.ChapterDateTimeValueIterator)this.getParent()).getDateTimeValue();
+			}
+
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.DocumentPart.DocumentPartDateTimeValueIterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.DocumentPart.DocumentPartDateTimeValueIterator)this.getParent()).getDateTimeValue();
 			}
 
 			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.Slideshow.SlideshowDateTimeValueIterator) {
 				subjectURI = ((edu.uiowa.slis.VIVOISF.Slideshow.SlideshowDateTimeValueIterator)this.getParent()).getDateTimeValue();
 			}
 
-			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.Report.ReportDateTimeValueIterator) {
-				subjectURI = ((edu.uiowa.slis.VIVOISF.Report.ReportDateTimeValueIterator)this.getParent()).getDateTimeValue();
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.ConferencePoster.ConferencePosterDateTimeValueIterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.ConferencePoster.ConferencePosterDateTimeValueIterator)this.getParent()).getDateTimeValue();
 			}
 
-			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.ConferencePaper.ConferencePaperDateTimeValueIterator) {
-				subjectURI = ((edu.uiowa.slis.VIVOISF.ConferencePaper.ConferencePaperDateTimeValueIterator)this.getParent()).getDateTimeValue();
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.Dataset.DatasetDateTimeValueIterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.Dataset.DatasetDateTimeValueIterator)this.getParent()).getDateTimeValue();
+			}
+
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.Book.BookDateTimeValueIterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.Book.BookDateTimeValueIterator)this.getParent()).getDateTimeValue();
+			}
+
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.Collection.CollectionDateTimeValueIterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.Collection.CollectionDateTimeValueIterator)this.getParent()).getDateTimeValue();
+			}
+
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.Report.ReportDateTimeValueIterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.Report.ReportDateTimeValueIterator)this.getParent()).getDateTimeValue();
 			}
 
 			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.AudioVisualDocument.AudioVisualDocumentDateTimeValueIterator) {
@@ -67,14 +118,6 @@ public class DateTimeValue extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 
 			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.DateTimeInterval.DateTimeIntervalStartIterator) {
 				subjectURI = ((edu.uiowa.slis.VIVOISF.DateTimeInterval.DateTimeIntervalStartIterator)this.getParent()).getStart();
-			}
-
-			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.Patent.PatentDateFiledIterator) {
-				subjectURI = ((edu.uiowa.slis.VIVOISF.Patent.PatentDateFiledIterator)this.getParent()).getDateFiled();
-			}
-
-			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.GlobalCitationCount.GlobalCitationCountHasGlobalCountDateIterator) {
-				subjectURI = ((edu.uiowa.slis.VIVOISF.GlobalCitationCount.GlobalCitationCountHasGlobalCountDateIterator)this.getParent()).getHasGlobalCountDate();
 			}
 
 			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.DateTimeValue.DateTimeValueDateTimeIterator) {
@@ -91,10 +134,46 @@ public class DateTimeValue extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 				subjectURI = theDateTimeIntervalEndIterator.getEnd();
 			}
 
-			edu.uiowa.slis.VIVOISF.Chapter.ChapterDateTimeValueIterator theChapterDateTimeValueIterator = (edu.uiowa.slis.VIVOISF.Chapter.ChapterDateTimeValueIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.Chapter.ChapterDateTimeValueIterator.class);
+			edu.uiowa.slis.VIVOISF.BFO_0000001.BFO_0000001DateTimeValueIterator theBFO_0000001DateTimeValueIterator = (edu.uiowa.slis.VIVOISF.BFO_0000001.BFO_0000001DateTimeValueIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.BFO_0000001.BFO_0000001DateTimeValueIterator.class);
 
-			if (subjectURI == null && theChapterDateTimeValueIterator != null) {
-				subjectURI = theChapterDateTimeValueIterator.getDateTimeValue();
+			if (subjectURI == null && theBFO_0000001DateTimeValueIterator != null) {
+				subjectURI = theBFO_0000001DateTimeValueIterator.getDateTimeValue();
+			}
+
+			edu.uiowa.slis.VIVOISF.BFO_0000002.BFO_0000002DateTimeValueIterator theBFO_0000002DateTimeValueIterator = (edu.uiowa.slis.VIVOISF.BFO_0000002.BFO_0000002DateTimeValueIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.BFO_0000002.BFO_0000002DateTimeValueIterator.class);
+
+			if (subjectURI == null && theBFO_0000002DateTimeValueIterator != null) {
+				subjectURI = theBFO_0000002DateTimeValueIterator.getDateTimeValue();
+			}
+
+			edu.uiowa.slis.VIVOISF.BFO_0000031.BFO_0000031DateTimeValueIterator theBFO_0000031DateTimeValueIterator = (edu.uiowa.slis.VIVOISF.BFO_0000031.BFO_0000031DateTimeValueIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.BFO_0000031.BFO_0000031DateTimeValueIterator.class);
+
+			if (subjectURI == null && theBFO_0000031DateTimeValueIterator != null) {
+				subjectURI = theBFO_0000031DateTimeValueIterator.getDateTimeValue();
+			}
+
+			edu.uiowa.slis.VIVOISF.IAO_0000030.IAO_0000030DateTimeValueIterator theIAO_0000030DateTimeValueIterator = (edu.uiowa.slis.VIVOISF.IAO_0000030.IAO_0000030DateTimeValueIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.IAO_0000030.IAO_0000030DateTimeValueIterator.class);
+
+			if (subjectURI == null && theIAO_0000030DateTimeValueIterator != null) {
+				subjectURI = theIAO_0000030DateTimeValueIterator.getDateTimeValue();
+			}
+
+			edu.uiowa.slis.VIVOISF.Thing.ThingDateTimeValueIterator theThingDateTimeValueIterator = (edu.uiowa.slis.VIVOISF.Thing.ThingDateTimeValueIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.Thing.ThingDateTimeValueIterator.class);
+
+			if (subjectURI == null && theThingDateTimeValueIterator != null) {
+				subjectURI = theThingDateTimeValueIterator.getDateTimeValue();
+			}
+
+			edu.uiowa.slis.VIVOISF.Document.DocumentDateTimeValueIterator theDocumentDateTimeValueIterator = (edu.uiowa.slis.VIVOISF.Document.DocumentDateTimeValueIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.Document.DocumentDateTimeValueIterator.class);
+
+			if (subjectURI == null && theDocumentDateTimeValueIterator != null) {
+				subjectURI = theDocumentDateTimeValueIterator.getDateTimeValue();
+			}
+
+			edu.uiowa.slis.VIVOISF.Article.ArticleDateTimeValueIterator theArticleDateTimeValueIterator = (edu.uiowa.slis.VIVOISF.Article.ArticleDateTimeValueIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.Article.ArticleDateTimeValueIterator.class);
+
+			if (subjectURI == null && theArticleDateTimeValueIterator != null) {
+				subjectURI = theArticleDateTimeValueIterator.getDateTimeValue();
 			}
 
 			edu.uiowa.slis.VIVOISF.AcademicArticle.AcademicArticleDateTimeValueIterator theAcademicArticleDateTimeValueIterator = (edu.uiowa.slis.VIVOISF.AcademicArticle.AcademicArticleDateTimeValueIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.AcademicArticle.AcademicArticleDateTimeValueIterator.class);
@@ -103,10 +182,28 @@ public class DateTimeValue extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 				subjectURI = theAcademicArticleDateTimeValueIterator.getDateTimeValue();
 			}
 
-			edu.uiowa.slis.VIVOISF.ConferencePoster.ConferencePosterDateTimeValueIterator theConferencePosterDateTimeValueIterator = (edu.uiowa.slis.VIVOISF.ConferencePoster.ConferencePosterDateTimeValueIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.ConferencePoster.ConferencePosterDateTimeValueIterator.class);
+			edu.uiowa.slis.VIVOISF.ConferencePaper.ConferencePaperDateTimeValueIterator theConferencePaperDateTimeValueIterator = (edu.uiowa.slis.VIVOISF.ConferencePaper.ConferencePaperDateTimeValueIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.ConferencePaper.ConferencePaperDateTimeValueIterator.class);
 
-			if (subjectURI == null && theConferencePosterDateTimeValueIterator != null) {
-				subjectURI = theConferencePosterDateTimeValueIterator.getDateTimeValue();
+			if (subjectURI == null && theConferencePaperDateTimeValueIterator != null) {
+				subjectURI = theConferencePaperDateTimeValueIterator.getDateTimeValue();
+			}
+
+			edu.uiowa.slis.VIVOISF.BookSection.BookSectionDateTimeValueIterator theBookSectionDateTimeValueIterator = (edu.uiowa.slis.VIVOISF.BookSection.BookSectionDateTimeValueIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.BookSection.BookSectionDateTimeValueIterator.class);
+
+			if (subjectURI == null && theBookSectionDateTimeValueIterator != null) {
+				subjectURI = theBookSectionDateTimeValueIterator.getDateTimeValue();
+			}
+
+			edu.uiowa.slis.VIVOISF.Chapter.ChapterDateTimeValueIterator theChapterDateTimeValueIterator = (edu.uiowa.slis.VIVOISF.Chapter.ChapterDateTimeValueIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.Chapter.ChapterDateTimeValueIterator.class);
+
+			if (subjectURI == null && theChapterDateTimeValueIterator != null) {
+				subjectURI = theChapterDateTimeValueIterator.getDateTimeValue();
+			}
+
+			edu.uiowa.slis.VIVOISF.DocumentPart.DocumentPartDateTimeValueIterator theDocumentPartDateTimeValueIterator = (edu.uiowa.slis.VIVOISF.DocumentPart.DocumentPartDateTimeValueIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.DocumentPart.DocumentPartDateTimeValueIterator.class);
+
+			if (subjectURI == null && theDocumentPartDateTimeValueIterator != null) {
+				subjectURI = theDocumentPartDateTimeValueIterator.getDateTimeValue();
 			}
 
 			edu.uiowa.slis.VIVOISF.Slideshow.SlideshowDateTimeValueIterator theSlideshowDateTimeValueIterator = (edu.uiowa.slis.VIVOISF.Slideshow.SlideshowDateTimeValueIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.Slideshow.SlideshowDateTimeValueIterator.class);
@@ -115,16 +212,34 @@ public class DateTimeValue extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 				subjectURI = theSlideshowDateTimeValueIterator.getDateTimeValue();
 			}
 
+			edu.uiowa.slis.VIVOISF.ConferencePoster.ConferencePosterDateTimeValueIterator theConferencePosterDateTimeValueIterator = (edu.uiowa.slis.VIVOISF.ConferencePoster.ConferencePosterDateTimeValueIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.ConferencePoster.ConferencePosterDateTimeValueIterator.class);
+
+			if (subjectURI == null && theConferencePosterDateTimeValueIterator != null) {
+				subjectURI = theConferencePosterDateTimeValueIterator.getDateTimeValue();
+			}
+
+			edu.uiowa.slis.VIVOISF.Dataset.DatasetDateTimeValueIterator theDatasetDateTimeValueIterator = (edu.uiowa.slis.VIVOISF.Dataset.DatasetDateTimeValueIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.Dataset.DatasetDateTimeValueIterator.class);
+
+			if (subjectURI == null && theDatasetDateTimeValueIterator != null) {
+				subjectURI = theDatasetDateTimeValueIterator.getDateTimeValue();
+			}
+
+			edu.uiowa.slis.VIVOISF.Book.BookDateTimeValueIterator theBookDateTimeValueIterator = (edu.uiowa.slis.VIVOISF.Book.BookDateTimeValueIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.Book.BookDateTimeValueIterator.class);
+
+			if (subjectURI == null && theBookDateTimeValueIterator != null) {
+				subjectURI = theBookDateTimeValueIterator.getDateTimeValue();
+			}
+
+			edu.uiowa.slis.VIVOISF.Collection.CollectionDateTimeValueIterator theCollectionDateTimeValueIterator = (edu.uiowa.slis.VIVOISF.Collection.CollectionDateTimeValueIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.Collection.CollectionDateTimeValueIterator.class);
+
+			if (subjectURI == null && theCollectionDateTimeValueIterator != null) {
+				subjectURI = theCollectionDateTimeValueIterator.getDateTimeValue();
+			}
+
 			edu.uiowa.slis.VIVOISF.Report.ReportDateTimeValueIterator theReportDateTimeValueIterator = (edu.uiowa.slis.VIVOISF.Report.ReportDateTimeValueIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.Report.ReportDateTimeValueIterator.class);
 
 			if (subjectURI == null && theReportDateTimeValueIterator != null) {
 				subjectURI = theReportDateTimeValueIterator.getDateTimeValue();
-			}
-
-			edu.uiowa.slis.VIVOISF.ConferencePaper.ConferencePaperDateTimeValueIterator theConferencePaperDateTimeValueIterator = (edu.uiowa.slis.VIVOISF.ConferencePaper.ConferencePaperDateTimeValueIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.ConferencePaper.ConferencePaperDateTimeValueIterator.class);
-
-			if (subjectURI == null && theConferencePaperDateTimeValueIterator != null) {
-				subjectURI = theConferencePaperDateTimeValueIterator.getDateTimeValue();
 			}
 
 			edu.uiowa.slis.VIVOISF.AudioVisualDocument.AudioVisualDocumentDateTimeValueIterator theAudioVisualDocumentDateTimeValueIterator = (edu.uiowa.slis.VIVOISF.AudioVisualDocument.AudioVisualDocumentDateTimeValueIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.AudioVisualDocument.AudioVisualDocumentDateTimeValueIterator.class);
@@ -139,18 +254,6 @@ public class DateTimeValue extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 				subjectURI = theDateTimeIntervalStartIterator.getStart();
 			}
 
-			edu.uiowa.slis.VIVOISF.Patent.PatentDateFiledIterator thePatentDateFiledIterator = (edu.uiowa.slis.VIVOISF.Patent.PatentDateFiledIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.Patent.PatentDateFiledIterator.class);
-
-			if (subjectURI == null && thePatentDateFiledIterator != null) {
-				subjectURI = thePatentDateFiledIterator.getDateFiled();
-			}
-
-			edu.uiowa.slis.VIVOISF.GlobalCitationCount.GlobalCitationCountHasGlobalCountDateIterator theGlobalCitationCountHasGlobalCountDateIterator = (edu.uiowa.slis.VIVOISF.GlobalCitationCount.GlobalCitationCountHasGlobalCountDateIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.GlobalCitationCount.GlobalCitationCountHasGlobalCountDateIterator.class);
-
-			if (subjectURI == null && theGlobalCitationCountHasGlobalCountDateIterator != null) {
-				subjectURI = theGlobalCitationCountHasGlobalCountDateIterator.getHasGlobalCountDate();
-			}
-
 			edu.uiowa.slis.VIVOISF.DateTimeValue.DateTimeValueDateTimeIterator theDateTimeValueDateTimeIterator = (edu.uiowa.slis.VIVOISF.DateTimeValue.DateTimeValueDateTimeIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.DateTimeValue.DateTimeValueDateTimeIterator.class);
 
 			if (subjectURI == null && theDateTimeValueDateTimeIterator != null) {
@@ -161,7 +264,7 @@ public class DateTimeValue extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 				throw new JspException("subject URI generation currently not supported");
 			} else {
 				ResultSet rs = getResultSet(prefix
-				+ " SELECT ?labelUS ?labelENG ?label ?labelANY ?foafName ?schemaName ?rdfValue  where {"
+				+ " SELECT ?labelUS ?labelENG ?label ?labelANY ?foafName ?schemaName ?rdfValue  ?placeOfPublication ?hideFromDisplay ?abbreviation where {"
 				+ "  OPTIONAL { SELECT ?labelUS  WHERE { <" + subjectURI + "> rdfs:label ?labelUS  FILTER (lang(?labelUS) = \"en-US\")}    LIMIT 1 } "
 				+ "  OPTIONAL { SELECT ?labelENG WHERE { <" + subjectURI + "> rdfs:label ?labelENG FILTER (langMatches(?labelENG,\"en\"))} LIMIT 1 } "
 				+ "  OPTIONAL { SELECT ?label    WHERE { <" + subjectURI + "> rdfs:label ?label    FILTER (lang(?label) = \"\")}           LIMIT 1 } "
@@ -169,6 +272,9 @@ public class DateTimeValue extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 				+ "  OPTIONAL { <" + subjectURI + "> <http://xmlns.com/foaf/0.1/name> ?foafName } "
 				+ "  OPTIONAL { <" + subjectURI + "> <http://schema.org/name> ?schemaName } "
 				+ "  OPTIONAL { <" + subjectURI + "> <http://www.w3.org/1999/02/22-rdf-syntax-ns#value> ?rdfValue } "
+				+ "  OPTIONAL { <" + subjectURI + "> <http://vivoweb.org/ontology/core#placeOfPublication> ?placeOfPublication } "
+				+ "  OPTIONAL { <" + subjectURI + "> <http://vivoweb.org/ontology/core#hideFromDisplay> ?hideFromDisplay } "
+				+ "  OPTIONAL { <" + subjectURI + "> <http://vivoweb.org/ontology/core#abbreviation> ?abbreviation } "
 				+ "}");
 				while(rs.hasNext()) {
 					QuerySolution sol = rs.nextSolution();
@@ -185,6 +291,9 @@ public class DateTimeValue extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 						label = sol.get("?schemaName") == null ? null : sol.get("?schemaName").asLiteral().getString();
 					if (label == null)
 						label = sol.get("?rdfValue") == null ? null : sol.get("?rdfValue").asLiteral().getString();
+					placeOfPublication = sol.get("?placeOfPublication") == null ? null : sol.get("?placeOfPublication").toString();
+					hideFromDisplay = sol.get("?hideFromDisplay") == null ? null : sol.get("?hideFromDisplay").toString();
+					abbreviation = sol.get("?abbreviation") == null ? null : sol.get("?abbreviation").toString();
 				}
 			}
 		} catch (Exception e) {
@@ -230,6 +339,30 @@ public class DateTimeValue extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 
 	public String getLabel() {
 		return label;
+	}
+
+	public void setPlaceOfPublication(String placeOfPublication) {
+		this.placeOfPublication = placeOfPublication;
+	}
+
+	public String getPlaceOfPublication() {
+		return placeOfPublication;
+	}
+
+	public void setHideFromDisplay(String hideFromDisplay) {
+		this.hideFromDisplay = hideFromDisplay;
+	}
+
+	public String getHideFromDisplay() {
+		return hideFromDisplay;
+	}
+
+	public void setAbbreviation(String abbreviation) {
+		this.abbreviation = abbreviation;
+	}
+
+	public String getAbbreviation() {
+		return abbreviation;
 	}
 
 }
