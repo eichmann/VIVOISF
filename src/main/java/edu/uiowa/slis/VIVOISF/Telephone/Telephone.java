@@ -33,6 +33,86 @@ public class Telephone extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 				label = theTelephoneIterator.getLabel();
 			}
 
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.ARG_2000379.ARG_2000379HasTelephoneIterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.ARG_2000379.ARG_2000379HasTelephoneIterator)this.getParent()).getHasTelephone();
+			}
+
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.BFO_0000001.BFO_0000001HasTelephoneIterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.BFO_0000001.BFO_0000001HasTelephoneIterator)this.getParent()).getHasTelephone();
+			}
+
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.BFO_0000002.BFO_0000002HasTelephoneIterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.BFO_0000002.BFO_0000002HasTelephoneIterator)this.getParent()).getHasTelephone();
+			}
+
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.BFO_0000031.BFO_0000031HasTelephoneIterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.BFO_0000031.BFO_0000031HasTelephoneIterator)this.getParent()).getHasTelephone();
+			}
+
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.IAO_0000030.IAO_0000030HasTelephoneIterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.IAO_0000030.IAO_0000030HasTelephoneIterator)this.getParent()).getHasTelephone();
+			}
+
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.Thing.ThingHasTelephoneIterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.Thing.ThingHasTelephoneIterator)this.getParent()).getHasTelephone();
+			}
+
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.Individual.IndividualHasTelephoneIterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.Individual.IndividualHasTelephoneIterator)this.getParent()).getHasTelephone();
+			}
+
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.Kind.KindHasTelephoneIterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.Kind.KindHasTelephoneIterator)this.getParent()).getHasTelephone();
+			}
+
+			edu.uiowa.slis.VIVOISF.ARG_2000379.ARG_2000379HasTelephoneIterator theARG_2000379HasTelephoneIterator = (edu.uiowa.slis.VIVOISF.ARG_2000379.ARG_2000379HasTelephoneIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.ARG_2000379.ARG_2000379HasTelephoneIterator.class);
+
+			if (subjectURI == null && theARG_2000379HasTelephoneIterator != null) {
+				subjectURI = theARG_2000379HasTelephoneIterator.getHasTelephone();
+			}
+
+			edu.uiowa.slis.VIVOISF.BFO_0000001.BFO_0000001HasTelephoneIterator theBFO_0000001HasTelephoneIterator = (edu.uiowa.slis.VIVOISF.BFO_0000001.BFO_0000001HasTelephoneIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.BFO_0000001.BFO_0000001HasTelephoneIterator.class);
+
+			if (subjectURI == null && theBFO_0000001HasTelephoneIterator != null) {
+				subjectURI = theBFO_0000001HasTelephoneIterator.getHasTelephone();
+			}
+
+			edu.uiowa.slis.VIVOISF.BFO_0000002.BFO_0000002HasTelephoneIterator theBFO_0000002HasTelephoneIterator = (edu.uiowa.slis.VIVOISF.BFO_0000002.BFO_0000002HasTelephoneIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.BFO_0000002.BFO_0000002HasTelephoneIterator.class);
+
+			if (subjectURI == null && theBFO_0000002HasTelephoneIterator != null) {
+				subjectURI = theBFO_0000002HasTelephoneIterator.getHasTelephone();
+			}
+
+			edu.uiowa.slis.VIVOISF.BFO_0000031.BFO_0000031HasTelephoneIterator theBFO_0000031HasTelephoneIterator = (edu.uiowa.slis.VIVOISF.BFO_0000031.BFO_0000031HasTelephoneIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.BFO_0000031.BFO_0000031HasTelephoneIterator.class);
+
+			if (subjectURI == null && theBFO_0000031HasTelephoneIterator != null) {
+				subjectURI = theBFO_0000031HasTelephoneIterator.getHasTelephone();
+			}
+
+			edu.uiowa.slis.VIVOISF.IAO_0000030.IAO_0000030HasTelephoneIterator theIAO_0000030HasTelephoneIterator = (edu.uiowa.slis.VIVOISF.IAO_0000030.IAO_0000030HasTelephoneIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.IAO_0000030.IAO_0000030HasTelephoneIterator.class);
+
+			if (subjectURI == null && theIAO_0000030HasTelephoneIterator != null) {
+				subjectURI = theIAO_0000030HasTelephoneIterator.getHasTelephone();
+			}
+
+			edu.uiowa.slis.VIVOISF.Thing.ThingHasTelephoneIterator theThingHasTelephoneIterator = (edu.uiowa.slis.VIVOISF.Thing.ThingHasTelephoneIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.Thing.ThingHasTelephoneIterator.class);
+
+			if (subjectURI == null && theThingHasTelephoneIterator != null) {
+				subjectURI = theThingHasTelephoneIterator.getHasTelephone();
+			}
+
+			edu.uiowa.slis.VIVOISF.Individual.IndividualHasTelephoneIterator theIndividualHasTelephoneIterator = (edu.uiowa.slis.VIVOISF.Individual.IndividualHasTelephoneIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.Individual.IndividualHasTelephoneIterator.class);
+
+			if (subjectURI == null && theIndividualHasTelephoneIterator != null) {
+				subjectURI = theIndividualHasTelephoneIterator.getHasTelephone();
+			}
+
+			edu.uiowa.slis.VIVOISF.Kind.KindHasTelephoneIterator theKindHasTelephoneIterator = (edu.uiowa.slis.VIVOISF.Kind.KindHasTelephoneIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.Kind.KindHasTelephoneIterator.class);
+
+			if (subjectURI == null && theKindHasTelephoneIterator != null) {
+				subjectURI = theKindHasTelephoneIterator.getHasTelephone();
+			}
+
 			if (theTelephoneIterator == null && subjectURI == null) {
 				throw new JspException("subject URI generation currently not supported");
 			} else {
