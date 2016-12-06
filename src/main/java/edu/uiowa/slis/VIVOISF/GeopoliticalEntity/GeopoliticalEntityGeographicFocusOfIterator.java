@@ -9,39 +9,57 @@ import javax.servlet.jsp.JspTagException;
 import org.apache.jena.query.QuerySolution;
 import org.apache.jena.query.ResultSet;
 
+import java.util.Hashtable;
+
 @SuppressWarnings("serial")
 public class GeopoliticalEntityGeographicFocusOfIterator extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 	static GeopoliticalEntityGeographicFocusOfIterator currentInstance = null;
 	private static final Log log = LogFactory.getLog(GeopoliticalEntityGeographicFocusOfIterator.class);
 
 	String subjectURI = null;
+	String type = null;
 	String geographicFocusOf = null;
 	ResultSet rs = null;
+	Hashtable<String,String> classFilter = null;
 
 	public int doStartTag() throws JspException {
 		currentInstance = this;
 		try {
-			GeopoliticalEntity ancestorInstance = (GeopoliticalEntity) findAncestorWithClass(this, GeopoliticalEntity.class);
+			GeopoliticalEntity theGeopoliticalEntity = (GeopoliticalEntity) findAncestorWithClass(this, GeopoliticalEntity.class);
 
-			if (ancestorInstance != null) {
-				subjectURI = ancestorInstance.getSubjectURI();
+			if (theGeopoliticalEntity != null) {
+				subjectURI = theGeopoliticalEntity.getSubjectURI();
 			}
 
-			if (ancestorInstance == null && subjectURI == null) {
+			if (theGeopoliticalEntity == null && subjectURI == null) {
 				throw new JspException("subject URI generation currently not supported");
 			}
 
-			rs = getResultSet(prefix+"SELECT ?s where { <" + subjectURI + "> <http://vivoweb.org/ontology/core#geographicFocusOf> ?s } ");
-			if(rs.hasNext()) {
+			rs = getResultSet(prefix+"SELECT ?s ?t where {"
+					+" <" + subjectURI + "> <http://vivoweb.org/ontology/core#geographicFocusOf> ?s . "
+					+" ?s <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?t ."
+					+" FILTER NOT EXISTS {"
+					+"   ?s <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?subtype ."
+					+"   ?subtype <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?t ."
+					+"   filter ( ?subtype != ?t )"
+					+" }"
+					+"} ");
+			while(rs.hasNext()) {
 				QuerySolution sol = rs.nextSolution();
 				geographicFocusOf = sol.get("?s").toString();
-				return EVAL_BODY_INCLUDE;
+				type = getLocalName(sol.get("?t").toString());
+				if (type == null)
+					continue;
+				if (classFilter == null || (classFilter != null && type != null && classFilter.containsKey(type))) {
+					log.info("instance: " + geographicFocusOf + "	type: " + type);
+					return EVAL_BODY_INCLUDE;
+				}
 			}
 		} catch (Exception e) {
-			log.error("Exception raised in GeopoliticalEntityIterator doStartTag", e);
+			log.error("Exception raised in GeopoliticalEntityGeographicFocusOfIterator doStartTag", e);
 			clearServiceState();
 			freeConnection();
-			throw new JspTagException("Exception raised in GeopoliticalEntityIterator doStartTag");
+			throw new JspTagException("Exception raised in GeopoliticalEntityGeographicFocusOfIterator doStartTag");
 		}
 
 		return SKIP_BODY;
@@ -49,16 +67,22 @@ public class GeopoliticalEntityGeographicFocusOfIterator extends edu.uiowa.slis.
 
 	public int doAfterBody() throws JspException {
 		try {
-			if(rs.hasNext()) {
+			while(rs.hasNext()) {
 				QuerySolution sol = rs.nextSolution();
 				geographicFocusOf = sol.get("?s").toString();
-				return EVAL_BODY_AGAIN;
+				type = getLocalName(sol.get("?t").toString());
+				if (type == null)
+					continue;
+				if (classFilter == null || (classFilter != null && type != null && classFilter.containsKey(type))) {
+					log.info("instance: " + geographicFocusOf + "	type: " + type);
+					return EVAL_BODY_AGAIN;
+				}
 			}
 		} catch (Exception e) {
-			log.error("Exception raised in GeopoliticalEntityIterator doAfterBody", e);
+			log.error("Exception raised in GeopoliticalEntityGeographicFocusOfIterator doAfterBody", e);
 			clearServiceState();
 			freeConnection();
-			throw new JspTagException("Exception raised in GeopoliticalEntityIterator doAfterBody");
+			throw new JspTagException("Exception raised in GeopoliticalEntityGeographicFocusOfIterator doAfterBody");
 		}
 
 		return SKIP_BODY;
@@ -69,8 +93,8 @@ public class GeopoliticalEntityGeographicFocusOfIterator extends edu.uiowa.slis.
 		try {
 			// do processing
 		} catch (Exception e) {
-			log.error("Exception raised in GeopoliticalEntity doEndTag", e);
-			throw new JspTagException("Exception raised in GeopoliticalEntity doEndTag");
+			log.error("Exception raised in GeopoliticalEntityGeographicFocusOf doEndTag", e);
+			throw new JspTagException("Exception raised in GeopoliticalEntityGeographicFocusOf doEndTag");
 		} finally {
 			clearServiceState();
 			freeConnection();
@@ -81,6 +105,17 @@ public class GeopoliticalEntityGeographicFocusOfIterator extends edu.uiowa.slis.
 
 	private void clearServiceState() {
 		subjectURI = null;
+		type = null;
+		geographicFocusOf = null;
+		classFilter = null;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public String getType() {
+		return type;
 	}
 
 	public void setGeographicFocusOf(String geographicFocusOf) {
@@ -89,6 +124,19 @@ public class GeopoliticalEntityGeographicFocusOfIterator extends edu.uiowa.slis.
 
 	public String getGeographicFocusOf() {
 		return geographicFocusOf;
+	}
+
+	public void setClassFilter(String filterString) {
+		String[] classFilterArray = filterString.split(" ");
+		this.classFilter = new Hashtable<String, String>();
+		for (String filterClass : classFilterArray) {
+			log.info("adding filterClass " + filterClass + " to GeopoliticalEntityGeographicFocusOfIterator");
+			classFilter.put(filterClass, "");
+		}
+	}
+
+	public String getClassFilter() {
+		return classFilter.toString();
 	}
 
 }

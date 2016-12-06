@@ -11,12 +11,12 @@ public class GeographicRegionGeographicFocusOf extends edu.uiowa.slis.VIVOISF.Ta
 	static GeographicRegionGeographicFocusOf currentInstance = null;
 	private static final Log log = LogFactory.getLog(GeographicRegionGeographicFocusOf.class);
 
-	// non-functional property
+	// object property
 
 	public int doStartTag() throws JspException {
 		try {
-			GeographicRegionGeographicFocusOfIterator theGeographicRegion = (GeographicRegionGeographicFocusOfIterator)findAncestorWithClass(this, GeographicRegionGeographicFocusOfIterator.class);
-			pageContext.getOut().print(theGeographicRegion.getGeographicFocusOf());
+			GeographicRegionGeographicFocusOfIterator theGeographicRegionGeographicFocusOfIterator = (GeographicRegionGeographicFocusOfIterator)findAncestorWithClass(this, GeographicRegionGeographicFocusOfIterator.class);
+			pageContext.getOut().print(theGeographicRegionGeographicFocusOfIterator.getGeographicFocusOf());
 		} catch (Exception e) {
 			log.error("Can't find enclosing GeographicRegion for geographicFocusOf tag ", e);
 			throw new JspTagException("Error: Can't find enclosing GeographicRegion for geographicFocusOf tag ");

@@ -33,16 +33,6 @@ public class Geo extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 				label = theGeoIterator.getLabel();
 			}
 
-			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.Geographical.GeographicalHasGeoIterator) {
-				subjectURI = ((edu.uiowa.slis.VIVOISF.Geographical.GeographicalHasGeoIterator)this.getParent()).getHasGeo();
-			}
-
-			edu.uiowa.slis.VIVOISF.Geographical.GeographicalHasGeoIterator theGeographicalHasGeoIterator = (edu.uiowa.slis.VIVOISF.Geographical.GeographicalHasGeoIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.Geographical.GeographicalHasGeoIterator.class);
-
-			if (subjectURI == null && theGeographicalHasGeoIterator != null) {
-				subjectURI = theGeographicalHasGeoIterator.getHasGeo();
-			}
-
 			if (theGeoIterator == null && subjectURI == null) {
 				throw new JspException("subject URI generation currently not supported");
 			} else {

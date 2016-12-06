@@ -11,12 +11,12 @@ public class GeopoliticalEntityGeographicFocusOf extends edu.uiowa.slis.VIVOISF.
 	static GeopoliticalEntityGeographicFocusOf currentInstance = null;
 	private static final Log log = LogFactory.getLog(GeopoliticalEntityGeographicFocusOf.class);
 
-	// non-functional property
+	// object property
 
 	public int doStartTag() throws JspException {
 		try {
-			GeopoliticalEntityGeographicFocusOfIterator theGeopoliticalEntity = (GeopoliticalEntityGeographicFocusOfIterator)findAncestorWithClass(this, GeopoliticalEntityGeographicFocusOfIterator.class);
-			pageContext.getOut().print(theGeopoliticalEntity.getGeographicFocusOf());
+			GeopoliticalEntityGeographicFocusOfIterator theGeopoliticalEntityGeographicFocusOfIterator = (GeopoliticalEntityGeographicFocusOfIterator)findAncestorWithClass(this, GeopoliticalEntityGeographicFocusOfIterator.class);
+			pageContext.getOut().print(theGeopoliticalEntityGeographicFocusOfIterator.getGeographicFocusOf());
 		} catch (Exception e) {
 			log.error("Can't find enclosing GeopoliticalEntity for geographicFocusOf tag ", e);
 			throw new JspTagException("Error: Can't find enclosing GeopoliticalEntity for geographicFocusOf tag ");

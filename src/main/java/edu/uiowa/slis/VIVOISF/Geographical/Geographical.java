@@ -37,8 +37,8 @@ public class Geographical extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 				subjectURI = ((edu.uiowa.slis.VIVOISF.Address.AddressHasAddressInverseIterator)this.getParent()).getHasAddressInverse();
 			}
 
-			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.Geo.GeoHasGeoInverseIterator) {
-				subjectURI = ((edu.uiowa.slis.VIVOISF.Geo.GeoHasGeoInverseIterator)this.getParent()).getHasGeoInverse();
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.Email.EmailHasEmailInverseIterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.Email.EmailHasEmailInverseIterator)this.getParent()).getHasEmailInverse();
 			}
 
 			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.URL.URLHasURLInverseIterator) {
