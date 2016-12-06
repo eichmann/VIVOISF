@@ -22,7 +22,7 @@ public class GovernmentAgencyIterator extends edu.uiowa.slis.VIVOISF.TagLibSuppo
 		currentInstance = this;
 		try {
 			rs = getResultSet(prefix+
-					" SELECT ?s ?labelUS ?labelENG, ?label ?labelANY where { "+
+					" SELECT ?s ?labelUS ?labelENG ?label ?labelANY where { "+
 					"  ?s rdf:type <http://vivoweb.org/ontology/core#GovernmentAgency> . "+
 					"  OPTIONAL { SELECT ?labelUS  WHERE { ?s rdfs:label ?labelUS  FILTER (lang(?labelUS) = \"en-US\")}    LIMIT 1 } "+
 					"  OPTIONAL { SELECT ?labelENG WHERE { ?s rdfs:label ?labelENG FILTER (langMatches(?labelENG,\"en\"))} LIMIT 1 } "+
