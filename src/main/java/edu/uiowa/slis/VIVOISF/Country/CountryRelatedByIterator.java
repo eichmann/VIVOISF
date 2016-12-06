@@ -12,13 +12,13 @@ import org.apache.jena.query.ResultSet;
 import java.util.Hashtable;
 
 @SuppressWarnings("serial")
-public class CountryGeographicFocusOfIterator extends edu.uiowa.slis.VIVOISF.TagLibSupport {
-	static CountryGeographicFocusOfIterator currentInstance = null;
-	private static final Log log = LogFactory.getLog(CountryGeographicFocusOfIterator.class);
+public class CountryRelatedByIterator extends edu.uiowa.slis.VIVOISF.TagLibSupport {
+	static CountryRelatedByIterator currentInstance = null;
+	private static final Log log = LogFactory.getLog(CountryRelatedByIterator.class);
 
 	String subjectURI = null;
 	String type = null;
-	String geographicFocusOf = null;
+	String relatedBy = null;
 	ResultSet rs = null;
 	Hashtable<String,String> classFilter = null;
 
@@ -36,7 +36,7 @@ public class CountryGeographicFocusOfIterator extends edu.uiowa.slis.VIVOISF.Tag
 			}
 
 			rs = getResultSet(prefix+"SELECT ?s ?t where {"
-					+" <" + subjectURI + "> <http://vivoweb.org/ontology/core#geographicFocusOf> ?s . "
+					+" <" + subjectURI + "> <http://vivoweb.org/ontology/core#relatedBy> ?s . "
 					+" ?s <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?t ."
 					+" FILTER NOT EXISTS {"
 					+"   ?s <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?subtype ."
@@ -46,20 +46,20 @@ public class CountryGeographicFocusOfIterator extends edu.uiowa.slis.VIVOISF.Tag
 					+"} ");
 			while(rs.hasNext()) {
 				QuerySolution sol = rs.nextSolution();
-				geographicFocusOf = sol.get("?s").toString();
+				relatedBy = sol.get("?s").toString();
 				type = getLocalName(sol.get("?t").toString());
 				if (type == null)
 					continue;
 				if (classFilter == null || (classFilter != null && type != null && classFilter.containsKey(type))) {
-					log.info("instance: " + geographicFocusOf + "	type: " + type);
+					log.info("instance: " + relatedBy + "	type: " + type);
 					return EVAL_BODY_INCLUDE;
 				}
 			}
 		} catch (Exception e) {
-			log.error("Exception raised in CountryGeographicFocusOfIterator doStartTag", e);
+			log.error("Exception raised in CountryRelatedByIterator doStartTag", e);
 			clearServiceState();
 			freeConnection();
-			throw new JspTagException("Exception raised in CountryGeographicFocusOfIterator doStartTag");
+			throw new JspTagException("Exception raised in CountryRelatedByIterator doStartTag");
 		}
 
 		return SKIP_BODY;
@@ -69,20 +69,20 @@ public class CountryGeographicFocusOfIterator extends edu.uiowa.slis.VIVOISF.Tag
 		try {
 			while(rs.hasNext()) {
 				QuerySolution sol = rs.nextSolution();
-				geographicFocusOf = sol.get("?s").toString();
+				relatedBy = sol.get("?s").toString();
 				type = getLocalName(sol.get("?t").toString());
 				if (type == null)
 					continue;
 				if (classFilter == null || (classFilter != null && type != null && classFilter.containsKey(type))) {
-					log.info("instance: " + geographicFocusOf + "	type: " + type);
+					log.info("instance: " + relatedBy + "	type: " + type);
 					return EVAL_BODY_AGAIN;
 				}
 			}
 		} catch (Exception e) {
-			log.error("Exception raised in CountryGeographicFocusOfIterator doAfterBody", e);
+			log.error("Exception raised in CountryRelatedByIterator doAfterBody", e);
 			clearServiceState();
 			freeConnection();
-			throw new JspTagException("Exception raised in CountryGeographicFocusOfIterator doAfterBody");
+			throw new JspTagException("Exception raised in CountryRelatedByIterator doAfterBody");
 		}
 
 		return SKIP_BODY;
@@ -93,8 +93,8 @@ public class CountryGeographicFocusOfIterator extends edu.uiowa.slis.VIVOISF.Tag
 		try {
 			// do processing
 		} catch (Exception e) {
-			log.error("Exception raised in CountryGeographicFocusOf doEndTag", e);
-			throw new JspTagException("Exception raised in CountryGeographicFocusOf doEndTag");
+			log.error("Exception raised in CountryRelatedBy doEndTag", e);
+			throw new JspTagException("Exception raised in CountryRelatedBy doEndTag");
 		} finally {
 			clearServiceState();
 			freeConnection();
@@ -106,7 +106,7 @@ public class CountryGeographicFocusOfIterator extends edu.uiowa.slis.VIVOISF.Tag
 	private void clearServiceState() {
 		subjectURI = null;
 		type = null;
-		geographicFocusOf = null;
+		relatedBy = null;
 		classFilter = null;
 	}
 
@@ -118,19 +118,19 @@ public class CountryGeographicFocusOfIterator extends edu.uiowa.slis.VIVOISF.Tag
 		return type;
 	}
 
-	public void setGeographicFocusOf(String geographicFocusOf) {
-		this.geographicFocusOf = geographicFocusOf;
+	public void setRelatedBy(String relatedBy) {
+		this.relatedBy = relatedBy;
 	}
 
-	public String getGeographicFocusOf() {
-		return geographicFocusOf;
+	public String getRelatedBy() {
+		return relatedBy;
 	}
 
 	public void setClassFilter(String filterString) {
 		String[] classFilterArray = filterString.split(" ");
 		this.classFilter = new Hashtable<String, String>();
 		for (String filterClass : classFilterArray) {
-			log.info("adding filterClass " + filterClass + " to CountryGeographicFocusOfIterator");
+			log.info("adding filterClass " + filterClass + " to CountryRelatedByIterator");
 			classFilter.put(filterClass, "");
 		}
 	}

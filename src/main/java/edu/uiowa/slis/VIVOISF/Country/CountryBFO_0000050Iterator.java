@@ -12,13 +12,13 @@ import org.apache.jena.query.ResultSet;
 import java.util.Hashtable;
 
 @SuppressWarnings("serial")
-public class CountryValidInInverseIterator extends edu.uiowa.slis.VIVOISF.TagLibSupport {
-	static CountryValidInInverseIterator currentInstance = null;
-	private static final Log log = LogFactory.getLog(CountryValidInInverseIterator.class);
+public class CountryBFO_0000050Iterator extends edu.uiowa.slis.VIVOISF.TagLibSupport {
+	static CountryBFO_0000050Iterator currentInstance = null;
+	private static final Log log = LogFactory.getLog(CountryBFO_0000050Iterator.class);
 
 	String subjectURI = null;
 	String type = null;
-	String validInInverse = null;
+	String BFO_0000050 = null;
 	ResultSet rs = null;
 	Hashtable<String,String> classFilter = null;
 
@@ -36,7 +36,7 @@ public class CountryValidInInverseIterator extends edu.uiowa.slis.VIVOISF.TagLib
 			}
 
 			rs = getResultSet(prefix+"SELECT ?s ?t where {"
-					+" ?s <http://vivoweb.org/ontology/core#validIn> <" + subjectURI+ "> . "
+					+" <" + subjectURI + "> <http://purl.obolibrary.org/obo/BFO_0000050> ?s . "
 					+" ?s <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?t ."
 					+" FILTER NOT EXISTS {"
 					+"   ?s <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?subtype ."
@@ -46,20 +46,20 @@ public class CountryValidInInverseIterator extends edu.uiowa.slis.VIVOISF.TagLib
 					+"} ");
 			while(rs.hasNext()) {
 				QuerySolution sol = rs.nextSolution();
-				validInInverse = sol.get("?s").toString();
+				BFO_0000050 = sol.get("?s").toString();
 				type = getLocalName(sol.get("?t").toString());
 				if (type == null)
 					continue;
 				if (classFilter == null || (classFilter != null && type != null && classFilter.containsKey(type))) {
-					log.info("instance: " + validInInverse + "	type: " + type);
+					log.info("instance: " + BFO_0000050 + "	type: " + type);
 					return EVAL_BODY_INCLUDE;
 				}
 			}
 		} catch (Exception e) {
-			log.error("Exception raised in CountryValidInInverseIterator doStartTag", e);
+			log.error("Exception raised in CountryBFO_0000050Iterator doStartTag", e);
 			clearServiceState();
 			freeConnection();
-			throw new JspTagException("Exception raised in CountryValidInInverseIterator doStartTag");
+			throw new JspTagException("Exception raised in CountryBFO_0000050Iterator doStartTag");
 		}
 
 		return SKIP_BODY;
@@ -69,20 +69,20 @@ public class CountryValidInInverseIterator extends edu.uiowa.slis.VIVOISF.TagLib
 		try {
 			while(rs.hasNext()) {
 				QuerySolution sol = rs.nextSolution();
-				validInInverse = sol.get("?s").toString();
+				BFO_0000050 = sol.get("?s").toString();
 				type = getLocalName(sol.get("?t").toString());
 				if (type == null)
 					continue;
 				if (classFilter == null || (classFilter != null && type != null && classFilter.containsKey(type))) {
-					log.info("instance: " + validInInverse + "	type: " + type);
+					log.info("instance: " + BFO_0000050 + "	type: " + type);
 					return EVAL_BODY_AGAIN;
 				}
 			}
 		} catch (Exception e) {
-			log.error("Exception raised in CountryValidInIterator doAfterBody", e);
+			log.error("Exception raised in CountryBFO_0000050Iterator doAfterBody", e);
 			clearServiceState();
 			freeConnection();
-			throw new JspTagException("Exception raised in CountryValidInIterator doAfterBody");
+			throw new JspTagException("Exception raised in CountryBFO_0000050Iterator doAfterBody");
 		}
 
 		return SKIP_BODY;
@@ -93,8 +93,8 @@ public class CountryValidInInverseIterator extends edu.uiowa.slis.VIVOISF.TagLib
 		try {
 			// do processing
 		} catch (Exception e) {
-			log.error("Exception raised in CountryValidIn doEndTag", e);
-			throw new JspTagException("Exception raised in CountryValidIn doEndTag");
+			log.error("Exception raised in CountryBFO_0000050 doEndTag", e);
+			throw new JspTagException("Exception raised in CountryBFO_0000050 doEndTag");
 		} finally {
 			clearServiceState();
 			freeConnection();
@@ -106,7 +106,7 @@ public class CountryValidInInverseIterator extends edu.uiowa.slis.VIVOISF.TagLib
 	private void clearServiceState() {
 		subjectURI = null;
 		type = null;
-		validInInverse = null;
+		BFO_0000050 = null;
 		classFilter = null;
 	}
 
@@ -118,19 +118,19 @@ public class CountryValidInInverseIterator extends edu.uiowa.slis.VIVOISF.TagLib
 		return type;
 	}
 
-	public void setValidInInverse(String validInInverse) {
-		this.validInInverse = validInInverse;
+	public void setBFO_0000050(String BFO_0000050) {
+		this.BFO_0000050 = BFO_0000050;
 	}
 
-	public String getValidInInverse() {
-		return validInInverse;
+	public String getBFO_0000050() {
+		return BFO_0000050;
 	}
 
 	public void setClassFilter(String filterString) {
 		String[] classFilterArray = filterString.split(" ");
 		this.classFilter = new Hashtable<String, String>();
 		for (String filterClass : classFilterArray) {
-			log.info("adding filterClass " + filterClass + " to CountryValidInIterator");
+			log.info("adding filterClass " + filterClass + " to CountryBFO_0000050Iterator");
 			classFilter.put(filterClass, "");
 		}
 	}

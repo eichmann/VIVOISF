@@ -12,13 +12,13 @@ import org.apache.jena.query.ResultSet;
 import java.util.Hashtable;
 
 @SuppressWarnings("serial")
-public class CountryRO_0000056Iterator extends edu.uiowa.slis.VIVOISF.TagLibSupport {
-	static CountryRO_0000056Iterator currentInstance = null;
-	private static final Log log = LogFactory.getLog(CountryRO_0000056Iterator.class);
+public class CountryHasURLIterator extends edu.uiowa.slis.VIVOISF.TagLibSupport {
+	static CountryHasURLIterator currentInstance = null;
+	private static final Log log = LogFactory.getLog(CountryHasURLIterator.class);
 
 	String subjectURI = null;
 	String type = null;
-	String RO_0000056 = null;
+	String hasURL = null;
 	ResultSet rs = null;
 	Hashtable<String,String> classFilter = null;
 
@@ -36,7 +36,7 @@ public class CountryRO_0000056Iterator extends edu.uiowa.slis.VIVOISF.TagLibSupp
 			}
 
 			rs = getResultSet(prefix+"SELECT ?s ?t where {"
-					+" <" + subjectURI + "> <http://purl.obolibrary.org/obo/RO_0000056> ?s . "
+					+" <" + subjectURI + "> <http://www.w3.org/2006/vcard/ns#hasURL> ?s . "
 					+" ?s <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?t ."
 					+" FILTER NOT EXISTS {"
 					+"   ?s <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?subtype ."
@@ -46,20 +46,20 @@ public class CountryRO_0000056Iterator extends edu.uiowa.slis.VIVOISF.TagLibSupp
 					+"} ");
 			while(rs.hasNext()) {
 				QuerySolution sol = rs.nextSolution();
-				RO_0000056 = sol.get("?s").toString();
+				hasURL = sol.get("?s").toString();
 				type = getLocalName(sol.get("?t").toString());
 				if (type == null)
 					continue;
 				if (classFilter == null || (classFilter != null && type != null && classFilter.containsKey(type))) {
-					log.info("instance: " + RO_0000056 + "	type: " + type);
+					log.info("instance: " + hasURL + "	type: " + type);
 					return EVAL_BODY_INCLUDE;
 				}
 			}
 		} catch (Exception e) {
-			log.error("Exception raised in CountryRO_0000056Iterator doStartTag", e);
+			log.error("Exception raised in CountryHasURLIterator doStartTag", e);
 			clearServiceState();
 			freeConnection();
-			throw new JspTagException("Exception raised in CountryRO_0000056Iterator doStartTag");
+			throw new JspTagException("Exception raised in CountryHasURLIterator doStartTag");
 		}
 
 		return SKIP_BODY;
@@ -69,20 +69,20 @@ public class CountryRO_0000056Iterator extends edu.uiowa.slis.VIVOISF.TagLibSupp
 		try {
 			while(rs.hasNext()) {
 				QuerySolution sol = rs.nextSolution();
-				RO_0000056 = sol.get("?s").toString();
+				hasURL = sol.get("?s").toString();
 				type = getLocalName(sol.get("?t").toString());
 				if (type == null)
 					continue;
 				if (classFilter == null || (classFilter != null && type != null && classFilter.containsKey(type))) {
-					log.info("instance: " + RO_0000056 + "	type: " + type);
+					log.info("instance: " + hasURL + "	type: " + type);
 					return EVAL_BODY_AGAIN;
 				}
 			}
 		} catch (Exception e) {
-			log.error("Exception raised in CountryRO_0000056Iterator doAfterBody", e);
+			log.error("Exception raised in CountryHasURLIterator doAfterBody", e);
 			clearServiceState();
 			freeConnection();
-			throw new JspTagException("Exception raised in CountryRO_0000056Iterator doAfterBody");
+			throw new JspTagException("Exception raised in CountryHasURLIterator doAfterBody");
 		}
 
 		return SKIP_BODY;
@@ -93,8 +93,8 @@ public class CountryRO_0000056Iterator extends edu.uiowa.slis.VIVOISF.TagLibSupp
 		try {
 			// do processing
 		} catch (Exception e) {
-			log.error("Exception raised in CountryRO_0000056 doEndTag", e);
-			throw new JspTagException("Exception raised in CountryRO_0000056 doEndTag");
+			log.error("Exception raised in CountryHasURL doEndTag", e);
+			throw new JspTagException("Exception raised in CountryHasURL doEndTag");
 		} finally {
 			clearServiceState();
 			freeConnection();
@@ -106,7 +106,7 @@ public class CountryRO_0000056Iterator extends edu.uiowa.slis.VIVOISF.TagLibSupp
 	private void clearServiceState() {
 		subjectURI = null;
 		type = null;
-		RO_0000056 = null;
+		hasURL = null;
 		classFilter = null;
 	}
 
@@ -118,19 +118,19 @@ public class CountryRO_0000056Iterator extends edu.uiowa.slis.VIVOISF.TagLibSupp
 		return type;
 	}
 
-	public void setRO_0000056(String RO_0000056) {
-		this.RO_0000056 = RO_0000056;
+	public void setHasURL(String hasURL) {
+		this.hasURL = hasURL;
 	}
 
-	public String getRO_0000056() {
-		return RO_0000056;
+	public String getHasURL() {
+		return hasURL;
 	}
 
 	public void setClassFilter(String filterString) {
 		String[] classFilterArray = filterString.split(" ");
 		this.classFilter = new Hashtable<String, String>();
 		for (String filterClass : classFilterArray) {
-			log.info("adding filterClass " + filterClass + " to CountryRO_0000056Iterator");
+			log.info("adding filterClass " + filterClass + " to CountryHasURLIterator");
 			classFilter.put(filterClass, "");
 		}
 	}
