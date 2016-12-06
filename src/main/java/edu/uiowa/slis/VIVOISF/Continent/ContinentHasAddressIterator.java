@@ -12,13 +12,13 @@ import org.apache.jena.query.ResultSet;
 import java.util.Hashtable;
 
 @SuppressWarnings("serial")
-public class ContinentGeographicFocusOfIterator extends edu.uiowa.slis.VIVOISF.TagLibSupport {
-	static ContinentGeographicFocusOfIterator currentInstance = null;
-	private static final Log log = LogFactory.getLog(ContinentGeographicFocusOfIterator.class);
+public class ContinentHasAddressIterator extends edu.uiowa.slis.VIVOISF.TagLibSupport {
+	static ContinentHasAddressIterator currentInstance = null;
+	private static final Log log = LogFactory.getLog(ContinentHasAddressIterator.class);
 
 	String subjectURI = null;
 	String type = null;
-	String geographicFocusOf = null;
+	String hasAddress = null;
 	ResultSet rs = null;
 	Hashtable<String,String> classFilter = null;
 
@@ -36,7 +36,7 @@ public class ContinentGeographicFocusOfIterator extends edu.uiowa.slis.VIVOISF.T
 			}
 
 			rs = getResultSet(prefix+"SELECT ?s ?t where {"
-					+" <" + subjectURI + "> <http://vivoweb.org/ontology/core#geographicFocusOf> ?s . "
+					+" <" + subjectURI + "> <http://www.w3.org/2006/vcard/ns#hasAddress> ?s . "
 					+" ?s <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?t ."
 					+" FILTER NOT EXISTS {"
 					+"   ?s <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?subtype ."
@@ -46,20 +46,20 @@ public class ContinentGeographicFocusOfIterator extends edu.uiowa.slis.VIVOISF.T
 					+"} ");
 			while(rs.hasNext()) {
 				QuerySolution sol = rs.nextSolution();
-				geographicFocusOf = sol.get("?s").toString();
+				hasAddress = sol.get("?s").toString();
 				type = getLocalName(sol.get("?t").toString());
 				if (type == null)
 					continue;
 				if (classFilter == null || (classFilter != null && type != null && classFilter.containsKey(type))) {
-					log.info("instance: " + geographicFocusOf + "	type: " + type);
+					log.info("instance: " + hasAddress + "	type: " + type);
 					return EVAL_BODY_INCLUDE;
 				}
 			}
 		} catch (Exception e) {
-			log.error("Exception raised in ContinentGeographicFocusOfIterator doStartTag", e);
+			log.error("Exception raised in ContinentHasAddressIterator doStartTag", e);
 			clearServiceState();
 			freeConnection();
-			throw new JspTagException("Exception raised in ContinentGeographicFocusOfIterator doStartTag");
+			throw new JspTagException("Exception raised in ContinentHasAddressIterator doStartTag");
 		}
 
 		return SKIP_BODY;
@@ -69,20 +69,20 @@ public class ContinentGeographicFocusOfIterator extends edu.uiowa.slis.VIVOISF.T
 		try {
 			while(rs.hasNext()) {
 				QuerySolution sol = rs.nextSolution();
-				geographicFocusOf = sol.get("?s").toString();
+				hasAddress = sol.get("?s").toString();
 				type = getLocalName(sol.get("?t").toString());
 				if (type == null)
 					continue;
 				if (classFilter == null || (classFilter != null && type != null && classFilter.containsKey(type))) {
-					log.info("instance: " + geographicFocusOf + "	type: " + type);
+					log.info("instance: " + hasAddress + "	type: " + type);
 					return EVAL_BODY_AGAIN;
 				}
 			}
 		} catch (Exception e) {
-			log.error("Exception raised in ContinentGeographicFocusOfIterator doAfterBody", e);
+			log.error("Exception raised in ContinentHasAddressIterator doAfterBody", e);
 			clearServiceState();
 			freeConnection();
-			throw new JspTagException("Exception raised in ContinentGeographicFocusOfIterator doAfterBody");
+			throw new JspTagException("Exception raised in ContinentHasAddressIterator doAfterBody");
 		}
 
 		return SKIP_BODY;
@@ -93,8 +93,8 @@ public class ContinentGeographicFocusOfIterator extends edu.uiowa.slis.VIVOISF.T
 		try {
 			// do processing
 		} catch (Exception e) {
-			log.error("Exception raised in ContinentGeographicFocusOf doEndTag", e);
-			throw new JspTagException("Exception raised in ContinentGeographicFocusOf doEndTag");
+			log.error("Exception raised in ContinentHasAddress doEndTag", e);
+			throw new JspTagException("Exception raised in ContinentHasAddress doEndTag");
 		} finally {
 			clearServiceState();
 			freeConnection();
@@ -106,7 +106,7 @@ public class ContinentGeographicFocusOfIterator extends edu.uiowa.slis.VIVOISF.T
 	private void clearServiceState() {
 		subjectURI = null;
 		type = null;
-		geographicFocusOf = null;
+		hasAddress = null;
 		classFilter = null;
 	}
 
@@ -118,19 +118,19 @@ public class ContinentGeographicFocusOfIterator extends edu.uiowa.slis.VIVOISF.T
 		return type;
 	}
 
-	public void setGeographicFocusOf(String geographicFocusOf) {
-		this.geographicFocusOf = geographicFocusOf;
+	public void setHasAddress(String hasAddress) {
+		this.hasAddress = hasAddress;
 	}
 
-	public String getGeographicFocusOf() {
-		return geographicFocusOf;
+	public String getHasAddress() {
+		return hasAddress;
 	}
 
 	public void setClassFilter(String filterString) {
 		String[] classFilterArray = filterString.split(" ");
 		this.classFilter = new Hashtable<String, String>();
 		for (String filterClass : classFilterArray) {
-			log.info("adding filterClass " + filterClass + " to ContinentGeographicFocusOfIterator");
+			log.info("adding filterClass " + filterClass + " to ContinentHasAddressIterator");
 			classFilter.put(filterClass, "");
 		}
 	}
