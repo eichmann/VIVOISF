@@ -22,8 +22,8 @@ public class AgentIterator extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 		currentInstance = this;
 		try {
 			rs = getResultSet(prefix+
-					" SELECT ?s ?labelUS ?labelENG, ?label ?labelANY where { "+
-					"  ?s rdf:type <http://www.w3.org/2006/vcard/ns#Agent> . "+
+					" SELECT ?s ?labelUS ?labelENG ?label ?labelANY where { "+
+					"  ?s rdf:type <http://xmlns.com/foaf/0.1/Agent> . "+
 					"  OPTIONAL { SELECT ?labelUS  WHERE { ?s rdfs:label ?labelUS  FILTER (lang(?labelUS) = \"en-US\")}    LIMIT 1 } "+
 					"  OPTIONAL { SELECT ?labelENG WHERE { ?s rdfs:label ?labelENG FILTER (langMatches(?labelENG,\"en\"))} LIMIT 1 } "+
 					"  OPTIONAL { SELECT ?label    WHERE { ?s rdfs:label ?label    FILTER (lang(?label) = \"\")}           LIMIT 1 } "+
