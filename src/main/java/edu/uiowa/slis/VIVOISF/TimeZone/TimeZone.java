@@ -20,9 +20,6 @@ public class TimeZone extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 	String label = null;
 	boolean commitNeeded = false;
 
-	// functional datatype properties, both local and inherited
-
-
 	public int doStartTag() throws JspException {
 		currentInstance = this;
 		try {
