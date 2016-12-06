@@ -12,13 +12,13 @@ import org.apache.jena.query.ResultSet;
 import java.util.Hashtable;
 
 @SuppressWarnings("serial")
-public class non_self_governingGeographicFocusOfIterator extends edu.uiowa.slis.VIVOISF.TagLibSupport {
-	static non_self_governingGeographicFocusOfIterator currentInstance = null;
-	private static final Log log = LogFactory.getLog(non_self_governingGeographicFocusOfIterator.class);
+public class non_self_governingOrcidIdInverseIterator extends edu.uiowa.slis.VIVOISF.TagLibSupport {
+	static non_self_governingOrcidIdInverseIterator currentInstance = null;
+	private static final Log log = LogFactory.getLog(non_self_governingOrcidIdInverseIterator.class);
 
 	String subjectURI = null;
 	String type = null;
-	String geographicFocusOf = null;
+	String orcidIdInverse = null;
 	ResultSet rs = null;
 	Hashtable<String,String> classFilter = null;
 
@@ -36,7 +36,7 @@ public class non_self_governingGeographicFocusOfIterator extends edu.uiowa.slis.
 			}
 
 			rs = getResultSet(prefix+"SELECT ?s ?t where {"
-					+" <" + subjectURI + "> <http://vivoweb.org/ontology/core#geographicFocusOf> ?s . "
+					+" ?s <http://vivoweb.org/ontology/core#orcidId> <" + subjectURI+ "> . "
 					+" ?s <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?t ."
 					+" FILTER NOT EXISTS {"
 					+"   ?s <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?subtype ."
@@ -46,20 +46,20 @@ public class non_self_governingGeographicFocusOfIterator extends edu.uiowa.slis.
 					+"} ");
 			while(rs.hasNext()) {
 				QuerySolution sol = rs.nextSolution();
-				geographicFocusOf = sol.get("?s").toString();
+				orcidIdInverse = sol.get("?s").toString();
 				type = getLocalName(sol.get("?t").toString());
 				if (type == null)
 					continue;
 				if (classFilter == null || (classFilter != null && type != null && classFilter.containsKey(type))) {
-					log.info("instance: " + geographicFocusOf + "	type: " + type);
+					log.info("instance: " + orcidIdInverse + "	type: " + type);
 					return EVAL_BODY_INCLUDE;
 				}
 			}
 		} catch (Exception e) {
-			log.error("Exception raised in non_self_governingGeographicFocusOfIterator doStartTag", e);
+			log.error("Exception raised in non_self_governingOrcidIdInverseIterator doStartTag", e);
 			clearServiceState();
 			freeConnection();
-			throw new JspTagException("Exception raised in non_self_governingGeographicFocusOfIterator doStartTag");
+			throw new JspTagException("Exception raised in non_self_governingOrcidIdInverseIterator doStartTag");
 		}
 
 		return SKIP_BODY;
@@ -69,20 +69,20 @@ public class non_self_governingGeographicFocusOfIterator extends edu.uiowa.slis.
 		try {
 			while(rs.hasNext()) {
 				QuerySolution sol = rs.nextSolution();
-				geographicFocusOf = sol.get("?s").toString();
+				orcidIdInverse = sol.get("?s").toString();
 				type = getLocalName(sol.get("?t").toString());
 				if (type == null)
 					continue;
 				if (classFilter == null || (classFilter != null && type != null && classFilter.containsKey(type))) {
-					log.info("instance: " + geographicFocusOf + "	type: " + type);
+					log.info("instance: " + orcidIdInverse + "	type: " + type);
 					return EVAL_BODY_AGAIN;
 				}
 			}
 		} catch (Exception e) {
-			log.error("Exception raised in non_self_governingGeographicFocusOfIterator doAfterBody", e);
+			log.error("Exception raised in non_self_governingOrcidIdIterator doAfterBody", e);
 			clearServiceState();
 			freeConnection();
-			throw new JspTagException("Exception raised in non_self_governingGeographicFocusOfIterator doAfterBody");
+			throw new JspTagException("Exception raised in non_self_governingOrcidIdIterator doAfterBody");
 		}
 
 		return SKIP_BODY;
@@ -93,8 +93,8 @@ public class non_self_governingGeographicFocusOfIterator extends edu.uiowa.slis.
 		try {
 			// do processing
 		} catch (Exception e) {
-			log.error("Exception raised in non_self_governingGeographicFocusOf doEndTag", e);
-			throw new JspTagException("Exception raised in non_self_governingGeographicFocusOf doEndTag");
+			log.error("Exception raised in non_self_governingOrcidId doEndTag", e);
+			throw new JspTagException("Exception raised in non_self_governingOrcidId doEndTag");
 		} finally {
 			clearServiceState();
 			freeConnection();
@@ -106,7 +106,7 @@ public class non_self_governingGeographicFocusOfIterator extends edu.uiowa.slis.
 	private void clearServiceState() {
 		subjectURI = null;
 		type = null;
-		geographicFocusOf = null;
+		orcidIdInverse = null;
 		classFilter = null;
 	}
 
@@ -118,19 +118,19 @@ public class non_self_governingGeographicFocusOfIterator extends edu.uiowa.slis.
 		return type;
 	}
 
-	public void setGeographicFocusOf(String geographicFocusOf) {
-		this.geographicFocusOf = geographicFocusOf;
+	public void setOrcidIdInverse(String orcidIdInverse) {
+		this.orcidIdInverse = orcidIdInverse;
 	}
 
-	public String getGeographicFocusOf() {
-		return geographicFocusOf;
+	public String getOrcidIdInverse() {
+		return orcidIdInverse;
 	}
 
 	public void setClassFilter(String filterString) {
 		String[] classFilterArray = filterString.split(" ");
 		this.classFilter = new Hashtable<String, String>();
 		for (String filterClass : classFilterArray) {
-			log.info("adding filterClass " + filterClass + " to non_self_governingGeographicFocusOfIterator");
+			log.info("adding filterClass " + filterClass + " to non_self_governingOrcidIdIterator");
 			classFilter.put(filterClass, "");
 		}
 	}
