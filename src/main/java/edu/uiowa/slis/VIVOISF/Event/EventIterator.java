@@ -22,8 +22,8 @@ public class EventIterator extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 		currentInstance = this;
 		try {
 			rs = getResultSet(prefix+
-					" SELECT ?s ?labelUS ?labelENG, ?label ?labelANY where { "+
-					"  ?s rdf:type <http://purl.org/ontology/bibo/Event> . "+
+					" SELECT ?s ?labelUS ?labelENG ?label ?labelANY where { "+
+					"  ?s rdf:type <http://purl.org/NET/c4dm/event.owl#Event> . "+
 					"  OPTIONAL { SELECT ?labelUS  WHERE { ?s rdfs:label ?labelUS  FILTER (lang(?labelUS) = \"en-US\")}    LIMIT 1 } "+
 					"  OPTIONAL { SELECT ?labelENG WHERE { ?s rdfs:label ?labelENG FILTER (langMatches(?labelENG,\"en\"))} LIMIT 1 } "+
 					"  OPTIONAL { SELECT ?label    WHERE { ?s rdfs:label ?label    FILTER (lang(?label) = \"\")}           LIMIT 1 } "+
