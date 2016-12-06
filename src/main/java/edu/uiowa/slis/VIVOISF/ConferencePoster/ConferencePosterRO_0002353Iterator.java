@@ -9,39 +9,57 @@ import javax.servlet.jsp.JspTagException;
 import org.apache.jena.query.QuerySolution;
 import org.apache.jena.query.ResultSet;
 
+import java.util.Hashtable;
+
 @SuppressWarnings("serial")
 public class ConferencePosterRO_0002353Iterator extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 	static ConferencePosterRO_0002353Iterator currentInstance = null;
 	private static final Log log = LogFactory.getLog(ConferencePosterRO_0002353Iterator.class);
 
 	String subjectURI = null;
+	String type = null;
 	String RO_0002353 = null;
 	ResultSet rs = null;
+	Hashtable<String,String> classFilter = null;
 
 	public int doStartTag() throws JspException {
 		currentInstance = this;
 		try {
-			ConferencePoster ancestorInstance = (ConferencePoster) findAncestorWithClass(this, ConferencePoster.class);
+			ConferencePoster theConferencePoster = (ConferencePoster) findAncestorWithClass(this, ConferencePoster.class);
 
-			if (ancestorInstance != null) {
-				subjectURI = ancestorInstance.getSubjectURI();
+			if (theConferencePoster != null) {
+				subjectURI = theConferencePoster.getSubjectURI();
 			}
 
-			if (ancestorInstance == null && subjectURI == null) {
+			if (theConferencePoster == null && subjectURI == null) {
 				throw new JspException("subject URI generation currently not supported");
 			}
 
-			rs = getResultSet(prefix+"SELECT ?s where { <" + subjectURI + "> <http://purl.obolibrary.org/obo/RO_0002353> ?s } ");
-			if(rs.hasNext()) {
+			rs = getResultSet(prefix+"SELECT ?s ?t where {"
+					+" <" + subjectURI + "> <http://purl.obolibrary.org/obo/RO_0002353> ?s . "
+					+" ?s <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?t ."
+					+" FILTER NOT EXISTS {"
+					+"   ?s <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?subtype ."
+					+"   ?subtype <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?t ."
+					+"   filter ( ?subtype != ?t )"
+					+" }"
+					+"} ");
+			while(rs.hasNext()) {
 				QuerySolution sol = rs.nextSolution();
 				RO_0002353 = sol.get("?s").toString();
-				return EVAL_BODY_INCLUDE;
+				type = getLocalName(sol.get("?t").toString());
+				if (type == null)
+					continue;
+				if (classFilter == null || (classFilter != null && type != null && classFilter.containsKey(type))) {
+					log.info("instance: " + RO_0002353 + "	type: " + type);
+					return EVAL_BODY_INCLUDE;
+				}
 			}
 		} catch (Exception e) {
-			log.error("Exception raised in ConferencePosterIterator doStartTag", e);
+			log.error("Exception raised in ConferencePosterRO_0002353Iterator doStartTag", e);
 			clearServiceState();
 			freeConnection();
-			throw new JspTagException("Exception raised in ConferencePosterIterator doStartTag");
+			throw new JspTagException("Exception raised in ConferencePosterRO_0002353Iterator doStartTag");
 		}
 
 		return SKIP_BODY;
@@ -49,16 +67,22 @@ public class ConferencePosterRO_0002353Iterator extends edu.uiowa.slis.VIVOISF.T
 
 	public int doAfterBody() throws JspException {
 		try {
-			if(rs.hasNext()) {
+			while(rs.hasNext()) {
 				QuerySolution sol = rs.nextSolution();
 				RO_0002353 = sol.get("?s").toString();
-				return EVAL_BODY_AGAIN;
+				type = getLocalName(sol.get("?t").toString());
+				if (type == null)
+					continue;
+				if (classFilter == null || (classFilter != null && type != null && classFilter.containsKey(type))) {
+					log.info("instance: " + RO_0002353 + "	type: " + type);
+					return EVAL_BODY_AGAIN;
+				}
 			}
 		} catch (Exception e) {
-			log.error("Exception raised in ConferencePosterIterator doAfterBody", e);
+			log.error("Exception raised in ConferencePosterRO_0002353Iterator doAfterBody", e);
 			clearServiceState();
 			freeConnection();
-			throw new JspTagException("Exception raised in ConferencePosterIterator doAfterBody");
+			throw new JspTagException("Exception raised in ConferencePosterRO_0002353Iterator doAfterBody");
 		}
 
 		return SKIP_BODY;
@@ -69,8 +93,8 @@ public class ConferencePosterRO_0002353Iterator extends edu.uiowa.slis.VIVOISF.T
 		try {
 			// do processing
 		} catch (Exception e) {
-			log.error("Exception raised in ConferencePoster doEndTag", e);
-			throw new JspTagException("Exception raised in ConferencePoster doEndTag");
+			log.error("Exception raised in ConferencePosterRO_0002353 doEndTag", e);
+			throw new JspTagException("Exception raised in ConferencePosterRO_0002353 doEndTag");
 		} finally {
 			clearServiceState();
 			freeConnection();
@@ -81,6 +105,17 @@ public class ConferencePosterRO_0002353Iterator extends edu.uiowa.slis.VIVOISF.T
 
 	private void clearServiceState() {
 		subjectURI = null;
+		type = null;
+		RO_0002353 = null;
+		classFilter = null;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public String getType() {
+		return type;
 	}
 
 	public void setRO_0002353(String RO_0002353) {
@@ -89,6 +124,19 @@ public class ConferencePosterRO_0002353Iterator extends edu.uiowa.slis.VIVOISF.T
 
 	public String getRO_0002353() {
 		return RO_0002353;
+	}
+
+	public void setClassFilter(String filterString) {
+		String[] classFilterArray = filterString.split(" ");
+		this.classFilter = new Hashtable<String, String>();
+		for (String filterClass : classFilterArray) {
+			log.info("adding filterClass " + filterClass + " to ConferencePosterRO_0002353Iterator");
+			classFilter.put(filterClass, "");
+		}
+	}
+
+	public String getClassFilter() {
+		return classFilter.toString();
 	}
 
 }
