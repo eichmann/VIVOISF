@@ -12,13 +12,13 @@ import org.apache.jena.query.ResultSet;
 import java.util.Hashtable;
 
 @SuppressWarnings("serial")
-public class self_governingGeographicFocusOfIterator extends edu.uiowa.slis.VIVOISF.TagLibSupport {
-	static self_governingGeographicFocusOfIterator currentInstance = null;
-	private static final Log log = LogFactory.getLog(self_governingGeographicFocusOfIterator.class);
+public class self_governingHasPublicationVenueIterator extends edu.uiowa.slis.VIVOISF.TagLibSupport {
+	static self_governingHasPublicationVenueIterator currentInstance = null;
+	private static final Log log = LogFactory.getLog(self_governingHasPublicationVenueIterator.class);
 
 	String subjectURI = null;
 	String type = null;
-	String geographicFocusOf = null;
+	String hasPublicationVenue = null;
 	ResultSet rs = null;
 	Hashtable<String,String> classFilter = null;
 
@@ -36,7 +36,7 @@ public class self_governingGeographicFocusOfIterator extends edu.uiowa.slis.VIVO
 			}
 
 			rs = getResultSet(prefix+"SELECT ?s ?t where {"
-					+" <" + subjectURI + "> <http://vivoweb.org/ontology/core#geographicFocusOf> ?s . "
+					+" <" + subjectURI + "> <http://vivoweb.org/ontology/core#hasPublicationVenue> ?s . "
 					+" ?s <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?t ."
 					+" FILTER NOT EXISTS {"
 					+"   ?s <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?subtype ."
@@ -46,20 +46,20 @@ public class self_governingGeographicFocusOfIterator extends edu.uiowa.slis.VIVO
 					+"} ");
 			while(rs.hasNext()) {
 				QuerySolution sol = rs.nextSolution();
-				geographicFocusOf = sol.get("?s").toString();
+				hasPublicationVenue = sol.get("?s").toString();
 				type = getLocalName(sol.get("?t").toString());
 				if (type == null)
 					continue;
 				if (classFilter == null || (classFilter != null && type != null && classFilter.containsKey(type))) {
-					log.info("instance: " + geographicFocusOf + "	type: " + type);
+					log.info("instance: " + hasPublicationVenue + "	type: " + type);
 					return EVAL_BODY_INCLUDE;
 				}
 			}
 		} catch (Exception e) {
-			log.error("Exception raised in self_governingGeographicFocusOfIterator doStartTag", e);
+			log.error("Exception raised in self_governingHasPublicationVenueIterator doStartTag", e);
 			clearServiceState();
 			freeConnection();
-			throw new JspTagException("Exception raised in self_governingGeographicFocusOfIterator doStartTag");
+			throw new JspTagException("Exception raised in self_governingHasPublicationVenueIterator doStartTag");
 		}
 
 		return SKIP_BODY;
@@ -69,20 +69,20 @@ public class self_governingGeographicFocusOfIterator extends edu.uiowa.slis.VIVO
 		try {
 			while(rs.hasNext()) {
 				QuerySolution sol = rs.nextSolution();
-				geographicFocusOf = sol.get("?s").toString();
+				hasPublicationVenue = sol.get("?s").toString();
 				type = getLocalName(sol.get("?t").toString());
 				if (type == null)
 					continue;
 				if (classFilter == null || (classFilter != null && type != null && classFilter.containsKey(type))) {
-					log.info("instance: " + geographicFocusOf + "	type: " + type);
+					log.info("instance: " + hasPublicationVenue + "	type: " + type);
 					return EVAL_BODY_AGAIN;
 				}
 			}
 		} catch (Exception e) {
-			log.error("Exception raised in self_governingGeographicFocusOfIterator doAfterBody", e);
+			log.error("Exception raised in self_governingHasPublicationVenueIterator doAfterBody", e);
 			clearServiceState();
 			freeConnection();
-			throw new JspTagException("Exception raised in self_governingGeographicFocusOfIterator doAfterBody");
+			throw new JspTagException("Exception raised in self_governingHasPublicationVenueIterator doAfterBody");
 		}
 
 		return SKIP_BODY;
@@ -93,8 +93,8 @@ public class self_governingGeographicFocusOfIterator extends edu.uiowa.slis.VIVO
 		try {
 			// do processing
 		} catch (Exception e) {
-			log.error("Exception raised in self_governingGeographicFocusOf doEndTag", e);
-			throw new JspTagException("Exception raised in self_governingGeographicFocusOf doEndTag");
+			log.error("Exception raised in self_governingHasPublicationVenue doEndTag", e);
+			throw new JspTagException("Exception raised in self_governingHasPublicationVenue doEndTag");
 		} finally {
 			clearServiceState();
 			freeConnection();
@@ -106,7 +106,7 @@ public class self_governingGeographicFocusOfIterator extends edu.uiowa.slis.VIVO
 	private void clearServiceState() {
 		subjectURI = null;
 		type = null;
-		geographicFocusOf = null;
+		hasPublicationVenue = null;
 		classFilter = null;
 	}
 
@@ -118,19 +118,19 @@ public class self_governingGeographicFocusOfIterator extends edu.uiowa.slis.VIVO
 		return type;
 	}
 
-	public void setGeographicFocusOf(String geographicFocusOf) {
-		this.geographicFocusOf = geographicFocusOf;
+	public void setHasPublicationVenue(String hasPublicationVenue) {
+		this.hasPublicationVenue = hasPublicationVenue;
 	}
 
-	public String getGeographicFocusOf() {
-		return geographicFocusOf;
+	public String getHasPublicationVenue() {
+		return hasPublicationVenue;
 	}
 
 	public void setClassFilter(String filterString) {
 		String[] classFilterArray = filterString.split(" ");
 		this.classFilter = new Hashtable<String, String>();
 		for (String filterClass : classFilterArray) {
-			log.info("adding filterClass " + filterClass + " to self_governingGeographicFocusOfIterator");
+			log.info("adding filterClass " + filterClass + " to self_governingHasPublicationVenueIterator");
 			classFilter.put(filterClass, "");
 		}
 	}
