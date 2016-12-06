@@ -33,16 +33,6 @@ public class DocumentStatus extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 				label = theDocumentStatusIterator.getLabel();
 			}
 
-			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.Document.DocumentStatusIterator) {
-				subjectURI = ((edu.uiowa.slis.VIVOISF.Document.DocumentStatusIterator)this.getParent()).getStatus();
-			}
-
-			edu.uiowa.slis.VIVOISF.Document.DocumentStatusIterator theDocumentStatusIterator = (edu.uiowa.slis.VIVOISF.Document.DocumentStatusIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.Document.DocumentStatusIterator.class);
-
-			if (subjectURI == null && theDocumentStatusIterator != null) {
-				subjectURI = theDocumentStatusIterator.getStatus();
-			}
-
 			if (theDocumentStatusIterator == null && subjectURI == null) {
 				throw new JspException("subject URI generation currently not supported");
 			} else {
