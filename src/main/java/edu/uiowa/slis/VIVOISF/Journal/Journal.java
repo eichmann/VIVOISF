@@ -20,6 +20,12 @@ public class Journal extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 	String label = null;
 	boolean commitNeeded = false;
 
+	// functional datatype properties, both local and inherited
+
+	String abbreviation = null;
+	String placeOfPublication = null;
+	String hideFromDisplay = null;
+
 	public int doStartTag() throws JspException {
 		currentInstance = this;
 		try {
@@ -30,11 +36,141 @@ public class Journal extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 				label = theJournalIterator.getLabel();
 			}
 
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.BFO_0000001.BFO_0000001HasPublicationVenueIterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.BFO_0000001.BFO_0000001HasPublicationVenueIterator)this.getParent()).getHasPublicationVenue();
+			}
+
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.BFO_0000002.BFO_0000002HasPublicationVenueIterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.BFO_0000002.BFO_0000002HasPublicationVenueIterator)this.getParent()).getHasPublicationVenue();
+			}
+
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.BFO_0000031.BFO_0000031HasPublicationVenueIterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.BFO_0000031.BFO_0000031HasPublicationVenueIterator)this.getParent()).getHasPublicationVenue();
+			}
+
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.IAO_0000030.IAO_0000030HasPublicationVenueIterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.IAO_0000030.IAO_0000030HasPublicationVenueIterator)this.getParent()).getHasPublicationVenue();
+			}
+
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.Document.DocumentHasPublicationVenueIterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.Document.DocumentHasPublicationVenueIterator)this.getParent()).getHasPublicationVenue();
+			}
+
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.Thing.ThingHasPublicationVenueIterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.Thing.ThingHasPublicationVenueIterator)this.getParent()).getHasPublicationVenue();
+			}
+
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.Article.ArticleHasPublicationVenueIterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.Article.ArticleHasPublicationVenueIterator)this.getParent()).getHasPublicationVenue();
+			}
+
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.AcademicArticle.AcademicArticleHasPublicationVenueIterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.AcademicArticle.AcademicArticleHasPublicationVenueIterator)this.getParent()).getHasPublicationVenue();
+			}
+
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.BookSection.BookSectionHasPublicationVenueIterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.BookSection.BookSectionHasPublicationVenueIterator)this.getParent()).getHasPublicationVenue();
+			}
+
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.Chapter.ChapterHasPublicationVenueIterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.Chapter.ChapterHasPublicationVenueIterator)this.getParent()).getHasPublicationVenue();
+			}
+
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.DocumentPart.DocumentPartHasPublicationVenueIterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.DocumentPart.DocumentPartHasPublicationVenueIterator)this.getParent()).getHasPublicationVenue();
+			}
+
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.Book.BookHasPublicationVenueIterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.Book.BookHasPublicationVenueIterator)this.getParent()).getHasPublicationVenue();
+			}
+
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.ConferencePaper.ConferencePaperHasPublicationVenueIterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.ConferencePaper.ConferencePaperHasPublicationVenueIterator)this.getParent()).getHasPublicationVenue();
+			}
+
+			edu.uiowa.slis.VIVOISF.BFO_0000001.BFO_0000001HasPublicationVenueIterator theBFO_0000001HasPublicationVenueIterator = (edu.uiowa.slis.VIVOISF.BFO_0000001.BFO_0000001HasPublicationVenueIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.BFO_0000001.BFO_0000001HasPublicationVenueIterator.class);
+
+			if (subjectURI == null && theBFO_0000001HasPublicationVenueIterator != null) {
+				subjectURI = theBFO_0000001HasPublicationVenueIterator.getHasPublicationVenue();
+			}
+
+			edu.uiowa.slis.VIVOISF.BFO_0000002.BFO_0000002HasPublicationVenueIterator theBFO_0000002HasPublicationVenueIterator = (edu.uiowa.slis.VIVOISF.BFO_0000002.BFO_0000002HasPublicationVenueIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.BFO_0000002.BFO_0000002HasPublicationVenueIterator.class);
+
+			if (subjectURI == null && theBFO_0000002HasPublicationVenueIterator != null) {
+				subjectURI = theBFO_0000002HasPublicationVenueIterator.getHasPublicationVenue();
+			}
+
+			edu.uiowa.slis.VIVOISF.BFO_0000031.BFO_0000031HasPublicationVenueIterator theBFO_0000031HasPublicationVenueIterator = (edu.uiowa.slis.VIVOISF.BFO_0000031.BFO_0000031HasPublicationVenueIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.BFO_0000031.BFO_0000031HasPublicationVenueIterator.class);
+
+			if (subjectURI == null && theBFO_0000031HasPublicationVenueIterator != null) {
+				subjectURI = theBFO_0000031HasPublicationVenueIterator.getHasPublicationVenue();
+			}
+
+			edu.uiowa.slis.VIVOISF.IAO_0000030.IAO_0000030HasPublicationVenueIterator theIAO_0000030HasPublicationVenueIterator = (edu.uiowa.slis.VIVOISF.IAO_0000030.IAO_0000030HasPublicationVenueIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.IAO_0000030.IAO_0000030HasPublicationVenueIterator.class);
+
+			if (subjectURI == null && theIAO_0000030HasPublicationVenueIterator != null) {
+				subjectURI = theIAO_0000030HasPublicationVenueIterator.getHasPublicationVenue();
+			}
+
+			edu.uiowa.slis.VIVOISF.Document.DocumentHasPublicationVenueIterator theDocumentHasPublicationVenueIterator = (edu.uiowa.slis.VIVOISF.Document.DocumentHasPublicationVenueIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.Document.DocumentHasPublicationVenueIterator.class);
+
+			if (subjectURI == null && theDocumentHasPublicationVenueIterator != null) {
+				subjectURI = theDocumentHasPublicationVenueIterator.getHasPublicationVenue();
+			}
+
+			edu.uiowa.slis.VIVOISF.Thing.ThingHasPublicationVenueIterator theThingHasPublicationVenueIterator = (edu.uiowa.slis.VIVOISF.Thing.ThingHasPublicationVenueIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.Thing.ThingHasPublicationVenueIterator.class);
+
+			if (subjectURI == null && theThingHasPublicationVenueIterator != null) {
+				subjectURI = theThingHasPublicationVenueIterator.getHasPublicationVenue();
+			}
+
+			edu.uiowa.slis.VIVOISF.Article.ArticleHasPublicationVenueIterator theArticleHasPublicationVenueIterator = (edu.uiowa.slis.VIVOISF.Article.ArticleHasPublicationVenueIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.Article.ArticleHasPublicationVenueIterator.class);
+
+			if (subjectURI == null && theArticleHasPublicationVenueIterator != null) {
+				subjectURI = theArticleHasPublicationVenueIterator.getHasPublicationVenue();
+			}
+
+			edu.uiowa.slis.VIVOISF.AcademicArticle.AcademicArticleHasPublicationVenueIterator theAcademicArticleHasPublicationVenueIterator = (edu.uiowa.slis.VIVOISF.AcademicArticle.AcademicArticleHasPublicationVenueIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.AcademicArticle.AcademicArticleHasPublicationVenueIterator.class);
+
+			if (subjectURI == null && theAcademicArticleHasPublicationVenueIterator != null) {
+				subjectURI = theAcademicArticleHasPublicationVenueIterator.getHasPublicationVenue();
+			}
+
+			edu.uiowa.slis.VIVOISF.BookSection.BookSectionHasPublicationVenueIterator theBookSectionHasPublicationVenueIterator = (edu.uiowa.slis.VIVOISF.BookSection.BookSectionHasPublicationVenueIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.BookSection.BookSectionHasPublicationVenueIterator.class);
+
+			if (subjectURI == null && theBookSectionHasPublicationVenueIterator != null) {
+				subjectURI = theBookSectionHasPublicationVenueIterator.getHasPublicationVenue();
+			}
+
+			edu.uiowa.slis.VIVOISF.Chapter.ChapterHasPublicationVenueIterator theChapterHasPublicationVenueIterator = (edu.uiowa.slis.VIVOISF.Chapter.ChapterHasPublicationVenueIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.Chapter.ChapterHasPublicationVenueIterator.class);
+
+			if (subjectURI == null && theChapterHasPublicationVenueIterator != null) {
+				subjectURI = theChapterHasPublicationVenueIterator.getHasPublicationVenue();
+			}
+
+			edu.uiowa.slis.VIVOISF.DocumentPart.DocumentPartHasPublicationVenueIterator theDocumentPartHasPublicationVenueIterator = (edu.uiowa.slis.VIVOISF.DocumentPart.DocumentPartHasPublicationVenueIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.DocumentPart.DocumentPartHasPublicationVenueIterator.class);
+
+			if (subjectURI == null && theDocumentPartHasPublicationVenueIterator != null) {
+				subjectURI = theDocumentPartHasPublicationVenueIterator.getHasPublicationVenue();
+			}
+
+			edu.uiowa.slis.VIVOISF.Book.BookHasPublicationVenueIterator theBookHasPublicationVenueIterator = (edu.uiowa.slis.VIVOISF.Book.BookHasPublicationVenueIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.Book.BookHasPublicationVenueIterator.class);
+
+			if (subjectURI == null && theBookHasPublicationVenueIterator != null) {
+				subjectURI = theBookHasPublicationVenueIterator.getHasPublicationVenue();
+			}
+
+			edu.uiowa.slis.VIVOISF.ConferencePaper.ConferencePaperHasPublicationVenueIterator theConferencePaperHasPublicationVenueIterator = (edu.uiowa.slis.VIVOISF.ConferencePaper.ConferencePaperHasPublicationVenueIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.ConferencePaper.ConferencePaperHasPublicationVenueIterator.class);
+
+			if (subjectURI == null && theConferencePaperHasPublicationVenueIterator != null) {
+				subjectURI = theConferencePaperHasPublicationVenueIterator.getHasPublicationVenue();
+			}
+
 			if (theJournalIterator == null && subjectURI == null) {
 				throw new JspException("subject URI generation currently not supported");
 			} else {
 				ResultSet rs = getResultSet(prefix
-				+ " SELECT ?labelUS ?labelENG ?label ?labelANY ?foafName ?schemaName ?rdfValue  where {"
+				+ " SELECT ?labelUS ?labelENG ?label ?labelANY ?foafName ?schemaName ?rdfValue  ?abbreviation ?placeOfPublication ?hideFromDisplay where {"
 				+ "  OPTIONAL { SELECT ?labelUS  WHERE { <" + subjectURI + "> rdfs:label ?labelUS  FILTER (lang(?labelUS) = \"en-US\")}    LIMIT 1 } "
 				+ "  OPTIONAL { SELECT ?labelENG WHERE { <" + subjectURI + "> rdfs:label ?labelENG FILTER (langMatches(?labelENG,\"en\"))} LIMIT 1 } "
 				+ "  OPTIONAL { SELECT ?label    WHERE { <" + subjectURI + "> rdfs:label ?label    FILTER (lang(?label) = \"\")}           LIMIT 1 } "
@@ -42,6 +178,9 @@ public class Journal extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 				+ "  OPTIONAL { <" + subjectURI + "> <http://xmlns.com/foaf/0.1/name> ?foafName } "
 				+ "  OPTIONAL { <" + subjectURI + "> <http://schema.org/name> ?schemaName } "
 				+ "  OPTIONAL { <" + subjectURI + "> <http://www.w3.org/1999/02/22-rdf-syntax-ns#value> ?rdfValue } "
+				+ "  OPTIONAL { <" + subjectURI + "> <http://vivoweb.org/ontology/core#abbreviation> ?abbreviation } "
+				+ "  OPTIONAL { <" + subjectURI + "> <http://vivoweb.org/ontology/core#placeOfPublication> ?placeOfPublication } "
+				+ "  OPTIONAL { <" + subjectURI + "> <http://vivoweb.org/ontology/core#hideFromDisplay> ?hideFromDisplay } "
 				+ "}");
 				while(rs.hasNext()) {
 					QuerySolution sol = rs.nextSolution();
@@ -58,6 +197,9 @@ public class Journal extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 						label = sol.get("?schemaName") == null ? null : sol.get("?schemaName").asLiteral().getString();
 					if (label == null)
 						label = sol.get("?rdfValue") == null ? null : sol.get("?rdfValue").asLiteral().getString();
+					abbreviation = sol.get("?abbreviation") == null ? null : sol.get("?abbreviation").toString();
+					placeOfPublication = sol.get("?placeOfPublication") == null ? null : sol.get("?placeOfPublication").toString();
+					hideFromDisplay = sol.get("?hideFromDisplay") == null ? null : sol.get("?hideFromDisplay").toString();
 				}
 			}
 		} catch (Exception e) {
@@ -103,6 +245,30 @@ public class Journal extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 
 	public String getLabel() {
 		return label;
+	}
+
+	public void setAbbreviation(String abbreviation) {
+		this.abbreviation = abbreviation;
+	}
+
+	public String getAbbreviation() {
+		return abbreviation;
+	}
+
+	public void setPlaceOfPublication(String placeOfPublication) {
+		this.placeOfPublication = placeOfPublication;
+	}
+
+	public String getPlaceOfPublication() {
+		return placeOfPublication;
+	}
+
+	public void setHideFromDisplay(String hideFromDisplay) {
+		this.hideFromDisplay = hideFromDisplay;
+	}
+
+	public String getHideFromDisplay() {
+		return hideFromDisplay;
 	}
 
 }
