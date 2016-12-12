@@ -2865,6 +2865,42 @@
 	</tag>
 
 	<tag>
+		<name>foreachSpecial_groupHasMemberIterator</name>
+		<tag-class>edu.uiowa.slis.VIVOISF.Special_group.Special_groupHasMemberIterator</tag-class>
+		<body-content>JSP</body-content>
+
+		<attribute>
+			<name>classFilter</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>Special_groupHasMember</name>
+		<tag-class>edu.uiowa.slis.VIVOISF.Special_group.Special_groupHasMember</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>hasMember</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>Special_groupHasMemberType</name>
+		<tag-class>edu.uiowa.slis.VIVOISF.Special_group.Special_groupHasMemberType</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>type</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
 		<name>foreachSpecial_groupIsSuccessorOfIterator</name>
 		<tag-class>edu.uiowa.slis.VIVOISF.Special_group.Special_groupIsSuccessorOfIterator</tag-class>
 		<body-content>JSP</body-content>
@@ -2967,42 +3003,6 @@
 
 		<attribute>
 			<name>validSince</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-	</tag>
-
-	<tag>
-		<name>foreachSpecial_groupHasMemberIterator</name>
-		<tag-class>edu.uiowa.slis.VIVOISF.Special_group.Special_groupHasMemberIterator</tag-class>
-		<body-content>JSP</body-content>
-
-		<attribute>
-			<name>classFilter</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-	</tag>
-
-	<tag>
-		<name>Special_groupHasMember</name>
-		<tag-class>edu.uiowa.slis.VIVOISF.Special_group.Special_groupHasMember</tag-class>
-		<body-content>empty</body-content>
-
-		<attribute>
-			<name>hasMember</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-	</tag>
-
-	<tag>
-		<name>Special_groupHasMemberType</name>
-		<tag-class>edu.uiowa.slis.VIVOISF.Special_group.Special_groupHasMemberType</tag-class>
-		<body-content>empty</body-content>
-
-		<attribute>
-			<name>type</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
@@ -3123,18 +3123,6 @@
 	</tag>
 
 	<tag>
-		<name>JournalAbbreviation</name>
-		<tag-class>edu.uiowa.slis.VIVOISF.Journal.JournalAbbreviation</tag-class>
-		<body-content>empty</body-content>
-
-		<attribute>
-			<name>abbreviation</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-	</tag>
-
-	<tag>
 		<name>foreachJournalEissnIterator</name>
 		<tag-class>edu.uiowa.slis.VIVOISF.Journal.JournalEissnIterator</tag-class>
 		<body-content>JSP</body-content>
@@ -3165,6 +3153,18 @@
 
 		<attribute>
 			<name>issn</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>JournalAbbreviation</name>
+		<tag-class>edu.uiowa.slis.VIVOISF.Journal.JournalAbbreviation</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>abbreviation</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
@@ -4047,18 +4047,6 @@
 	</tag>
 
 	<tag>
-		<name>ChapterPlaceOfPublication</name>
-		<tag-class>edu.uiowa.slis.VIVOISF.Chapter.ChapterPlaceOfPublication</tag-class>
-		<body-content>empty</body-content>
-
-		<attribute>
-			<name>placeOfPublication</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-	</tag>
-
-	<tag>
 		<name>foreachChapterPageStartIterator</name>
 		<tag-class>edu.uiowa.slis.VIVOISF.Chapter.ChapterPageStartIterator</tag-class>
 		<body-content>JSP</body-content>
@@ -4077,18 +4065,12 @@
 	</tag>
 
 	<tag>
-		<name>foreachChapterIsbn13Iterator</name>
-		<tag-class>edu.uiowa.slis.VIVOISF.Chapter.ChapterIsbn13Iterator</tag-class>
-		<body-content>JSP</body-content>
-	</tag>
-
-	<tag>
-		<name>ChapterIsbn13</name>
-		<tag-class>edu.uiowa.slis.VIVOISF.Chapter.ChapterIsbn13</tag-class>
+		<name>ChapterPlaceOfPublication</name>
+		<tag-class>edu.uiowa.slis.VIVOISF.Chapter.ChapterPlaceOfPublication</tag-class>
 		<body-content>empty</body-content>
 
 		<attribute>
-			<name>isbn13</name>
+			<name>placeOfPublication</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
@@ -4113,24 +4095,6 @@
 	</tag>
 
 	<tag>
-		<name>foreachChapterIsbn10Iterator</name>
-		<tag-class>edu.uiowa.slis.VIVOISF.Chapter.ChapterIsbn10Iterator</tag-class>
-		<body-content>JSP</body-content>
-	</tag>
-
-	<tag>
-		<name>ChapterIsbn10</name>
-		<tag-class>edu.uiowa.slis.VIVOISF.Chapter.ChapterIsbn10</tag-class>
-		<body-content>empty</body-content>
-
-		<attribute>
-			<name>isbn10</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-	</tag>
-
-	<tag>
 		<name>foreachChapterNumPagesIterator</name>
 		<tag-class>edu.uiowa.slis.VIVOISF.Chapter.ChapterNumPagesIterator</tag-class>
 		<body-content>JSP</body-content>
@@ -4143,6 +4107,24 @@
 
 		<attribute>
 			<name>numPages</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>foreachChapterTheAbstractIterator</name>
+		<tag-class>edu.uiowa.slis.VIVOISF.Chapter.ChapterTheAbstractIterator</tag-class>
+		<body-content>JSP</body-content>
+	</tag>
+
+	<tag>
+		<name>ChapterTheAbstract</name>
+		<tag-class>edu.uiowa.slis.VIVOISF.Chapter.ChapterTheAbstract</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>theAbstract</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
@@ -4575,24 +4557,6 @@
 	</tag>
 
 	<tag>
-		<name>foreachArticlePmcidIterator</name>
-		<tag-class>edu.uiowa.slis.VIVOISF.Article.ArticlePmcidIterator</tag-class>
-		<body-content>JSP</body-content>
-	</tag>
-
-	<tag>
-		<name>ArticlePmcid</name>
-		<tag-class>edu.uiowa.slis.VIVOISF.Article.ArticlePmcid</tag-class>
-		<body-content>empty</body-content>
-
-		<attribute>
-			<name>pmcid</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-	</tag>
-
-	<tag>
 		<name>foreachArticlePageStartIterator</name>
 		<tag-class>edu.uiowa.slis.VIVOISF.Article.ArticlePageStartIterator</tag-class>
 		<body-content>JSP</body-content>
@@ -4611,54 +4575,36 @@
 	</tag>
 
 	<tag>
-		<name>foreachArticlePmidIterator</name>
-		<tag-class>edu.uiowa.slis.VIVOISF.Article.ArticlePmidIterator</tag-class>
+		<name>foreachArticlePmcidIterator</name>
+		<tag-class>edu.uiowa.slis.VIVOISF.Article.ArticlePmcidIterator</tag-class>
 		<body-content>JSP</body-content>
 	</tag>
 
 	<tag>
-		<name>ArticlePmid</name>
-		<tag-class>edu.uiowa.slis.VIVOISF.Article.ArticlePmid</tag-class>
+		<name>ArticlePmcid</name>
+		<tag-class>edu.uiowa.slis.VIVOISF.Article.ArticlePmcid</tag-class>
 		<body-content>empty</body-content>
 
 		<attribute>
-			<name>pmid</name>
+			<name>pmcid</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 	</tag>
 
 	<tag>
-		<name>foreachArticleIsbn13Iterator</name>
-		<tag-class>edu.uiowa.slis.VIVOISF.Article.ArticleIsbn13Iterator</tag-class>
+		<name>foreachArticleIssueIterator</name>
+		<tag-class>edu.uiowa.slis.VIVOISF.Article.ArticleIssueIterator</tag-class>
 		<body-content>JSP</body-content>
 	</tag>
 
 	<tag>
-		<name>ArticleIsbn13</name>
-		<tag-class>edu.uiowa.slis.VIVOISF.Article.ArticleIsbn13</tag-class>
+		<name>ArticleIssue</name>
+		<tag-class>edu.uiowa.slis.VIVOISF.Article.ArticleIssue</tag-class>
 		<body-content>empty</body-content>
 
 		<attribute>
-			<name>isbn13</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-	</tag>
-
-	<tag>
-		<name>foreachArticleVolumeIterator</name>
-		<tag-class>edu.uiowa.slis.VIVOISF.Article.ArticleVolumeIterator</tag-class>
-		<body-content>JSP</body-content>
-	</tag>
-
-	<tag>
-		<name>ArticleVolume</name>
-		<tag-class>edu.uiowa.slis.VIVOISF.Article.ArticleVolume</tag-class>
-		<body-content>empty</body-content>
-
-		<attribute>
-			<name>volume</name>
+			<name>issue</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
@@ -4683,24 +4629,6 @@
 	</tag>
 
 	<tag>
-		<name>foreachArticleIsbn10Iterator</name>
-		<tag-class>edu.uiowa.slis.VIVOISF.Article.ArticleIsbn10Iterator</tag-class>
-		<body-content>JSP</body-content>
-	</tag>
-
-	<tag>
-		<name>ArticleIsbn10</name>
-		<tag-class>edu.uiowa.slis.VIVOISF.Article.ArticleIsbn10</tag-class>
-		<body-content>empty</body-content>
-
-		<attribute>
-			<name>isbn10</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-	</tag>
-
-	<tag>
 		<name>foreachArticleNumPagesIterator</name>
 		<tag-class>edu.uiowa.slis.VIVOISF.Article.ArticleNumPagesIterator</tag-class>
 		<body-content>JSP</body-content>
@@ -4719,6 +4647,24 @@
 	</tag>
 
 	<tag>
+		<name>foreachArticleTheAbstractIterator</name>
+		<tag-class>edu.uiowa.slis.VIVOISF.Article.ArticleTheAbstractIterator</tag-class>
+		<body-content>JSP</body-content>
+	</tag>
+
+	<tag>
+		<name>ArticleTheAbstract</name>
+		<tag-class>edu.uiowa.slis.VIVOISF.Article.ArticleTheAbstract</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>theAbstract</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
 		<name>foreachArticleDoiIterator</name>
 		<tag-class>edu.uiowa.slis.VIVOISF.Article.ArticleDoiIterator</tag-class>
 		<body-content>JSP</body-content>
@@ -4731,6 +4677,42 @@
 
 		<attribute>
 			<name>doi</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>foreachArticlePmidIterator</name>
+		<tag-class>edu.uiowa.slis.VIVOISF.Article.ArticlePmidIterator</tag-class>
+		<body-content>JSP</body-content>
+	</tag>
+
+	<tag>
+		<name>ArticlePmid</name>
+		<tag-class>edu.uiowa.slis.VIVOISF.Article.ArticlePmid</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>pmid</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>foreachArticleVolumeIterator</name>
+		<tag-class>edu.uiowa.slis.VIVOISF.Article.ArticleVolumeIterator</tag-class>
+		<body-content>JSP</body-content>
+	</tag>
+
+	<tag>
+		<name>ArticleVolume</name>
+		<tag-class>edu.uiowa.slis.VIVOISF.Article.ArticleVolume</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>volume</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
@@ -5271,42 +5253,6 @@
 	</tag>
 
 	<tag>
-		<name>foreachGeographical_regionValidUntilIterator</name>
-		<tag-class>edu.uiowa.slis.VIVOISF.Geographical_region.Geographical_regionValidUntilIterator</tag-class>
-		<body-content>JSP</body-content>
-	</tag>
-
-	<tag>
-		<name>Geographical_regionValidUntil</name>
-		<tag-class>edu.uiowa.slis.VIVOISF.Geographical_region.Geographical_regionValidUntil</tag-class>
-		<body-content>empty</body-content>
-
-		<attribute>
-			<name>validUntil</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-	</tag>
-
-	<tag>
-		<name>foreachGeographical_regionValidSinceIterator</name>
-		<tag-class>edu.uiowa.slis.VIVOISF.Geographical_region.Geographical_regionValidSinceIterator</tag-class>
-		<body-content>JSP</body-content>
-	</tag>
-
-	<tag>
-		<name>Geographical_regionValidSince</name>
-		<tag-class>edu.uiowa.slis.VIVOISF.Geographical_region.Geographical_regionValidSince</tag-class>
-		<body-content>empty</body-content>
-
-		<attribute>
-			<name>validSince</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-	</tag>
-
-	<tag>
 		<name>foreachGeographical_regionHasMemberIterator</name>
 		<tag-class>edu.uiowa.slis.VIVOISF.Geographical_region.Geographical_regionHasMemberIterator</tag-class>
 		<body-content>JSP</body-content>
@@ -5337,6 +5283,42 @@
 
 		<attribute>
 			<name>type</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>foreachGeographical_regionValidUntilIterator</name>
+		<tag-class>edu.uiowa.slis.VIVOISF.Geographical_region.Geographical_regionValidUntilIterator</tag-class>
+		<body-content>JSP</body-content>
+	</tag>
+
+	<tag>
+		<name>Geographical_regionValidUntil</name>
+		<tag-class>edu.uiowa.slis.VIVOISF.Geographical_region.Geographical_regionValidUntil</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>validUntil</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>foreachGeographical_regionValidSinceIterator</name>
+		<tag-class>edu.uiowa.slis.VIVOISF.Geographical_region.Geographical_regionValidSinceIterator</tag-class>
+		<body-content>JSP</body-content>
+	</tag>
+
+	<tag>
+		<name>Geographical_regionValidSince</name>
+		<tag-class>edu.uiowa.slis.VIVOISF.Geographical_region.Geographical_regionValidSince</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>validSince</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
@@ -6837,24 +6819,6 @@
 	</tag>
 
 	<tag>
-		<name>foreachAcademicArticlePmcidIterator</name>
-		<tag-class>edu.uiowa.slis.VIVOISF.AcademicArticle.AcademicArticlePmcidIterator</tag-class>
-		<body-content>JSP</body-content>
-	</tag>
-
-	<tag>
-		<name>AcademicArticlePmcid</name>
-		<tag-class>edu.uiowa.slis.VIVOISF.AcademicArticle.AcademicArticlePmcid</tag-class>
-		<body-content>empty</body-content>
-
-		<attribute>
-			<name>pmcid</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-	</tag>
-
-	<tag>
 		<name>foreachAcademicArticlePageStartIterator</name>
 		<tag-class>edu.uiowa.slis.VIVOISF.AcademicArticle.AcademicArticlePageStartIterator</tag-class>
 		<body-content>JSP</body-content>
@@ -6867,42 +6831,6 @@
 
 		<attribute>
 			<name>pageStart</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-	</tag>
-
-	<tag>
-		<name>foreachAcademicArticlePmidIterator</name>
-		<tag-class>edu.uiowa.slis.VIVOISF.AcademicArticle.AcademicArticlePmidIterator</tag-class>
-		<body-content>JSP</body-content>
-	</tag>
-
-	<tag>
-		<name>AcademicArticlePmid</name>
-		<tag-class>edu.uiowa.slis.VIVOISF.AcademicArticle.AcademicArticlePmid</tag-class>
-		<body-content>empty</body-content>
-
-		<attribute>
-			<name>pmid</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-	</tag>
-
-	<tag>
-		<name>foreachAcademicArticleVolumeIterator</name>
-		<tag-class>edu.uiowa.slis.VIVOISF.AcademicArticle.AcademicArticleVolumeIterator</tag-class>
-		<body-content>JSP</body-content>
-	</tag>
-
-	<tag>
-		<name>AcademicArticleVolume</name>
-		<tag-class>edu.uiowa.slis.VIVOISF.AcademicArticle.AcademicArticleVolume</tag-class>
-		<body-content>empty</body-content>
-
-		<attribute>
-			<name>volume</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
@@ -6957,6 +6885,78 @@
 
 		<attribute>
 			<name>doi</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>foreachAcademicArticlePmcidIterator</name>
+		<tag-class>edu.uiowa.slis.VIVOISF.AcademicArticle.AcademicArticlePmcidIterator</tag-class>
+		<body-content>JSP</body-content>
+	</tag>
+
+	<tag>
+		<name>AcademicArticlePmcid</name>
+		<tag-class>edu.uiowa.slis.VIVOISF.AcademicArticle.AcademicArticlePmcid</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>pmcid</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>foreachAcademicArticleIssueIterator</name>
+		<tag-class>edu.uiowa.slis.VIVOISF.AcademicArticle.AcademicArticleIssueIterator</tag-class>
+		<body-content>JSP</body-content>
+	</tag>
+
+	<tag>
+		<name>AcademicArticleIssue</name>
+		<tag-class>edu.uiowa.slis.VIVOISF.AcademicArticle.AcademicArticleIssue</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>issue</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>foreachAcademicArticlePmidIterator</name>
+		<tag-class>edu.uiowa.slis.VIVOISF.AcademicArticle.AcademicArticlePmidIterator</tag-class>
+		<body-content>JSP</body-content>
+	</tag>
+
+	<tag>
+		<name>AcademicArticlePmid</name>
+		<tag-class>edu.uiowa.slis.VIVOISF.AcademicArticle.AcademicArticlePmid</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>pmid</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>foreachAcademicArticleVolumeIterator</name>
+		<tag-class>edu.uiowa.slis.VIVOISF.AcademicArticle.AcademicArticleVolumeIterator</tag-class>
+		<body-content>JSP</body-content>
+	</tag>
+
+	<tag>
+		<name>AcademicArticleVolume</name>
+		<tag-class>edu.uiowa.slis.VIVOISF.AcademicArticle.AcademicArticleVolume</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>volume</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
@@ -8631,6 +8631,24 @@
 	</tag>
 
 	<tag>
+		<name>foreachConferencePosterTheAbstractIterator</name>
+		<tag-class>edu.uiowa.slis.VIVOISF.ConferencePoster.ConferencePosterTheAbstractIterator</tag-class>
+		<body-content>JSP</body-content>
+	</tag>
+
+	<tag>
+		<name>ConferencePosterTheAbstract</name>
+		<tag-class>edu.uiowa.slis.VIVOISF.ConferencePoster.ConferencePosterTheAbstract</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>theAbstract</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
 		<name>foreachConferencePosterDoiIterator</name>
 		<tag-class>edu.uiowa.slis.VIVOISF.ConferencePoster.ConferencePosterDoiIterator</tag-class>
 		<body-content>JSP</body-content>
@@ -9933,6 +9951,24 @@
 	</tag>
 
 	<tag>
+		<name>foreachBFO_0000002PageStartIterator</name>
+		<tag-class>edu.uiowa.slis.VIVOISF.BFO_0000002.BFO_0000002PageStartIterator</tag-class>
+		<body-content>JSP</body-content>
+	</tag>
+
+	<tag>
+		<name>BFO_0000002PageStart</name>
+		<tag-class>edu.uiowa.slis.VIVOISF.BFO_0000002.BFO_0000002PageStart</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>pageStart</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
 		<name>BFO_0000002PlaceOfPublication</name>
 		<tag-class>edu.uiowa.slis.VIVOISF.BFO_0000002.BFO_0000002PlaceOfPublication</tag-class>
 		<body-content>empty</body-content>
@@ -10647,6 +10683,24 @@
 	</tag>
 
 	<tag>
+		<name>foreachBFO_0000002PageEndIterator</name>
+		<tag-class>edu.uiowa.slis.VIVOISF.BFO_0000002.BFO_0000002PageEndIterator</tag-class>
+		<body-content>JSP</body-content>
+	</tag>
+
+	<tag>
+		<name>BFO_0000002PageEnd</name>
+		<tag-class>edu.uiowa.slis.VIVOISF.BFO_0000002.BFO_0000002PageEnd</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>pageEnd</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
 		<name>foreachBFO_0000002CodeFAOSTATIterator</name>
 		<tag-class>edu.uiowa.slis.VIVOISF.BFO_0000002.BFO_0000002CodeFAOSTATIterator</tag-class>
 		<body-content>JSP</body-content>
@@ -10731,6 +10785,24 @@
 
 		<attribute>
 			<name>nameListZH</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>foreachBFO_0000002EissnIterator</name>
+		<tag-class>edu.uiowa.slis.VIVOISF.BFO_0000002.BFO_0000002EissnIterator</tag-class>
+		<body-content>JSP</body-content>
+	</tag>
+
+	<tag>
+		<name>BFO_0000002Eissn</name>
+		<tag-class>edu.uiowa.slis.VIVOISF.BFO_0000002.BFO_0000002Eissn</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>eissn</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
@@ -10959,6 +11031,24 @@
 
 		<attribute>
 			<name>landAreaUnit</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>foreachBFO_0000002IssnIterator</name>
+		<tag-class>edu.uiowa.slis.VIVOISF.BFO_0000002.BFO_0000002IssnIterator</tag-class>
+		<body-content>JSP</body-content>
+	</tag>
+
+	<tag>
+		<name>BFO_0000002Issn</name>
+		<tag-class>edu.uiowa.slis.VIVOISF.BFO_0000002.BFO_0000002Issn</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>issn</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
@@ -11211,6 +11301,24 @@
 	</tag>
 
 	<tag>
+		<name>foreachBFO_0000002IdentifierIterator</name>
+		<tag-class>edu.uiowa.slis.VIVOISF.BFO_0000002.BFO_0000002IdentifierIterator</tag-class>
+		<body-content>JSP</body-content>
+	</tag>
+
+	<tag>
+		<name>BFO_0000002Identifier</name>
+		<tag-class>edu.uiowa.slis.VIVOISF.BFO_0000002.BFO_0000002Identifier</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>identifier</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
 		<name>foreachBFO_0000002UrlIterator</name>
 		<tag-class>edu.uiowa.slis.VIVOISF.BFO_0000002.BFO_0000002UrlIterator</tag-class>
 		<body-content>JSP</body-content>
@@ -11223,6 +11331,24 @@
 
 		<attribute>
 			<name>url</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>foreachBFO_0000002NumPagesIterator</name>
+		<tag-class>edu.uiowa.slis.VIVOISF.BFO_0000002.BFO_0000002NumPagesIterator</tag-class>
+		<body-content>JSP</body-content>
+	</tag>
+
+	<tag>
+		<name>BFO_0000002NumPages</name>
+		<tag-class>edu.uiowa.slis.VIVOISF.BFO_0000002.BFO_0000002NumPages</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>numPages</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
@@ -12171,6 +12297,24 @@
 	</tag>
 
 	<tag>
+		<name>foreachBFO_0000031PageStartIterator</name>
+		<tag-class>edu.uiowa.slis.VIVOISF.BFO_0000031.BFO_0000031PageStartIterator</tag-class>
+		<body-content>JSP</body-content>
+	</tag>
+
+	<tag>
+		<name>BFO_0000031PageStart</name>
+		<tag-class>edu.uiowa.slis.VIVOISF.BFO_0000031.BFO_0000031PageStart</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>pageStart</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
 		<name>BFO_0000031PlaceOfPublication</name>
 		<tag-class>edu.uiowa.slis.VIVOISF.BFO_0000031.BFO_0000031PlaceOfPublication</tag-class>
 		<body-content>empty</body-content>
@@ -12201,12 +12345,102 @@
 	</tag>
 
 	<tag>
+		<name>foreachBFO_0000031PageEndIterator</name>
+		<tag-class>edu.uiowa.slis.VIVOISF.BFO_0000031.BFO_0000031PageEndIterator</tag-class>
+		<body-content>JSP</body-content>
+	</tag>
+
+	<tag>
+		<name>BFO_0000031PageEnd</name>
+		<tag-class>edu.uiowa.slis.VIVOISF.BFO_0000031.BFO_0000031PageEnd</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>pageEnd</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>foreachBFO_0000031EissnIterator</name>
+		<tag-class>edu.uiowa.slis.VIVOISF.BFO_0000031.BFO_0000031EissnIterator</tag-class>
+		<body-content>JSP</body-content>
+	</tag>
+
+	<tag>
+		<name>BFO_0000031Eissn</name>
+		<tag-class>edu.uiowa.slis.VIVOISF.BFO_0000031.BFO_0000031Eissn</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>eissn</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>foreachBFO_0000031IssnIterator</name>
+		<tag-class>edu.uiowa.slis.VIVOISF.BFO_0000031.BFO_0000031IssnIterator</tag-class>
+		<body-content>JSP</body-content>
+	</tag>
+
+	<tag>
+		<name>BFO_0000031Issn</name>
+		<tag-class>edu.uiowa.slis.VIVOISF.BFO_0000031.BFO_0000031Issn</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>issn</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
 		<name>BFO_0000031Abbreviation</name>
 		<tag-class>edu.uiowa.slis.VIVOISF.BFO_0000031.BFO_0000031Abbreviation</tag-class>
 		<body-content>empty</body-content>
 
 		<attribute>
 			<name>abbreviation</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>foreachBFO_0000031IdentifierIterator</name>
+		<tag-class>edu.uiowa.slis.VIVOISF.BFO_0000031.BFO_0000031IdentifierIterator</tag-class>
+		<body-content>JSP</body-content>
+	</tag>
+
+	<tag>
+		<name>BFO_0000031Identifier</name>
+		<tag-class>edu.uiowa.slis.VIVOISF.BFO_0000031.BFO_0000031Identifier</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>identifier</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>foreachBFO_0000031NumPagesIterator</name>
+		<tag-class>edu.uiowa.slis.VIVOISF.BFO_0000031.BFO_0000031NumPagesIterator</tag-class>
+		<body-content>JSP</body-content>
+	</tag>
+
+	<tag>
+		<name>BFO_0000031NumPages</name>
+		<tag-class>edu.uiowa.slis.VIVOISF.BFO_0000031.BFO_0000031NumPages</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>numPages</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
@@ -13203,24 +13437,6 @@
 	</tag>
 
 	<tag>
-		<name>foreachDocumentIsbn13Iterator</name>
-		<tag-class>edu.uiowa.slis.VIVOISF.Document.DocumentIsbn13Iterator</tag-class>
-		<body-content>JSP</body-content>
-	</tag>
-
-	<tag>
-		<name>DocumentIsbn13</name>
-		<tag-class>edu.uiowa.slis.VIVOISF.Document.DocumentIsbn13</tag-class>
-		<body-content>empty</body-content>
-
-		<attribute>
-			<name>isbn13</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-	</tag>
-
-	<tag>
 		<name>foreachDocumentVolumeIterator</name>
 		<tag-class>edu.uiowa.slis.VIVOISF.Document.DocumentVolumeIterator</tag-class>
 		<body-content>JSP</body-content>
@@ -13257,24 +13473,6 @@
 	</tag>
 
 	<tag>
-		<name>foreachDocumentIsbn10Iterator</name>
-		<tag-class>edu.uiowa.slis.VIVOISF.Document.DocumentIsbn10Iterator</tag-class>
-		<body-content>JSP</body-content>
-	</tag>
-
-	<tag>
-		<name>DocumentIsbn10</name>
-		<tag-class>edu.uiowa.slis.VIVOISF.Document.DocumentIsbn10</tag-class>
-		<body-content>empty</body-content>
-
-		<attribute>
-			<name>isbn10</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-	</tag>
-
-	<tag>
 		<name>foreachDocumentNumPagesIterator</name>
 		<tag-class>edu.uiowa.slis.VIVOISF.Document.DocumentNumPagesIterator</tag-class>
 		<body-content>JSP</body-content>
@@ -13287,6 +13485,24 @@
 
 		<attribute>
 			<name>numPages</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>foreachDocumentTheAbstractIterator</name>
+		<tag-class>edu.uiowa.slis.VIVOISF.Document.DocumentTheAbstractIterator</tag-class>
+		<body-content>JSP</body-content>
+	</tag>
+
+	<tag>
+		<name>DocumentTheAbstract</name>
+		<tag-class>edu.uiowa.slis.VIVOISF.Document.DocumentTheAbstract</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>theAbstract</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
@@ -13977,6 +14193,24 @@
 
 		<attribute>
 			<name>identifier</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>foreachCollectionTheAbstractIterator</name>
+		<tag-class>edu.uiowa.slis.VIVOISF.Collection.CollectionTheAbstractIterator</tag-class>
+		<body-content>JSP</body-content>
+	</tag>
+
+	<tag>
+		<name>CollectionTheAbstract</name>
+		<tag-class>edu.uiowa.slis.VIVOISF.Collection.CollectionTheAbstract</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>theAbstract</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
@@ -15279,6 +15513,42 @@
 	</tag>
 
 	<tag>
+		<name>foreachEconomic_regionHasMemberIterator</name>
+		<tag-class>edu.uiowa.slis.VIVOISF.Economic_region.Economic_regionHasMemberIterator</tag-class>
+		<body-content>JSP</body-content>
+
+		<attribute>
+			<name>classFilter</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>Economic_regionHasMember</name>
+		<tag-class>edu.uiowa.slis.VIVOISF.Economic_region.Economic_regionHasMember</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>hasMember</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>Economic_regionHasMemberType</name>
+		<tag-class>edu.uiowa.slis.VIVOISF.Economic_region.Economic_regionHasMemberType</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>type</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
 		<name>foreachEconomic_regionIsSuccessorOfIterator</name>
 		<tag-class>edu.uiowa.slis.VIVOISF.Economic_region.Economic_regionIsSuccessorOfIterator</tag-class>
 		<body-content>JSP</body-content>
@@ -15381,42 +15651,6 @@
 
 		<attribute>
 			<name>validSince</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-	</tag>
-
-	<tag>
-		<name>foreachEconomic_regionHasMemberIterator</name>
-		<tag-class>edu.uiowa.slis.VIVOISF.Economic_region.Economic_regionHasMemberIterator</tag-class>
-		<body-content>JSP</body-content>
-
-		<attribute>
-			<name>classFilter</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-	</tag>
-
-	<tag>
-		<name>Economic_regionHasMember</name>
-		<tag-class>edu.uiowa.slis.VIVOISF.Economic_region.Economic_regionHasMember</tag-class>
-		<body-content>empty</body-content>
-
-		<attribute>
-			<name>hasMember</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-	</tag>
-
-	<tag>
-		<name>Economic_regionHasMemberType</name>
-		<tag-class>edu.uiowa.slis.VIVOISF.Economic_region.Economic_regionHasMemberType</tag-class>
-		<body-content>empty</body-content>
-
-		<attribute>
-			<name>type</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
@@ -16347,6 +16581,24 @@
 	</tag>
 
 	<tag>
+		<name>foreachBFO_0000001PageStartIterator</name>
+		<tag-class>edu.uiowa.slis.VIVOISF.BFO_0000001.BFO_0000001PageStartIterator</tag-class>
+		<body-content>JSP</body-content>
+	</tag>
+
+	<tag>
+		<name>BFO_0000001PageStart</name>
+		<tag-class>edu.uiowa.slis.VIVOISF.BFO_0000001.BFO_0000001PageStart</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>pageStart</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
 		<name>BFO_0000001PlaceOfPublication</name>
 		<tag-class>edu.uiowa.slis.VIVOISF.BFO_0000001.BFO_0000001PlaceOfPublication</tag-class>
 		<body-content>empty</body-content>
@@ -17061,6 +17313,24 @@
 	</tag>
 
 	<tag>
+		<name>foreachBFO_0000001PageEndIterator</name>
+		<tag-class>edu.uiowa.slis.VIVOISF.BFO_0000001.BFO_0000001PageEndIterator</tag-class>
+		<body-content>JSP</body-content>
+	</tag>
+
+	<tag>
+		<name>BFO_0000001PageEnd</name>
+		<tag-class>edu.uiowa.slis.VIVOISF.BFO_0000001.BFO_0000001PageEnd</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>pageEnd</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
 		<name>foreachBFO_0000001CodeFAOSTATIterator</name>
 		<tag-class>edu.uiowa.slis.VIVOISF.BFO_0000001.BFO_0000001CodeFAOSTATIterator</tag-class>
 		<body-content>JSP</body-content>
@@ -17145,6 +17415,24 @@
 
 		<attribute>
 			<name>nameListZH</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>foreachBFO_0000001EissnIterator</name>
+		<tag-class>edu.uiowa.slis.VIVOISF.BFO_0000001.BFO_0000001EissnIterator</tag-class>
+		<body-content>JSP</body-content>
+	</tag>
+
+	<tag>
+		<name>BFO_0000001Eissn</name>
+		<tag-class>edu.uiowa.slis.VIVOISF.BFO_0000001.BFO_0000001Eissn</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>eissn</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
@@ -17373,6 +17661,24 @@
 
 		<attribute>
 			<name>landAreaUnit</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>foreachBFO_0000001IssnIterator</name>
+		<tag-class>edu.uiowa.slis.VIVOISF.BFO_0000001.BFO_0000001IssnIterator</tag-class>
+		<body-content>JSP</body-content>
+	</tag>
+
+	<tag>
+		<name>BFO_0000001Issn</name>
+		<tag-class>edu.uiowa.slis.VIVOISF.BFO_0000001.BFO_0000001Issn</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>issn</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
@@ -17643,6 +17949,24 @@
 	</tag>
 
 	<tag>
+		<name>foreachBFO_0000001IdentifierIterator</name>
+		<tag-class>edu.uiowa.slis.VIVOISF.BFO_0000001.BFO_0000001IdentifierIterator</tag-class>
+		<body-content>JSP</body-content>
+	</tag>
+
+	<tag>
+		<name>BFO_0000001Identifier</name>
+		<tag-class>edu.uiowa.slis.VIVOISF.BFO_0000001.BFO_0000001Identifier</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>identifier</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
 		<name>foreachBFO_0000001UrlIterator</name>
 		<tag-class>edu.uiowa.slis.VIVOISF.BFO_0000001.BFO_0000001UrlIterator</tag-class>
 		<body-content>JSP</body-content>
@@ -17655,6 +17979,24 @@
 
 		<attribute>
 			<name>url</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>foreachBFO_0000001NumPagesIterator</name>
+		<tag-class>edu.uiowa.slis.VIVOISF.BFO_0000001.BFO_0000001NumPagesIterator</tag-class>
+		<body-content>JSP</body-content>
+	</tag>
+
+	<tag>
+		<name>BFO_0000001NumPages</name>
+		<tag-class>edu.uiowa.slis.VIVOISF.BFO_0000001.BFO_0000001NumPages</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>numPages</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
@@ -24495,18 +24837,6 @@
 	</tag>
 
 	<tag>
-		<name>DocumentPartPlaceOfPublication</name>
-		<tag-class>edu.uiowa.slis.VIVOISF.DocumentPart.DocumentPartPlaceOfPublication</tag-class>
-		<body-content>empty</body-content>
-
-		<attribute>
-			<name>placeOfPublication</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-	</tag>
-
-	<tag>
 		<name>foreachDocumentPartPageStartIterator</name>
 		<tag-class>edu.uiowa.slis.VIVOISF.DocumentPart.DocumentPartPageStartIterator</tag-class>
 		<body-content>JSP</body-content>
@@ -24525,18 +24855,12 @@
 	</tag>
 
 	<tag>
-		<name>foreachDocumentPartIsbn13Iterator</name>
-		<tag-class>edu.uiowa.slis.VIVOISF.DocumentPart.DocumentPartIsbn13Iterator</tag-class>
-		<body-content>JSP</body-content>
-	</tag>
-
-	<tag>
-		<name>DocumentPartIsbn13</name>
-		<tag-class>edu.uiowa.slis.VIVOISF.DocumentPart.DocumentPartIsbn13</tag-class>
+		<name>DocumentPartPlaceOfPublication</name>
+		<tag-class>edu.uiowa.slis.VIVOISF.DocumentPart.DocumentPartPlaceOfPublication</tag-class>
 		<body-content>empty</body-content>
 
 		<attribute>
-			<name>isbn13</name>
+			<name>placeOfPublication</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
@@ -24561,24 +24885,6 @@
 	</tag>
 
 	<tag>
-		<name>foreachDocumentPartIsbn10Iterator</name>
-		<tag-class>edu.uiowa.slis.VIVOISF.DocumentPart.DocumentPartIsbn10Iterator</tag-class>
-		<body-content>JSP</body-content>
-	</tag>
-
-	<tag>
-		<name>DocumentPartIsbn10</name>
-		<tag-class>edu.uiowa.slis.VIVOISF.DocumentPart.DocumentPartIsbn10</tag-class>
-		<body-content>empty</body-content>
-
-		<attribute>
-			<name>isbn10</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-	</tag>
-
-	<tag>
 		<name>foreachDocumentPartNumPagesIterator</name>
 		<tag-class>edu.uiowa.slis.VIVOISF.DocumentPart.DocumentPartNumPagesIterator</tag-class>
 		<body-content>JSP</body-content>
@@ -24591,6 +24897,24 @@
 
 		<attribute>
 			<name>numPages</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>foreachDocumentPartTheAbstractIterator</name>
+		<tag-class>edu.uiowa.slis.VIVOISF.DocumentPart.DocumentPartTheAbstractIterator</tag-class>
+		<body-content>JSP</body-content>
+	</tag>
+
+	<tag>
+		<name>DocumentPartTheAbstract</name>
+		<tag-class>edu.uiowa.slis.VIVOISF.DocumentPart.DocumentPartTheAbstract</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>theAbstract</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
@@ -31281,18 +31605,6 @@
 	</tag>
 
 	<tag>
-		<name>PeriodicalAbbreviation</name>
-		<tag-class>edu.uiowa.slis.VIVOISF.Periodical.PeriodicalAbbreviation</tag-class>
-		<body-content>empty</body-content>
-
-		<attribute>
-			<name>abbreviation</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-	</tag>
-
-	<tag>
 		<name>foreachPeriodicalEissnIterator</name>
 		<tag-class>edu.uiowa.slis.VIVOISF.Periodical.PeriodicalEissnIterator</tag-class>
 		<body-content>JSP</body-content>
@@ -31323,6 +31635,18 @@
 
 		<attribute>
 			<name>issn</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>PeriodicalAbbreviation</name>
+		<tag-class>edu.uiowa.slis.VIVOISF.Periodical.PeriodicalAbbreviation</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>abbreviation</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
@@ -31785,18 +32109,6 @@
 	</tag>
 
 	<tag>
-		<name>BookSectionPlaceOfPublication</name>
-		<tag-class>edu.uiowa.slis.VIVOISF.BookSection.BookSectionPlaceOfPublication</tag-class>
-		<body-content>empty</body-content>
-
-		<attribute>
-			<name>placeOfPublication</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-	</tag>
-
-	<tag>
 		<name>foreachBookSectionPageStartIterator</name>
 		<tag-class>edu.uiowa.slis.VIVOISF.BookSection.BookSectionPageStartIterator</tag-class>
 		<body-content>JSP</body-content>
@@ -31815,18 +32127,12 @@
 	</tag>
 
 	<tag>
-		<name>foreachBookSectionIsbn13Iterator</name>
-		<tag-class>edu.uiowa.slis.VIVOISF.BookSection.BookSectionIsbn13Iterator</tag-class>
-		<body-content>JSP</body-content>
-	</tag>
-
-	<tag>
-		<name>BookSectionIsbn13</name>
-		<tag-class>edu.uiowa.slis.VIVOISF.BookSection.BookSectionIsbn13</tag-class>
+		<name>BookSectionPlaceOfPublication</name>
+		<tag-class>edu.uiowa.slis.VIVOISF.BookSection.BookSectionPlaceOfPublication</tag-class>
 		<body-content>empty</body-content>
 
 		<attribute>
-			<name>isbn13</name>
+			<name>placeOfPublication</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
@@ -31851,24 +32157,6 @@
 	</tag>
 
 	<tag>
-		<name>foreachBookSectionIsbn10Iterator</name>
-		<tag-class>edu.uiowa.slis.VIVOISF.BookSection.BookSectionIsbn10Iterator</tag-class>
-		<body-content>JSP</body-content>
-	</tag>
-
-	<tag>
-		<name>BookSectionIsbn10</name>
-		<tag-class>edu.uiowa.slis.VIVOISF.BookSection.BookSectionIsbn10</tag-class>
-		<body-content>empty</body-content>
-
-		<attribute>
-			<name>isbn10</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-	</tag>
-
-	<tag>
 		<name>foreachBookSectionNumPagesIterator</name>
 		<tag-class>edu.uiowa.slis.VIVOISF.BookSection.BookSectionNumPagesIterator</tag-class>
 		<body-content>JSP</body-content>
@@ -31881,6 +32169,24 @@
 
 		<attribute>
 			<name>numPages</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>foreachBookSectionTheAbstractIterator</name>
+		<tag-class>edu.uiowa.slis.VIVOISF.BookSection.BookSectionTheAbstractIterator</tag-class>
+		<body-content>JSP</body-content>
+	</tag>
+
+	<tag>
+		<name>BookSectionTheAbstract</name>
+		<tag-class>edu.uiowa.slis.VIVOISF.BookSection.BookSectionTheAbstract</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>theAbstract</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
@@ -34485,6 +34791,42 @@
 	</tag>
 
 	<tag>
+		<name>foreachIAO_0000030TheAbstractIterator</name>
+		<tag-class>edu.uiowa.slis.VIVOISF.IAO_0000030.IAO_0000030TheAbstractIterator</tag-class>
+		<body-content>JSP</body-content>
+	</tag>
+
+	<tag>
+		<name>IAO_0000030TheAbstract</name>
+		<tag-class>edu.uiowa.slis.VIVOISF.IAO_0000030.IAO_0000030TheAbstract</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>theAbstract</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>foreachIAO_0000030PageStartIterator</name>
+		<tag-class>edu.uiowa.slis.VIVOISF.IAO_0000030.IAO_0000030PageStartIterator</tag-class>
+		<body-content>JSP</body-content>
+	</tag>
+
+	<tag>
+		<name>IAO_0000030PageStart</name>
+		<tag-class>edu.uiowa.slis.VIVOISF.IAO_0000030.IAO_0000030PageStart</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>pageStart</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
 		<name>IAO_0000030PlaceOfPublication</name>
 		<tag-class>edu.uiowa.slis.VIVOISF.IAO_0000030.IAO_0000030PlaceOfPublication</tag-class>
 		<body-content>empty</body-content>
@@ -34515,12 +34857,120 @@
 	</tag>
 
 	<tag>
+		<name>foreachIAO_0000030PageEndIterator</name>
+		<tag-class>edu.uiowa.slis.VIVOISF.IAO_0000030.IAO_0000030PageEndIterator</tag-class>
+		<body-content>JSP</body-content>
+	</tag>
+
+	<tag>
+		<name>IAO_0000030PageEnd</name>
+		<tag-class>edu.uiowa.slis.VIVOISF.IAO_0000030.IAO_0000030PageEnd</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>pageEnd</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>foreachIAO_0000030EissnIterator</name>
+		<tag-class>edu.uiowa.slis.VIVOISF.IAO_0000030.IAO_0000030EissnIterator</tag-class>
+		<body-content>JSP</body-content>
+	</tag>
+
+	<tag>
+		<name>IAO_0000030Eissn</name>
+		<tag-class>edu.uiowa.slis.VIVOISF.IAO_0000030.IAO_0000030Eissn</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>eissn</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>foreachIAO_0000030IssnIterator</name>
+		<tag-class>edu.uiowa.slis.VIVOISF.IAO_0000030.IAO_0000030IssnIterator</tag-class>
+		<body-content>JSP</body-content>
+	</tag>
+
+	<tag>
+		<name>IAO_0000030Issn</name>
+		<tag-class>edu.uiowa.slis.VIVOISF.IAO_0000030.IAO_0000030Issn</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>issn</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
 		<name>IAO_0000030Abbreviation</name>
 		<tag-class>edu.uiowa.slis.VIVOISF.IAO_0000030.IAO_0000030Abbreviation</tag-class>
 		<body-content>empty</body-content>
 
 		<attribute>
 			<name>abbreviation</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>foreachIAO_0000030IdentifierIterator</name>
+		<tag-class>edu.uiowa.slis.VIVOISF.IAO_0000030.IAO_0000030IdentifierIterator</tag-class>
+		<body-content>JSP</body-content>
+	</tag>
+
+	<tag>
+		<name>IAO_0000030Identifier</name>
+		<tag-class>edu.uiowa.slis.VIVOISF.IAO_0000030.IAO_0000030Identifier</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>identifier</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>foreachIAO_0000030NumPagesIterator</name>
+		<tag-class>edu.uiowa.slis.VIVOISF.IAO_0000030.IAO_0000030NumPagesIterator</tag-class>
+		<body-content>JSP</body-content>
+	</tag>
+
+	<tag>
+		<name>IAO_0000030NumPages</name>
+		<tag-class>edu.uiowa.slis.VIVOISF.IAO_0000030.IAO_0000030NumPages</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>numPages</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>foreachIAO_0000030DoiIterator</name>
+		<tag-class>edu.uiowa.slis.VIVOISF.IAO_0000030.IAO_0000030DoiIterator</tag-class>
+		<body-content>JSP</body-content>
+	</tag>
+
+	<tag>
+		<name>IAO_0000030Doi</name>
+		<tag-class>edu.uiowa.slis.VIVOISF.IAO_0000030.IAO_0000030Doi</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>doi</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
@@ -36291,6 +36741,24 @@
 	</tag>
 
 	<tag>
+		<name>foreachSlideshowTheAbstractIterator</name>
+		<tag-class>edu.uiowa.slis.VIVOISF.Slideshow.SlideshowTheAbstractIterator</tag-class>
+		<body-content>JSP</body-content>
+	</tag>
+
+	<tag>
+		<name>SlideshowTheAbstract</name>
+		<tag-class>edu.uiowa.slis.VIVOISF.Slideshow.SlideshowTheAbstract</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>theAbstract</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
 		<name>foreachSlideshowDoiIterator</name>
 		<tag-class>edu.uiowa.slis.VIVOISF.Slideshow.SlideshowDoiIterator</tag-class>
 		<body-content>JSP</body-content>
@@ -36645,6 +37113,24 @@
 	</tag>
 
 	<tag>
+		<name>foreachDatasetTheAbstractIterator</name>
+		<tag-class>edu.uiowa.slis.VIVOISF.Dataset.DatasetTheAbstractIterator</tag-class>
+		<body-content>JSP</body-content>
+	</tag>
+
+	<tag>
+		<name>DatasetTheAbstract</name>
+		<tag-class>edu.uiowa.slis.VIVOISF.Dataset.DatasetTheAbstract</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>theAbstract</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
 		<name>foreachDatasetDoiIterator</name>
 		<tag-class>edu.uiowa.slis.VIVOISF.Dataset.DatasetDoiIterator</tag-class>
 		<body-content>JSP</body-content>
@@ -36993,24 +37479,6 @@
 	</tag>
 
 	<tag>
-		<name>foreachBookVolumeIterator</name>
-		<tag-class>edu.uiowa.slis.VIVOISF.Book.BookVolumeIterator</tag-class>
-		<body-content>JSP</body-content>
-	</tag>
-
-	<tag>
-		<name>BookVolume</name>
-		<tag-class>edu.uiowa.slis.VIVOISF.Book.BookVolume</tag-class>
-		<body-content>empty</body-content>
-
-		<attribute>
-			<name>volume</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-	</tag>
-
-	<tag>
 		<name>foreachBookPageEndIterator</name>
 		<tag-class>edu.uiowa.slis.VIVOISF.Book.BookPageEndIterator</tag-class>
 		<body-content>JSP</body-content>
@@ -37077,6 +37545,24 @@
 
 		<attribute>
 			<name>doi</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>foreachBookVolumeIterator</name>
+		<tag-class>edu.uiowa.slis.VIVOISF.Book.BookVolumeIterator</tag-class>
+		<body-content>JSP</body-content>
+	</tag>
+
+	<tag>
+		<name>BookVolume</name>
+		<tag-class>edu.uiowa.slis.VIVOISF.Book.BookVolume</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>volume</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
@@ -38337,36 +38823,18 @@
 	</tag>
 
 	<tag>
-		<name>foreachConferencePaperIsbn13Iterator</name>
-		<tag-class>edu.uiowa.slis.VIVOISF.ConferencePaper.ConferencePaperIsbn13Iterator</tag-class>
+		<name>foreachConferencePaperTheAbstractIterator</name>
+		<tag-class>edu.uiowa.slis.VIVOISF.ConferencePaper.ConferencePaperTheAbstractIterator</tag-class>
 		<body-content>JSP</body-content>
 	</tag>
 
 	<tag>
-		<name>ConferencePaperIsbn13</name>
-		<tag-class>edu.uiowa.slis.VIVOISF.ConferencePaper.ConferencePaperIsbn13</tag-class>
+		<name>ConferencePaperTheAbstract</name>
+		<tag-class>edu.uiowa.slis.VIVOISF.ConferencePaper.ConferencePaperTheAbstract</tag-class>
 		<body-content>empty</body-content>
 
 		<attribute>
-			<name>isbn13</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-	</tag>
-
-	<tag>
-		<name>foreachConferencePaperIsbn10Iterator</name>
-		<tag-class>edu.uiowa.slis.VIVOISF.ConferencePaper.ConferencePaperIsbn10Iterator</tag-class>
-		<body-content>JSP</body-content>
-	</tag>
-
-	<tag>
-		<name>ConferencePaperIsbn10</name>
-		<tag-class>edu.uiowa.slis.VIVOISF.ConferencePaper.ConferencePaperIsbn10</tag-class>
-		<body-content>empty</body-content>
-
-		<attribute>
-			<name>isbn10</name>
+			<name>theAbstract</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
@@ -42753,6 +43221,24 @@
 	</tag>
 
 	<tag>
+		<name>foreachThingPageStartIterator</name>
+		<tag-class>edu.uiowa.slis.VIVOISF.Thing.ThingPageStartIterator</tag-class>
+		<body-content>JSP</body-content>
+	</tag>
+
+	<tag>
+		<name>ThingPageStart</name>
+		<tag-class>edu.uiowa.slis.VIVOISF.Thing.ThingPageStart</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>pageStart</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
 		<name>ThingPlaceOfPublication</name>
 		<tag-class>edu.uiowa.slis.VIVOISF.Thing.ThingPlaceOfPublication</tag-class>
 		<body-content>empty</body-content>
@@ -43485,6 +43971,24 @@
 	</tag>
 
 	<tag>
+		<name>foreachThingPageEndIterator</name>
+		<tag-class>edu.uiowa.slis.VIVOISF.Thing.ThingPageEndIterator</tag-class>
+		<body-content>JSP</body-content>
+	</tag>
+
+	<tag>
+		<name>ThingPageEnd</name>
+		<tag-class>edu.uiowa.slis.VIVOISF.Thing.ThingPageEnd</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>pageEnd</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
 		<name>foreachThingCodeFAOSTATIterator</name>
 		<tag-class>edu.uiowa.slis.VIVOISF.Thing.ThingCodeFAOSTATIterator</tag-class>
 		<body-content>JSP</body-content>
@@ -43569,6 +44073,24 @@
 
 		<attribute>
 			<name>nameListZH</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>foreachThingEissnIterator</name>
+		<tag-class>edu.uiowa.slis.VIVOISF.Thing.ThingEissnIterator</tag-class>
+		<body-content>JSP</body-content>
+	</tag>
+
+	<tag>
+		<name>ThingEissn</name>
+		<tag-class>edu.uiowa.slis.VIVOISF.Thing.ThingEissn</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>eissn</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
@@ -43797,6 +44319,24 @@
 
 		<attribute>
 			<name>landAreaUnit</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>foreachThingIssnIterator</name>
+		<tag-class>edu.uiowa.slis.VIVOISF.Thing.ThingIssnIterator</tag-class>
+		<body-content>JSP</body-content>
+	</tag>
+
+	<tag>
+		<name>ThingIssn</name>
+		<tag-class>edu.uiowa.slis.VIVOISF.Thing.ThingIssn</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>issn</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
@@ -44085,6 +44625,24 @@
 	</tag>
 
 	<tag>
+		<name>foreachThingIdentifierIterator</name>
+		<tag-class>edu.uiowa.slis.VIVOISF.Thing.ThingIdentifierIterator</tag-class>
+		<body-content>JSP</body-content>
+	</tag>
+
+	<tag>
+		<name>ThingIdentifier</name>
+		<tag-class>edu.uiowa.slis.VIVOISF.Thing.ThingIdentifier</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>identifier</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
 		<name>foreachThingUrlIterator</name>
 		<tag-class>edu.uiowa.slis.VIVOISF.Thing.ThingUrlIterator</tag-class>
 		<body-content>JSP</body-content>
@@ -44097,6 +44655,24 @@
 
 		<attribute>
 			<name>url</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>foreachThingNumPagesIterator</name>
+		<tag-class>edu.uiowa.slis.VIVOISF.Thing.ThingNumPagesIterator</tag-class>
+		<body-content>JSP</body-content>
+	</tag>
+
+	<tag>
+		<name>ThingNumPages</name>
+		<tag-class>edu.uiowa.slis.VIVOISF.Thing.ThingNumPages</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>numPages</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
@@ -44463,6 +45039,24 @@
 
 		<attribute>
 			<name>type</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>foreachAudioVisualDocumentTheAbstractIterator</name>
+		<tag-class>edu.uiowa.slis.VIVOISF.AudioVisualDocument.AudioVisualDocumentTheAbstractIterator</tag-class>
+		<body-content>JSP</body-content>
+	</tag>
+
+	<tag>
+		<name>AudioVisualDocumentTheAbstract</name>
+		<tag-class>edu.uiowa.slis.VIVOISF.AudioVisualDocument.AudioVisualDocumentTheAbstract</tag-class>
+		<body-content>empty</body-content>
+
+		<attribute>
+			<name>theAbstract</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
