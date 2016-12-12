@@ -36,16 +36,16 @@ public class BFO_0000001 extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 				label = theBFO_0000001Iterator.getLabel();
 			}
 
-			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.area.areaBFO_0000051Iterator) {
-				subjectURI = ((edu.uiowa.slis.VIVOISF.area.areaBFO_0000051Iterator)this.getParent()).getBFO_0000051();
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.Area.AreaBFO_0000051Iterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.Area.AreaBFO_0000051Iterator)this.getParent()).getBFO_0000051();
 			}
 
-			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.self_governing.self_governingBFO_0000051Iterator) {
-				subjectURI = ((edu.uiowa.slis.VIVOISF.self_governing.self_governingBFO_0000051Iterator)this.getParent()).getBFO_0000051();
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.Self_governing.Self_governingBFO_0000051Iterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.Self_governing.Self_governingBFO_0000051Iterator)this.getParent()).getBFO_0000051();
 			}
 
-			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.territory.territoryBFO_0000051Iterator) {
-				subjectURI = ((edu.uiowa.slis.VIVOISF.territory.territoryBFO_0000051Iterator)this.getParent()).getBFO_0000051();
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.Territory.TerritoryBFO_0000051Iterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.Territory.TerritoryBFO_0000051Iterator)this.getParent()).getBFO_0000051();
 			}
 
 			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.BFO_0000001.BFO_0000001BFO_0000051Iterator) {
@@ -104,16 +104,16 @@ public class BFO_0000001 extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 				subjectURI = ((edu.uiowa.slis.VIVOISF.Concept.ConceptResearchAreaOfIterator)this.getParent()).getResearchAreaOf();
 			}
 
-			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.area.areaRO_0001015Iterator) {
-				subjectURI = ((edu.uiowa.slis.VIVOISF.area.areaRO_0001015Iterator)this.getParent()).getRO_0001015();
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.Area.AreaRO_0001015Iterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.Area.AreaRO_0001015Iterator)this.getParent()).getRO_0001015();
 			}
 
-			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.self_governing.self_governingRO_0001015Iterator) {
-				subjectURI = ((edu.uiowa.slis.VIVOISF.self_governing.self_governingRO_0001015Iterator)this.getParent()).getRO_0001015();
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.Self_governing.Self_governingRO_0001015Iterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.Self_governing.Self_governingRO_0001015Iterator)this.getParent()).getRO_0001015();
 			}
 
-			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.territory.territoryRO_0001015Iterator) {
-				subjectURI = ((edu.uiowa.slis.VIVOISF.territory.territoryRO_0001015Iterator)this.getParent()).getRO_0001015();
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.Territory.TerritoryRO_0001015Iterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.Territory.TerritoryRO_0001015Iterator)this.getParent()).getRO_0001015();
 			}
 
 			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.BFO_0000001.BFO_0000001RO_0001015Iterator) {
@@ -716,10 +716,6 @@ public class BFO_0000001 extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 				subjectURI = ((edu.uiowa.slis.VIVOISF.Thing.ThingBFO_0000050Iterator)this.getParent()).getBFO_0000050();
 			}
 
-			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.Address.AddressHasAddressInverseIterator) {
-				subjectURI = ((edu.uiowa.slis.VIVOISF.Address.AddressHasAddressInverseIterator)this.getParent()).getHasAddressInverse();
-			}
-
 			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.Telephone.TelephoneHasTelephoneInverseIterator) {
 				subjectURI = ((edu.uiowa.slis.VIVOISF.Telephone.TelephoneHasTelephoneInverseIterator)this.getParent()).getHasTelephoneInverse();
 			}
@@ -748,22 +744,22 @@ public class BFO_0000001 extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 				subjectURI = ((edu.uiowa.slis.VIVOISF.URL.URLHasURLInverseIterator)this.getParent()).getHasURLInverse();
 			}
 
-			edu.uiowa.slis.VIVOISF.area.areaBFO_0000051Iterator theareaBFO_0000051Iterator = (edu.uiowa.slis.VIVOISF.area.areaBFO_0000051Iterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.area.areaBFO_0000051Iterator.class);
+			edu.uiowa.slis.VIVOISF.Area.AreaBFO_0000051Iterator theAreaBFO_0000051Iterator = (edu.uiowa.slis.VIVOISF.Area.AreaBFO_0000051Iterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.Area.AreaBFO_0000051Iterator.class);
 
-			if (subjectURI == null && theareaBFO_0000051Iterator != null) {
-				subjectURI = theareaBFO_0000051Iterator.getBFO_0000051();
+			if (subjectURI == null && theAreaBFO_0000051Iterator != null) {
+				subjectURI = theAreaBFO_0000051Iterator.getBFO_0000051();
 			}
 
-			edu.uiowa.slis.VIVOISF.self_governing.self_governingBFO_0000051Iterator theself_governingBFO_0000051Iterator = (edu.uiowa.slis.VIVOISF.self_governing.self_governingBFO_0000051Iterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.self_governing.self_governingBFO_0000051Iterator.class);
+			edu.uiowa.slis.VIVOISF.Self_governing.Self_governingBFO_0000051Iterator theSelf_governingBFO_0000051Iterator = (edu.uiowa.slis.VIVOISF.Self_governing.Self_governingBFO_0000051Iterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.Self_governing.Self_governingBFO_0000051Iterator.class);
 
-			if (subjectURI == null && theself_governingBFO_0000051Iterator != null) {
-				subjectURI = theself_governingBFO_0000051Iterator.getBFO_0000051();
+			if (subjectURI == null && theSelf_governingBFO_0000051Iterator != null) {
+				subjectURI = theSelf_governingBFO_0000051Iterator.getBFO_0000051();
 			}
 
-			edu.uiowa.slis.VIVOISF.territory.territoryBFO_0000051Iterator theterritoryBFO_0000051Iterator = (edu.uiowa.slis.VIVOISF.territory.territoryBFO_0000051Iterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.territory.territoryBFO_0000051Iterator.class);
+			edu.uiowa.slis.VIVOISF.Territory.TerritoryBFO_0000051Iterator theTerritoryBFO_0000051Iterator = (edu.uiowa.slis.VIVOISF.Territory.TerritoryBFO_0000051Iterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.Territory.TerritoryBFO_0000051Iterator.class);
 
-			if (subjectURI == null && theterritoryBFO_0000051Iterator != null) {
-				subjectURI = theterritoryBFO_0000051Iterator.getBFO_0000051();
+			if (subjectURI == null && theTerritoryBFO_0000051Iterator != null) {
+				subjectURI = theTerritoryBFO_0000051Iterator.getBFO_0000051();
 			}
 
 			edu.uiowa.slis.VIVOISF.BFO_0000001.BFO_0000001BFO_0000051Iterator theBFO_0000001BFO_0000051Iterator = (edu.uiowa.slis.VIVOISF.BFO_0000001.BFO_0000001BFO_0000051Iterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.BFO_0000001.BFO_0000001BFO_0000051Iterator.class);
@@ -850,22 +846,22 @@ public class BFO_0000001 extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 				subjectURI = theConceptResearchAreaOfIterator.getResearchAreaOf();
 			}
 
-			edu.uiowa.slis.VIVOISF.area.areaRO_0001015Iterator theareaRO_0001015Iterator = (edu.uiowa.slis.VIVOISF.area.areaRO_0001015Iterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.area.areaRO_0001015Iterator.class);
+			edu.uiowa.slis.VIVOISF.Area.AreaRO_0001015Iterator theAreaRO_0001015Iterator = (edu.uiowa.slis.VIVOISF.Area.AreaRO_0001015Iterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.Area.AreaRO_0001015Iterator.class);
 
-			if (subjectURI == null && theareaRO_0001015Iterator != null) {
-				subjectURI = theareaRO_0001015Iterator.getRO_0001015();
+			if (subjectURI == null && theAreaRO_0001015Iterator != null) {
+				subjectURI = theAreaRO_0001015Iterator.getRO_0001015();
 			}
 
-			edu.uiowa.slis.VIVOISF.self_governing.self_governingRO_0001015Iterator theself_governingRO_0001015Iterator = (edu.uiowa.slis.VIVOISF.self_governing.self_governingRO_0001015Iterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.self_governing.self_governingRO_0001015Iterator.class);
+			edu.uiowa.slis.VIVOISF.Self_governing.Self_governingRO_0001015Iterator theSelf_governingRO_0001015Iterator = (edu.uiowa.slis.VIVOISF.Self_governing.Self_governingRO_0001015Iterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.Self_governing.Self_governingRO_0001015Iterator.class);
 
-			if (subjectURI == null && theself_governingRO_0001015Iterator != null) {
-				subjectURI = theself_governingRO_0001015Iterator.getRO_0001015();
+			if (subjectURI == null && theSelf_governingRO_0001015Iterator != null) {
+				subjectURI = theSelf_governingRO_0001015Iterator.getRO_0001015();
 			}
 
-			edu.uiowa.slis.VIVOISF.territory.territoryRO_0001015Iterator theterritoryRO_0001015Iterator = (edu.uiowa.slis.VIVOISF.territory.territoryRO_0001015Iterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.territory.territoryRO_0001015Iterator.class);
+			edu.uiowa.slis.VIVOISF.Territory.TerritoryRO_0001015Iterator theTerritoryRO_0001015Iterator = (edu.uiowa.slis.VIVOISF.Territory.TerritoryRO_0001015Iterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.Territory.TerritoryRO_0001015Iterator.class);
 
-			if (subjectURI == null && theterritoryRO_0001015Iterator != null) {
-				subjectURI = theterritoryRO_0001015Iterator.getRO_0001015();
+			if (subjectURI == null && theTerritoryRO_0001015Iterator != null) {
+				subjectURI = theTerritoryRO_0001015Iterator.getRO_0001015();
 			}
 
 			edu.uiowa.slis.VIVOISF.BFO_0000001.BFO_0000001RO_0001015Iterator theBFO_0000001RO_0001015Iterator = (edu.uiowa.slis.VIVOISF.BFO_0000001.BFO_0000001RO_0001015Iterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.BFO_0000001.BFO_0000001RO_0001015Iterator.class);
@@ -1772,7 +1768,7 @@ public class BFO_0000001 extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 				throw new JspException("subject URI generation currently not supported");
 			} else {
 				ResultSet rs = getResultSet(prefix
-				+ " SELECT ?labelUS ?labelENG ?label ?labelANY ?foafName ?schemaName ?rdfValue  ?placeOfPublication ?hideFromDisplay ?abbreviation where {"
+				+ " SELECT ?labelUS ?labelENG ?label ?labelANY ?foafName ?schemaName ?rdfValue  ?PlaceOfPublication ?HideFromDisplay ?Abbreviation where {"
 				+ "  OPTIONAL { SELECT ?labelUS  WHERE { <" + subjectURI + "> rdfs:label ?labelUS  FILTER (lang(?labelUS) = \"en-US\")}    LIMIT 1 } "
 				+ "  OPTIONAL { SELECT ?labelENG WHERE { <" + subjectURI + "> rdfs:label ?labelENG FILTER (langMatches(?labelENG,\"en\"))} LIMIT 1 } "
 				+ "  OPTIONAL { SELECT ?label    WHERE { <" + subjectURI + "> rdfs:label ?label    FILTER (lang(?label) = \"\")}           LIMIT 1 } "
@@ -1780,9 +1776,9 @@ public class BFO_0000001 extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 				+ "  OPTIONAL { <" + subjectURI + "> <http://xmlns.com/foaf/0.1/name> ?foafName } "
 				+ "  OPTIONAL { <" + subjectURI + "> <http://schema.org/name> ?schemaName } "
 				+ "  OPTIONAL { <" + subjectURI + "> <http://www.w3.org/1999/02/22-rdf-syntax-ns#value> ?rdfValue } "
-				+ "  OPTIONAL { <" + subjectURI + "> <http://vivoweb.org/ontology/core#placeOfPublication> ?placeOfPublication } "
-				+ "  OPTIONAL { <" + subjectURI + "> <http://vivoweb.org/ontology/core#hideFromDisplay> ?hideFromDisplay } "
-				+ "  OPTIONAL { <" + subjectURI + "> <http://vivoweb.org/ontology/core#abbreviation> ?abbreviation } "
+				+ "  OPTIONAL { <" + subjectURI + "> <http://vivoweb.org/ontology/core#placeOfPublication> ?PlaceOfPublication } "
+				+ "  OPTIONAL { <" + subjectURI + "> <http://vivoweb.org/ontology/core#hideFromDisplay> ?HideFromDisplay } "
+				+ "  OPTIONAL { <" + subjectURI + "> <http://vivoweb.org/ontology/core#abbreviation> ?Abbreviation } "
 				+ "}");
 				while(rs.hasNext()) {
 					QuerySolution sol = rs.nextSolution();
@@ -1799,9 +1795,9 @@ public class BFO_0000001 extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 						label = sol.get("?schemaName") == null ? null : sol.get("?schemaName").asLiteral().getString();
 					if (label == null)
 						label = sol.get("?rdfValue") == null ? null : sol.get("?rdfValue").asLiteral().getString();
-					placeOfPublication = sol.get("?placeOfPublication") == null ? null : sol.get("?placeOfPublication").toString();
-					hideFromDisplay = sol.get("?hideFromDisplay") == null ? null : sol.get("?hideFromDisplay").toString();
-					abbreviation = sol.get("?abbreviation") == null ? null : sol.get("?abbreviation").toString();
+					placeOfPublication = sol.get("?PlaceOfPublication") == null ? null : sol.get("?PlaceOfPublication").toString();
+					hideFromDisplay = sol.get("?HideFromDisplay") == null ? null : sol.get("?HideFromDisplay").toString();
+					abbreviation = sol.get("?Abbreviation") == null ? null : sol.get("?Abbreviation").toString();
 				}
 			}
 		} catch (Exception e) {

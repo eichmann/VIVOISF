@@ -65,26 +65,6 @@ public class Email extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 				subjectURI = ((edu.uiowa.slis.VIVOISF.Individual.IndividualHasEmailIterator)this.getParent()).getHasEmail();
 			}
 
-			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.Addressing.AddressingHasEmailIterator) {
-				subjectURI = ((edu.uiowa.slis.VIVOISF.Addressing.AddressingHasEmailIterator)this.getParent()).getHasEmail();
-			}
-
-			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.Communication.CommunicationHasEmailIterator) {
-				subjectURI = ((edu.uiowa.slis.VIVOISF.Communication.CommunicationHasEmailIterator)this.getParent()).getHasEmail();
-			}
-
-			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.Explanatory.ExplanatoryHasEmailIterator) {
-				subjectURI = ((edu.uiowa.slis.VIVOISF.Explanatory.ExplanatoryHasEmailIterator)this.getParent()).getHasEmail();
-			}
-
-			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.Geographical.GeographicalHasEmailIterator) {
-				subjectURI = ((edu.uiowa.slis.VIVOISF.Geographical.GeographicalHasEmailIterator)this.getParent()).getHasEmail();
-			}
-
-			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.Identification.IdentificationHasEmailIterator) {
-				subjectURI = ((edu.uiowa.slis.VIVOISF.Identification.IdentificationHasEmailIterator)this.getParent()).getHasEmail();
-			}
-
 			edu.uiowa.slis.VIVOISF.ARG_2000379.ARG_2000379HasEmailIterator theARG_2000379HasEmailIterator = (edu.uiowa.slis.VIVOISF.ARG_2000379.ARG_2000379HasEmailIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.ARG_2000379.ARG_2000379HasEmailIterator.class);
 
 			if (subjectURI == null && theARG_2000379HasEmailIterator != null) {
@@ -131,36 +111,6 @@ public class Email extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 
 			if (subjectURI == null && theIndividualHasEmailIterator != null) {
 				subjectURI = theIndividualHasEmailIterator.getHasEmail();
-			}
-
-			edu.uiowa.slis.VIVOISF.Addressing.AddressingHasEmailIterator theAddressingHasEmailIterator = (edu.uiowa.slis.VIVOISF.Addressing.AddressingHasEmailIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.Addressing.AddressingHasEmailIterator.class);
-
-			if (subjectURI == null && theAddressingHasEmailIterator != null) {
-				subjectURI = theAddressingHasEmailIterator.getHasEmail();
-			}
-
-			edu.uiowa.slis.VIVOISF.Communication.CommunicationHasEmailIterator theCommunicationHasEmailIterator = (edu.uiowa.slis.VIVOISF.Communication.CommunicationHasEmailIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.Communication.CommunicationHasEmailIterator.class);
-
-			if (subjectURI == null && theCommunicationHasEmailIterator != null) {
-				subjectURI = theCommunicationHasEmailIterator.getHasEmail();
-			}
-
-			edu.uiowa.slis.VIVOISF.Explanatory.ExplanatoryHasEmailIterator theExplanatoryHasEmailIterator = (edu.uiowa.slis.VIVOISF.Explanatory.ExplanatoryHasEmailIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.Explanatory.ExplanatoryHasEmailIterator.class);
-
-			if (subjectURI == null && theExplanatoryHasEmailIterator != null) {
-				subjectURI = theExplanatoryHasEmailIterator.getHasEmail();
-			}
-
-			edu.uiowa.slis.VIVOISF.Geographical.GeographicalHasEmailIterator theGeographicalHasEmailIterator = (edu.uiowa.slis.VIVOISF.Geographical.GeographicalHasEmailIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.Geographical.GeographicalHasEmailIterator.class);
-
-			if (subjectURI == null && theGeographicalHasEmailIterator != null) {
-				subjectURI = theGeographicalHasEmailIterator.getHasEmail();
-			}
-
-			edu.uiowa.slis.VIVOISF.Identification.IdentificationHasEmailIterator theIdentificationHasEmailIterator = (edu.uiowa.slis.VIVOISF.Identification.IdentificationHasEmailIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.Identification.IdentificationHasEmailIterator.class);
-
-			if (subjectURI == null && theIdentificationHasEmailIterator != null) {
-				subjectURI = theIdentificationHasEmailIterator.getHasEmail();
 			}
 
 			if (theEmailIterator == null && subjectURI == null) {

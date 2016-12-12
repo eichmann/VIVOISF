@@ -33,18 +33,6 @@ public class Geographical extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 				label = theGeographicalIterator.getLabel();
 			}
 
-			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.Address.AddressHasAddressInverseIterator) {
-				subjectURI = ((edu.uiowa.slis.VIVOISF.Address.AddressHasAddressInverseIterator)this.getParent()).getHasAddressInverse();
-			}
-
-			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.Email.EmailHasEmailInverseIterator) {
-				subjectURI = ((edu.uiowa.slis.VIVOISF.Email.EmailHasEmailInverseIterator)this.getParent()).getHasEmailInverse();
-			}
-
-			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.URL.URLHasURLInverseIterator) {
-				subjectURI = ((edu.uiowa.slis.VIVOISF.URL.URLHasURLInverseIterator)this.getParent()).getHasURLInverse();
-			}
-
 			if (theGeographicalIterator == null && subjectURI == null) {
 				throw new JspException("subject URI generation currently not supported");
 			} else {

@@ -23,8 +23,6 @@ public class BFO_0000003 extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 	// functional datatype properties, both local and inherited
 
 	String abbreviation = null;
-	String placeOfPublication = null;
-	String hideFromDisplay = null;
 
 	public int doStartTag() throws JspException {
 		currentInstance = this;
@@ -98,10 +96,6 @@ public class BFO_0000003 extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 
 			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.ConferencePaper.ConferencePaperRO_0002353Iterator) {
 				subjectURI = ((edu.uiowa.slis.VIVOISF.ConferencePaper.ConferencePaperRO_0002353Iterator)this.getParent()).getRO_0002353();
-			}
-
-			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.DateTimeInterval.DateTimeIntervalDateTimeIntervalInverseIterator) {
-				subjectURI = ((edu.uiowa.slis.VIVOISF.DateTimeInterval.DateTimeIntervalDateTimeIntervalInverseIterator)this.getParent()).getDateTimeIntervalInverse();
 			}
 
 			edu.uiowa.slis.VIVOISF.ARG_2000379.ARG_2000379ARG_2000029Iterator theARG_2000379ARG_2000029Iterator = (edu.uiowa.slis.VIVOISF.ARG_2000379.ARG_2000379ARG_2000029Iterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.ARG_2000379.ARG_2000379ARG_2000029Iterator.class);
@@ -204,7 +198,7 @@ public class BFO_0000003 extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 				throw new JspException("subject URI generation currently not supported");
 			} else {
 				ResultSet rs = getResultSet(prefix
-				+ " SELECT ?labelUS ?labelENG ?label ?labelANY ?foafName ?schemaName ?rdfValue  ?abbreviation ?placeOfPublication ?hideFromDisplay where {"
+				+ " SELECT ?labelUS ?labelENG ?label ?labelANY ?foafName ?schemaName ?rdfValue  ?Abbreviation where {"
 				+ "  OPTIONAL { SELECT ?labelUS  WHERE { <" + subjectURI + "> rdfs:label ?labelUS  FILTER (lang(?labelUS) = \"en-US\")}    LIMIT 1 } "
 				+ "  OPTIONAL { SELECT ?labelENG WHERE { <" + subjectURI + "> rdfs:label ?labelENG FILTER (langMatches(?labelENG,\"en\"))} LIMIT 1 } "
 				+ "  OPTIONAL { SELECT ?label    WHERE { <" + subjectURI + "> rdfs:label ?label    FILTER (lang(?label) = \"\")}           LIMIT 1 } "
@@ -212,9 +206,7 @@ public class BFO_0000003 extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 				+ "  OPTIONAL { <" + subjectURI + "> <http://xmlns.com/foaf/0.1/name> ?foafName } "
 				+ "  OPTIONAL { <" + subjectURI + "> <http://schema.org/name> ?schemaName } "
 				+ "  OPTIONAL { <" + subjectURI + "> <http://www.w3.org/1999/02/22-rdf-syntax-ns#value> ?rdfValue } "
-				+ "  OPTIONAL { <" + subjectURI + "> <http://vivoweb.org/ontology/core#abbreviation> ?abbreviation } "
-				+ "  OPTIONAL { <" + subjectURI + "> <http://vivoweb.org/ontology/core#placeOfPublication> ?placeOfPublication } "
-				+ "  OPTIONAL { <" + subjectURI + "> <http://vivoweb.org/ontology/core#hideFromDisplay> ?hideFromDisplay } "
+				+ "  OPTIONAL { <" + subjectURI + "> <http://vivoweb.org/ontology/core#abbreviation> ?Abbreviation } "
 				+ "}");
 				while(rs.hasNext()) {
 					QuerySolution sol = rs.nextSolution();
@@ -231,9 +223,7 @@ public class BFO_0000003 extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 						label = sol.get("?schemaName") == null ? null : sol.get("?schemaName").asLiteral().getString();
 					if (label == null)
 						label = sol.get("?rdfValue") == null ? null : sol.get("?rdfValue").asLiteral().getString();
-					abbreviation = sol.get("?abbreviation") == null ? null : sol.get("?abbreviation").toString();
-					placeOfPublication = sol.get("?placeOfPublication") == null ? null : sol.get("?placeOfPublication").toString();
-					hideFromDisplay = sol.get("?hideFromDisplay") == null ? null : sol.get("?hideFromDisplay").toString();
+					abbreviation = sol.get("?Abbreviation") == null ? null : sol.get("?Abbreviation").toString();
 				}
 			}
 		} catch (Exception e) {
@@ -287,22 +277,6 @@ public class BFO_0000003 extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 
 	public String getAbbreviation() {
 		return abbreviation;
-	}
-
-	public void setPlaceOfPublication(String placeOfPublication) {
-		this.placeOfPublication = placeOfPublication;
-	}
-
-	public String getPlaceOfPublication() {
-		return placeOfPublication;
-	}
-
-	public void setHideFromDisplay(String hideFromDisplay) {
-		this.hideFromDisplay = hideFromDisplay;
-	}
-
-	public String getHideFromDisplay() {
-		return hideFromDisplay;
 	}
 
 }

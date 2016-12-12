@@ -23,8 +23,6 @@ public class Periodical extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 	// functional datatype properties, both local and inherited
 
 	String abbreviation = null;
-	String placeOfPublication = null;
-	String hideFromDisplay = null;
 
 	public int doStartTag() throws JspException {
 		currentInstance = this;
@@ -66,18 +64,6 @@ public class Periodical extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 
 			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.AcademicArticle.AcademicArticleHasPublicationVenueIterator) {
 				subjectURI = ((edu.uiowa.slis.VIVOISF.AcademicArticle.AcademicArticleHasPublicationVenueIterator)this.getParent()).getHasPublicationVenue();
-			}
-
-			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.BookSection.BookSectionHasPublicationVenueIterator) {
-				subjectURI = ((edu.uiowa.slis.VIVOISF.BookSection.BookSectionHasPublicationVenueIterator)this.getParent()).getHasPublicationVenue();
-			}
-
-			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.Chapter.ChapterHasPublicationVenueIterator) {
-				subjectURI = ((edu.uiowa.slis.VIVOISF.Chapter.ChapterHasPublicationVenueIterator)this.getParent()).getHasPublicationVenue();
-			}
-
-			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.DocumentPart.DocumentPartHasPublicationVenueIterator) {
-				subjectURI = ((edu.uiowa.slis.VIVOISF.DocumentPart.DocumentPartHasPublicationVenueIterator)this.getParent()).getHasPublicationVenue();
 			}
 
 			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.Book.BookHasPublicationVenueIterator) {
@@ -136,24 +122,6 @@ public class Periodical extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 				subjectURI = theAcademicArticleHasPublicationVenueIterator.getHasPublicationVenue();
 			}
 
-			edu.uiowa.slis.VIVOISF.BookSection.BookSectionHasPublicationVenueIterator theBookSectionHasPublicationVenueIterator = (edu.uiowa.slis.VIVOISF.BookSection.BookSectionHasPublicationVenueIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.BookSection.BookSectionHasPublicationVenueIterator.class);
-
-			if (subjectURI == null && theBookSectionHasPublicationVenueIterator != null) {
-				subjectURI = theBookSectionHasPublicationVenueIterator.getHasPublicationVenue();
-			}
-
-			edu.uiowa.slis.VIVOISF.Chapter.ChapterHasPublicationVenueIterator theChapterHasPublicationVenueIterator = (edu.uiowa.slis.VIVOISF.Chapter.ChapterHasPublicationVenueIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.Chapter.ChapterHasPublicationVenueIterator.class);
-
-			if (subjectURI == null && theChapterHasPublicationVenueIterator != null) {
-				subjectURI = theChapterHasPublicationVenueIterator.getHasPublicationVenue();
-			}
-
-			edu.uiowa.slis.VIVOISF.DocumentPart.DocumentPartHasPublicationVenueIterator theDocumentPartHasPublicationVenueIterator = (edu.uiowa.slis.VIVOISF.DocumentPart.DocumentPartHasPublicationVenueIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.DocumentPart.DocumentPartHasPublicationVenueIterator.class);
-
-			if (subjectURI == null && theDocumentPartHasPublicationVenueIterator != null) {
-				subjectURI = theDocumentPartHasPublicationVenueIterator.getHasPublicationVenue();
-			}
-
 			edu.uiowa.slis.VIVOISF.Book.BookHasPublicationVenueIterator theBookHasPublicationVenueIterator = (edu.uiowa.slis.VIVOISF.Book.BookHasPublicationVenueIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.Book.BookHasPublicationVenueIterator.class);
 
 			if (subjectURI == null && theBookHasPublicationVenueIterator != null) {
@@ -170,7 +138,7 @@ public class Periodical extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 				throw new JspException("subject URI generation currently not supported");
 			} else {
 				ResultSet rs = getResultSet(prefix
-				+ " SELECT ?labelUS ?labelENG ?label ?labelANY ?foafName ?schemaName ?rdfValue  ?abbreviation ?placeOfPublication ?hideFromDisplay where {"
+				+ " SELECT ?labelUS ?labelENG ?label ?labelANY ?foafName ?schemaName ?rdfValue  ?Abbreviation where {"
 				+ "  OPTIONAL { SELECT ?labelUS  WHERE { <" + subjectURI + "> rdfs:label ?labelUS  FILTER (lang(?labelUS) = \"en-US\")}    LIMIT 1 } "
 				+ "  OPTIONAL { SELECT ?labelENG WHERE { <" + subjectURI + "> rdfs:label ?labelENG FILTER (langMatches(?labelENG,\"en\"))} LIMIT 1 } "
 				+ "  OPTIONAL { SELECT ?label    WHERE { <" + subjectURI + "> rdfs:label ?label    FILTER (lang(?label) = \"\")}           LIMIT 1 } "
@@ -178,9 +146,7 @@ public class Periodical extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 				+ "  OPTIONAL { <" + subjectURI + "> <http://xmlns.com/foaf/0.1/name> ?foafName } "
 				+ "  OPTIONAL { <" + subjectURI + "> <http://schema.org/name> ?schemaName } "
 				+ "  OPTIONAL { <" + subjectURI + "> <http://www.w3.org/1999/02/22-rdf-syntax-ns#value> ?rdfValue } "
-				+ "  OPTIONAL { <" + subjectURI + "> <http://vivoweb.org/ontology/core#abbreviation> ?abbreviation } "
-				+ "  OPTIONAL { <" + subjectURI + "> <http://vivoweb.org/ontology/core#placeOfPublication> ?placeOfPublication } "
-				+ "  OPTIONAL { <" + subjectURI + "> <http://vivoweb.org/ontology/core#hideFromDisplay> ?hideFromDisplay } "
+				+ "  OPTIONAL { <" + subjectURI + "> <http://vivoweb.org/ontology/core#abbreviation> ?Abbreviation } "
 				+ "}");
 				while(rs.hasNext()) {
 					QuerySolution sol = rs.nextSolution();
@@ -197,9 +163,7 @@ public class Periodical extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 						label = sol.get("?schemaName") == null ? null : sol.get("?schemaName").asLiteral().getString();
 					if (label == null)
 						label = sol.get("?rdfValue") == null ? null : sol.get("?rdfValue").asLiteral().getString();
-					abbreviation = sol.get("?abbreviation") == null ? null : sol.get("?abbreviation").toString();
-					placeOfPublication = sol.get("?placeOfPublication") == null ? null : sol.get("?placeOfPublication").toString();
-					hideFromDisplay = sol.get("?hideFromDisplay") == null ? null : sol.get("?hideFromDisplay").toString();
+					abbreviation = sol.get("?Abbreviation") == null ? null : sol.get("?Abbreviation").toString();
 				}
 			}
 		} catch (Exception e) {
@@ -253,22 +217,6 @@ public class Periodical extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 
 	public String getAbbreviation() {
 		return abbreviation;
-	}
-
-	public void setPlaceOfPublication(String placeOfPublication) {
-		this.placeOfPublication = placeOfPublication;
-	}
-
-	public String getPlaceOfPublication() {
-		return placeOfPublication;
-	}
-
-	public void setHideFromDisplay(String hideFromDisplay) {
-		this.hideFromDisplay = hideFromDisplay;
-	}
-
-	public String getHideFromDisplay() {
-		return hideFromDisplay;
 	}
 
 }
