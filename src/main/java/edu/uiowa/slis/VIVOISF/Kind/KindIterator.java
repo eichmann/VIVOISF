@@ -14,9 +14,15 @@ public class KindIterator extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 	static KindIterator currentInstance = null;
 	private static final Log log = LogFactory.getLog(KindIterator.class);
 
+	static boolean firstInstance = false;
+	static boolean lastInstance = false;
+
 	String subjectURI = null;
 	String label = null;
 	ResultSet rs = null;
+	String sortCriteria = null;
+	int limitCriteria = 0;
+	int offsetCriteria = 0;
 
 	public int doStartTag() throws JspException {
 		currentInstance = this;
@@ -28,12 +34,18 @@ public class KindIterator extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 					"  OPTIONAL { ?s rdfs:label ?labelENG FILTER (langMatches(?labelENG,\"en\")) } "+
 					"  OPTIONAL { ?s rdfs:label ?label    FILTER (lang(?label) = \"\") } "+
 					"  OPTIONAL { ?s rdfs:label ?labelANY FILTER (lang(?labelANY) != \"\") } "+
-					"  BIND(COALESCE(?labelUS, ?labelENG, ?label, ?labelANY) as ?lab) "+
-					"} ORDER BY ?lab");
+					"  BIND(COALESCE(?labelUS, ?labelENG, ?label, ?labelANY ) as ?lab) "+
+					" } " +
+					" ORDER BY ?lab " +
+					(limitCriteria == 0 ? "" : " LIMIT " + limitCriteria + " ") +
+					(offsetCriteria == 0 ? "" : " OFFSET " + offsetCriteria + " ")
+					);
 			if(rs.hasNext()) {
 				QuerySolution sol = rs.nextSolution();
 				subjectURI = sol.get("?s").toString();
 				label = sol.get("?lab") == null ? null : sol.get("?lab").asLiteral().getString();
+				firstInstance = true;
+				lastInstance = ! rs.hasNext();
 				return EVAL_BODY_INCLUDE;
 			}
 		} catch (Exception e) {
@@ -52,6 +64,8 @@ public class KindIterator extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 				QuerySolution sol = rs.nextSolution();
 				subjectURI = sol.get("?s").toString();
 				label = sol.get("?lab") == null ? null : sol.get("?lab").toString();
+				firstInstance = false;
+				lastInstance = ! rs.hasNext();
 				return EVAL_BODY_AGAIN;
 			}
 		} catch (Exception e) {
@@ -84,20 +98,60 @@ public class KindIterator extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 		label = null;
 	}
 
-	public void setSubjectURI(String subjectURI) {
-		this.subjectURI = subjectURI;
+	public void setSortCriteria(String theSortCriteria) {
+		sortCriteria = theSortCriteria;
+	}
+
+	public String getSortCriteria() {
+		return sortCriteria;
+	}
+
+	public void setLimitCriteria(Integer theLimitCriteria) {
+		limitCriteria = theLimitCriteria;
+	}
+
+	public Integer getLimitCriteria() {
+		return limitCriteria;
+	}
+
+	public void setOffsetCriteria(Integer theOffsetCriteria) {
+		offsetCriteria = theOffsetCriteria;
+	}
+
+	public Integer getOffsetCriteria() {
+		return offsetCriteria;
+	}
+
+	public void setSubjectURI(String theSubjectURI) {
+		subjectURI = theSubjectURI;
 	}
 
 	public String getSubjectURI() {
 		return subjectURI;
 	}
 
-	public void setLabel(String label) {
-		this.label = label;
+	public void setLabel(String theLabel) {
+		label = theLabel;
 	}
 
 	public String getLabel() {
 		return label;
+	}
+
+	public static void setFirstInstance(Boolean theFirstInstance) {
+		firstInstance = theFirstInstance;
+	}
+
+	public static Boolean getFirstInstance() {
+		return firstInstance;
+	}
+
+	public static void setLastInstance(Boolean theLastInstance) {
+		lastInstance = theLastInstance;
+	}
+
+	public static Boolean getLastInstance() {
+		return lastInstance;
 	}
 
 }

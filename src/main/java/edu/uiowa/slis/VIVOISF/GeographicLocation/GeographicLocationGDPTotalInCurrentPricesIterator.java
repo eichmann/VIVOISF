@@ -14,6 +14,9 @@ public class GeographicLocationGDPTotalInCurrentPricesIterator extends edu.uiowa
 	static GeographicLocationGDPTotalInCurrentPricesIterator currentInstance = null;
 	private static final Log log = LogFactory.getLog(GeographicLocationGDPTotalInCurrentPricesIterator.class);
 
+	static boolean firstInstance = false;
+	static boolean lastInstance = false;
+
 	String subjectURI = null;
 	String GDPTotalInCurrentPrices = null;
 	ResultSet rs = null;
@@ -34,7 +37,9 @@ public class GeographicLocationGDPTotalInCurrentPricesIterator extends edu.uiowa
 			rs = getResultSet(prefix+"SELECT ?s where { <" + subjectURI + "> <http://aims.fao.org/aos/geopolitical.owl#GDPTotalInCurrentPrices> ?s } ");
 			if(rs.hasNext()) {
 				QuerySolution sol = rs.nextSolution();
-				GDPTotalInCurrentPrices = sol.get("?s").toString();
+				GDPTotalInCurrentPrices = sol.get("?s").isLiteral() ? sol.get("?s").asLiteral().getString() : sol.get("?s").toString();
+				firstInstance = true;
+				lastInstance = ! rs.hasNext();
 				return EVAL_BODY_INCLUDE;
 			}
 		} catch (Exception e) {
@@ -51,7 +56,9 @@ public class GeographicLocationGDPTotalInCurrentPricesIterator extends edu.uiowa
 		try {
 			if(rs.hasNext()) {
 				QuerySolution sol = rs.nextSolution();
-				GDPTotalInCurrentPrices = sol.get("?s").toString();
+				GDPTotalInCurrentPrices = sol.get("?s").isLiteral() ? sol.get("?s").asLiteral().getString() : sol.get("?s").toString();
+				firstInstance = false;
+				lastInstance = ! rs.hasNext();
 				return EVAL_BODY_AGAIN;
 			}
 		} catch (Exception e) {
@@ -83,12 +90,28 @@ public class GeographicLocationGDPTotalInCurrentPricesIterator extends edu.uiowa
 		subjectURI = null;
 	}
 
-	public void setGDPTotalInCurrentPrices(String GDPTotalInCurrentPrices) {
-		this.GDPTotalInCurrentPrices = GDPTotalInCurrentPrices;
+	public void setGDPTotalInCurrentPrices(String theGDPTotalInCurrentPrices) {
+		GDPTotalInCurrentPrices = theGDPTotalInCurrentPrices;
 	}
 
 	public String getGDPTotalInCurrentPrices() {
 		return GDPTotalInCurrentPrices;
+	}
+
+	public static void setFirstInstance(Boolean theFirstInstance) {
+		firstInstance = theFirstInstance;
+	}
+
+	public static Boolean getFirstInstance() {
+		return firstInstance;
+	}
+
+	public static void setLastInstance(Boolean theLastInstance) {
+		lastInstance = theLastInstance;
+	}
+
+	public static Boolean getLastInstance() {
+		return lastInstance;
 	}
 
 }

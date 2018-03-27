@@ -14,6 +14,9 @@ public class Special_groupNameListITIterator extends edu.uiowa.slis.VIVOISF.TagL
 	static Special_groupNameListITIterator currentInstance = null;
 	private static final Log log = LogFactory.getLog(Special_groupNameListITIterator.class);
 
+	static boolean firstInstance = false;
+	static boolean lastInstance = false;
+
 	String subjectURI = null;
 	String nameListIT = null;
 	ResultSet rs = null;
@@ -34,7 +37,9 @@ public class Special_groupNameListITIterator extends edu.uiowa.slis.VIVOISF.TagL
 			rs = getResultSet(prefix+"SELECT ?s where { <" + subjectURI + "> <http://aims.fao.org/aos/geopolitical.owl#nameListIT> ?s } ");
 			if(rs.hasNext()) {
 				QuerySolution sol = rs.nextSolution();
-				nameListIT = sol.get("?s").toString();
+				nameListIT = sol.get("?s").isLiteral() ? sol.get("?s").asLiteral().getString() : sol.get("?s").toString();
+				firstInstance = true;
+				lastInstance = ! rs.hasNext();
 				return EVAL_BODY_INCLUDE;
 			}
 		} catch (Exception e) {
@@ -51,7 +56,9 @@ public class Special_groupNameListITIterator extends edu.uiowa.slis.VIVOISF.TagL
 		try {
 			if(rs.hasNext()) {
 				QuerySolution sol = rs.nextSolution();
-				nameListIT = sol.get("?s").toString();
+				nameListIT = sol.get("?s").isLiteral() ? sol.get("?s").asLiteral().getString() : sol.get("?s").toString();
+				firstInstance = false;
+				lastInstance = ! rs.hasNext();
 				return EVAL_BODY_AGAIN;
 			}
 		} catch (Exception e) {
@@ -83,12 +90,28 @@ public class Special_groupNameListITIterator extends edu.uiowa.slis.VIVOISF.TagL
 		subjectURI = null;
 	}
 
-	public void setNameListIT(String nameListIT) {
-		this.nameListIT = nameListIT;
+	public void setNameListIT(String theNameListIT) {
+		nameListIT = theNameListIT;
 	}
 
 	public String getNameListIT() {
 		return nameListIT;
+	}
+
+	public static void setFirstInstance(Boolean theFirstInstance) {
+		firstInstance = theFirstInstance;
+	}
+
+	public static Boolean getFirstInstance() {
+		return firstInstance;
+	}
+
+	public static void setLastInstance(Boolean theLastInstance) {
+		lastInstance = theLastInstance;
+	}
+
+	public static Boolean getLastInstance() {
+		return lastInstance;
 	}
 
 }

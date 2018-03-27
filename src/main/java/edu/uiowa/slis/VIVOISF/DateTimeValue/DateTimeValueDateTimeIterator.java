@@ -16,10 +16,16 @@ public class DateTimeValueDateTimeIterator extends edu.uiowa.slis.VIVOISF.TagLib
 	static DateTimeValueDateTimeIterator currentInstance = null;
 	private static final Log log = LogFactory.getLog(DateTimeValueDateTimeIterator.class);
 
+	static boolean firstInstance = false;
+	static boolean lastInstance = false;
+
 	String subjectURI = null;
 	String type = null;
 	String dateTime = null;
 	ResultSet rs = null;
+	String sortCriteria = null;
+	int limitCriteria = 0;
+	int offsetCriteria = 0;
 	Hashtable<String,String> classFilter = null;
 
 	public int doStartTag() throws JspException {
@@ -37,21 +43,26 @@ public class DateTimeValueDateTimeIterator extends edu.uiowa.slis.VIVOISF.TagLib
 
 			rs = getResultSet(prefix+"SELECT ?s ?t where {"
 					+" <" + subjectURI + "> <http://vivoweb.org/ontology/core#dateTime> ?s . "
-					+" ?s <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?t ."
+					+" OPTIONAL { ?s <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?t } ."
 					+" FILTER NOT EXISTS {"
 					+"   ?s <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> ?subtype ."
 					+"   ?subtype <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?t ."
 					+"   filter ( ?subtype != ?t )"
-					+" }"
-					+"} ");
+					+" } " +
+					" } " +
+					(limitCriteria == 0 ? "" : " LIMIT " + limitCriteria + " ") +
+					(offsetCriteria == 0 ? "" : " OFFSET " + offsetCriteria + " ")
+					);
 			while(rs.hasNext()) {
 				QuerySolution sol = rs.nextSolution();
-				dateTime = sol.get("?s").toString();
-				type = getLocalName(sol.get("?t").toString());
-				if (type == null)
-					continue;
+				dateTime = sol.get("?s").isLiteral() ? sol.get("?s").asLiteral().getString() : sol.get("?s").toString();
+				type = sol.get("?t") == null ? null : getLocalName(sol.get("?t").toString());
+//				if (type == null)
+//					continue;
 				if (classFilter == null || (classFilter != null && type != null && classFilter.containsKey(type))) {
 					log.info("instance: " + dateTime + "	type: " + type);
+					firstInstance = true;
+					lastInstance = ! rs.hasNext();
 					return EVAL_BODY_INCLUDE;
 				}
 			}
@@ -70,11 +81,13 @@ public class DateTimeValueDateTimeIterator extends edu.uiowa.slis.VIVOISF.TagLib
 			while(rs.hasNext()) {
 				QuerySolution sol = rs.nextSolution();
 				dateTime = sol.get("?s").toString();
-				type = getLocalName(sol.get("?t").toString());
-				if (type == null)
-					continue;
+				type = sol.get("?t") == null ? null : getLocalName(sol.get("?t").toString());
+//				if (type == null)
+//					continue;
 				if (classFilter == null || (classFilter != null && type != null && classFilter.containsKey(type))) {
 					log.info("instance: " + dateTime + "	type: " + type);
+					firstInstance = false;
+					lastInstance = ! rs.hasNext();
 					return EVAL_BODY_AGAIN;
 				}
 			}
@@ -110,20 +123,60 @@ public class DateTimeValueDateTimeIterator extends edu.uiowa.slis.VIVOISF.TagLib
 		classFilter = null;
 	}
 
-	public void setType(String type) {
-		this.type = type;
+	public void setSortCriteria(String theSortCriteria) {
+		sortCriteria = theSortCriteria;
+	}
+
+	public String getSortCriteria() {
+		return sortCriteria;
+	}
+
+	public void setLimitCriteria(Integer theLimitCriteria) {
+		limitCriteria = theLimitCriteria;
+	}
+
+	public Integer getLimitCriteria() {
+		return limitCriteria;
+	}
+
+	public void setOffsetCriteria(Integer theOffsetCriteria) {
+		offsetCriteria = theOffsetCriteria;
+	}
+
+	public Integer getOffsetCriteria() {
+		return offsetCriteria;
+	}
+
+	public void setType(String theType) {
+		type = theType;
 	}
 
 	public String getType() {
 		return type;
 	}
 
-	public void setDateTime(String dateTime) {
-		this.dateTime = dateTime;
+	public void setDateTime(String theDateTime) {
+		dateTime = theDateTime;
 	}
 
 	public String getDateTime() {
 		return dateTime;
+	}
+
+	public static void setFirstInstance(Boolean theFirstInstance) {
+		firstInstance = theFirstInstance;
+	}
+
+	public static Boolean getFirstInstance() {
+		return firstInstance;
+	}
+
+	public static void setLastInstance(Boolean theLastInstance) {
+		lastInstance = theLastInstance;
+	}
+
+	public static Boolean getLastInstance() {
+		return lastInstance;
 	}
 
 	public void setClassFilter(String filterString) {

@@ -57,14 +57,6 @@ public class Area extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 				subjectURI = ((edu.uiowa.slis.VIVOISF.Person.PersonRO_0001025Iterator)this.getParent()).getRO_0001025();
 			}
 
-			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.Area.AreaIsSuccessorOfIterator) {
-				subjectURI = ((edu.uiowa.slis.VIVOISF.Area.AreaIsSuccessorOfIterator)this.getParent()).getIsSuccessorOf();
-			}
-
-			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.Area.AreaIsPredecessorOfIterator) {
-				subjectURI = ((edu.uiowa.slis.VIVOISF.Area.AreaIsPredecessorOfIterator)this.getParent()).getIsPredecessorOf();
-			}
-
 			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.BFO_0000001.BFO_0000001BFO_0000050Iterator) {
 				subjectURI = ((edu.uiowa.slis.VIVOISF.BFO_0000001.BFO_0000001BFO_0000050Iterator)this.getParent()).getBFO_0000050();
 			}
@@ -109,6 +101,14 @@ public class Area extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 				subjectURI = ((edu.uiowa.slis.VIVOISF.Thing.ThingBFO_0000050Iterator)this.getParent()).getBFO_0000050();
 			}
 
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.Area.AreaIsSuccessorOfIterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.Area.AreaIsSuccessorOfIterator)this.getParent()).getIsSuccessorOf();
+			}
+
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.Area.AreaIsPredecessorOfIterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.Area.AreaIsPredecessorOfIterator)this.getParent()).getIsPredecessorOf();
+			}
+
 			edu.uiowa.slis.VIVOISF.BFO_0000001.BFO_0000001RO_0001025Iterator theBFO_0000001RO_0001025Iterator = (edu.uiowa.slis.VIVOISF.BFO_0000001.BFO_0000001RO_0001025Iterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.BFO_0000001.BFO_0000001RO_0001025Iterator.class);
 
 			if (subjectURI == null && theBFO_0000001RO_0001025Iterator != null) {
@@ -143,18 +143,6 @@ public class Area extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 
 			if (subjectURI == null && thePersonRO_0001025Iterator != null) {
 				subjectURI = thePersonRO_0001025Iterator.getRO_0001025();
-			}
-
-			edu.uiowa.slis.VIVOISF.Area.AreaIsSuccessorOfIterator theAreaIsSuccessorOfIterator = (edu.uiowa.slis.VIVOISF.Area.AreaIsSuccessorOfIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.Area.AreaIsSuccessorOfIterator.class);
-
-			if (subjectURI == null && theAreaIsSuccessorOfIterator != null) {
-				subjectURI = theAreaIsSuccessorOfIterator.getIsSuccessorOf();
-			}
-
-			edu.uiowa.slis.VIVOISF.Area.AreaIsPredecessorOfIterator theAreaIsPredecessorOfIterator = (edu.uiowa.slis.VIVOISF.Area.AreaIsPredecessorOfIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.Area.AreaIsPredecessorOfIterator.class);
-
-			if (subjectURI == null && theAreaIsPredecessorOfIterator != null) {
-				subjectURI = theAreaIsPredecessorOfIterator.getIsPredecessorOf();
 			}
 
 			edu.uiowa.slis.VIVOISF.BFO_0000001.BFO_0000001BFO_0000050Iterator theBFO_0000001BFO_0000050Iterator = (edu.uiowa.slis.VIVOISF.BFO_0000001.BFO_0000001BFO_0000050Iterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.BFO_0000001.BFO_0000001BFO_0000050Iterator.class);
@@ -223,6 +211,18 @@ public class Area extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 				subjectURI = theThingBFO_0000050Iterator.getBFO_0000050();
 			}
 
+			edu.uiowa.slis.VIVOISF.Area.AreaIsSuccessorOfIterator theAreaIsSuccessorOfIterator = (edu.uiowa.slis.VIVOISF.Area.AreaIsSuccessorOfIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.Area.AreaIsSuccessorOfIterator.class);
+
+			if (subjectURI == null && theAreaIsSuccessorOfIterator != null) {
+				subjectURI = theAreaIsSuccessorOfIterator.getIsSuccessorOf();
+			}
+
+			edu.uiowa.slis.VIVOISF.Area.AreaIsPredecessorOfIterator theAreaIsPredecessorOfIterator = (edu.uiowa.slis.VIVOISF.Area.AreaIsPredecessorOfIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.Area.AreaIsPredecessorOfIterator.class);
+
+			if (subjectURI == null && theAreaIsPredecessorOfIterator != null) {
+				subjectURI = theAreaIsPredecessorOfIterator.getIsPredecessorOf();
+			}
+
 			if (theAreaIterator == null && subjectURI == null) {
 				throw new JspException("subject URI generation currently not supported");
 			} else {
@@ -282,16 +282,16 @@ public class Area extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 		subjectURI = null;
 	}
 
-	public void setSubjectURI(String subjectURI) {
-		this.subjectURI = subjectURI;
+	public void setSubjectURI(String theSubjectURI) {
+		subjectURI = theSubjectURI;
 	}
 
 	public String getSubjectURI() {
 		return subjectURI;
 	}
 
-	public void setLabel(String label) {
-		this.label = label;
+	public void setLabel(String theLabel) {
+		label = theLabel;
 	}
 
 	public String getLabel() {

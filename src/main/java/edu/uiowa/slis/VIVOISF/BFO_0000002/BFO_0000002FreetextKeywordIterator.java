@@ -14,6 +14,9 @@ public class BFO_0000002FreetextKeywordIterator extends edu.uiowa.slis.VIVOISF.T
 	static BFO_0000002FreetextKeywordIterator currentInstance = null;
 	private static final Log log = LogFactory.getLog(BFO_0000002FreetextKeywordIterator.class);
 
+	static boolean firstInstance = false;
+	static boolean lastInstance = false;
+
 	String subjectURI = null;
 	String freetextKeyword = null;
 	ResultSet rs = null;
@@ -34,7 +37,9 @@ public class BFO_0000002FreetextKeywordIterator extends edu.uiowa.slis.VIVOISF.T
 			rs = getResultSet(prefix+"SELECT ?s where { <" + subjectURI + "> <http://vivoweb.org/ontology/core#freetextKeyword> ?s } ");
 			if(rs.hasNext()) {
 				QuerySolution sol = rs.nextSolution();
-				freetextKeyword = sol.get("?s").toString();
+				freetextKeyword = sol.get("?s").isLiteral() ? sol.get("?s").asLiteral().getString() : sol.get("?s").toString();
+				firstInstance = true;
+				lastInstance = ! rs.hasNext();
 				return EVAL_BODY_INCLUDE;
 			}
 		} catch (Exception e) {
@@ -51,7 +56,9 @@ public class BFO_0000002FreetextKeywordIterator extends edu.uiowa.slis.VIVOISF.T
 		try {
 			if(rs.hasNext()) {
 				QuerySolution sol = rs.nextSolution();
-				freetextKeyword = sol.get("?s").toString();
+				freetextKeyword = sol.get("?s").isLiteral() ? sol.get("?s").asLiteral().getString() : sol.get("?s").toString();
+				firstInstance = false;
+				lastInstance = ! rs.hasNext();
 				return EVAL_BODY_AGAIN;
 			}
 		} catch (Exception e) {
@@ -83,12 +90,28 @@ public class BFO_0000002FreetextKeywordIterator extends edu.uiowa.slis.VIVOISF.T
 		subjectURI = null;
 	}
 
-	public void setFreetextKeyword(String freetextKeyword) {
-		this.freetextKeyword = freetextKeyword;
+	public void setFreetextKeyword(String theFreetextKeyword) {
+		freetextKeyword = theFreetextKeyword;
 	}
 
 	public String getFreetextKeyword() {
 		return freetextKeyword;
+	}
+
+	public static void setFirstInstance(Boolean theFirstInstance) {
+		firstInstance = theFirstInstance;
+	}
+
+	public static Boolean getFirstInstance() {
+		return firstInstance;
+	}
+
+	public static void setLastInstance(Boolean theLastInstance) {
+		lastInstance = theLastInstance;
+	}
+
+	public static Boolean getLastInstance() {
+		return lastInstance;
 	}
 
 }

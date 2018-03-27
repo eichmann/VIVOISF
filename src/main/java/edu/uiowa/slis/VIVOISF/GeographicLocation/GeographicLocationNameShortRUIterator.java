@@ -14,6 +14,9 @@ public class GeographicLocationNameShortRUIterator extends edu.uiowa.slis.VIVOIS
 	static GeographicLocationNameShortRUIterator currentInstance = null;
 	private static final Log log = LogFactory.getLog(GeographicLocationNameShortRUIterator.class);
 
+	static boolean firstInstance = false;
+	static boolean lastInstance = false;
+
 	String subjectURI = null;
 	String nameShortRU = null;
 	ResultSet rs = null;
@@ -34,7 +37,9 @@ public class GeographicLocationNameShortRUIterator extends edu.uiowa.slis.VIVOIS
 			rs = getResultSet(prefix+"SELECT ?s where { <" + subjectURI + "> <http://aims.fao.org/aos/geopolitical.owl#nameShortRU> ?s } ");
 			if(rs.hasNext()) {
 				QuerySolution sol = rs.nextSolution();
-				nameShortRU = sol.get("?s").toString();
+				nameShortRU = sol.get("?s").isLiteral() ? sol.get("?s").asLiteral().getString() : sol.get("?s").toString();
+				firstInstance = true;
+				lastInstance = ! rs.hasNext();
 				return EVAL_BODY_INCLUDE;
 			}
 		} catch (Exception e) {
@@ -51,7 +56,9 @@ public class GeographicLocationNameShortRUIterator extends edu.uiowa.slis.VIVOIS
 		try {
 			if(rs.hasNext()) {
 				QuerySolution sol = rs.nextSolution();
-				nameShortRU = sol.get("?s").toString();
+				nameShortRU = sol.get("?s").isLiteral() ? sol.get("?s").asLiteral().getString() : sol.get("?s").toString();
+				firstInstance = false;
+				lastInstance = ! rs.hasNext();
 				return EVAL_BODY_AGAIN;
 			}
 		} catch (Exception e) {
@@ -83,12 +90,28 @@ public class GeographicLocationNameShortRUIterator extends edu.uiowa.slis.VIVOIS
 		subjectURI = null;
 	}
 
-	public void setNameShortRU(String nameShortRU) {
-		this.nameShortRU = nameShortRU;
+	public void setNameShortRU(String theNameShortRU) {
+		nameShortRU = theNameShortRU;
 	}
 
 	public String getNameShortRU() {
 		return nameShortRU;
+	}
+
+	public static void setFirstInstance(Boolean theFirstInstance) {
+		firstInstance = theFirstInstance;
+	}
+
+	public static Boolean getFirstInstance() {
+		return firstInstance;
+	}
+
+	public static void setLastInstance(Boolean theLastInstance) {
+		lastInstance = theLastInstance;
+	}
+
+	public static Boolean getLastInstance() {
+		return lastInstance;
 	}
 
 }

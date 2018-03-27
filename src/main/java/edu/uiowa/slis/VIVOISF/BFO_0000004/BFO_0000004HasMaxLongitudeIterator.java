@@ -14,6 +14,9 @@ public class BFO_0000004HasMaxLongitudeIterator extends edu.uiowa.slis.VIVOISF.T
 	static BFO_0000004HasMaxLongitudeIterator currentInstance = null;
 	private static final Log log = LogFactory.getLog(BFO_0000004HasMaxLongitudeIterator.class);
 
+	static boolean firstInstance = false;
+	static boolean lastInstance = false;
+
 	String subjectURI = null;
 	String hasMaxLongitude = null;
 	ResultSet rs = null;
@@ -34,7 +37,9 @@ public class BFO_0000004HasMaxLongitudeIterator extends edu.uiowa.slis.VIVOISF.T
 			rs = getResultSet(prefix+"SELECT ?s where { <" + subjectURI + "> <http://aims.fao.org/aos/geopolitical.owl#hasMaxLongitude> ?s } ");
 			if(rs.hasNext()) {
 				QuerySolution sol = rs.nextSolution();
-				hasMaxLongitude = sol.get("?s").toString();
+				hasMaxLongitude = sol.get("?s").isLiteral() ? sol.get("?s").asLiteral().getString() : sol.get("?s").toString();
+				firstInstance = true;
+				lastInstance = ! rs.hasNext();
 				return EVAL_BODY_INCLUDE;
 			}
 		} catch (Exception e) {
@@ -51,7 +56,9 @@ public class BFO_0000004HasMaxLongitudeIterator extends edu.uiowa.slis.VIVOISF.T
 		try {
 			if(rs.hasNext()) {
 				QuerySolution sol = rs.nextSolution();
-				hasMaxLongitude = sol.get("?s").toString();
+				hasMaxLongitude = sol.get("?s").isLiteral() ? sol.get("?s").asLiteral().getString() : sol.get("?s").toString();
+				firstInstance = false;
+				lastInstance = ! rs.hasNext();
 				return EVAL_BODY_AGAIN;
 			}
 		} catch (Exception e) {
@@ -83,12 +90,28 @@ public class BFO_0000004HasMaxLongitudeIterator extends edu.uiowa.slis.VIVOISF.T
 		subjectURI = null;
 	}
 
-	public void setHasMaxLongitude(String hasMaxLongitude) {
-		this.hasMaxLongitude = hasMaxLongitude;
+	public void setHasMaxLongitude(String theHasMaxLongitude) {
+		hasMaxLongitude = theHasMaxLongitude;
 	}
 
 	public String getHasMaxLongitude() {
 		return hasMaxLongitude;
+	}
+
+	public static void setFirstInstance(Boolean theFirstInstance) {
+		firstInstance = theFirstInstance;
+	}
+
+	public static Boolean getFirstInstance() {
+		return firstInstance;
+	}
+
+	public static void setLastInstance(Boolean theLastInstance) {
+		lastInstance = theLastInstance;
+	}
+
+	public static Boolean getLastInstance() {
+		return lastInstance;
 	}
 
 }

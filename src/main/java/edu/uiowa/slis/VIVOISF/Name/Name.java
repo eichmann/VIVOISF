@@ -33,38 +33,6 @@ public class Name extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 				label = theNameIterator.getLabel();
 			}
 
-			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.Individual.IndividualHasNameIterator) {
-				subjectURI = ((edu.uiowa.slis.VIVOISF.Individual.IndividualHasNameIterator)this.getParent()).getHasName();
-			}
-
-			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.ARG_2000379.ARG_2000379HasNameIterator) {
-				subjectURI = ((edu.uiowa.slis.VIVOISF.ARG_2000379.ARG_2000379HasNameIterator)this.getParent()).getHasName();
-			}
-
-			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.BFO_0000001.BFO_0000001HasNameIterator) {
-				subjectURI = ((edu.uiowa.slis.VIVOISF.BFO_0000001.BFO_0000001HasNameIterator)this.getParent()).getHasName();
-			}
-
-			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.BFO_0000002.BFO_0000002HasNameIterator) {
-				subjectURI = ((edu.uiowa.slis.VIVOISF.BFO_0000002.BFO_0000002HasNameIterator)this.getParent()).getHasName();
-			}
-
-			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.BFO_0000031.BFO_0000031HasNameIterator) {
-				subjectURI = ((edu.uiowa.slis.VIVOISF.BFO_0000031.BFO_0000031HasNameIterator)this.getParent()).getHasName();
-			}
-
-			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.IAO_0000030.IAO_0000030HasNameIterator) {
-				subjectURI = ((edu.uiowa.slis.VIVOISF.IAO_0000030.IAO_0000030HasNameIterator)this.getParent()).getHasName();
-			}
-
-			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.Thing.ThingHasNameIterator) {
-				subjectURI = ((edu.uiowa.slis.VIVOISF.Thing.ThingHasNameIterator)this.getParent()).getHasName();
-			}
-
-			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.Kind.KindHasNameIterator) {
-				subjectURI = ((edu.uiowa.slis.VIVOISF.Kind.KindHasNameIterator)this.getParent()).getHasName();
-			}
-
 			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.BFO_0000001.BFO_0000001RelatedByIterator) {
 				subjectURI = ((edu.uiowa.slis.VIVOISF.BFO_0000001.BFO_0000001RelatedByIterator)this.getParent()).getRelatedBy();
 			}
@@ -125,6 +93,38 @@ public class Name extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 				subjectURI = ((edu.uiowa.slis.VIVOISF.Dataset.DatasetRelatedByIterator)this.getParent()).getRelatedBy();
 			}
 
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.Individual.IndividualHasNameIterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.Individual.IndividualHasNameIterator)this.getParent()).getHasName();
+			}
+
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.ARG_2000379.ARG_2000379HasNameIterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.ARG_2000379.ARG_2000379HasNameIterator)this.getParent()).getHasName();
+			}
+
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.BFO_0000001.BFO_0000001HasNameIterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.BFO_0000001.BFO_0000001HasNameIterator)this.getParent()).getHasName();
+			}
+
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.BFO_0000002.BFO_0000002HasNameIterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.BFO_0000002.BFO_0000002HasNameIterator)this.getParent()).getHasName();
+			}
+
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.BFO_0000031.BFO_0000031HasNameIterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.BFO_0000031.BFO_0000031HasNameIterator)this.getParent()).getHasName();
+			}
+
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.IAO_0000030.IAO_0000030HasNameIterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.IAO_0000030.IAO_0000030HasNameIterator)this.getParent()).getHasName();
+			}
+
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.Thing.ThingHasNameIterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.Thing.ThingHasNameIterator)this.getParent()).getHasName();
+			}
+
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.Kind.KindHasNameIterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.Kind.KindHasNameIterator)this.getParent()).getHasName();
+			}
+
 			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.BFO_0000001.BFO_0000001RelatesIterator) {
 				subjectURI = ((edu.uiowa.slis.VIVOISF.BFO_0000001.BFO_0000001RelatesIterator)this.getParent()).getRelates();
 			}
@@ -163,54 +163,6 @@ public class Name extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 
 			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.URL.URLHasURLInverseIterator) {
 				subjectURI = ((edu.uiowa.slis.VIVOISF.URL.URLHasURLInverseIterator)this.getParent()).getHasURLInverse();
-			}
-
-			edu.uiowa.slis.VIVOISF.Individual.IndividualHasNameIterator theIndividualHasNameIterator = (edu.uiowa.slis.VIVOISF.Individual.IndividualHasNameIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.Individual.IndividualHasNameIterator.class);
-
-			if (subjectURI == null && theIndividualHasNameIterator != null) {
-				subjectURI = theIndividualHasNameIterator.getHasName();
-			}
-
-			edu.uiowa.slis.VIVOISF.ARG_2000379.ARG_2000379HasNameIterator theARG_2000379HasNameIterator = (edu.uiowa.slis.VIVOISF.ARG_2000379.ARG_2000379HasNameIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.ARG_2000379.ARG_2000379HasNameIterator.class);
-
-			if (subjectURI == null && theARG_2000379HasNameIterator != null) {
-				subjectURI = theARG_2000379HasNameIterator.getHasName();
-			}
-
-			edu.uiowa.slis.VIVOISF.BFO_0000001.BFO_0000001HasNameIterator theBFO_0000001HasNameIterator = (edu.uiowa.slis.VIVOISF.BFO_0000001.BFO_0000001HasNameIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.BFO_0000001.BFO_0000001HasNameIterator.class);
-
-			if (subjectURI == null && theBFO_0000001HasNameIterator != null) {
-				subjectURI = theBFO_0000001HasNameIterator.getHasName();
-			}
-
-			edu.uiowa.slis.VIVOISF.BFO_0000002.BFO_0000002HasNameIterator theBFO_0000002HasNameIterator = (edu.uiowa.slis.VIVOISF.BFO_0000002.BFO_0000002HasNameIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.BFO_0000002.BFO_0000002HasNameIterator.class);
-
-			if (subjectURI == null && theBFO_0000002HasNameIterator != null) {
-				subjectURI = theBFO_0000002HasNameIterator.getHasName();
-			}
-
-			edu.uiowa.slis.VIVOISF.BFO_0000031.BFO_0000031HasNameIterator theBFO_0000031HasNameIterator = (edu.uiowa.slis.VIVOISF.BFO_0000031.BFO_0000031HasNameIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.BFO_0000031.BFO_0000031HasNameIterator.class);
-
-			if (subjectURI == null && theBFO_0000031HasNameIterator != null) {
-				subjectURI = theBFO_0000031HasNameIterator.getHasName();
-			}
-
-			edu.uiowa.slis.VIVOISF.IAO_0000030.IAO_0000030HasNameIterator theIAO_0000030HasNameIterator = (edu.uiowa.slis.VIVOISF.IAO_0000030.IAO_0000030HasNameIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.IAO_0000030.IAO_0000030HasNameIterator.class);
-
-			if (subjectURI == null && theIAO_0000030HasNameIterator != null) {
-				subjectURI = theIAO_0000030HasNameIterator.getHasName();
-			}
-
-			edu.uiowa.slis.VIVOISF.Thing.ThingHasNameIterator theThingHasNameIterator = (edu.uiowa.slis.VIVOISF.Thing.ThingHasNameIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.Thing.ThingHasNameIterator.class);
-
-			if (subjectURI == null && theThingHasNameIterator != null) {
-				subjectURI = theThingHasNameIterator.getHasName();
-			}
-
-			edu.uiowa.slis.VIVOISF.Kind.KindHasNameIterator theKindHasNameIterator = (edu.uiowa.slis.VIVOISF.Kind.KindHasNameIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.Kind.KindHasNameIterator.class);
-
-			if (subjectURI == null && theKindHasNameIterator != null) {
-				subjectURI = theKindHasNameIterator.getHasName();
 			}
 
 			edu.uiowa.slis.VIVOISF.BFO_0000001.BFO_0000001RelatedByIterator theBFO_0000001RelatedByIterator = (edu.uiowa.slis.VIVOISF.BFO_0000001.BFO_0000001RelatedByIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.BFO_0000001.BFO_0000001RelatedByIterator.class);
@@ -301,6 +253,54 @@ public class Name extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 
 			if (subjectURI == null && theDatasetRelatedByIterator != null) {
 				subjectURI = theDatasetRelatedByIterator.getRelatedBy();
+			}
+
+			edu.uiowa.slis.VIVOISF.Individual.IndividualHasNameIterator theIndividualHasNameIterator = (edu.uiowa.slis.VIVOISF.Individual.IndividualHasNameIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.Individual.IndividualHasNameIterator.class);
+
+			if (subjectURI == null && theIndividualHasNameIterator != null) {
+				subjectURI = theIndividualHasNameIterator.getHasName();
+			}
+
+			edu.uiowa.slis.VIVOISF.ARG_2000379.ARG_2000379HasNameIterator theARG_2000379HasNameIterator = (edu.uiowa.slis.VIVOISF.ARG_2000379.ARG_2000379HasNameIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.ARG_2000379.ARG_2000379HasNameIterator.class);
+
+			if (subjectURI == null && theARG_2000379HasNameIterator != null) {
+				subjectURI = theARG_2000379HasNameIterator.getHasName();
+			}
+
+			edu.uiowa.slis.VIVOISF.BFO_0000001.BFO_0000001HasNameIterator theBFO_0000001HasNameIterator = (edu.uiowa.slis.VIVOISF.BFO_0000001.BFO_0000001HasNameIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.BFO_0000001.BFO_0000001HasNameIterator.class);
+
+			if (subjectURI == null && theBFO_0000001HasNameIterator != null) {
+				subjectURI = theBFO_0000001HasNameIterator.getHasName();
+			}
+
+			edu.uiowa.slis.VIVOISF.BFO_0000002.BFO_0000002HasNameIterator theBFO_0000002HasNameIterator = (edu.uiowa.slis.VIVOISF.BFO_0000002.BFO_0000002HasNameIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.BFO_0000002.BFO_0000002HasNameIterator.class);
+
+			if (subjectURI == null && theBFO_0000002HasNameIterator != null) {
+				subjectURI = theBFO_0000002HasNameIterator.getHasName();
+			}
+
+			edu.uiowa.slis.VIVOISF.BFO_0000031.BFO_0000031HasNameIterator theBFO_0000031HasNameIterator = (edu.uiowa.slis.VIVOISF.BFO_0000031.BFO_0000031HasNameIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.BFO_0000031.BFO_0000031HasNameIterator.class);
+
+			if (subjectURI == null && theBFO_0000031HasNameIterator != null) {
+				subjectURI = theBFO_0000031HasNameIterator.getHasName();
+			}
+
+			edu.uiowa.slis.VIVOISF.IAO_0000030.IAO_0000030HasNameIterator theIAO_0000030HasNameIterator = (edu.uiowa.slis.VIVOISF.IAO_0000030.IAO_0000030HasNameIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.IAO_0000030.IAO_0000030HasNameIterator.class);
+
+			if (subjectURI == null && theIAO_0000030HasNameIterator != null) {
+				subjectURI = theIAO_0000030HasNameIterator.getHasName();
+			}
+
+			edu.uiowa.slis.VIVOISF.Thing.ThingHasNameIterator theThingHasNameIterator = (edu.uiowa.slis.VIVOISF.Thing.ThingHasNameIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.Thing.ThingHasNameIterator.class);
+
+			if (subjectURI == null && theThingHasNameIterator != null) {
+				subjectURI = theThingHasNameIterator.getHasName();
+			}
+
+			edu.uiowa.slis.VIVOISF.Kind.KindHasNameIterator theKindHasNameIterator = (edu.uiowa.slis.VIVOISF.Kind.KindHasNameIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.Kind.KindHasNameIterator.class);
+
+			if (subjectURI == null && theKindHasNameIterator != null) {
+				subjectURI = theKindHasNameIterator.getHasName();
 			}
 
 			edu.uiowa.slis.VIVOISF.BFO_0000001.BFO_0000001RelatesIterator theBFO_0000001RelatesIterator = (edu.uiowa.slis.VIVOISF.BFO_0000001.BFO_0000001RelatesIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.BFO_0000001.BFO_0000001RelatesIterator.class);
@@ -416,16 +416,16 @@ public class Name extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 		subjectURI = null;
 	}
 
-	public void setSubjectURI(String subjectURI) {
-		this.subjectURI = subjectURI;
+	public void setSubjectURI(String theSubjectURI) {
+		subjectURI = theSubjectURI;
 	}
 
 	public String getSubjectURI() {
 		return subjectURI;
 	}
 
-	public void setLabel(String label) {
-		this.label = label;
+	public void setLabel(String theLabel) {
+		label = theLabel;
 	}
 
 	public String getLabel() {

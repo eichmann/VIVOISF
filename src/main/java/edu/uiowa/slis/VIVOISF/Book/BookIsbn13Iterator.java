@@ -14,6 +14,9 @@ public class BookIsbn13Iterator extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 	static BookIsbn13Iterator currentInstance = null;
 	private static final Log log = LogFactory.getLog(BookIsbn13Iterator.class);
 
+	static boolean firstInstance = false;
+	static boolean lastInstance = false;
+
 	String subjectURI = null;
 	String isbn13 = null;
 	ResultSet rs = null;
@@ -34,7 +37,9 @@ public class BookIsbn13Iterator extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 			rs = getResultSet(prefix+"SELECT ?s where { <" + subjectURI + "> <http://purl.org/ontology/bibo/isbn13> ?s } ");
 			if(rs.hasNext()) {
 				QuerySolution sol = rs.nextSolution();
-				isbn13 = sol.get("?s").toString();
+				isbn13 = sol.get("?s").isLiteral() ? sol.get("?s").asLiteral().getString() : sol.get("?s").toString();
+				firstInstance = true;
+				lastInstance = ! rs.hasNext();
 				return EVAL_BODY_INCLUDE;
 			}
 		} catch (Exception e) {
@@ -51,7 +56,9 @@ public class BookIsbn13Iterator extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 		try {
 			if(rs.hasNext()) {
 				QuerySolution sol = rs.nextSolution();
-				isbn13 = sol.get("?s").toString();
+				isbn13 = sol.get("?s").isLiteral() ? sol.get("?s").asLiteral().getString() : sol.get("?s").toString();
+				firstInstance = false;
+				lastInstance = ! rs.hasNext();
 				return EVAL_BODY_AGAIN;
 			}
 		} catch (Exception e) {
@@ -83,12 +90,28 @@ public class BookIsbn13Iterator extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 		subjectURI = null;
 	}
 
-	public void setIsbn13(String isbn13) {
-		this.isbn13 = isbn13;
+	public void setIsbn13(String theIsbn13) {
+		isbn13 = theIsbn13;
 	}
 
 	public String getIsbn13() {
 		return isbn13;
+	}
+
+	public static void setFirstInstance(Boolean theFirstInstance) {
+		firstInstance = theFirstInstance;
+	}
+
+	public static Boolean getFirstInstance() {
+		return firstInstance;
+	}
+
+	public static void setLastInstance(Boolean theLastInstance) {
+		lastInstance = theLastInstance;
+	}
+
+	public static Boolean getLastInstance() {
+		return lastInstance;
 	}
 
 }

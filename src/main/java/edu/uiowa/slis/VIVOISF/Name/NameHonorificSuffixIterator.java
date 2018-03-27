@@ -14,6 +14,9 @@ public class NameHonorificSuffixIterator extends edu.uiowa.slis.VIVOISF.TagLibSu
 	static NameHonorificSuffixIterator currentInstance = null;
 	private static final Log log = LogFactory.getLog(NameHonorificSuffixIterator.class);
 
+	static boolean firstInstance = false;
+	static boolean lastInstance = false;
+
 	String subjectURI = null;
 	String honorificSuffix = null;
 	ResultSet rs = null;
@@ -34,7 +37,9 @@ public class NameHonorificSuffixIterator extends edu.uiowa.slis.VIVOISF.TagLibSu
 			rs = getResultSet(prefix+"SELECT ?s where { <" + subjectURI + "> <http://www.w3.org/2006/vcard/ns#honorificSuffix> ?s } ");
 			if(rs.hasNext()) {
 				QuerySolution sol = rs.nextSolution();
-				honorificSuffix = sol.get("?s").toString();
+				honorificSuffix = sol.get("?s").isLiteral() ? sol.get("?s").asLiteral().getString() : sol.get("?s").toString();
+				firstInstance = true;
+				lastInstance = ! rs.hasNext();
 				return EVAL_BODY_INCLUDE;
 			}
 		} catch (Exception e) {
@@ -51,7 +56,9 @@ public class NameHonorificSuffixIterator extends edu.uiowa.slis.VIVOISF.TagLibSu
 		try {
 			if(rs.hasNext()) {
 				QuerySolution sol = rs.nextSolution();
-				honorificSuffix = sol.get("?s").toString();
+				honorificSuffix = sol.get("?s").isLiteral() ? sol.get("?s").asLiteral().getString() : sol.get("?s").toString();
+				firstInstance = false;
+				lastInstance = ! rs.hasNext();
 				return EVAL_BODY_AGAIN;
 			}
 		} catch (Exception e) {
@@ -83,12 +90,28 @@ public class NameHonorificSuffixIterator extends edu.uiowa.slis.VIVOISF.TagLibSu
 		subjectURI = null;
 	}
 
-	public void setHonorificSuffix(String honorificSuffix) {
-		this.honorificSuffix = honorificSuffix;
+	public void setHonorificSuffix(String theHonorificSuffix) {
+		honorificSuffix = theHonorificSuffix;
 	}
 
 	public String getHonorificSuffix() {
 		return honorificSuffix;
+	}
+
+	public static void setFirstInstance(Boolean theFirstInstance) {
+		firstInstance = theFirstInstance;
+	}
+
+	public static Boolean getFirstInstance() {
+		return firstInstance;
+	}
+
+	public static void setLastInstance(Boolean theLastInstance) {
+		lastInstance = theLastInstance;
+	}
+
+	public static Boolean getLastInstance() {
+		return lastInstance;
 	}
 
 }

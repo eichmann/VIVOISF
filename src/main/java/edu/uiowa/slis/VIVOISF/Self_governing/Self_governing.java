@@ -33,10 +33,6 @@ public class Self_governing extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 				label = theSelf_governingIterator.getLabel();
 			}
 
-			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.Non_self_governing.Non_self_governingIsAdministeredByIterator) {
-				subjectURI = ((edu.uiowa.slis.VIVOISF.Non_self_governing.Non_self_governingIsAdministeredByIterator)this.getParent()).getIsAdministeredBy();
-			}
-
 			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.BFO_0000001.BFO_0000001RO_0001025Iterator) {
 				subjectURI = ((edu.uiowa.slis.VIVOISF.BFO_0000001.BFO_0000001RO_0001025Iterator)this.getParent()).getRO_0001025();
 			}
@@ -105,10 +101,8 @@ public class Self_governing extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 				subjectURI = ((edu.uiowa.slis.VIVOISF.Thing.ThingBFO_0000050Iterator)this.getParent()).getBFO_0000050();
 			}
 
-			edu.uiowa.slis.VIVOISF.Non_self_governing.Non_self_governingIsAdministeredByIterator theNon_self_governingIsAdministeredByIterator = (edu.uiowa.slis.VIVOISF.Non_self_governing.Non_self_governingIsAdministeredByIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.Non_self_governing.Non_self_governingIsAdministeredByIterator.class);
-
-			if (subjectURI == null && theNon_self_governingIsAdministeredByIterator != null) {
-				subjectURI = theNon_self_governingIsAdministeredByIterator.getIsAdministeredBy();
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.Non_self_governing.Non_self_governingIsAdministeredByIterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.Non_self_governing.Non_self_governingIsAdministeredByIterator)this.getParent()).getIsAdministeredBy();
 			}
 
 			edu.uiowa.slis.VIVOISF.BFO_0000001.BFO_0000001RO_0001025Iterator theBFO_0000001RO_0001025Iterator = (edu.uiowa.slis.VIVOISF.BFO_0000001.BFO_0000001RO_0001025Iterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.BFO_0000001.BFO_0000001RO_0001025Iterator.class);
@@ -213,6 +207,12 @@ public class Self_governing extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 				subjectURI = theThingBFO_0000050Iterator.getBFO_0000050();
 			}
 
+			edu.uiowa.slis.VIVOISF.Non_self_governing.Non_self_governingIsAdministeredByIterator theNon_self_governingIsAdministeredByIterator = (edu.uiowa.slis.VIVOISF.Non_self_governing.Non_self_governingIsAdministeredByIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.Non_self_governing.Non_self_governingIsAdministeredByIterator.class);
+
+			if (subjectURI == null && theNon_self_governingIsAdministeredByIterator != null) {
+				subjectURI = theNon_self_governingIsAdministeredByIterator.getIsAdministeredBy();
+			}
+
 			if (theSelf_governingIterator == null && subjectURI == null) {
 				throw new JspException("subject URI generation currently not supported");
 			} else {
@@ -272,16 +272,16 @@ public class Self_governing extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 		subjectURI = null;
 	}
 
-	public void setSubjectURI(String subjectURI) {
-		this.subjectURI = subjectURI;
+	public void setSubjectURI(String theSubjectURI) {
+		subjectURI = theSubjectURI;
 	}
 
 	public String getSubjectURI() {
 		return subjectURI;
 	}
 
-	public void setLabel(String label) {
-		this.label = label;
+	public void setLabel(String theLabel) {
+		label = theLabel;
 	}
 
 	public String getLabel() {

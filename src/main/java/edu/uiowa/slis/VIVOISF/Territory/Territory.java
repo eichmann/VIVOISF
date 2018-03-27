@@ -57,12 +57,12 @@ public class Territory extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 				subjectURI = ((edu.uiowa.slis.VIVOISF.Person.PersonRO_0001025Iterator)this.getParent()).getRO_0001025();
 			}
 
-			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.Group.GroupHasMemberIterator) {
-				subjectURI = ((edu.uiowa.slis.VIVOISF.Group.GroupHasMemberIterator)this.getParent()).getHasMember();
-			}
-
 			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.Territory.TerritoryHasBorderWithIterator) {
 				subjectURI = ((edu.uiowa.slis.VIVOISF.Territory.TerritoryHasBorderWithIterator)this.getParent()).getHasBorderWith();
+			}
+
+			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.Group.GroupHasMemberIterator) {
+				subjectURI = ((edu.uiowa.slis.VIVOISF.Group.GroupHasMemberIterator)this.getParent()).getHasMember();
 			}
 
 			if (this.getParent() instanceof edu.uiowa.slis.VIVOISF.BFO_0000001.BFO_0000001BFO_0000050Iterator) {
@@ -145,16 +145,16 @@ public class Territory extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 				subjectURI = thePersonRO_0001025Iterator.getRO_0001025();
 			}
 
-			edu.uiowa.slis.VIVOISF.Group.GroupHasMemberIterator theGroupHasMemberIterator = (edu.uiowa.slis.VIVOISF.Group.GroupHasMemberIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.Group.GroupHasMemberIterator.class);
-
-			if (subjectURI == null && theGroupHasMemberIterator != null) {
-				subjectURI = theGroupHasMemberIterator.getHasMember();
-			}
-
 			edu.uiowa.slis.VIVOISF.Territory.TerritoryHasBorderWithIterator theTerritoryHasBorderWithIterator = (edu.uiowa.slis.VIVOISF.Territory.TerritoryHasBorderWithIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.Territory.TerritoryHasBorderWithIterator.class);
 
 			if (subjectURI == null && theTerritoryHasBorderWithIterator != null) {
 				subjectURI = theTerritoryHasBorderWithIterator.getHasBorderWith();
+			}
+
+			edu.uiowa.slis.VIVOISF.Group.GroupHasMemberIterator theGroupHasMemberIterator = (edu.uiowa.slis.VIVOISF.Group.GroupHasMemberIterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.Group.GroupHasMemberIterator.class);
+
+			if (subjectURI == null && theGroupHasMemberIterator != null) {
+				subjectURI = theGroupHasMemberIterator.getHasMember();
 			}
 
 			edu.uiowa.slis.VIVOISF.BFO_0000001.BFO_0000001BFO_0000050Iterator theBFO_0000001BFO_0000050Iterator = (edu.uiowa.slis.VIVOISF.BFO_0000001.BFO_0000001BFO_0000050Iterator) findAncestorWithClass(this, edu.uiowa.slis.VIVOISF.BFO_0000001.BFO_0000001BFO_0000050Iterator.class);
@@ -282,16 +282,16 @@ public class Territory extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 		subjectURI = null;
 	}
 
-	public void setSubjectURI(String subjectURI) {
-		this.subjectURI = subjectURI;
+	public void setSubjectURI(String theSubjectURI) {
+		subjectURI = theSubjectURI;
 	}
 
 	public String getSubjectURI() {
 		return subjectURI;
 	}
 
-	public void setLabel(String label) {
-		this.label = label;
+	public void setLabel(String theLabel) {
+		label = theLabel;
 	}
 
 	public String getLabel() {

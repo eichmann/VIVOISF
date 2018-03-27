@@ -14,6 +14,9 @@ public class AreaSourceIterator extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 	static AreaSourceIterator currentInstance = null;
 	private static final Log log = LogFactory.getLog(AreaSourceIterator.class);
 
+	static boolean firstInstance = false;
+	static boolean lastInstance = false;
+
 	String subjectURI = null;
 	String source = null;
 	ResultSet rs = null;
@@ -34,7 +37,9 @@ public class AreaSourceIterator extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 			rs = getResultSet(prefix+"SELECT ?s where { <" + subjectURI + "> <http://purl.org/dc/terms/source> ?s } ");
 			if(rs.hasNext()) {
 				QuerySolution sol = rs.nextSolution();
-				source = sol.get("?s").toString();
+				source = sol.get("?s").isLiteral() ? sol.get("?s").asLiteral().getString() : sol.get("?s").toString();
+				firstInstance = true;
+				lastInstance = ! rs.hasNext();
 				return EVAL_BODY_INCLUDE;
 			}
 		} catch (Exception e) {
@@ -51,7 +56,9 @@ public class AreaSourceIterator extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 		try {
 			if(rs.hasNext()) {
 				QuerySolution sol = rs.nextSolution();
-				source = sol.get("?s").toString();
+				source = sol.get("?s").isLiteral() ? sol.get("?s").asLiteral().getString() : sol.get("?s").toString();
+				firstInstance = false;
+				lastInstance = ! rs.hasNext();
 				return EVAL_BODY_AGAIN;
 			}
 		} catch (Exception e) {
@@ -83,12 +90,28 @@ public class AreaSourceIterator extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 		subjectURI = null;
 	}
 
-	public void setSource(String source) {
-		this.source = source;
+	public void setSource(String theSource) {
+		source = theSource;
 	}
 
 	public String getSource() {
 		return source;
+	}
+
+	public static void setFirstInstance(Boolean theFirstInstance) {
+		firstInstance = theFirstInstance;
+	}
+
+	public static Boolean getFirstInstance() {
+		return firstInstance;
+	}
+
+	public static void setLastInstance(Boolean theLastInstance) {
+		lastInstance = theLastInstance;
+	}
+
+	public static Boolean getLastInstance() {
+		return lastInstance;
 	}
 
 }

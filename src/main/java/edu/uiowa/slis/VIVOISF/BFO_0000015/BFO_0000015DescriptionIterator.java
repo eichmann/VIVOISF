@@ -14,6 +14,9 @@ public class BFO_0000015DescriptionIterator extends edu.uiowa.slis.VIVOISF.TagLi
 	static BFO_0000015DescriptionIterator currentInstance = null;
 	private static final Log log = LogFactory.getLog(BFO_0000015DescriptionIterator.class);
 
+	static boolean firstInstance = false;
+	static boolean lastInstance = false;
+
 	String subjectURI = null;
 	String description = null;
 	ResultSet rs = null;
@@ -34,7 +37,9 @@ public class BFO_0000015DescriptionIterator extends edu.uiowa.slis.VIVOISF.TagLi
 			rs = getResultSet(prefix+"SELECT ?s where { <" + subjectURI + "> <http://vivoweb.org/ontology/core#description> ?s } ");
 			if(rs.hasNext()) {
 				QuerySolution sol = rs.nextSolution();
-				description = sol.get("?s").toString();
+				description = sol.get("?s").isLiteral() ? sol.get("?s").asLiteral().getString() : sol.get("?s").toString();
+				firstInstance = true;
+				lastInstance = ! rs.hasNext();
 				return EVAL_BODY_INCLUDE;
 			}
 		} catch (Exception e) {
@@ -51,7 +56,9 @@ public class BFO_0000015DescriptionIterator extends edu.uiowa.slis.VIVOISF.TagLi
 		try {
 			if(rs.hasNext()) {
 				QuerySolution sol = rs.nextSolution();
-				description = sol.get("?s").toString();
+				description = sol.get("?s").isLiteral() ? sol.get("?s").asLiteral().getString() : sol.get("?s").toString();
+				firstInstance = false;
+				lastInstance = ! rs.hasNext();
 				return EVAL_BODY_AGAIN;
 			}
 		} catch (Exception e) {
@@ -83,12 +90,28 @@ public class BFO_0000015DescriptionIterator extends edu.uiowa.slis.VIVOISF.TagLi
 		subjectURI = null;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public void setDescription(String theDescription) {
+		description = theDescription;
 	}
 
 	public String getDescription() {
 		return description;
+	}
+
+	public static void setFirstInstance(Boolean theFirstInstance) {
+		firstInstance = theFirstInstance;
+	}
+
+	public static Boolean getFirstInstance() {
+		return firstInstance;
+	}
+
+	public static void setLastInstance(Boolean theLastInstance) {
+		lastInstance = theLastInstance;
+	}
+
+	public static Boolean getLastInstance() {
+		return lastInstance;
 	}
 
 }

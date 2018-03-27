@@ -195,24 +195,24 @@ public class Periodical extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 		subjectURI = null;
 	}
 
-	public void setSubjectURI(String subjectURI) {
-		this.subjectURI = subjectURI;
+	public void setSubjectURI(String theSubjectURI) {
+		subjectURI = theSubjectURI;
 	}
 
 	public String getSubjectURI() {
 		return subjectURI;
 	}
 
-	public void setLabel(String label) {
-		this.label = label;
+	public void setLabel(String theLabel) {
+		label = theLabel;
 	}
 
 	public String getLabel() {
 		return label;
 	}
 
-	public void setAbbreviation(String abbreviation) {
-		this.abbreviation = abbreviation;
+	public void setAbbreviation(String theAbbreviation) {
+		abbreviation = theAbbreviation;
 	}
 
 	public String getAbbreviation() {

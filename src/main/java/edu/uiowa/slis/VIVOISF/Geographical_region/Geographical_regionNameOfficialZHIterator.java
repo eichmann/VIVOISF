@@ -14,6 +14,9 @@ public class Geographical_regionNameOfficialZHIterator extends edu.uiowa.slis.VI
 	static Geographical_regionNameOfficialZHIterator currentInstance = null;
 	private static final Log log = LogFactory.getLog(Geographical_regionNameOfficialZHIterator.class);
 
+	static boolean firstInstance = false;
+	static boolean lastInstance = false;
+
 	String subjectURI = null;
 	String nameOfficialZH = null;
 	ResultSet rs = null;
@@ -34,7 +37,9 @@ public class Geographical_regionNameOfficialZHIterator extends edu.uiowa.slis.VI
 			rs = getResultSet(prefix+"SELECT ?s where { <" + subjectURI + "> <http://aims.fao.org/aos/geopolitical.owl#nameOfficialZH> ?s } ");
 			if(rs.hasNext()) {
 				QuerySolution sol = rs.nextSolution();
-				nameOfficialZH = sol.get("?s").toString();
+				nameOfficialZH = sol.get("?s").isLiteral() ? sol.get("?s").asLiteral().getString() : sol.get("?s").toString();
+				firstInstance = true;
+				lastInstance = ! rs.hasNext();
 				return EVAL_BODY_INCLUDE;
 			}
 		} catch (Exception e) {
@@ -51,7 +56,9 @@ public class Geographical_regionNameOfficialZHIterator extends edu.uiowa.slis.VI
 		try {
 			if(rs.hasNext()) {
 				QuerySolution sol = rs.nextSolution();
-				nameOfficialZH = sol.get("?s").toString();
+				nameOfficialZH = sol.get("?s").isLiteral() ? sol.get("?s").asLiteral().getString() : sol.get("?s").toString();
+				firstInstance = false;
+				lastInstance = ! rs.hasNext();
 				return EVAL_BODY_AGAIN;
 			}
 		} catch (Exception e) {
@@ -83,12 +90,28 @@ public class Geographical_regionNameOfficialZHIterator extends edu.uiowa.slis.VI
 		subjectURI = null;
 	}
 
-	public void setNameOfficialZH(String nameOfficialZH) {
-		this.nameOfficialZH = nameOfficialZH;
+	public void setNameOfficialZH(String theNameOfficialZH) {
+		nameOfficialZH = theNameOfficialZH;
 	}
 
 	public String getNameOfficialZH() {
 		return nameOfficialZH;
+	}
+
+	public static void setFirstInstance(Boolean theFirstInstance) {
+		firstInstance = theFirstInstance;
+	}
+
+	public static Boolean getFirstInstance() {
+		return firstInstance;
+	}
+
+	public static void setLastInstance(Boolean theLastInstance) {
+		lastInstance = theLastInstance;
+	}
+
+	public static Boolean getLastInstance() {
+		return lastInstance;
 	}
 
 }

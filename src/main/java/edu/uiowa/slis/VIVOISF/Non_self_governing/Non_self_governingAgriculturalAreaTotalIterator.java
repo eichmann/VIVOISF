@@ -14,6 +14,9 @@ public class Non_self_governingAgriculturalAreaTotalIterator extends edu.uiowa.s
 	static Non_self_governingAgriculturalAreaTotalIterator currentInstance = null;
 	private static final Log log = LogFactory.getLog(Non_self_governingAgriculturalAreaTotalIterator.class);
 
+	static boolean firstInstance = false;
+	static boolean lastInstance = false;
+
 	String subjectURI = null;
 	String agriculturalAreaTotal = null;
 	ResultSet rs = null;
@@ -34,7 +37,9 @@ public class Non_self_governingAgriculturalAreaTotalIterator extends edu.uiowa.s
 			rs = getResultSet(prefix+"SELECT ?s where { <" + subjectURI + "> <http://aims.fao.org/aos/geopolitical.owl#agriculturalAreaTotal> ?s } ");
 			if(rs.hasNext()) {
 				QuerySolution sol = rs.nextSolution();
-				agriculturalAreaTotal = sol.get("?s").toString();
+				agriculturalAreaTotal = sol.get("?s").isLiteral() ? sol.get("?s").asLiteral().getString() : sol.get("?s").toString();
+				firstInstance = true;
+				lastInstance = ! rs.hasNext();
 				return EVAL_BODY_INCLUDE;
 			}
 		} catch (Exception e) {
@@ -51,7 +56,9 @@ public class Non_self_governingAgriculturalAreaTotalIterator extends edu.uiowa.s
 		try {
 			if(rs.hasNext()) {
 				QuerySolution sol = rs.nextSolution();
-				agriculturalAreaTotal = sol.get("?s").toString();
+				agriculturalAreaTotal = sol.get("?s").isLiteral() ? sol.get("?s").asLiteral().getString() : sol.get("?s").toString();
+				firstInstance = false;
+				lastInstance = ! rs.hasNext();
 				return EVAL_BODY_AGAIN;
 			}
 		} catch (Exception e) {
@@ -83,12 +90,28 @@ public class Non_self_governingAgriculturalAreaTotalIterator extends edu.uiowa.s
 		subjectURI = null;
 	}
 
-	public void setAgriculturalAreaTotal(String agriculturalAreaTotal) {
-		this.agriculturalAreaTotal = agriculturalAreaTotal;
+	public void setAgriculturalAreaTotal(String theAgriculturalAreaTotal) {
+		agriculturalAreaTotal = theAgriculturalAreaTotal;
 	}
 
 	public String getAgriculturalAreaTotal() {
 		return agriculturalAreaTotal;
+	}
+
+	public static void setFirstInstance(Boolean theFirstInstance) {
+		firstInstance = theFirstInstance;
+	}
+
+	public static Boolean getFirstInstance() {
+		return firstInstance;
+	}
+
+	public static void setLastInstance(Boolean theLastInstance) {
+		lastInstance = theLastInstance;
+	}
+
+	public static Boolean getLastInstance() {
+		return lastInstance;
 	}
 
 }

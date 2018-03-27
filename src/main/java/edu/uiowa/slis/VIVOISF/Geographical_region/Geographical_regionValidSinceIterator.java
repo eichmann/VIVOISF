@@ -14,6 +14,9 @@ public class Geographical_regionValidSinceIterator extends edu.uiowa.slis.VIVOIS
 	static Geographical_regionValidSinceIterator currentInstance = null;
 	private static final Log log = LogFactory.getLog(Geographical_regionValidSinceIterator.class);
 
+	static boolean firstInstance = false;
+	static boolean lastInstance = false;
+
 	String subjectURI = null;
 	String validSince = null;
 	ResultSet rs = null;
@@ -34,7 +37,9 @@ public class Geographical_regionValidSinceIterator extends edu.uiowa.slis.VIVOIS
 			rs = getResultSet(prefix+"SELECT ?s where { <" + subjectURI + "> <http://aims.fao.org/aos/geopolitical.owl#validSince> ?s } ");
 			if(rs.hasNext()) {
 				QuerySolution sol = rs.nextSolution();
-				validSince = sol.get("?s").toString();
+				validSince = sol.get("?s").isLiteral() ? sol.get("?s").asLiteral().getString() : sol.get("?s").toString();
+				firstInstance = true;
+				lastInstance = ! rs.hasNext();
 				return EVAL_BODY_INCLUDE;
 			}
 		} catch (Exception e) {
@@ -51,7 +56,9 @@ public class Geographical_regionValidSinceIterator extends edu.uiowa.slis.VIVOIS
 		try {
 			if(rs.hasNext()) {
 				QuerySolution sol = rs.nextSolution();
-				validSince = sol.get("?s").toString();
+				validSince = sol.get("?s").isLiteral() ? sol.get("?s").asLiteral().getString() : sol.get("?s").toString();
+				firstInstance = false;
+				lastInstance = ! rs.hasNext();
 				return EVAL_BODY_AGAIN;
 			}
 		} catch (Exception e) {
@@ -83,12 +90,28 @@ public class Geographical_regionValidSinceIterator extends edu.uiowa.slis.VIVOIS
 		subjectURI = null;
 	}
 
-	public void setValidSince(String validSince) {
-		this.validSince = validSince;
+	public void setValidSince(String theValidSince) {
+		validSince = theValidSince;
 	}
 
 	public String getValidSince() {
 		return validSince;
+	}
+
+	public static void setFirstInstance(Boolean theFirstInstance) {
+		firstInstance = theFirstInstance;
+	}
+
+	public static Boolean getFirstInstance() {
+		return firstInstance;
+	}
+
+	public static void setLastInstance(Boolean theLastInstance) {
+		lastInstance = theLastInstance;
+	}
+
+	public static Boolean getLastInstance() {
+		return lastInstance;
 	}
 
 }

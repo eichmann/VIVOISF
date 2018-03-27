@@ -81,24 +81,24 @@ public class SPARQL extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 		object = null;
 	}
 
-	public void setSubject(String subject) {
-		this.subject = subject;
+	public void setSubject(String theSubject) {
+		subject = theSubject;
 	}
 
 	public String getSubject() {
 		return subject;
 	}
 
-	public void setPredicate(String predicate) {
-		this.predicate = predicate;
+	public void setPredicate(String thePredicate) {
+		predicate = thePredicate;
 	}
 
 	public String getPredicate() {
 		return predicate;
 	}
 
-	public void setObject(String object) {
-		this.object = object;
+	public void setObject(String theObject) {
+		object = theObject;
 	}
 
 	public String getObject() {

@@ -14,6 +14,9 @@ public class CountryNationalityESIterator extends edu.uiowa.slis.VIVOISF.TagLibS
 	static CountryNationalityESIterator currentInstance = null;
 	private static final Log log = LogFactory.getLog(CountryNationalityESIterator.class);
 
+	static boolean firstInstance = false;
+	static boolean lastInstance = false;
+
 	String subjectURI = null;
 	String nationalityES = null;
 	ResultSet rs = null;
@@ -34,7 +37,9 @@ public class CountryNationalityESIterator extends edu.uiowa.slis.VIVOISF.TagLibS
 			rs = getResultSet(prefix+"SELECT ?s where { <" + subjectURI + "> <http://aims.fao.org/aos/geopolitical.owl#nationalityES> ?s } ");
 			if(rs.hasNext()) {
 				QuerySolution sol = rs.nextSolution();
-				nationalityES = sol.get("?s").toString();
+				nationalityES = sol.get("?s").isLiteral() ? sol.get("?s").asLiteral().getString() : sol.get("?s").toString();
+				firstInstance = true;
+				lastInstance = ! rs.hasNext();
 				return EVAL_BODY_INCLUDE;
 			}
 		} catch (Exception e) {
@@ -51,7 +56,9 @@ public class CountryNationalityESIterator extends edu.uiowa.slis.VIVOISF.TagLibS
 		try {
 			if(rs.hasNext()) {
 				QuerySolution sol = rs.nextSolution();
-				nationalityES = sol.get("?s").toString();
+				nationalityES = sol.get("?s").isLiteral() ? sol.get("?s").asLiteral().getString() : sol.get("?s").toString();
+				firstInstance = false;
+				lastInstance = ! rs.hasNext();
 				return EVAL_BODY_AGAIN;
 			}
 		} catch (Exception e) {
@@ -83,12 +90,28 @@ public class CountryNationalityESIterator extends edu.uiowa.slis.VIVOISF.TagLibS
 		subjectURI = null;
 	}
 
-	public void setNationalityES(String nationalityES) {
-		this.nationalityES = nationalityES;
+	public void setNationalityES(String theNationalityES) {
+		nationalityES = theNationalityES;
 	}
 
 	public String getNationalityES() {
 		return nationalityES;
+	}
+
+	public static void setFirstInstance(Boolean theFirstInstance) {
+		firstInstance = theFirstInstance;
+	}
+
+	public static Boolean getFirstInstance() {
+		return firstInstance;
+	}
+
+	public static void setLastInstance(Boolean theLastInstance) {
+		lastInstance = theLastInstance;
+	}
+
+	public static Boolean getLastInstance() {
+		return lastInstance;
 	}
 
 }

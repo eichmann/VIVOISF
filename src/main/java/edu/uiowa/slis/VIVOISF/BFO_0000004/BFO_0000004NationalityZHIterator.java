@@ -14,6 +14,9 @@ public class BFO_0000004NationalityZHIterator extends edu.uiowa.slis.VIVOISF.Tag
 	static BFO_0000004NationalityZHIterator currentInstance = null;
 	private static final Log log = LogFactory.getLog(BFO_0000004NationalityZHIterator.class);
 
+	static boolean firstInstance = false;
+	static boolean lastInstance = false;
+
 	String subjectURI = null;
 	String nationalityZH = null;
 	ResultSet rs = null;
@@ -34,7 +37,9 @@ public class BFO_0000004NationalityZHIterator extends edu.uiowa.slis.VIVOISF.Tag
 			rs = getResultSet(prefix+"SELECT ?s where { <" + subjectURI + "> <http://aims.fao.org/aos/geopolitical.owl#nationalityZH> ?s } ");
 			if(rs.hasNext()) {
 				QuerySolution sol = rs.nextSolution();
-				nationalityZH = sol.get("?s").toString();
+				nationalityZH = sol.get("?s").isLiteral() ? sol.get("?s").asLiteral().getString() : sol.get("?s").toString();
+				firstInstance = true;
+				lastInstance = ! rs.hasNext();
 				return EVAL_BODY_INCLUDE;
 			}
 		} catch (Exception e) {
@@ -51,7 +56,9 @@ public class BFO_0000004NationalityZHIterator extends edu.uiowa.slis.VIVOISF.Tag
 		try {
 			if(rs.hasNext()) {
 				QuerySolution sol = rs.nextSolution();
-				nationalityZH = sol.get("?s").toString();
+				nationalityZH = sol.get("?s").isLiteral() ? sol.get("?s").asLiteral().getString() : sol.get("?s").toString();
+				firstInstance = false;
+				lastInstance = ! rs.hasNext();
 				return EVAL_BODY_AGAIN;
 			}
 		} catch (Exception e) {
@@ -83,12 +90,28 @@ public class BFO_0000004NationalityZHIterator extends edu.uiowa.slis.VIVOISF.Tag
 		subjectURI = null;
 	}
 
-	public void setNationalityZH(String nationalityZH) {
-		this.nationalityZH = nationalityZH;
+	public void setNationalityZH(String theNationalityZH) {
+		nationalityZH = theNationalityZH;
 	}
 
 	public String getNationalityZH() {
 		return nationalityZH;
+	}
+
+	public static void setFirstInstance(Boolean theFirstInstance) {
+		firstInstance = theFirstInstance;
+	}
+
+	public static Boolean getFirstInstance() {
+		return firstInstance;
+	}
+
+	public static void setLastInstance(Boolean theLastInstance) {
+		lastInstance = theLastInstance;
+	}
+
+	public static Boolean getLastInstance() {
+		return lastInstance;
 	}
 
 }

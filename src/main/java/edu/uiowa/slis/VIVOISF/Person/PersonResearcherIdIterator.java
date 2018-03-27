@@ -14,6 +14,9 @@ public class PersonResearcherIdIterator extends edu.uiowa.slis.VIVOISF.TagLibSup
 	static PersonResearcherIdIterator currentInstance = null;
 	private static final Log log = LogFactory.getLog(PersonResearcherIdIterator.class);
 
+	static boolean firstInstance = false;
+	static boolean lastInstance = false;
+
 	String subjectURI = null;
 	String researcherId = null;
 	ResultSet rs = null;
@@ -34,7 +37,9 @@ public class PersonResearcherIdIterator extends edu.uiowa.slis.VIVOISF.TagLibSup
 			rs = getResultSet(prefix+"SELECT ?s where { <" + subjectURI + "> <http://vivoweb.org/ontology/core#researcherId> ?s } ");
 			if(rs.hasNext()) {
 				QuerySolution sol = rs.nextSolution();
-				researcherId = sol.get("?s").toString();
+				researcherId = sol.get("?s").isLiteral() ? sol.get("?s").asLiteral().getString() : sol.get("?s").toString();
+				firstInstance = true;
+				lastInstance = ! rs.hasNext();
 				return EVAL_BODY_INCLUDE;
 			}
 		} catch (Exception e) {
@@ -51,7 +56,9 @@ public class PersonResearcherIdIterator extends edu.uiowa.slis.VIVOISF.TagLibSup
 		try {
 			if(rs.hasNext()) {
 				QuerySolution sol = rs.nextSolution();
-				researcherId = sol.get("?s").toString();
+				researcherId = sol.get("?s").isLiteral() ? sol.get("?s").asLiteral().getString() : sol.get("?s").toString();
+				firstInstance = false;
+				lastInstance = ! rs.hasNext();
 				return EVAL_BODY_AGAIN;
 			}
 		} catch (Exception e) {
@@ -83,12 +90,28 @@ public class PersonResearcherIdIterator extends edu.uiowa.slis.VIVOISF.TagLibSup
 		subjectURI = null;
 	}
 
-	public void setResearcherId(String researcherId) {
-		this.researcherId = researcherId;
+	public void setResearcherId(String theResearcherId) {
+		researcherId = theResearcherId;
 	}
 
 	public String getResearcherId() {
 		return researcherId;
+	}
+
+	public static void setFirstInstance(Boolean theFirstInstance) {
+		firstInstance = theFirstInstance;
+	}
+
+	public static Boolean getFirstInstance() {
+		return firstInstance;
+	}
+
+	public static void setLastInstance(Boolean theLastInstance) {
+		lastInstance = theLastInstance;
+	}
+
+	public static Boolean getLastInstance() {
+		return lastInstance;
 	}
 
 }

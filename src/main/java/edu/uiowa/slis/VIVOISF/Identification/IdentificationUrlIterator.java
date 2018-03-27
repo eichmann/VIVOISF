@@ -14,6 +14,9 @@ public class IdentificationUrlIterator extends edu.uiowa.slis.VIVOISF.TagLibSupp
 	static IdentificationUrlIterator currentInstance = null;
 	private static final Log log = LogFactory.getLog(IdentificationUrlIterator.class);
 
+	static boolean firstInstance = false;
+	static boolean lastInstance = false;
+
 	String subjectURI = null;
 	String url = null;
 	ResultSet rs = null;
@@ -34,7 +37,9 @@ public class IdentificationUrlIterator extends edu.uiowa.slis.VIVOISF.TagLibSupp
 			rs = getResultSet(prefix+"SELECT ?s where { <" + subjectURI + "> <http://www.w3.org/2006/vcard/ns#url> ?s } ");
 			if(rs.hasNext()) {
 				QuerySolution sol = rs.nextSolution();
-				url = sol.get("?s").toString();
+				url = sol.get("?s").isLiteral() ? sol.get("?s").asLiteral().getString() : sol.get("?s").toString();
+				firstInstance = true;
+				lastInstance = ! rs.hasNext();
 				return EVAL_BODY_INCLUDE;
 			}
 		} catch (Exception e) {
@@ -51,7 +56,9 @@ public class IdentificationUrlIterator extends edu.uiowa.slis.VIVOISF.TagLibSupp
 		try {
 			if(rs.hasNext()) {
 				QuerySolution sol = rs.nextSolution();
-				url = sol.get("?s").toString();
+				url = sol.get("?s").isLiteral() ? sol.get("?s").asLiteral().getString() : sol.get("?s").toString();
+				firstInstance = false;
+				lastInstance = ! rs.hasNext();
 				return EVAL_BODY_AGAIN;
 			}
 		} catch (Exception e) {
@@ -83,12 +90,28 @@ public class IdentificationUrlIterator extends edu.uiowa.slis.VIVOISF.TagLibSupp
 		subjectURI = null;
 	}
 
-	public void setUrl(String url) {
-		this.url = url;
+	public void setUrl(String theUrl) {
+		url = theUrl;
 	}
 
 	public String getUrl() {
 		return url;
+	}
+
+	public static void setFirstInstance(Boolean theFirstInstance) {
+		firstInstance = theFirstInstance;
+	}
+
+	public static Boolean getFirstInstance() {
+		return firstInstance;
+	}
+
+	public static void setLastInstance(Boolean theLastInstance) {
+		lastInstance = theLastInstance;
+	}
+
+	public static Boolean getLastInstance() {
+		return lastInstance;
 	}
 
 }

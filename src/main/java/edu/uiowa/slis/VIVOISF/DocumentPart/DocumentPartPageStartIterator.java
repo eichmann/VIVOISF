@@ -14,6 +14,9 @@ public class DocumentPartPageStartIterator extends edu.uiowa.slis.VIVOISF.TagLib
 	static DocumentPartPageStartIterator currentInstance = null;
 	private static final Log log = LogFactory.getLog(DocumentPartPageStartIterator.class);
 
+	static boolean firstInstance = false;
+	static boolean lastInstance = false;
+
 	String subjectURI = null;
 	String pageStart = null;
 	ResultSet rs = null;
@@ -34,7 +37,9 @@ public class DocumentPartPageStartIterator extends edu.uiowa.slis.VIVOISF.TagLib
 			rs = getResultSet(prefix+"SELECT ?s where { <" + subjectURI + "> <http://purl.org/ontology/bibo/pageStart> ?s } ");
 			if(rs.hasNext()) {
 				QuerySolution sol = rs.nextSolution();
-				pageStart = sol.get("?s").toString();
+				pageStart = sol.get("?s").isLiteral() ? sol.get("?s").asLiteral().getString() : sol.get("?s").toString();
+				firstInstance = true;
+				lastInstance = ! rs.hasNext();
 				return EVAL_BODY_INCLUDE;
 			}
 		} catch (Exception e) {
@@ -51,7 +56,9 @@ public class DocumentPartPageStartIterator extends edu.uiowa.slis.VIVOISF.TagLib
 		try {
 			if(rs.hasNext()) {
 				QuerySolution sol = rs.nextSolution();
-				pageStart = sol.get("?s").toString();
+				pageStart = sol.get("?s").isLiteral() ? sol.get("?s").asLiteral().getString() : sol.get("?s").toString();
+				firstInstance = false;
+				lastInstance = ! rs.hasNext();
 				return EVAL_BODY_AGAIN;
 			}
 		} catch (Exception e) {
@@ -83,12 +90,28 @@ public class DocumentPartPageStartIterator extends edu.uiowa.slis.VIVOISF.TagLib
 		subjectURI = null;
 	}
 
-	public void setPageStart(String pageStart) {
-		this.pageStart = pageStart;
+	public void setPageStart(String thePageStart) {
+		pageStart = thePageStart;
 	}
 
 	public String getPageStart() {
 		return pageStart;
+	}
+
+	public static void setFirstInstance(Boolean theFirstInstance) {
+		firstInstance = theFirstInstance;
+	}
+
+	public static Boolean getFirstInstance() {
+		return firstInstance;
+	}
+
+	public static void setLastInstance(Boolean theLastInstance) {
+		lastInstance = theLastInstance;
+	}
+
+	public static Boolean getLastInstance() {
+		return lastInstance;
 	}
 
 }

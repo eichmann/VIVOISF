@@ -14,6 +14,9 @@ public class CollectionEissnIterator extends edu.uiowa.slis.VIVOISF.TagLibSuppor
 	static CollectionEissnIterator currentInstance = null;
 	private static final Log log = LogFactory.getLog(CollectionEissnIterator.class);
 
+	static boolean firstInstance = false;
+	static boolean lastInstance = false;
+
 	String subjectURI = null;
 	String eissn = null;
 	ResultSet rs = null;
@@ -34,7 +37,9 @@ public class CollectionEissnIterator extends edu.uiowa.slis.VIVOISF.TagLibSuppor
 			rs = getResultSet(prefix+"SELECT ?s where { <" + subjectURI + "> <http://purl.org/ontology/bibo/eissn> ?s } ");
 			if(rs.hasNext()) {
 				QuerySolution sol = rs.nextSolution();
-				eissn = sol.get("?s").toString();
+				eissn = sol.get("?s").isLiteral() ? sol.get("?s").asLiteral().getString() : sol.get("?s").toString();
+				firstInstance = true;
+				lastInstance = ! rs.hasNext();
 				return EVAL_BODY_INCLUDE;
 			}
 		} catch (Exception e) {
@@ -51,7 +56,9 @@ public class CollectionEissnIterator extends edu.uiowa.slis.VIVOISF.TagLibSuppor
 		try {
 			if(rs.hasNext()) {
 				QuerySolution sol = rs.nextSolution();
-				eissn = sol.get("?s").toString();
+				eissn = sol.get("?s").isLiteral() ? sol.get("?s").asLiteral().getString() : sol.get("?s").toString();
+				firstInstance = false;
+				lastInstance = ! rs.hasNext();
 				return EVAL_BODY_AGAIN;
 			}
 		} catch (Exception e) {
@@ -83,12 +90,28 @@ public class CollectionEissnIterator extends edu.uiowa.slis.VIVOISF.TagLibSuppor
 		subjectURI = null;
 	}
 
-	public void setEissn(String eissn) {
-		this.eissn = eissn;
+	public void setEissn(String theEissn) {
+		eissn = theEissn;
 	}
 
 	public String getEissn() {
 		return eissn;
+	}
+
+	public static void setFirstInstance(Boolean theFirstInstance) {
+		firstInstance = theFirstInstance;
+	}
+
+	public static Boolean getFirstInstance() {
+		return firstInstance;
+	}
+
+	public static void setLastInstance(Boolean theLastInstance) {
+		lastInstance = theLastInstance;
+	}
+
+	public static Boolean getLastInstance() {
+		return lastInstance;
 	}
 
 }

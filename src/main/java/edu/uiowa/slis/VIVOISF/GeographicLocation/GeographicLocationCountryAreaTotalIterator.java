@@ -14,6 +14,9 @@ public class GeographicLocationCountryAreaTotalIterator extends edu.uiowa.slis.V
 	static GeographicLocationCountryAreaTotalIterator currentInstance = null;
 	private static final Log log = LogFactory.getLog(GeographicLocationCountryAreaTotalIterator.class);
 
+	static boolean firstInstance = false;
+	static boolean lastInstance = false;
+
 	String subjectURI = null;
 	String countryAreaTotal = null;
 	ResultSet rs = null;
@@ -34,7 +37,9 @@ public class GeographicLocationCountryAreaTotalIterator extends edu.uiowa.slis.V
 			rs = getResultSet(prefix+"SELECT ?s where { <" + subjectURI + "> <http://aims.fao.org/aos/geopolitical.owl#countryAreaTotal> ?s } ");
 			if(rs.hasNext()) {
 				QuerySolution sol = rs.nextSolution();
-				countryAreaTotal = sol.get("?s").toString();
+				countryAreaTotal = sol.get("?s").isLiteral() ? sol.get("?s").asLiteral().getString() : sol.get("?s").toString();
+				firstInstance = true;
+				lastInstance = ! rs.hasNext();
 				return EVAL_BODY_INCLUDE;
 			}
 		} catch (Exception e) {
@@ -51,7 +56,9 @@ public class GeographicLocationCountryAreaTotalIterator extends edu.uiowa.slis.V
 		try {
 			if(rs.hasNext()) {
 				QuerySolution sol = rs.nextSolution();
-				countryAreaTotal = sol.get("?s").toString();
+				countryAreaTotal = sol.get("?s").isLiteral() ? sol.get("?s").asLiteral().getString() : sol.get("?s").toString();
+				firstInstance = false;
+				lastInstance = ! rs.hasNext();
 				return EVAL_BODY_AGAIN;
 			}
 		} catch (Exception e) {
@@ -83,12 +90,28 @@ public class GeographicLocationCountryAreaTotalIterator extends edu.uiowa.slis.V
 		subjectURI = null;
 	}
 
-	public void setCountryAreaTotal(String countryAreaTotal) {
-		this.countryAreaTotal = countryAreaTotal;
+	public void setCountryAreaTotal(String theCountryAreaTotal) {
+		countryAreaTotal = theCountryAreaTotal;
 	}
 
 	public String getCountryAreaTotal() {
 		return countryAreaTotal;
+	}
+
+	public static void setFirstInstance(Boolean theFirstInstance) {
+		firstInstance = theFirstInstance;
+	}
+
+	public static Boolean getFirstInstance() {
+		return firstInstance;
+	}
+
+	public static void setLastInstance(Boolean theLastInstance) {
+		lastInstance = theLastInstance;
+	}
+
+	public static Boolean getLastInstance() {
+		return lastInstance;
 	}
 
 }

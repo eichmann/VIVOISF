@@ -14,6 +14,9 @@ public class EmailEmailIterator extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 	static EmailEmailIterator currentInstance = null;
 	private static final Log log = LogFactory.getLog(EmailEmailIterator.class);
 
+	static boolean firstInstance = false;
+	static boolean lastInstance = false;
+
 	String subjectURI = null;
 	String email = null;
 	ResultSet rs = null;
@@ -34,7 +37,9 @@ public class EmailEmailIterator extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 			rs = getResultSet(prefix+"SELECT ?s where { <" + subjectURI + "> <http://www.w3.org/2006/vcard/ns#email> ?s } ");
 			if(rs.hasNext()) {
 				QuerySolution sol = rs.nextSolution();
-				email = sol.get("?s").toString();
+				email = sol.get("?s").isLiteral() ? sol.get("?s").asLiteral().getString() : sol.get("?s").toString();
+				firstInstance = true;
+				lastInstance = ! rs.hasNext();
 				return EVAL_BODY_INCLUDE;
 			}
 		} catch (Exception e) {
@@ -51,7 +56,9 @@ public class EmailEmailIterator extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 		try {
 			if(rs.hasNext()) {
 				QuerySolution sol = rs.nextSolution();
-				email = sol.get("?s").toString();
+				email = sol.get("?s").isLiteral() ? sol.get("?s").asLiteral().getString() : sol.get("?s").toString();
+				firstInstance = false;
+				lastInstance = ! rs.hasNext();
 				return EVAL_BODY_AGAIN;
 			}
 		} catch (Exception e) {
@@ -83,12 +90,28 @@ public class EmailEmailIterator extends edu.uiowa.slis.VIVOISF.TagLibSupport {
 		subjectURI = null;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setEmail(String theEmail) {
+		email = theEmail;
 	}
 
 	public String getEmail() {
 		return email;
+	}
+
+	public static void setFirstInstance(Boolean theFirstInstance) {
+		firstInstance = theFirstInstance;
+	}
+
+	public static Boolean getFirstInstance() {
+		return firstInstance;
+	}
+
+	public static void setLastInstance(Boolean theLastInstance) {
+		lastInstance = theLastInstance;
+	}
+
+	public static Boolean getLastInstance() {
+		return lastInstance;
 	}
 
 }

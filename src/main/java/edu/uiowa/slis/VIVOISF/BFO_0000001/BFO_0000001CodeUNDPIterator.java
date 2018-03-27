@@ -14,6 +14,9 @@ public class BFO_0000001CodeUNDPIterator extends edu.uiowa.slis.VIVOISF.TagLibSu
 	static BFO_0000001CodeUNDPIterator currentInstance = null;
 	private static final Log log = LogFactory.getLog(BFO_0000001CodeUNDPIterator.class);
 
+	static boolean firstInstance = false;
+	static boolean lastInstance = false;
+
 	String subjectURI = null;
 	String codeUNDP = null;
 	ResultSet rs = null;
@@ -34,7 +37,9 @@ public class BFO_0000001CodeUNDPIterator extends edu.uiowa.slis.VIVOISF.TagLibSu
 			rs = getResultSet(prefix+"SELECT ?s where { <" + subjectURI + "> <http://aims.fao.org/aos/geopolitical.owl#codeUNDP> ?s } ");
 			if(rs.hasNext()) {
 				QuerySolution sol = rs.nextSolution();
-				codeUNDP = sol.get("?s").toString();
+				codeUNDP = sol.get("?s").isLiteral() ? sol.get("?s").asLiteral().getString() : sol.get("?s").toString();
+				firstInstance = true;
+				lastInstance = ! rs.hasNext();
 				return EVAL_BODY_INCLUDE;
 			}
 		} catch (Exception e) {
@@ -51,7 +56,9 @@ public class BFO_0000001CodeUNDPIterator extends edu.uiowa.slis.VIVOISF.TagLibSu
 		try {
 			if(rs.hasNext()) {
 				QuerySolution sol = rs.nextSolution();
-				codeUNDP = sol.get("?s").toString();
+				codeUNDP = sol.get("?s").isLiteral() ? sol.get("?s").asLiteral().getString() : sol.get("?s").toString();
+				firstInstance = false;
+				lastInstance = ! rs.hasNext();
 				return EVAL_BODY_AGAIN;
 			}
 		} catch (Exception e) {
@@ -83,12 +90,28 @@ public class BFO_0000001CodeUNDPIterator extends edu.uiowa.slis.VIVOISF.TagLibSu
 		subjectURI = null;
 	}
 
-	public void setCodeUNDP(String codeUNDP) {
-		this.codeUNDP = codeUNDP;
+	public void setCodeUNDP(String theCodeUNDP) {
+		codeUNDP = theCodeUNDP;
 	}
 
 	public String getCodeUNDP() {
 		return codeUNDP;
+	}
+
+	public static void setFirstInstance(Boolean theFirstInstance) {
+		firstInstance = theFirstInstance;
+	}
+
+	public static Boolean getFirstInstance() {
+		return firstInstance;
+	}
+
+	public static void setLastInstance(Boolean theLastInstance) {
+		lastInstance = theLastInstance;
+	}
+
+	public static Boolean getLastInstance() {
+		return lastInstance;
 	}
 
 }

@@ -14,6 +14,9 @@ public class GeographicRegionPopulationTotalIterator extends edu.uiowa.slis.VIVO
 	static GeographicRegionPopulationTotalIterator currentInstance = null;
 	private static final Log log = LogFactory.getLog(GeographicRegionPopulationTotalIterator.class);
 
+	static boolean firstInstance = false;
+	static boolean lastInstance = false;
+
 	String subjectURI = null;
 	String populationTotal = null;
 	ResultSet rs = null;
@@ -34,7 +37,9 @@ public class GeographicRegionPopulationTotalIterator extends edu.uiowa.slis.VIVO
 			rs = getResultSet(prefix+"SELECT ?s where { <" + subjectURI + "> <http://aims.fao.org/aos/geopolitical.owl#populationTotal> ?s } ");
 			if(rs.hasNext()) {
 				QuerySolution sol = rs.nextSolution();
-				populationTotal = sol.get("?s").toString();
+				populationTotal = sol.get("?s").isLiteral() ? sol.get("?s").asLiteral().getString() : sol.get("?s").toString();
+				firstInstance = true;
+				lastInstance = ! rs.hasNext();
 				return EVAL_BODY_INCLUDE;
 			}
 		} catch (Exception e) {
@@ -51,7 +56,9 @@ public class GeographicRegionPopulationTotalIterator extends edu.uiowa.slis.VIVO
 		try {
 			if(rs.hasNext()) {
 				QuerySolution sol = rs.nextSolution();
-				populationTotal = sol.get("?s").toString();
+				populationTotal = sol.get("?s").isLiteral() ? sol.get("?s").asLiteral().getString() : sol.get("?s").toString();
+				firstInstance = false;
+				lastInstance = ! rs.hasNext();
 				return EVAL_BODY_AGAIN;
 			}
 		} catch (Exception e) {
@@ -83,12 +90,28 @@ public class GeographicRegionPopulationTotalIterator extends edu.uiowa.slis.VIVO
 		subjectURI = null;
 	}
 
-	public void setPopulationTotal(String populationTotal) {
-		this.populationTotal = populationTotal;
+	public void setPopulationTotal(String thePopulationTotal) {
+		populationTotal = thePopulationTotal;
 	}
 
 	public String getPopulationTotal() {
 		return populationTotal;
+	}
+
+	public static void setFirstInstance(Boolean theFirstInstance) {
+		firstInstance = theFirstInstance;
+	}
+
+	public static Boolean getFirstInstance() {
+		return firstInstance;
+	}
+
+	public static void setLastInstance(Boolean theLastInstance) {
+		lastInstance = theLastInstance;
+	}
+
+	public static Boolean getLastInstance() {
+		return lastInstance;
 	}
 
 }

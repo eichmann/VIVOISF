@@ -14,6 +14,9 @@ public class ThingIAO_0000115Iterator extends edu.uiowa.slis.VIVOISF.TagLibSuppo
 	static ThingIAO_0000115Iterator currentInstance = null;
 	private static final Log log = LogFactory.getLog(ThingIAO_0000115Iterator.class);
 
+	static boolean firstInstance = false;
+	static boolean lastInstance = false;
+
 	String subjectURI = null;
 	String IAO_0000115 = null;
 	ResultSet rs = null;
@@ -34,7 +37,9 @@ public class ThingIAO_0000115Iterator extends edu.uiowa.slis.VIVOISF.TagLibSuppo
 			rs = getResultSet(prefix+"SELECT ?s where { <" + subjectURI + "> <http://purl.obolibrary.org/obo/IAO_0000115> ?s } ");
 			if(rs.hasNext()) {
 				QuerySolution sol = rs.nextSolution();
-				IAO_0000115 = sol.get("?s").toString();
+				IAO_0000115 = sol.get("?s").isLiteral() ? sol.get("?s").asLiteral().getString() : sol.get("?s").toString();
+				firstInstance = true;
+				lastInstance = ! rs.hasNext();
 				return EVAL_BODY_INCLUDE;
 			}
 		} catch (Exception e) {
@@ -51,7 +56,9 @@ public class ThingIAO_0000115Iterator extends edu.uiowa.slis.VIVOISF.TagLibSuppo
 		try {
 			if(rs.hasNext()) {
 				QuerySolution sol = rs.nextSolution();
-				IAO_0000115 = sol.get("?s").toString();
+				IAO_0000115 = sol.get("?s").isLiteral() ? sol.get("?s").asLiteral().getString() : sol.get("?s").toString();
+				firstInstance = false;
+				lastInstance = ! rs.hasNext();
 				return EVAL_BODY_AGAIN;
 			}
 		} catch (Exception e) {
@@ -83,12 +90,28 @@ public class ThingIAO_0000115Iterator extends edu.uiowa.slis.VIVOISF.TagLibSuppo
 		subjectURI = null;
 	}
 
-	public void setIAO_0000115(String IAO_0000115) {
-		this.IAO_0000115 = IAO_0000115;
+	public void setIAO_0000115(String theIAO_0000115) {
+		IAO_0000115 = theIAO_0000115;
 	}
 
 	public String getIAO_0000115() {
 		return IAO_0000115;
+	}
+
+	public static void setFirstInstance(Boolean theFirstInstance) {
+		firstInstance = theFirstInstance;
+	}
+
+	public static Boolean getFirstInstance() {
+		return firstInstance;
+	}
+
+	public static void setLastInstance(Boolean theLastInstance) {
+		lastInstance = theLastInstance;
+	}
+
+	public static Boolean getLastInstance() {
+		return lastInstance;
 	}
 
 }

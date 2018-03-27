@@ -14,6 +14,9 @@ public class AcademicArticleIssueIterator extends edu.uiowa.slis.VIVOISF.TagLibS
 	static AcademicArticleIssueIterator currentInstance = null;
 	private static final Log log = LogFactory.getLog(AcademicArticleIssueIterator.class);
 
+	static boolean firstInstance = false;
+	static boolean lastInstance = false;
+
 	String subjectURI = null;
 	String issue = null;
 	ResultSet rs = null;
@@ -34,7 +37,9 @@ public class AcademicArticleIssueIterator extends edu.uiowa.slis.VIVOISF.TagLibS
 			rs = getResultSet(prefix+"SELECT ?s where { <" + subjectURI + "> <http://purl.org/ontology/bibo/issue> ?s } ");
 			if(rs.hasNext()) {
 				QuerySolution sol = rs.nextSolution();
-				issue = sol.get("?s").toString();
+				issue = sol.get("?s").isLiteral() ? sol.get("?s").asLiteral().getString() : sol.get("?s").toString();
+				firstInstance = true;
+				lastInstance = ! rs.hasNext();
 				return EVAL_BODY_INCLUDE;
 			}
 		} catch (Exception e) {
@@ -51,7 +56,9 @@ public class AcademicArticleIssueIterator extends edu.uiowa.slis.VIVOISF.TagLibS
 		try {
 			if(rs.hasNext()) {
 				QuerySolution sol = rs.nextSolution();
-				issue = sol.get("?s").toString();
+				issue = sol.get("?s").isLiteral() ? sol.get("?s").asLiteral().getString() : sol.get("?s").toString();
+				firstInstance = false;
+				lastInstance = ! rs.hasNext();
 				return EVAL_BODY_AGAIN;
 			}
 		} catch (Exception e) {
@@ -83,12 +90,28 @@ public class AcademicArticleIssueIterator extends edu.uiowa.slis.VIVOISF.TagLibS
 		subjectURI = null;
 	}
 
-	public void setIssue(String issue) {
-		this.issue = issue;
+	public void setIssue(String theIssue) {
+		issue = theIssue;
 	}
 
 	public String getIssue() {
 		return issue;
+	}
+
+	public static void setFirstInstance(Boolean theFirstInstance) {
+		firstInstance = theFirstInstance;
+	}
+
+	public static Boolean getFirstInstance() {
+		return firstInstance;
+	}
+
+	public static void setLastInstance(Boolean theLastInstance) {
+		lastInstance = theLastInstance;
+	}
+
+	public static Boolean getLastInstance() {
+		return lastInstance;
 	}
 
 }

@@ -14,6 +14,9 @@ public class AreaCodeDBPediaIDIterator extends edu.uiowa.slis.VIVOISF.TagLibSupp
 	static AreaCodeDBPediaIDIterator currentInstance = null;
 	private static final Log log = LogFactory.getLog(AreaCodeDBPediaIDIterator.class);
 
+	static boolean firstInstance = false;
+	static boolean lastInstance = false;
+
 	String subjectURI = null;
 	String codeDBPediaID = null;
 	ResultSet rs = null;
@@ -34,7 +37,9 @@ public class AreaCodeDBPediaIDIterator extends edu.uiowa.slis.VIVOISF.TagLibSupp
 			rs = getResultSet(prefix+"SELECT ?s where { <" + subjectURI + "> <http://aims.fao.org/aos/geopolitical.owl#codeDBPediaID> ?s } ");
 			if(rs.hasNext()) {
 				QuerySolution sol = rs.nextSolution();
-				codeDBPediaID = sol.get("?s").toString();
+				codeDBPediaID = sol.get("?s").isLiteral() ? sol.get("?s").asLiteral().getString() : sol.get("?s").toString();
+				firstInstance = true;
+				lastInstance = ! rs.hasNext();
 				return EVAL_BODY_INCLUDE;
 			}
 		} catch (Exception e) {
@@ -51,7 +56,9 @@ public class AreaCodeDBPediaIDIterator extends edu.uiowa.slis.VIVOISF.TagLibSupp
 		try {
 			if(rs.hasNext()) {
 				QuerySolution sol = rs.nextSolution();
-				codeDBPediaID = sol.get("?s").toString();
+				codeDBPediaID = sol.get("?s").isLiteral() ? sol.get("?s").asLiteral().getString() : sol.get("?s").toString();
+				firstInstance = false;
+				lastInstance = ! rs.hasNext();
 				return EVAL_BODY_AGAIN;
 			}
 		} catch (Exception e) {
@@ -83,12 +90,28 @@ public class AreaCodeDBPediaIDIterator extends edu.uiowa.slis.VIVOISF.TagLibSupp
 		subjectURI = null;
 	}
 
-	public void setCodeDBPediaID(String codeDBPediaID) {
-		this.codeDBPediaID = codeDBPediaID;
+	public void setCodeDBPediaID(String theCodeDBPediaID) {
+		codeDBPediaID = theCodeDBPediaID;
 	}
 
 	public String getCodeDBPediaID() {
 		return codeDBPediaID;
+	}
+
+	public static void setFirstInstance(Boolean theFirstInstance) {
+		firstInstance = theFirstInstance;
+	}
+
+	public static Boolean getFirstInstance() {
+		return firstInstance;
+	}
+
+	public static void setLastInstance(Boolean theLastInstance) {
+		lastInstance = theLastInstance;
+	}
+
+	public static Boolean getLastInstance() {
+		return lastInstance;
 	}
 
 }

@@ -14,6 +14,9 @@ public class LocationNameCurrencyITIterator extends edu.uiowa.slis.VIVOISF.TagLi
 	static LocationNameCurrencyITIterator currentInstance = null;
 	private static final Log log = LogFactory.getLog(LocationNameCurrencyITIterator.class);
 
+	static boolean firstInstance = false;
+	static boolean lastInstance = false;
+
 	String subjectURI = null;
 	String nameCurrencyIT = null;
 	ResultSet rs = null;
@@ -34,7 +37,9 @@ public class LocationNameCurrencyITIterator extends edu.uiowa.slis.VIVOISF.TagLi
 			rs = getResultSet(prefix+"SELECT ?s where { <" + subjectURI + "> <http://aims.fao.org/aos/geopolitical.owl#nameCurrencyIT> ?s } ");
 			if(rs.hasNext()) {
 				QuerySolution sol = rs.nextSolution();
-				nameCurrencyIT = sol.get("?s").toString();
+				nameCurrencyIT = sol.get("?s").isLiteral() ? sol.get("?s").asLiteral().getString() : sol.get("?s").toString();
+				firstInstance = true;
+				lastInstance = ! rs.hasNext();
 				return EVAL_BODY_INCLUDE;
 			}
 		} catch (Exception e) {
@@ -51,7 +56,9 @@ public class LocationNameCurrencyITIterator extends edu.uiowa.slis.VIVOISF.TagLi
 		try {
 			if(rs.hasNext()) {
 				QuerySolution sol = rs.nextSolution();
-				nameCurrencyIT = sol.get("?s").toString();
+				nameCurrencyIT = sol.get("?s").isLiteral() ? sol.get("?s").asLiteral().getString() : sol.get("?s").toString();
+				firstInstance = false;
+				lastInstance = ! rs.hasNext();
 				return EVAL_BODY_AGAIN;
 			}
 		} catch (Exception e) {
@@ -83,12 +90,28 @@ public class LocationNameCurrencyITIterator extends edu.uiowa.slis.VIVOISF.TagLi
 		subjectURI = null;
 	}
 
-	public void setNameCurrencyIT(String nameCurrencyIT) {
-		this.nameCurrencyIT = nameCurrencyIT;
+	public void setNameCurrencyIT(String theNameCurrencyIT) {
+		nameCurrencyIT = theNameCurrencyIT;
 	}
 
 	public String getNameCurrencyIT() {
 		return nameCurrencyIT;
+	}
+
+	public static void setFirstInstance(Boolean theFirstInstance) {
+		firstInstance = theFirstInstance;
+	}
+
+	public static Boolean getFirstInstance() {
+		return firstInstance;
+	}
+
+	public static void setLastInstance(Boolean theLastInstance) {
+		lastInstance = theLastInstance;
+	}
+
+	public static Boolean getLastInstance() {
+		return lastInstance;
 	}
 
 }

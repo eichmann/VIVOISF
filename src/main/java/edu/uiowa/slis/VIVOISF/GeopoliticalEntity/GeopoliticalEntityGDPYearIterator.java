@@ -14,6 +14,9 @@ public class GeopoliticalEntityGDPYearIterator extends edu.uiowa.slis.VIVOISF.Ta
 	static GeopoliticalEntityGDPYearIterator currentInstance = null;
 	private static final Log log = LogFactory.getLog(GeopoliticalEntityGDPYearIterator.class);
 
+	static boolean firstInstance = false;
+	static boolean lastInstance = false;
+
 	String subjectURI = null;
 	String GDPYear = null;
 	ResultSet rs = null;
@@ -34,7 +37,9 @@ public class GeopoliticalEntityGDPYearIterator extends edu.uiowa.slis.VIVOISF.Ta
 			rs = getResultSet(prefix+"SELECT ?s where { <" + subjectURI + "> <http://aims.fao.org/aos/geopolitical.owl#GDPYear> ?s } ");
 			if(rs.hasNext()) {
 				QuerySolution sol = rs.nextSolution();
-				GDPYear = sol.get("?s").toString();
+				GDPYear = sol.get("?s").isLiteral() ? sol.get("?s").asLiteral().getString() : sol.get("?s").toString();
+				firstInstance = true;
+				lastInstance = ! rs.hasNext();
 				return EVAL_BODY_INCLUDE;
 			}
 		} catch (Exception e) {
@@ -51,7 +56,9 @@ public class GeopoliticalEntityGDPYearIterator extends edu.uiowa.slis.VIVOISF.Ta
 		try {
 			if(rs.hasNext()) {
 				QuerySolution sol = rs.nextSolution();
-				GDPYear = sol.get("?s").toString();
+				GDPYear = sol.get("?s").isLiteral() ? sol.get("?s").asLiteral().getString() : sol.get("?s").toString();
+				firstInstance = false;
+				lastInstance = ! rs.hasNext();
 				return EVAL_BODY_AGAIN;
 			}
 		} catch (Exception e) {
@@ -83,12 +90,28 @@ public class GeopoliticalEntityGDPYearIterator extends edu.uiowa.slis.VIVOISF.Ta
 		subjectURI = null;
 	}
 
-	public void setGDPYear(String GDPYear) {
-		this.GDPYear = GDPYear;
+	public void setGDPYear(String theGDPYear) {
+		GDPYear = theGDPYear;
 	}
 
 	public String getGDPYear() {
 		return GDPYear;
+	}
+
+	public static void setFirstInstance(Boolean theFirstInstance) {
+		firstInstance = theFirstInstance;
+	}
+
+	public static Boolean getFirstInstance() {
+		return firstInstance;
+	}
+
+	public static void setLastInstance(Boolean theLastInstance) {
+		lastInstance = theLastInstance;
+	}
+
+	public static Boolean getLastInstance() {
+		return lastInstance;
 	}
 
 }
